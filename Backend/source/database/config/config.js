@@ -1,9 +1,9 @@
 module.exports = {
   "development": {
-    "username": "gimnasio_activa",
-    "password": null,
-    "database": "database_development",
-    "host": "127.0.0.1",
+    "username": "root",
+    "password": "1234",
+    "database": "gimnasio_activa",
+    "host": "localhost",
     "dialect": "mysql"
   },
   "test": {

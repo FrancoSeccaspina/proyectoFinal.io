@@ -1,4 +1,8 @@
 {
+  "scripts": {
+    "start": "node --watch source/app.js"
+  },
+  
   "dependencies": {
     "bcryptjs": "^3.0.2",
     "cookie-parser": "^1.4.7",
