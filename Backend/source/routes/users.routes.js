@@ -4,6 +4,8 @@ const usersController = require('../controllers/users.controller');
 
 const route = express.Router();
 
+const registerValidator = require('../validations/register')
+
 // const {resolve, extname} = require('path');
 
 // const { existsSync, mkdirSync } = require('fs');
@@ -32,7 +34,6 @@ const route = express.Router();
 // const multer = require('multer');
 // const upload = multer({storage:multer.diskStorage({destination, filename})});
 
-// const registerValidator = require('../validations/register')
 
 // const editValidator = require('../validations/userEdit')
 
@@ -49,7 +50,7 @@ const route = express.Router();
 // route.get('/register', usersController.create)
 
 
-route.post('/register/save',upload.any(), registerValidator, usersController.save)
+route.post('/register/save', usersController.save)
 // route.post('/register/save',usersController.save)
 
 // route.get('/login', usersController.login)
