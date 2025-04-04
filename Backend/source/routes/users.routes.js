@@ -68,9 +68,9 @@ route.get('/users/detail/:id', usersController.show)
 
 // route.get('/users/edit/:id', isLogged, usersController.edit);
 
-// route.put('/users/update/:id', isLogged, isAdmin, upload.any(),editValidator,usersController.update);
+route.put('/users/update/:id', usersController.update);
 
-// route.get('/users/update', isLogged,usersController.update)
+route.get('/users/update', usersController.update)
 
 // //Sólo el Admin puede ver todos los usuarios, en cambio el usuario puede actualizar y ver sus datos
 

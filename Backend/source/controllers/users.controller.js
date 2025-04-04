@@ -91,7 +91,7 @@ const controlador = {
       let errores = result.mapped();
       console.log("fallo");
       console.log("errores ;:    ", errores);
-      
+
       return res.status(404).json({
         success: false,
         message: "Usuario no creado",
@@ -112,32 +112,39 @@ const controlador = {
 
   //     })
   // },
-  // update: (req, res) => {
-  //     const result = validationResult(req);
-  //     const success = data => res.redirect('/')
-  //     const error = error => res.render(error)
-  //     if(result.isEmpty()){
+  update: (req, res) => {
+      const result = validationResult(req);
+      const success = data => res.redirect('/')
+      const error = error => res.render(error)
+      if(result.isEmpty()){
 
-  //         db.user.findByPk(req.params.id).then((data) => db.user.update({
-  //             fullName: req.body.fullName,
-  //             user: req.body.user,
-  //             password: req.body.password,
-  //             perfil: req.body.perfil,
-  //             birthDay: req.body.birthDay,
-  //             image: req.files && req.files.length>0 ? req.files[0].fileName : data.image,
-  //             email: req.body.email
-  //          },{
-  //              where:{
-  //                  id: req.params.id
-  //              }
-  //         })).then(success).catch(error)
-  //     }else{
-  //         let errores = result.mapped();
-  //         console.log('fallo');
-  //         console.log('errores ;:    ',errores);
-  //         return res.render('users/userEdit',{errors:errores,user: req.body})
-  //     }
-  // },
+          db.Usuario.findByPk(req.params.id).then((data) => db.Usuario.update({
+
+              apellido: req.body.apellido,
+              nombre: req.body.nombre,
+              edad: req.body.edad,
+              mail: req.body.mail,
+              contrasenia: bcryptjs.hashSync(req.body.contrasenia, 10),
+              perfil: "User",
+              fechaNacimiento: req.body.fechaNacimiento,
+              imagen: req.body.imagen,
+
+           },{
+               where:{
+                   id: req.params.id
+               }
+          })).then(success
+          ).catch(error)
+
+          console.log("usuario editado")
+
+      }else{
+          let errores = result.mapped();
+          console.log('fallo');
+          console.log('errores ;:    ',errores);
+          return res.render('users/userEdit',{errors:errores,user: req.body})
+      }
+  },
   // remove: (req, res) => {
   //     const user = db.user.destroy({
   //         where:{
