@@ -3,6 +3,9 @@
 
 <head>
   <%- include('./partials/head.ejs') %>
+  <audio id="background-music" autoplay loop>
+    <source src="/music/soundtrack.mp3" type="audio/mpeg">
+  </audio>
 </head>
 <body>
     <%- include('./partials/header.ejs') %>
@@ -58,7 +61,7 @@
         
         <div class="planes">
             <section class="planMensual">
-                <img src="/images/planMensual.jpg" alt="mensual">
+                <img src="/images/planMensual.png" alt="mensual">
                 <a href="https://api.whatsapp.com/send?phone=5491166601356"><i class="fa-brands fa-whatsapp"></i>Consulta a tu asesor</a>
             </section>
             <section class="planAnual">
@@ -78,5 +81,6 @@
     </footer>
 </body>
 <script src="./js/hamburguer.js"></script>
+<script src="./js/soundtrack.js"></script>
 <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.5/dist/js/bootstrap.bundle.min.js" integrity="sha384-k6d4wzSIapyDyv1kpU366/PK5hCdSbCRGRCMv+eplOQJWyd1fbcAu9OCUj5zNLiq" crossorigin="anonymous"></script>
 </html>
