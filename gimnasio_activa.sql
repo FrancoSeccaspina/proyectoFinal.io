@@ -3,9 +3,9 @@
 -- https://www.phpmyadmin.net/
 --
 -- Servidor: 127.0.0.1
--- Tiempo de generación: 29-03-2025 a las 05:02:44
+-- Tiempo de generación: 06-04-2025 a las 22:51:13
 -- Versión del servidor: 10.4.32-MariaDB
--- Versión de PHP: 8.1.25
+-- Versión de PHP: 8.2.12
 
 SET SQL_MODE = "NO_AUTO_VALUE_ON_ZERO";
 START TRANSACTION;
@@ -24,6 +24,18 @@ SET time_zone = "+00:00";
 -- --------------------------------------------------------
 
 --
+-- Estructura de tabla para la tabla `autenticacion`
+--
+
+CREATE TABLE `autenticacion` (
+  `id` int(11) NOT NULL,
+  `email` varchar(100) NOT NULL,
+  `contrasenia` blob NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
+
+-- --------------------------------------------------------
+
+--
 -- Estructura de tabla para la tabla `categorias`
 --
 
@@ -31,6 +43,14 @@ CREATE TABLE `categorias` (
   `id` int(11) NOT NULL,
   `nombre` varchar(50) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
+
+--
+-- Volcado de datos para la tabla `categorias`
+--
+
+INSERT INTO `categorias` (`id`, `nombre`) VALUES
+(3, 'Comida'),
+(4, 'Suplementos');
 
 -- --------------------------------------------------------
 
@@ -65,6 +85,19 @@ CREATE TABLE `ejercicios` (
 CREATE TABLE `grupos_musculares` (
   `id` int(11) NOT NULL,
   `nombre` varchar(50) NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
+
+-- --------------------------------------------------------
+
+--
+-- Estructura de tabla para la tabla `membresia`
+--
+
+CREATE TABLE `membresia` (
+  `id` int(11) NOT NULL,
+  `tipo` varchar(100) NOT NULL,
+  `fecha_inicio` date NOT NULL,
+  `fecha_fin` date NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
 -- --------------------------------------------------------
@@ -106,17 +139,29 @@ CREATE TABLE `usuarios` (
   `id` int(11) NOT NULL,
   `apellido` varchar(50) NOT NULL,
   `nombre` varchar(20) NOT NULL,
-  `edad` int(11) NOT NULL,
-  `mail` varchar(50) NOT NULL,
-  `contrasenia` varchar(200) DEFAULT NULL,
-  `perfil` varchar(10) NOT NULL,
-  `fechaNacimiento` date NOT NULL,
-  `imagen` varchar(255) NOT NULL
+  `rol` varchar(20) NOT NULL,
+  `imagen` varchar(255) NOT NULL,
+  `membrecia` int(11) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
+
+--
+-- Volcado de datos para la tabla `usuarios`
+--
+
+INSERT INTO `usuarios` (`id`, `apellido`, `nombre`, `rol`, `imagen`, `membrecia`) VALUES
+(6, '', 'Lucas', '', '', 0),
+(7, '', 'periodista', '', '', 0),
+(8, '', 'qweqwe', '', '', 0);
 
 --
 -- Índices para tablas volcadas
 --
+
+--
+-- Indices de la tabla `autenticacion`
+--
+ALTER TABLE `autenticacion`
+  ADD PRIMARY KEY (`id`);
 
 --
 -- Indices de la tabla `categorias`
@@ -144,6 +189,12 @@ ALTER TABLE `grupos_musculares`
   ADD PRIMARY KEY (`id`);
 
 --
+-- Indices de la tabla `membresia`
+--
+ALTER TABLE `membresia`
+  ADD PRIMARY KEY (`id`);
+
+--
 -- Indices de la tabla `productos`
 --
 ALTER TABLE `productos`
@@ -168,10 +219,16 @@ ALTER TABLE `usuarios`
 --
 
 --
+-- AUTO_INCREMENT de la tabla `autenticacion`
+--
+ALTER TABLE `autenticacion`
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT;
+
+--
 -- AUTO_INCREMENT de la tabla `categorias`
 --
 ALTER TABLE `categorias`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=6;
 
 --
 -- AUTO_INCREMENT de la tabla `categoria_recetas`
@@ -192,10 +249,16 @@ ALTER TABLE `grupos_musculares`
   MODIFY `id` int(11) NOT NULL AUTO_INCREMENT;
 
 --
+-- AUTO_INCREMENT de la tabla `membresia`
+--
+ALTER TABLE `membresia`
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT;
+
+--
 -- AUTO_INCREMENT de la tabla `productos`
 --
 ALTER TABLE `productos`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=6;
 
 --
 -- AUTO_INCREMENT de la tabla `recetas`
@@ -207,7 +270,7 @@ ALTER TABLE `recetas`
 -- AUTO_INCREMENT de la tabla `usuarios`
 --
 ALTER TABLE `usuarios`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=10;
 
 --
 -- Restricciones para tablas volcadas

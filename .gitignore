@@ -1,3 +1,2 @@
-# Dependencias
-
-/Backend/node_modules/*
+# Node modules
+/Backend/node_modules/
