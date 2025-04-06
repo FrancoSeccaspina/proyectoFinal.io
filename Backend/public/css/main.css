@@ -1,0 +1,51 @@
+@import url('header.css');
+@import url('footer.css');
+a {
+    text-decoration: none;
+}
+
+li {
+    list-style-type: none;
+}
+main{
+    background-color: #f1f1f1;
+}
+
+.main-content{
+    width: 100%;
+}
+
+
+
+
+
+.planes{
+    width: 100%;
+    display: flex;
+}
+.planMensual, .planAnual{
+    width: 50%;
+    display: flex;
+    flex-direction: column;
+    align-self: center;
+    justify-content: center;
+}
+.planMensual img, .planAnual img{
+    width: 100%;
+    padding: 0.5rem;
+}
+
+.planMensual a, .planAnual a{
+    text-decoration: none;
+    color: black;
+    text-align: center;
+    padding: 1rem;
+}
+.planMensual a:hover{
+    text-decoration: none;
+    color: rgb(104, 104, 104);
+} 
+.planAnual a:hover{
+    text-decoration: none;
+    color: rgb(104, 104, 104);
+}
