@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: localhost
--- Generation Time: Apr 06, 2025 at 11:35 PM
+-- Generation Time: Apr 07, 2025 at 03:57 AM
 -- Server version: 8.0.38
 -- PHP Version: 8.2.12
 
@@ -29,7 +29,7 @@ SET time_zone = "+00:00";
 
 CREATE TABLE `autenticacion` (
   `id` int NOT NULL,
-  `email` varchar(100) COLLATE utf8mb4_general_ci NOT NULL,
+  `email` varchar(100) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci NOT NULL,
   `contrasenia` blob NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
@@ -41,7 +41,7 @@ CREATE TABLE `autenticacion` (
 
 CREATE TABLE `categorias` (
   `id` int NOT NULL,
-  `nombre` varchar(50) COLLATE utf8mb4_general_ci NOT NULL
+  `nombre` varchar(50) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
 --
@@ -60,7 +60,7 @@ INSERT INTO `categorias` (`id`, `nombre`) VALUES
 
 CREATE TABLE `categoria_recetas` (
   `id` int NOT NULL,
-  `nombre` varchar(50) COLLATE utf8mb4_general_ci NOT NULL
+  `nombre` varchar(50) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
 -- --------------------------------------------------------
@@ -71,8 +71,8 @@ CREATE TABLE `categoria_recetas` (
 
 CREATE TABLE `ejercicios` (
   `id` int NOT NULL,
-  `nombre` varchar(50) COLLATE utf8mb4_general_ci NOT NULL,
-  `descripcion` varchar(500) COLLATE utf8mb4_general_ci DEFAULT NULL,
+  `nombre` varchar(50) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci NOT NULL,
+  `descripcion` varchar(500) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci DEFAULT NULL,
   `grupo_muscular_id` int DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
@@ -84,7 +84,7 @@ CREATE TABLE `ejercicios` (
 
 CREATE TABLE `grupos_musculares` (
   `id` int NOT NULL,
-  `nombre` varchar(50) COLLATE utf8mb4_general_ci NOT NULL
+  `nombre` varchar(50) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
 -- --------------------------------------------------------
@@ -95,7 +95,7 @@ CREATE TABLE `grupos_musculares` (
 
 CREATE TABLE `membresia` (
   `id` int NOT NULL,
-  `tipo` varchar(100) COLLATE utf8mb4_general_ci NOT NULL,
+  `tipo` varchar(100) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci NOT NULL,
   `fecha_inicio` date NOT NULL,
   `fecha_fin` date NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
@@ -108,11 +108,11 @@ CREATE TABLE `membresia` (
 
 CREATE TABLE `productos` (
   `id` int NOT NULL,
-  `nombre` varchar(50) COLLATE utf8mb4_general_ci NOT NULL,
-  `descripcion` varchar(500) COLLATE utf8mb4_general_ci DEFAULT NULL,
+  `nombre` varchar(50) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci NOT NULL,
+  `descripcion` varchar(500) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci DEFAULT NULL,
   `precio` int NOT NULL,
   `categoriaId` int NOT NULL,
-  `imagen` varchar(255) COLLATE utf8mb4_general_ci NOT NULL,
+  `imagen` varchar(255) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci NOT NULL,
   `stock` int NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
@@ -124,8 +124,8 @@ CREATE TABLE `productos` (
 
 CREATE TABLE `recetas` (
   `id` int NOT NULL,
-  `nombre` varchar(50) COLLATE utf8mb4_general_ci NOT NULL,
-  `descripcion` varchar(100) COLLATE utf8mb4_general_ci DEFAULT NULL,
+  `nombre` varchar(50) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci NOT NULL,
+  `descripcion` varchar(100) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci DEFAULT NULL,
   `categoria_id` int DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
@@ -137,22 +137,23 @@ CREATE TABLE `recetas` (
 
 CREATE TABLE `usuarios` (
   `id` int NOT NULL,
-  `apellido` varchar(50) COLLATE utf8mb4_general_ci NOT NULL,
-  `nombre` varchar(20) COLLATE utf8mb4_general_ci NOT NULL,
-  `rol` varchar(20) COLLATE utf8mb4_general_ci NOT NULL,
-  `imagen` varchar(255) COLLATE utf8mb4_general_ci NOT NULL,
+  `apellido` varchar(50) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci NOT NULL,
+  `nombre` varchar(20) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci NOT NULL,
+  `rol` varchar(20) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci NOT NULL,
+  `imagen` varchar(255) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci NOT NULL,
   `id_membresia` int NOT NULL,
-  `id_autenticacion` int NOT NULL
+  `id_autenticacion` int NOT NULL,
+  `fecha_nacimiento` date DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
 --
 -- Dumping data for table `usuarios`
 --
 
-INSERT INTO `usuarios` (`id`, `apellido`, `nombre`, `rol`, `imagen`, `id_membresia`, `id_autenticacion`) VALUES
-(6, '', 'Lucas', '', '', 0, 0),
-(7, '', 'periodista', '', '', 0, 0),
-(8, '', 'qweqwe', '', '', 0, 0);
+INSERT INTO `usuarios` (`id`, `apellido`, `nombre`, `rol`, `imagen`, `id_membresia`, `id_autenticacion`, `fecha_nacimiento`) VALUES
+(6, '', 'Lucas', '', '', 0, 0, NULL),
+(7, '', 'periodista', '', '', 0, 0, NULL),
+(8, '', 'qweqwe', '', '', 0, 0, NULL);
 
 --
 -- Indexes for dumped tables
