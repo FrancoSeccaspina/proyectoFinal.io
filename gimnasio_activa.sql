@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: localhost
--- Generation Time: Apr 07, 2025 at 03:57 AM
+-- Generation Time: Apr 08, 2025 at 12:06 AM
 -- Server version: 8.0.38
 -- PHP Version: 8.2.12
 
@@ -140,20 +140,11 @@ CREATE TABLE `usuarios` (
   `apellido` varchar(50) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci NOT NULL,
   `nombre` varchar(20) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci NOT NULL,
   `rol` varchar(20) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci NOT NULL,
-  `imagen` varchar(255) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci NOT NULL,
-  `id_membresia` int NOT NULL,
-  `id_autenticacion` int NOT NULL,
+  `imagen` varchar(255) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci DEFAULT NULL,
+  `id_membresia` int DEFAULT NULL,
+  `id_autenticacion` int DEFAULT NULL,
   `fecha_nacimiento` date DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
-
---
--- Dumping data for table `usuarios`
---
-
-INSERT INTO `usuarios` (`id`, `apellido`, `nombre`, `rol`, `imagen`, `id_membresia`, `id_autenticacion`, `fecha_nacimiento`) VALUES
-(6, '', 'Lucas', '', '', 0, 0, NULL),
-(7, '', 'periodista', '', '', 0, 0, NULL),
-(8, '', 'qweqwe', '', '', 0, 0, NULL);
 
 --
 -- Indexes for dumped tables
