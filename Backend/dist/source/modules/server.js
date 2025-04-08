@@ -1,7 +1,13 @@
-const port = process.env.PORT || 3032 ;
-const start = () => console.log('servidor corriendo...');
-
-module.exports = { port, start }
+"use strict";
+Object.defineProperty(exports, "__esModule", { value: true });
+exports.start = exports.port = void 0;
+const port = process.env.PORT || 3032;
+exports.port = port;
+const start = () => {
+    console.log('servidor corriendo...');
+    console.log('http://localhost:3032');
+};
+exports.start = start;
 /*const express = require('express');
 const path = require('path');
 const app = express();
@@ -17,4 +23,4 @@ app.get('/usuarios', (req, res) => {
 
 app.listen(PORT, () => {
   console.log(`Servidor corriendo en http://localhost:${PORT}`);
-});*/
+});*/ 

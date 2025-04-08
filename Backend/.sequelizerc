@@ -3,5 +3,6 @@ module.exports = {
     "config": path.join(__dirname, 'source', 'database', 'config', 'config.js'),
     "models-path": path.join(__dirname, 'source', 'database', 'models'),
     "migrations-path": path.join(__dirname, 'source', 'database', 'migrations'),
-    "seeders-path": path.join(__dirname, 'source', 'database', 'seeders')
+    "seeders-path": path.join(__dirname, 'source', 'database', 'seeders'),
+    'ts-node': true
 }
