@@ -4,7 +4,7 @@ let db = require('../database/models/index')
 
         
 let email = body('email').notEmpty().withMessage('E-Mail no puede quedar vacio').bail().isEmail().custom(function(user,{req}){
-    return db.user.findOne({where:
+    return db.usuario.findOne({where:
     {
         email: req.body.email
     }}).then(function(data){
@@ -15,12 +15,12 @@ let email = body('email').notEmpty().withMessage('E-Mail no puede quedar vacio')
         }
     })
 }).withMessage('Email ya registrado')
-let password = body('password').notEmpty().withMessage('Por favor, ingrese su contraseña').bail().isLength({min:10}).withMessage('Al menos 10 caracteres')
+let contrasenia = body('contrasenia').notEmpty().withMessage('Por favor, ingrese su contraseña').bail().isLength({min:10}).withMessage('Al menos 10 caracteres')
 
-let user = body('user').notEmpty().withMessage('El nombre de usuario no puede quedar vacío')
+let usuario = body('usuario').notEmpty().withMessage('El nombre de usuario no puede quedar vacío')
 .isLength({min:2,max:20}).withMessage('minimo 2 caracteres, maximo 20')
 
-let fullName = body('fullName').notEmpty().withMessage('El nombre de usuario no puede quedar vacío')
+let apellido = body('apellido').notEmpty().withMessage('El nombre de usuario no puede quedar vacío')
 //custom(function(user){
 //return db.user.findOne({where:
 //    {
@@ -56,6 +56,6 @@ let imagen = body('image').custom(function(value,{req}){
 
 
 
-let validaciones = [email,user,fullName,imagen]
+let validaciones = [email,usuario,apellido,imagen]
 
 module.exports = validaciones;

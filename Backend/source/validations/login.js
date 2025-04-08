@@ -6,29 +6,29 @@ const { nextTick } = require('process');
 const { cp } = require('fs');
 
 
-let mail = body('mail').notEmpty().withMessage('E-Mail no puede quedar vacío').bail().isEmail().withMessage('Email no valido').bail()
+let email = body('email').notEmpty().withMessage('E-Mail no puede quedar vacío').bail().isEmail().withMessage('Email no valido').bail()
 let contrasenia = body('contrasenia').notEmpty().withMessage('Por favor, ingrese su contraseña').bail()
 
 module.exports = [
     
-    body('mail').custom(value => {
+    body('email').custom(value => {
         return db.usuario.findOne({
             where:{
-                mail: value
+                email: value
             }
-        }).then(usuario => {
-          if (!usuario) {
+        }).then(user => {
+          if (!user) {
             return Promise.reject('Este email no está registrado');
           }else{
             return true
           }
         });
       }),
-    body('contrasenia').notEmpty().withMessage('La contraseña no puede quedar vacia').bail().custom(function(usuario,{req}){
+    body('contrasenia').notEmpty().withMessage('La contraseña no puede quedar vacia').bail().custom(function(user,{req}){
         return db.usuario.findOne({where:
         {
     
-            mail: req.body.mail
+            email: req.body.email
         }}).then(function(data){     
             if(data){
                 if(compareSync(req.body.contrasenia, data.contrasenia)){            

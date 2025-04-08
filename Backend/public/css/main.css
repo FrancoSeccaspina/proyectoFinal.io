@@ -14,11 +14,6 @@ main{
 .main-content{
     width: 100%;
 }
-
-
-
-
-
 .planes{
     width: 100%;
     display: flex;
@@ -48,4 +43,10 @@ main{
 .planAnual a:hover{
     text-decoration: none;
     color: rgb(104, 104, 104);
+}
+.burger-user {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    width: 15%;
 }

@@ -1,0 +1,96 @@
+.mainRutinas{
+    width: 100%;
+    display: flex;
+    flex-direction: column;
+}
+#rutina{
+    padding: 1rem 1rem 0.2rem 1rem;
+    border-bottom: 1px solid rgb(55, 55, 55);
+    margin: 0; 
+    width: 90%;
+}
+#rutina h2{
+    font-size: 18px;    
+}
+.rutinas_subidas{
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+.moverlo{
+    display: flex;
+    flex-direction: row;
+    flex-wrap: wrap;
+    justify-content: center;
+}
+.card {
+    width: 18rem;
+    margin: 1rem;
+    padding: 1rem;
+    border: 1px solid #ccc;
+    background-color: #fff;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    text-align: center;
+}
+.card-body {
+    width: 100%;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    gap: 0.8rem;
+    width: 100%;
+}
+.card-img-top {
+    width: 100%;
+    height: auto;
+    border-radius: 8px;
+}
+.btn-primary {
+    width: 100%; 
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    text-decoration: none;
+    color: black;
+}
+.boton{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+.consultar a{
+    text-decoration: none;
+    color: black;
+    text-align: center;
+}
+@media screen and (min-width:320px) {
+    .titulo{
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+    }
+    .titulo h4{
+        padding-top: 1rem;
+        font-size: 15px;
+    }
+    #rutina h2{
+        display: flex;
+        align-items: center;
+        flex-direction: column;
+    }
+    #rutina{
+        padding: 1rem 1rem 0.2rem 1rem; 
+        border-bottom: 1px solid rgb(55, 55, 55);
+        margin: 0;
+        width: auto;
+    }
+    .burger-user {
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
+        width: 15%;
+}
+}

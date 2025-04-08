@@ -155,53 +155,53 @@ const controlador = {
   //     const error = error => res.render(error)
   //     return user.then(success).catch(error)
   // },
-  // login:(req, res) => {
-  //     errorEmail = ''
-  //     return res.render('login',{oldDataLogin:{}},errorEmail)
-  // },
-  // access: (req, res) => {
+  /*login:(req, res) => {
+       errorEmail = ''
+       return res.render('login',{oldDataLogin:{}},errorEmail)
+   },
+   access: (req, res) => {
 
-  //     const result = validationResult(req);
-  //     if(!result.isEmpty()){
-  //         errores = result.mapped();
-  //         return res.render('login',{
-  //             errorEmail:{email:{msg:''}},
-  //             oldDataLogin: req.body,
-  //             errors: errores
-  //         })
-  //     }
+       const result = validationResult(req);
+       if(!result.isEmpty()){
+           errores = result.mapped();
+           return res.render('login',{
+               errorEmail:{email:{msg:''}},
+               oldDataLogin: req.body,
+               errors: errores
+           })
+       }
 
-  //     db.user.findOne({
-  //             where:{
-  //                 email:req.body.email
-  //             }
-  //         })
-  //     .then(function(dato){
+       db.usuario.findOne({
+               where:{
+                   email:req.body.email
+               }
+           })
+       .then(function(dato){
 
-  //     if(dato){
-  //         req.session.user = dato
-  //         if(req.body.recordame){
-  //             res.cookie('user',req.body.email,{maxAge: 1000*60000*3})
+       if(dato){
+           req.session.user = dato
+           if(req.body.recordame){
+               res.cookie('user',req.body.email,{maxAge: 1000*60000*3})
 
-  //         }
-  //          return res.redirect('/')
-  //     }
-  //     else{
-  //         console.log('else')
-  //         const result = validationResult(req);
-  //         if(!result.isEmpty()){
-  //             errores = result.mapped()
-  //         // return  res.render('login', {errores:{email:'No estás registrado'}});
-  //             return res.render('login',{
-  //                 errorEmail:{email:{msg:'Not found'}},
-  //                 oldDataLogin: req.body,
-  //                 errors:errores
-  //             })
-  //         }
-  //     }
-  //     })
+           }
+            return res.redirect('/')
+       }
+       else{
+           console.log('else')
+           const result = validationResult(req);
+           if(!result.isEmpty()){
+               errores = result.mapped()
+           // return  res.render('login', {errores:{email:'No estás registrado'}});
+               return res.render('login',{
+                   errorEmail:{email:{msg:'Not found'}},
+                   oldDataLogin: req.body,
+                   errors:errores
+               })
+           }
+       }
+       })
 
-  // },
+  },*/
   // logout:(req, res) => {
   //     delete req.session.user
   //     res.cookie('user', req.body.email,{maxAge:-1})

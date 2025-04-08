@@ -1,0 +1,58 @@
+<!DOCTYPE html>
+<html lang="en">
+
+    <head>
+        <%- include('./partials/head.ejs') %>
+        <link rel="stylesheet" href="/css/login.css">
+    </head>
+
+    <body>
+        <%- include('./partials/header.ejs') %>
+        
+        <main class="mainLogin">
+            
+            <div id="left-login">
+                
+                <h2>Iniciar Sesión</h2>
+                
+                <form action="/login/access" method="POST">
+
+                    <label class="none" for="usuario"></label>
+                    
+                    <input class="inputs-login" type="text" name="email" id="usuario" placeholder="Correo electronico" required value="<%= oldDataLogin && oldDataLogin.email ? oldDataLogin.email : '' %>">
+                    <% if(locals && locals.errors && errors.email) { %>
+                        <p class="feedback"><%= errors.email.msg %></p>
+                    <% } %>
+                    
+                    <label for="contrasenia" class="none"></label>
+                    
+                    <input class="inputs-login" type="text" name="contrasenia" placeholder="Contrasenia" id="contrasenia" value="<%= oldDataLogin && oldDataLogin.contrasenia ? oldDataLogin.contrasenia : '' %>">
+                    <% if(locals && locals.errors && errors.contrasenia) { %>
+                        <p class="feedback"><%= errors.contrasenia.msg %></p>
+                    <% } %>
+                </form>
+            </div>
+        
+            
+            
+            
+            
+            
+        
+            
+            
+            
+            
+            
+            
+            
+            
+            
+            
+            
+            
+            
+            
+        </main>
+    </body>
+</html>

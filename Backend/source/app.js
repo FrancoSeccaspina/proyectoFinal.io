@@ -65,6 +65,15 @@ app.use(cors());
 app.get("/home", function(req,res){
     return res.render("home");
 });
+app.get("/rutinas", function(req,res){
+    return res.render("rutinas");
+});
+app.get("/recetas", function(req,res){
+    return res.render("recetas");
+});
+app.get("/productos", function(req,res){
+    return res.render("productos");
+});
 // app.use(require('./routes/api/products.api.routes'));
 // app.use(require('./routes/api/users.api.routes'));
 // app.use(require('./routes/api/categories.api.routes'));

@@ -161,7 +161,6 @@ header{
     display: flex;
     align-items: center;
     justify-content: space-between;
-    width: 10%;
 }
 .hamburger-button{
     font-size: 2rem;

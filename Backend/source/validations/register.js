@@ -3,10 +3,10 @@ let db = require('../database/models/index')
 
 
         
-let mail = body('mail').notEmpty().withMessage('E-Mail no puede quedar vacio').bail().isEmail().custom(function(usuario,{req}){
+let email = body('email').notEmpty().withMessage('E-Mail no puede quedar vacio').bail().isEmail().custom(function(user,{req}){
     return db.usuario.findOne({where:
     {
-        mail: req.body.mail
+        email: req.body.email
     }}).then(function(data){
         if(data){
             return Promise.reject('used email')
@@ -18,10 +18,10 @@ let mail = body('mail').notEmpty().withMessage('E-Mail no puede quedar vacio').b
 let contrasenia = body('contrasenia').notEmpty().withMessage('Por favor, ingrese su contraseña').bail().isLength({min:6}).withMessage('Al menos 10 caracteres')
 
 let usuario = body('usuario').notEmpty().withMessage('El nombre de usuario no puede quedar vacío').
-custom(function(usuario){
+custom(function(user){
    return db.usuario.findOne({where:
     {
-        usuario: usuario
+        user: user
     }}).then(function(data){
         if(data){
             throw new Error('used user')
@@ -33,10 +33,10 @@ custom(function(usuario){
 .isLength({min:5,max:20}).withMessage('minimo 5 caracteres, maximo 20')
 
 let apellido = body('apellido').notEmpty().withMessage('El nombre de usuario no puede quedar vacío').
-custom(function(usuario){
+custom(function(user){
    return db.usuario.findOne({where:
     {
-        usuario: usuario
+        user: user
     }}).then(function(data){
         if(data){
             throw new Error('used user')
@@ -68,6 +68,6 @@ let imagen = body('imagen').custom(function(value,{req}){
 
 
 
-let validaciones = [mail,contrasenia,usuario,apellido,imagen]
+let validaciones = [email,contrasenia,usuario,apellido,imagen]
 
 module.exports = validaciones;
