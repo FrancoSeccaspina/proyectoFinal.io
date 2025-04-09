@@ -4,12 +4,21 @@ var __importDefault = (this && this.__importDefault) || function (mod) {
 };
 Object.defineProperty(exports, "__esModule", { value: true });
 const express_1 = __importDefault(require("express"));
-const usersController_1 = __importDefault(require("../controllers/usersController"));
 // import registerValidator from '../validations/register';
 // import loginValidator from '../validations/login';
 // import isLogged from '../middlewares/isLogged';
 // import isAdmin from '../middlewares/isAdmin';
 const route = express_1.default.Router();
-route.get('/detail/:id', (req, res) => { usersController_1.default.show(req, res); });
-// route.post('/usuarios', (req, res) => { usersController.create(req, res) });
+route.get("/home", function (req, res) {
+    res.render("home");
+});
+route.get("/rutinas", function (req, res) {
+    res.render("rutinas");
+});
+route.get("/recetas", function (req, res) {
+    res.render("recetas");
+});
+route.get("/productos", function (req, res) {
+    res.render("productos");
+});
 exports.default = route;

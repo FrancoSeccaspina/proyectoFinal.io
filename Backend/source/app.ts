@@ -10,6 +10,7 @@ import cookieParser from 'cookie-parser';
 // Middlewares y rutas
 // import userMiddleware from './middlewares/user';
 import usersRoutes from './routes/users.routes';
+import viewRoutes from './routes/view.routes';
 
 const app = express();
 
@@ -18,7 +19,7 @@ const publicPath = path.resolve(__dirname, '../public');
 app.use(staticHandler(publicPath));
 
 // Configuración de EJS
-app.set('views', join(__dirname, './views'));
+app.set('views', path.resolve(__dirname, 'views'));
 app.set('view engine', 'ejs');
 
 // Middleware de body y JSON
@@ -42,6 +43,7 @@ app.use(methodOverride('m'));
 // app.use(userMiddleware);
 
 // Rutas
+app.use('', viewRoutes);
 app.use('/users', usersRoutes);
 app.use('/products', usersRoutes);
 
@@ -49,9 +51,9 @@ app.use('/products', usersRoutes);
 app.use(cors());
 
 // Ruta principal
-app.get('/home', (req: Request, res: Response) => {
-    return res.render('home');
-});
+// app.get('/home', (req: Request, res: Response) => {
+//     return res.render('home');
+// });
 
 // Escuchar el servidor
 app.listen(port, start);

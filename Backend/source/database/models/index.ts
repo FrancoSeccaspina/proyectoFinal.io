@@ -1,5 +1,6 @@
 import { Sequelize } from 'sequelize';
 import { initUsuarioModel, Usuario } from './usuario';
+import { Autenticacion, initAutenticacionModel} from './autenticacion';
 
 const sequelize = new Sequelize('gimnasio_activa', 'root', '1234', {
   host: 'localhost',
@@ -8,5 +9,6 @@ const sequelize = new Sequelize('gimnasio_activa', 'root', '1234', {
 });
 
 initUsuarioModel(sequelize);
+initAutenticacionModel(sequelize);
 
-export { sequelize, Usuario };
+export { sequelize, Usuario, Autenticacion };
