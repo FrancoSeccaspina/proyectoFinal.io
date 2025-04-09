@@ -17,7 +17,7 @@ interface ProductoAttributes {
     stock: number;
 }
 
-class Producto extends Model<InferAttributes<Producto>> implements ProductoAttributes {
+class Producto extends Model<InferAttributes<Producto>, InferCreationAttributes<Producto>> implements ProductoAttributes {
     declare id: CreationOptional<number>;
     declare nombre: string;
     declare descripcion: string;

@@ -30,4 +30,6 @@ route.get('/detail/:id', (req, res) => { usersController_1.default.show(req, res
 // route.get('/users/update', userController.update); // ¿Esta línea tiene sentido? No parece una ruta válida
 // Listado de todos los usuarios (solo admin)
 // route.get('/users', isLogged, isAdmin, userController.index);
+//Crea un usuario llamando al controlador usersController y usando la función create
+route.post('/usuarios', (req, res) => { usersController_1.default.create(req, res); });
 exports.default = route;
