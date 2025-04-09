@@ -69,6 +69,7 @@ app.use((0, method_override_1.default)('m'));
 // app.use(userMiddleware);
 // Rutas
 app.use('/users', users_routes_1.default);
+app.use('/products', users_routes_1.default);
 // Habilitar CORS
 app.use((0, cors_1.default)());
 // Ruta principal
