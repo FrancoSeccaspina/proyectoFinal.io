@@ -28,6 +28,25 @@ export class UsuarioController {
       });
     }
   }
+  async create(req: Request, res: Response): Promise<Response> {
+    try {
+      const { apellido, nombre, imagen } = req.body;
+
+      const newUser = await Usuario.create({ apellido, nombre, imagen });
+
+      return res.status(201).json({
+        success: true,
+        message: "Usuario creado",
+        user: newUser,
+      });
+    } catch (error) {
+      console.error("Error en create:", (error as Error).message);
+      return res.status(500).json({
+        success: false,
+        message: "Error al crear usuario",
+      });
+    }
+  }
 }
 
 // Exporta la clase para usarla en el enrutador

@@ -15,7 +15,7 @@ interface UsuarioAttributes {
   imagen: string;
 }
 
-class Usuario extends Model<InferAttributes<Usuario>> implements UsuarioAttributes {
+class Usuario extends Model<InferAttributes<Usuario>, InferCreationAttributes<Usuario>> implements UsuarioAttributes {
 
   declare id: CreationOptional<number>;
   declare apellido: string;
