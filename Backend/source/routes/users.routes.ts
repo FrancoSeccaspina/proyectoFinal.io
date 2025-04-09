@@ -26,12 +26,12 @@ const route = express.Router();
 
 // Mostrar detalle de usuario por ID
 // route.post('/register/save', usersController.save);
-route.get('/detail/:id', (req, res) =>  {usersController.show(req, res)});
+route.get('/detail/:id', (req, res) => { usersController.show(req, res) });
 
 // route.get('/test', (req, res) => {
 //     res.send('<h1>¡Ruta /test funcionando correctamente! ✅</h1>');
 //   });
-  
+
 
 // Actualizar usuario (si tu controller tiene `update`)
 // route.put('/users/update/:id', userController.update); // Asegurate de tener este método
@@ -39,5 +39,11 @@ route.get('/detail/:id', (req, res) =>  {usersController.show(req, res)});
 
 // Listado de todos los usuarios (solo admin)
 // route.get('/users', isLogged, isAdmin, userController.index);
+
+
+//Crea un usuario llamando al controlador usersController y usando la función create
+route.post('/usuarios', (req, res) => { usersController.create(req, res) });
+
+
 
 export default route;
