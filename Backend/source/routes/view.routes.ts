@@ -22,5 +22,8 @@ route.get("/recetas", function(req,res){
 route.get("/productos", function(req,res){
     res.render("productos");
 });
+route.get("/listaProductos", function(req,res){
+    res.render("listaProductos");
+});
 
 export default route;
