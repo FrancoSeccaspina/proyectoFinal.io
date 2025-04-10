@@ -46,7 +46,7 @@ app.use(methodOverride('m'));
 // Rutas
 app.use('', viewRoutes);
 app.use('/users', usersRoutes);
-app.use('/productos', productoRoutes);
+app.use('/products', productoRoutes);
 
 // Habilitar CORS
 app.use(cors());
