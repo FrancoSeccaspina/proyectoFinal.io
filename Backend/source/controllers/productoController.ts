@@ -22,7 +22,9 @@ export class productoController {
     async listaProductos(req: Request, res: Response): Promise<void> {
         try {
             const productos = await Producto.findAll();
-            res.status(200).json(productos);
+            console.log(productos)
+            //res.status(200).json(productos);
+            res.render('/productos', { productos });
         } catch (error) {
             console.error('Error al listar productos:', error);
             res.status(500).json({ message: 'Error al obtener los productos' });

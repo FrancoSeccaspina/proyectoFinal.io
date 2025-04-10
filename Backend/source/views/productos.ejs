@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+<html lang="en">
+    <%- include('./partials/head.ejs') %>
+    <link rel="stylesheet" href="/css/productDetail.css">
+
+    <body>
+        
+        <%- include('./partials/header.ejs') %>
+        <main>
+            <div id="main-content">
+
+                <div class="container-image">
+                    <img src="../../images/<%= productos.imagen %>" alt="<%= productos.nombre %>" class="img-juego" />
+                </div>
+                    
+                <div class="main-description">
+                    
+                    <section class="section-description">
+                    
+                        <div class="description">
+                            <h2 id="title-item">Descripcion del prodcuto</h2>
+                            <p><%= productos.descripcion %></p>
+                        </div>
+                    </section>
+                    
+                    <section class="list-products">
+
+                        <ul class="lista-description">
+                            <li>Instrucciones en español</li>
+                            <li>Paso a paso facil de interpretar</li>
+                            <li>Videos e instrucciones en internet mismo de no interpretarlas</li>
+                            <li>Le figura cantidad que trae el balde, junto con su gusto</li>                
+                        </ul>
+                            
+                    </section>
+                    
+                    
+                    
+                    
+                </div>
+            </div>    
+        </main>
+    </body>
+</html>

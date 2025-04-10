@@ -19,8 +19,8 @@ route.get("/rutinas", function(req,res){
 route.get("/recetas", function(req,res){
     res.render("recetas");
 });
-// route.get("/productos", function(req,res){
-//     res.render("productos");
-// });
+route.get("/productos", function(req,res){
+    res.render("productos");
+});
 
 export default route;
