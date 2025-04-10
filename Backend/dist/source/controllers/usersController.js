@@ -15,12 +15,12 @@ class UsuarioController {
     show(req, res) {
         return __awaiter(this, void 0, void 0, function* () {
             try {
-                const user = yield models_1.Usuario.findOne({ where: { id: req.params.id } });
-                if (user) {
+                const usuario = yield models_1.Usuario.findOne({ where: { id: req.params.id } });
+                if (usuario) {
                     return res.status(200).json({
                         success: true,
                         message: "Usuario encontrado",
-                        user,
+                        usuario,
                     });
                 }
                 return res.status(404).json({
@@ -33,26 +33,6 @@ class UsuarioController {
                 return res.status(500).json({
                     success: false,
                     message: "Error interno del servidor",
-                });
-            }
-        });
-    }
-    create(req, res) {
-        return __awaiter(this, void 0, void 0, function* () {
-            try {
-                const { apellido, nombre, imagen } = req.body;
-                const newUser = yield models_1.Usuario.create({ apellido, nombre, imagen });
-                return res.status(201).json({
-                    success: true,
-                    message: "Usuario creado",
-                    user: newUser,
-                });
-            }
-            catch (error) {
-                console.error("Error en create:", error.message);
-                return res.status(500).json({
-                    success: false,
-                    message: "Error al crear usuario",
                 });
             }
         });

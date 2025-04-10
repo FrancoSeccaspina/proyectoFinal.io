@@ -1,15 +1,14 @@
 import { Router } from 'express';
-import { listaProductos, buscarProductosPorId, crearProducto } from '../controllers/productoController';
-
-const router = Router();
+import productoController from '../controllers/productoController';
+const route = Router();
 
 //ruta para crear un producto
-router.post('/productos', (req, res) => { crearProducto(req, res) });
+route.post('/productos', (req, res) => { productoController.crearProducto(req, res) });
 
 // Ruta para listar productos
-router.get('/productos', listaProductos);
+route.get('/productos', (req, res) => { productoController.listaProductos(req, res) });
 
 // Ruta para buscar un producto por ID
-router.get('/productos/:id', buscarProductosPorId);
+route.get('/productos/:id', (req, res) => { productoController.buscarProductosPorId(req, res) });
 
-export default router;
+export default route;

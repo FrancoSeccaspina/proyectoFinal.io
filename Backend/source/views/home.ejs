@@ -13,6 +13,7 @@
     <main class="main-content">
         <div id="carouselExampleIndicators" class="carousel slide" data-bs-ride="carousel">
             <div class="carousel-indicators">
+              
               <button type="button" data-bs-target="#carouselExampleIndicators" data-bs-slide-to="0" class="active" aria-current="true" aria-label="Slide 1"></button>
               <button type="button" data-bs-target="#carouselExampleIndicators" data-bs-slide-to="1" aria-label="Slide 2"></button>
               <button type="button" data-bs-target="#carouselExampleIndicators" data-bs-slide-to="2" aria-label="Slide 3"></button>
@@ -70,12 +71,7 @@
             </section>
         </div>
     </main>
-    <% if(userLogged && userLogged.perfil=='Admin' ) { %>
-        <ul class="botones">
-          <a href="/users" class="crear-editar">USUARIOS</a>
-          <a href="/register" class="crear-editar">CREAR USUARIO</a>
-        </ul>
-    <% } %>
+
     <footer class="main-footer">
         <%- include('./partials/footer.ejs') %>
     </footer>

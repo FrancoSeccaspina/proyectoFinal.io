@@ -10,10 +10,17 @@ import usersController from '../controllers/usersController';
 
 const route = express.Router();
 
-route.get('/detail/:id', (req, res) => { usersController.show(req, res) });
-
-// route.post('/usuarios', (req, res) => { usersController.create(req, res) });
-
-
+route.get("/home", function(req,res){
+    res.render("home");
+});
+route.get("/rutinas", function(req,res){
+    res.render("rutinas");
+});
+route.get("/recetas", function(req,res){
+    res.render("recetas");
+});
+// route.get("/productos", function(req,res){
+//     res.render("productos");
+// });
 
 export default route;
