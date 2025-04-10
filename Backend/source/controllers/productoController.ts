@@ -23,8 +23,8 @@ export class productoController {
         try {
             const productos = await Producto.findAll();
             console.log(productos)
-            //res.status(200).json(productos);
-            res.render('/productos', { productos });
+            res.render('productos', { productos });
+            
         } catch (error) {
             console.error('Error al listar productos:', error);
             res.status(500).json({ message: 'Error al obtener los productos' });

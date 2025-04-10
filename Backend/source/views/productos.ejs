@@ -1,25 +1,28 @@
 <!DOCTYPE html>
 <html lang="en">
     <%- include('./partials/head.ejs') %>
-    <link rel="stylesheet" href="/css/productDetail.css">
 
     <body>
         
         <%- include('./partials/header.ejs') %>
         <main>
             <div id="main-content">
-
-                <div class="container-image">
-                    <img src="../../images/<%= productos.imagen %>" alt="<%= productos.nombre %>" class="img-juego" />
-                </div>
-                    
+                <div %></div>
+                
+                <% productos.forEach(producto => { %>
+                    <li>
+                      <strong><%= producto.nombre %></strong> - $<%= producto.precio %>
+                    </li>
+                    <div class="container-image">
+                        <img src="../../images/<%= producto.imagen %>" alt="<%= producto.nombre %>" class="img-juego" />
+                    </div>
+                  <% }); %>
+                </ul>
                 <div class="main-description">
                     
                     <section class="section-description">
                     
                         <div class="description">
-                            <h2 id="title-item">Descripcion del prodcuto</h2>
-                            <p><%= productos.descripcion %></p>
                         </div>
                     </section>
                     
