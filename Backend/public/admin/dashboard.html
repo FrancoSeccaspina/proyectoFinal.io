@@ -4,9 +4,8 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Dashboard - Activa</title>
-    <link rel="stylesheet" href="dashboard.css">
+    <link rel="stylesheet" href="/admin/dashboard.css"> <!-- Ruta corregida -->
     <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
-
 </head>
 <body>
     <div class="sidebar" id="sidebar">
@@ -22,6 +21,7 @@
             <button class="menu-button" onclick="toggleSidebar()">☰</button>
             <h2>Bienvenido, Empleado</h2>
             <button onclick="window.location.href='index.html'">Cerrar sesión</button>
+            <!-- Funciona porque index.html está en la misma carpeta -->
         </div>
         <div class="cards">
             <div class="card">
@@ -36,11 +36,12 @@
                 <h3>Suscripciones Vencidas</h3>
                 <p>15</p>
             </div>
-            </div>
-            <div class="chart-container">
-                <canvas id="gymTrafficChart"></canvas>          
+        </div>
+        <div class="chart-container">
+            <canvas id="gymTrafficChart"></canvas>          
         </div>
     </div>
+
     <script>
         function toggleSidebar() {
             const sidebar = document.getElementById("sidebar");
@@ -51,12 +52,12 @@
         const ctx = document.getElementById('gymTrafficChart').getContext('2d');
     
         const gymTrafficChart = new Chart(ctx, {
-            type: 'line', // Tipo de gráfico (líneas)
+            type: 'line',
             data: {
-                labels: ['1-5', '6-10', '11-15', '16-20', '21-25', '26-30'], // Días del mes
+                labels: ['1-5', '6-10', '11-15', '16-20', '21-25', '26-30'],
                 datasets: [{
                     label: 'Cantidad de visitas',
-                    data: [30, 50, 80, 60, 90, 40], // Datos de ejemplo
+                    data: [30, 50, 80, 60, 90, 40],
                     borderColor: 'blue',
                     backgroundColor: 'rgba(0, 0, 255, 0.2)',
                     borderWidth: 2
@@ -72,6 +73,6 @@
             }
         });
     </script>
-    
 </body>
 </html>
+

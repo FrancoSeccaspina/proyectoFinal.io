@@ -4,21 +4,21 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Activa - Sistema de Gestión</title>
-    <link rel="stylesheet" href="styles.css"> <!-- Vinculamos el CSS externo -->
+    <link rel="stylesheet" href="/admin/styles.css"> <!-- Ruta corregida -->
 </head>
 <body>
     <header>
-        <img src="/proyectoFinal.io/Backend/public/images/LOGO.svg" alt="Logo Activa Fitness">
-        <!--"/appweb_caba_2c_2024/E-Grupo5/Proyecto_Gimnasio/public/img/log.svg" width="50" height="50" alt="logo"-->
-
-
+        <img src="/images/LOGO.svg" alt="Logo Activa Fitness"> <!-- Ruta corregida -->
         <h1>Sistema de Gestión</h1>
     </header>
+
     <section class="hero">
         <h2>Optimiza la gestión de tu gimnasio</h2>
         <p>Control de clientes, suscripciones y más.</p>
         <button onclick="window.location.href='dashboard.html'">Iniciar sesión</button>
+        <!-- Esto funciona porque dashboard.html está en la misma carpeta -->
     </section>
+
     <section class="features">
         <div class="feature">
             <h3>Gestión de Clientes</h3>
@@ -33,8 +33,10 @@
             <p>Automatiza el ingreso y la seguridad del gimnasio.</p>
         </div>
     </section>
+
     <footer>
         <p>&copy; 2025 Activa - Todos los derechos reservados</p>
     </footer>
 </body>
 </html>
+
