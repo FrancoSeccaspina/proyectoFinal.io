@@ -4,6 +4,9 @@ exports.initUsuarioModel = exports.Usuario = void 0;
 const sequelize_1 = require("sequelize");
 class Usuario extends sequelize_1.Model {
     static associate(models) {
+        Usuario.hasOne(models.Autenticacion, {
+            foreignKey: 'usuarioId',
+        });
     }
 }
 exports.Usuario = Usuario;

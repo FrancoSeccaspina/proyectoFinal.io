@@ -4,7 +4,9 @@ exports.initAutenticacionModel = exports.Autenticacion = void 0;
 const sequelize_1 = require("sequelize");
 class Autenticacion extends sequelize_1.Model {
     static associate(models) {
-        // Aquí puedes definir las asociaciones con otros modelos si es necesario
+        Autenticacion.belongsTo(models.Usuario, {
+            foreignKey: 'usuarioId',
+        });
     }
 }
 exports.Autenticacion = Autenticacion;
@@ -21,7 +23,7 @@ const initAutenticacionModel = (sequelize) => {
             allowNull: false,
         },
         contrasenia: {
-            type: sequelize_1.DataTypes.BLOB,
+            type: sequelize_1.DataTypes.STRING(255),
             allowNull: false,
         },
     }, {

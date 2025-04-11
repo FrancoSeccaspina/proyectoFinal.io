@@ -8,9 +8,13 @@ var __awaiter = (this && this.__awaiter) || function (thisArg, _arguments, P, ge
         step((generator = generator.apply(thisArg, _arguments || [])).next());
     });
 };
+var __importDefault = (this && this.__importDefault) || function (mod) {
+    return (mod && mod.__esModule) ? mod : { "default": mod };
+};
 Object.defineProperty(exports, "__esModule", { value: true });
 exports.UsuarioController = void 0;
 const models_1 = require("../database/models");
+const bcryptjs_1 = __importDefault(require("bcryptjs"));
 class UsuarioController {
     show(req, res) {
         return __awaiter(this, void 0, void 0, function* () {
@@ -30,6 +34,40 @@ class UsuarioController {
             }
             catch (error) {
                 console.error("Error en show:", error.message);
+                return res.status(500).json({
+                    success: false,
+                    message: "Error interno del servidor",
+                });
+            }
+        });
+    }
+    register(req, res) {
+        return __awaiter(this, void 0, void 0, function* () {
+            try {
+                const { email, contrasenia } = req.body;
+                const usuarioExistente = yield models_1.Autenticacion.findOne({ where: { email } });
+                if (usuarioExistente) {
+                    return res.status(400).json({
+                        success: false,
+                        message: "El usuario ya existe",
+                    });
+                }
+                const nuevoUsuario = yield models_1.Usuario.create(req.body);
+                // Crear la autenticación para el nuevo usuario
+                const hashedPassword = bcryptjs_1.default.hashSync(contrasenia, 10);
+                yield models_1.Autenticacion.create({
+                    email,
+                    contrasenia: hashedPassword,
+                    usuarioId: nuevoUsuario.id,
+                });
+                return res.status(201).json({
+                    success: true,
+                    message: "Usuario registrado correctamente",
+                    usuario: nuevoUsuario,
+                });
+            }
+            catch (error) {
+                console.error("Error en register:", error.message);
                 return res.status(500).json({
                     success: false,
                     message: "Error interno del servidor",

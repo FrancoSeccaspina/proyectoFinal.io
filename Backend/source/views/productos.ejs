@@ -8,10 +8,8 @@
         <%- include('./partials/header.ejs') %>
         <main>
             <div id="main-content">
+                <div><%= productos %></div>
 
-                <div class="container-image">
-                    <img src="../../images/<%= productos.imagen %>" alt="<%= productos.nombre %>" class="img-juego" />
-                </div>
                     
                 <div class="main-description">
                     
@@ -19,7 +17,7 @@
                     
                         <div class="description">
                             <h2 id="title-item">Descripcion del prodcuto</h2>
-                            <p><%= productos.descripcion %></p>
+
                         </div>
                     </section>
                     

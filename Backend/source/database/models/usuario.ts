@@ -1,28 +1,31 @@
 import {
   Model,
   DataTypes,
-  Optional,
   Sequelize,
   InferAttributes,
   InferCreationAttributes,
-  CreationOptional
+  CreationOptional,
 } from 'sequelize';
 
 interface UsuarioAttributes {
   id: number;
   apellido: string;
   nombre: string;
+  rol: string;
   imagen: string;
 }
 
 class Usuario extends Model<InferAttributes<Usuario>, InferCreationAttributes<Usuario>> implements UsuarioAttributes {
-
   declare id: CreationOptional<number>;
   declare apellido: string;
   declare nombre: string;
+  declare rol: string;
   declare imagen: string;
 
   static associate(models: any) {
+    Usuario.hasOne(models.Autenticacion, {
+      foreignKey: 'id_usuario',
+    });
   }
 }
 
@@ -45,6 +48,10 @@ const initUsuarioModel = (sequelize: Sequelize) => {
       },
       imagen: {
         type: DataTypes.STRING(255),
+        allowNull: false,
+      },
+      rol: {
+        type: DataTypes.STRING(20),
         allowNull: false,
       },
     },

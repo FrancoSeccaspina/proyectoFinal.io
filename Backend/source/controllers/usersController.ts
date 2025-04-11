@@ -28,48 +28,62 @@ export class UsuarioController {
       });
     }
   }
-  // async create(req: Request, res: Response): Promise<Response> {
-    
-  //   const transaction = await Usuario.sequelize?.transaction();
-    
-  //   try {
-  //     const { apellido, nombre, imagen,  email, contrasenia} = req.body;
-  //     if (!apellido || !nombre || !email || !contrasenia) {
-  //       return res.status(400).json({
-  //         success: false,
-  //         message: "Faltan campos obligatorios",
-  //       });
-  //     }
+  async register(req: Request, res: Response): Promise<Response> {
+    const transaction = await Usuario.sequelize?.transaction();
+    try {
+      const { apellido, nombre, imagen, email, contrasenia } = req.body;
+  
+      if (!apellido || !nombre || !imagen || !email || !contrasenia) {
+        return res.status(400).json({
+          success: false,
+          message: "Faltan campos obligatorios",
+        });
+      }
+  
+      const usuarioExistente = await Autenticacion.findOne({ where: { email } });
+      if (usuarioExistente) {
+        return res.status(400).json({
+          success: false,
+          message: "El usuario ya existe",
+        });
+      }
+  
+      const nuevoUsuario = await Usuario.create(
+        {
+          apellido,
+          nombre,
+          rol: "cliente", // TODO: definir nombre de rol en una variable de entorno
+          imagen,
+        },
+        { transaction }
+      );
+  
+      // TODO: agregar el numero de vueltas en una variable de entorno
+      const hashedPassword = bcrypt.hashSync(contrasenia, 10); 
+      await Autenticacion.create(
+        {
+          email,
+          contrasenia: hashedPassword,
+          id_usuario: nuevoUsuario.id,
+        },
+        { transaction }
+      );
+  
+      await transaction?.commit();
+      return res.status(201).json({
+        success: true,
+        message: "Usuario registrado correctamente",
+        usuario: nuevoUsuario,
+      });
 
-      
-  //     const hashedPassword = await bcrypt.hash(contrasenia, 10);
-  //     const newAuth = await Autenticacion.create(
-  //       {
-  //         email,
-  //         contrasenia: hashedPassword,
-  //       },
-  //       { transaction }
-  //     );
-
-  //     const nuevoUsuario = await Usuario.create(
-  //       { apellido, nombre, imagen },
-  //       { transaction });
-
-
-  //     return res.status(201).json({
-  //       success: true,
-  //       message: "Usuario creado",
-  //       user: newUser,
-  //     });
-  //   } catch (error) {
-  //     console.error("Error en create:", (error as Error).message);
-  //     return res.status(500).json({
-  //       success: false,
-  //       message: "Error al crear usuario",
-  //     });
-  //   }
-  // }
+    } catch (error) {
+      await transaction?.rollback();
+      console.error("Error en register:", (error as Error).message);
+      return res.status(500).json({
+        success: false,
+        message: "Error interno del servidor",
+      });
+    }
+  }
 }
-
-// Exporta la clase para usarla en el enrutador
 export default new UsuarioController();

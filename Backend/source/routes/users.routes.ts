@@ -1,19 +1,10 @@
 import express from 'express';
-import path from 'path';
-import fs from 'fs';
 import usersController from '../controllers/usersController';
-
-// import registerValidator from '../validations/register';
-// import loginValidator from '../validations/login';
-// import isLogged from '../middlewares/isLogged';
-// import isAdmin from '../middlewares/isAdmin';
 
 const route = express.Router();
 
-route.get('/detail/:id', (req, res) => { usersController.show(req, res) });
+route.get('/show/:id', (req, res) => { usersController.show(req, res) });
 
-// route.post('/usuarios', (req, res) => { usersController.create(req, res) });
-
-
+route.post('/register', (req, res) => { usersController.register(req, res) });
 
 export default route;

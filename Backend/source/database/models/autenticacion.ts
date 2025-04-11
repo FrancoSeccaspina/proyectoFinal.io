@@ -1,7 +1,6 @@
 import {
   Model,
   DataTypes,
-  Optional,
   Sequelize,
   InferAttributes,
   InferCreationAttributes,
@@ -11,19 +10,20 @@ import {
 interface AutenticacionAttributes {
   id: number;
   email: string;
-  contrasenia: Buffer;
+  contrasenia: string;
+  id_usuario: number; // Clave foránea hacia usuarios
 }
 
-class Autenticacion
-  extends Model<InferAttributes<Autenticacion>, InferCreationAttributes<Autenticacion>>
-  implements AutenticacionAttributes
-{
+class Autenticacion extends Model<InferAttributes<Autenticacion>, InferCreationAttributes<Autenticacion>> implements AutenticacionAttributes {
   declare id: CreationOptional<number>;
   declare email: string;
-  declare contrasenia: Buffer;
+  declare contrasenia: string;
+  declare id_usuario: number;
 
   static associate(models: any) {
-    // Aquí puedes definir las asociaciones con otros modelos si es necesario
+    Autenticacion.belongsTo(models.Usuario, {
+      foreignKey: 'id_usuario', 
+    });
   }
 }
 
@@ -41,8 +41,18 @@ const initAutenticacionModel = (sequelize: Sequelize) => {
         allowNull: false,
       },
       contrasenia: {
-        type: DataTypes.BLOB,
+        type: DataTypes.STRING(255),
         allowNull: false,
+      },
+      id_usuario: {
+        type: DataTypes.INTEGER,
+        allowNull: false,
+        references: {
+          model: 'usuarios',
+          key: 'id',
+        },
+        onUpdate: 'CASCADE',
+        onDelete: 'CASCADE',
       },
     },
     {

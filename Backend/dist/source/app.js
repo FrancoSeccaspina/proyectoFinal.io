@@ -13,6 +13,7 @@ const method_override_1 = __importDefault(require("method-override"));
 // import userMiddleware from './middlewares/user';
 const users_routes_1 = __importDefault(require("./routes/users.routes"));
 const view_routes_1 = __importDefault(require("./routes/view.routes"));
+const producto_routes_1 = __importDefault(require("./routes/producto.routes"));
 const app = (0, express_1.default)();
 // Ruta pública
 const publicPath = path_1.default.resolve(__dirname, '../public');
@@ -36,9 +37,9 @@ app.use((0, method_override_1.default)('m'));
 // Middleware personalizado
 // app.use(userMiddleware);
 // Rutas
-app.use('/', view_routes_1.default);
+app.use('', view_routes_1.default);
 app.use('/users', users_routes_1.default);
-app.use('/products', users_routes_1.default);
+app.use('/productos', producto_routes_1.default);
 // Habilitar CORS
 app.use((0, cors_1.default)());
 // Ruta principal
