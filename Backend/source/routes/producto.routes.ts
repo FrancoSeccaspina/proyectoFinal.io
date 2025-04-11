@@ -6,7 +6,7 @@ const route = Router();
 route.post('/productos', (req, res) => { productoController.crearProducto(req, res) });
 
 // Ruta para listar productos
-route.get('/listaProductos', (req, res) => { productoController.listaProductos(req, res) });
+route.get('/', (req, res) => { productoController.listaProductos(req, res) });
 // route.get('/listaProductos', (req, res) => {
 //     const productos = [
 //       { id: 1, nombre: 'Zapatillas', precio: 12000 },
@@ -17,6 +17,6 @@ route.get('/listaProductos', (req, res) => { productoController.listaProductos(r
 //     res.render('productos', { productos });
 //   });
 // Ruta para buscar un producto por ID
-route.get('/listaProductos/:id', (req, res) => { productoController.buscarProductosPorId(req, res) });
+route.get('/:id', (req, res) => { productoController.buscarProductosPorId(req, res) });
 
 export default route;

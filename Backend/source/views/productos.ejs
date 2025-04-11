@@ -1,38 +1,42 @@
 <!DOCTYPE html>
 <html lang="en">
-    <head>
-        <%- include('./partials/head.ejs') %>
-        <link rel="stylesheet" href="/css/productos.css">
-    </head>
 
-    <body>
-        <%- include('./partials/header.ejs') %>
+<head>
+    <%- include('./partials/head.ejs') %>
+        <link rel="stylesheet" href="/css/productos.css">
+</head>
+
+<body>
+    <%- include('./partials/header.ejs') %>
         <main class="main-content">
             <div class="container-allMain">
-                    <% productos.forEach(producto => { %>
-                        <li class="titulo">
-                            <a href="/productos/listaProductos/<%= producto.id %>"></a>                        </li>
-                        <div class="productos list-group-item p-3">
-                            <picture>
-                                <img src="../../images/<%= producto.imagen %>" alt="<%= producto.nombre %>" class="img-juego" />
-                            </picture>
-                            <div class="informacion">
+                <% productos.forEach(producto=> { %>
+                    <li class="titulo">
+                        <a href="/productos/listaProductos/<%= producto.id %>"></a>
+                    </li>
+                    <div class="productos list-group-item p-3">
+                        <picture>
+                            <img src="../../images/<%= producto.imagen %>" alt="<%= producto.nombre %>"
+                                class="img-juego" />
+                        </picture>
+                        <div class="informacion">
 
-                                <span class="tipo-envio">En stock</span>
-                                <div class="container-prices">
-                                    <span class="precio-ahora">$<%=(producto.precio - (producto.precio * 0.1)) %></span>
-                                </div>
-                                <span class="tipo-entrega">Entrega inmediata</span>
-                                <span class="name-product">
-                                    <%= producto.nombre %>
-                                </span>
-                                <input type="text" name="categoriaId" id="categoriaId" hidden
-                                value="<%=producto.categoriaId%>">
+                            <span class="tipo-envio">En stock</span>
+                            <div class="container-prices">
+                                <span class="precio-ahora">$<%=(producto.precio - (producto.precio * 0.1)) %></span>
                             </div>
+                            <span class="tipo-entrega">Entrega inmediata</span>
+                            <span class="name-product">
+                                <%= producto.nombre %>
+                            </span>
+                            <input type="text" name="categoriaId" id="categoriaId" hidden
+                                value="<%=producto.categoriaId%>">
                         </div>
+                    </div>
                     </a>
                     <% }); %>
-            </div>    
+            </div>
         </main>
-    </body>
+</body>
+
 </html>
