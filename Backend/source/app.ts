@@ -12,6 +12,8 @@ import cookieParser from 'cookie-parser';
 import usersRoutes from './routes/users.routes';
 import viewRoutes from './routes/view.routes';
 import productoRoutes from './routes/producto.routes';
+import categoriaRoutes from './routes/categoria.routes';
+
 
 const app = express();
 
@@ -47,7 +49,7 @@ app.use(methodOverride('m'));
 app.use('', viewRoutes);
 app.use('/users', usersRoutes);
 app.use('/productos', productoRoutes);
-
+app.use('/categorias', categoriaRoutes);
 // Habilitar CORS
 app.use(cors());
 
