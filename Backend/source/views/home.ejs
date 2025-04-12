@@ -10,27 +10,29 @@
   <%- include('./partials/header.ejs') %>
 
   <main class="main-content">
-    <div id="carouselExampleIndicators" class="carousel slide" data-bs-ride="carousel">
-      <div class="carousel-indicators">
-        <% for(let i = 0; i < 8; i++) { %>
-          <button type="button" data-bs-target="#carouselExampleIndicators" data-bs-slide-to="<%= i %>" class="<%= i === 0 ? 'active' : '' %>" aria-label="Slide <%= i+1 %>"></button>
-        <% } %>
+    <div class="carousel-container">
+      <div id="carouselExampleIndicators" class="carousel slide" data-bs-ride="carousel">
+        <div class="carousel-indicators">
+          <% for(let i = 0; i < 8; i++) { %>
+            <button type="button" data-bs-target="#carouselExampleIndicators" data-bs-slide-to="<%= i %>" class="<%= i === 0 ? 'active' : '' %>" aria-label="Slide <%= i+1 %>"></button>
+          <% } %>
+        </div>
+        <div class="carousel-inner">
+          <% for(let i = 1; i <= 8; i++) { %>
+            <div class="carousel-item <%= i === 1 ? 'active' : '' %>">
+              <img src="/images/carrousel<%= i %>.jpeg" class="d-block w-100 carousel-img" alt="img<%= i %>">
+            </div>
+          <% } %>
+        </div>
+        <button class="carousel-control-prev" type="button" data-bs-target="#carouselExampleIndicators" data-bs-slide="prev">
+          <span class="carousel-control-prev-icon" aria-hidden="true"></span>
+          <span class="visually-hidden">Previous</span>
+        </button>
+        <button class="carousel-control-next" type="button" data-bs-target="#carouselExampleIndicators" data-bs-slide="next">
+          <span class="carousel-control-next-icon" aria-hidden="true"></span>
+          <span class="visually-hidden">Next</span>
+        </button>
       </div>
-      <div class="carousel-inner">
-        <% for(let i = 1; i <= 8; i++) { %>
-          <div class="carousel-item <%= i === 1 ? 'active' : '' %>">
-            <img src="/images/carrousel<%= i %>.jpeg" class="d-block w-100 carousel-img" alt="img<%= i %>">
-          </div>
-        <% } %>
-      </div>
-      <button class="carousel-control-prev" type="button" data-bs-target="#carouselExampleIndicators" data-bs-slide="prev">
-        <span class="carousel-control-prev-icon" aria-hidden="true"></span>
-        <span class="visually-hidden">Previous</span>
-      </button>
-      <button class="carousel-control-next" type="button" data-bs-target="#carouselExampleIndicators" data-bs-slide="next">
-        <span class="carousel-control-next-icon" aria-hidden="true"></span>
-        <span class="visually-hidden">Next</span>
-      </button>
     </div>
     
     <div class="planes">

@@ -19,9 +19,17 @@ main {
     margin: auto;
 }
 
+.carousel-container {
+    width: 100vw;
+    margin-left: -50vw;
+    left: 50%;
+    position: relative;
+}
+
 .carousel-img {
     object-fit: cover;
-    max-height: 400px;
+    max-height: 500px; /* Más grande que antes */
+    width: 100%;
 }
 
 .planes {
@@ -41,7 +49,7 @@ main {
 
 .planMensual img, .planAnual img {
     width: 100%;
-    max-width: 500px;
+    max-width: 250px; /* Reducido a la mitad */
     height: auto;
     padding: 0.5rem;
     object-fit: contain;
@@ -77,13 +85,3 @@ main {
 .gestion-boton button:hover {
     background-color: #222;
 }
-/* Estilo para que el carrusel llegue a los bordes laterales */
-.carousel-container {
-    width: 100vw;
-    position: relative;
-    left: 50%;
-    right: 50%;
-    margin-left: -50vw;
-    margin-right: -50vw;
-  }
-  
