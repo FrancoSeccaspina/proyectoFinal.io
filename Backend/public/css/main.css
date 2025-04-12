@@ -1,52 +1,89 @@
 @import url('header.css');
 @import url('footer.css');
+
 a {
     text-decoration: none;
 }
-
 li {
     list-style-type: none;
 }
-main{
+
+main {
     background-color: #f1f1f1;
+    padding: 1rem;
 }
 
-.main-content{
+.main-content {
     width: 100%;
+    max-width: 1200px;
+    margin: auto;
 }
-.planes{
-    width: 100%;
+
+.carousel-img {
+    object-fit: cover;
+    max-height: 400px;
+}
+
+.planes {
     display: flex;
+    flex-wrap: wrap;
+    gap: 1rem;
+    margin-top: 2rem;
 }
-.planMensual, .planAnual{
-    width: 50%;
+
+.planMensual, .planAnual {
+    flex: 1 1 300px;
     display: flex;
     flex-direction: column;
-    align-self: center;
+    align-items: center;
     justify-content: center;
 }
-.planMensual img, .planAnual img{
+
+.planMensual img, .planAnual img {
     width: 100%;
+    max-width: 500px;
+    height: auto;
     padding: 0.5rem;
+    object-fit: contain;
 }
 
-.planMensual a, .planAnual a{
+.planMensual a, .planAnual a {
     text-decoration: none;
     color: black;
     text-align: center;
     padding: 1rem;
+    font-weight: bold;
 }
-.planMensual a:hover{
-    text-decoration: none;
-    color: rgb(104, 104, 104);
-} 
-.planAnual a:hover{
-    text-decoration: none;
+
+.planMensual a:hover, .planAnual a:hover {
     color: rgb(104, 104, 104);
 }
-.burger-user {
-    display: flex;
-    align-items: center;
-    justify-content: space-between;
-    width: 15%;
+
+.gestion-boton {
+    text-align: center;
+    margin: 2rem 0;
 }
+
+.gestion-boton button {
+    padding: 0.8rem 1.5rem;
+    background-color: #444;
+    color: #fff;
+    border: none;
+    border-radius: 8px;
+    font-size: 1rem;
+    cursor: pointer;
+}
+
+.gestion-boton button:hover {
+    background-color: #222;
+}
+/* Estilo para que el carrusel llegue a los bordes laterales */
+.carousel-container {
+    width: 100vw;
+    position: relative;
+    left: 50%;
+    right: 50%;
+    margin-left: -50vw;
+    margin-right: -50vw;
+  }
+  
