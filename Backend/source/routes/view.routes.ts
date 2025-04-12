@@ -22,10 +22,13 @@ route.get("/recetas", function (req, res) {
 route.get("/listaProductos", function (req, res) {
     res.render("listaProductos");
 });
+route.get("/productDetail", function (req, res){
+    res.render('productDetail');
+});
 /*route.get("/login", function(req,res){
     res.render("login");
-});*/
+});
 route.get("/register", function (req, res) {
     res.render("register");
-});
+});*/
 export default route;
