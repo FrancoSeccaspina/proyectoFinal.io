@@ -50,7 +50,7 @@ const initUsuarioModel = (sequelize: Sequelize) => {
       },
       imagen: {
         type: DataTypes.STRING(255),
-        allowNull: false,
+        allowNull: true,
       },
       rol: {
         type: DataTypes.STRING(20),

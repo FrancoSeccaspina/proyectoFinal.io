@@ -32,24 +32,20 @@ export class UsuarioController {
     const transaction = await Usuario.sequelize?.transaction();
     try {
       const { apellido, nombre, imagen, email, contrasenia, fecha_nacimiento} = req.body;
-      console.log("ACA ESTOY")
-      console.log(nombre)
-
 
       const usuarioExistente = await Autenticacion.findOne({ where: { email } });
-
       if (usuarioExistente) {
-        res.render('register',{errors:{} ,oldData: {}})
-        return res
+          return res.status(400).json({
+              success: false,
+              message: "El correo electrónico ya está registrado.",
+          });
       }
-  
-      console.log("+++2")
 
       const nuevoUsuario = await Usuario.create(
         {
           apellido,
           nombre,
-          rol: "cliente", // TODO: definir nombre de rol en una variable de entorno
+          rol: "cliente", // TODO: definir nombre de rol en una variable de entorno/enums
           imagen,
           fecha_nacimiento
         },
@@ -60,7 +56,7 @@ export class UsuarioController {
       const hashedPassword = bcrypt.hashSync(contrasenia, 10); 
       await Autenticacion.create(
         {
-          email,
+          email : email,
           contrasenia: hashedPassword,
           id_usuario: nuevoUsuario.id,
         },
@@ -68,13 +64,12 @@ export class UsuarioController {
       );
   
       await transaction?.commit();
-      return res.status(201).json({
-        success: true,
-        message: "Usuario registrado correctamente",
-        usuario: nuevoUsuario,
-      });
+      
+      res.redirect('/login')
+      return res
 
     } catch (error) {
+
       await transaction?.rollback();
       console.error("Error en register:", (error as Error).message);
       return res.status(500).json({

@@ -14,7 +14,7 @@
 
             <h2 id="h2-Register">Registrate</h2>
             
-            <form action="/users/save" method="POST" enctype="multipart/form-data">
+            <form action="/users/save" method="POST">
                 
                 
 
@@ -37,7 +37,6 @@
                     <p class="feedback"><%= errors.contrasenia.msg %></p>
                 <% } %>
 
-                <input type="file" name="imagen" id="imgen" class="inputs-register">
 
                 <ul class="mensajeError" id="erroresRegister"></ul>
                 <button type="submit" class="btn-register">Registrar</button>

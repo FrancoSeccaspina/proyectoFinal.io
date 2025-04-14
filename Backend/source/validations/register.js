@@ -32,6 +32,8 @@ custom(function(user){
 }).withMessage('Usuario ya registrado').bail()
 .isLength({min:5,max:20}).withMessage('minimo 5 caracteres, maximo 20')
 
+
+// TODO cambiar validacion de apellido de usuario por email
 let apellido = body('apellido').notEmpty().withMessage('El nombre de usuario no puede quedar vacío').
 custom(function(user){
    return db.usuario.findOne({where:
