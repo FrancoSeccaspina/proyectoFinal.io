@@ -13,6 +13,7 @@ var __importDefault = (this && this.__importDefault) || function (mod) {
 };
 Object.defineProperty(exports, "__esModule", { value: true });
 exports.UsuarioController = void 0;
+const express_validator_1 = require("express-validator");
 const models_1 = require("../database/models");
 const bcryptjs_1 = __importDefault(require("bcryptjs"));
 class UsuarioController {
@@ -41,32 +42,53 @@ class UsuarioController {
             }
         });
     }
-    register(req, res) {
+    save(req, res) {
         return __awaiter(this, void 0, void 0, function* () {
+            var _a;
+            const transaction = yield ((_a = models_1.Usuario.sequelize) === null || _a === void 0 ? void 0 : _a.transaction());
             try {
-                const { email, contrasenia } = req.body;
+                const result = (0, express_validator_1.validationResult)(req);
+                const errores = result.mapped();
+                const { apellido, nombre, imagen, email, contrasenia, fecha_nacimiento } = req.body;
+                console.log(errores);
                 const usuarioExistente = yield models_1.Autenticacion.findOne({ where: { email } });
                 if (usuarioExistente) {
-                    return res.status(400).json({
-                        success: false,
-                        message: "El usuario ya existe",
+                    console.log('El email ya existe');
+                    res.render('register', {
+                        errorEmail: { email: { msg: 'Email ya registrado' } },
+                        oldData: req.body,
+                        errors: errores
                     });
+                    return res;
                 }
-                const nuevoUsuario = yield models_1.Usuario.create(req.body);
-                // Crear la autenticación para el nuevo usuario
+                if (!result.isEmpty()) {
+                    res.render('register', {
+                        errorEmail: { email: { msg: '' } },
+                        oldData: req.body,
+                        errors: errores
+                    });
+                    return res;
+                }
+                const nuevoUsuario = yield models_1.Usuario.create({
+                    apellido,
+                    nombre,
+                    rol: "cliente", // TODO: definir nombre de rol en una variable de entorno/enums
+                    imagen,
+                    fecha_nacimiento
+                }, { transaction });
+                // TODO: agregar el numero de vueltas en una variable de entorno
                 const hashedPassword = bcryptjs_1.default.hashSync(contrasenia, 10);
                 yield models_1.Autenticacion.create({
-                    email,
+                    email: email,
                     contrasenia: hashedPassword,
-                    usuarioId: nuevoUsuario.id,
-                });
-                return res.status(201).json({
-                    success: true,
-                    message: "Usuario registrado correctamente",
-                    usuario: nuevoUsuario,
-                });
+                    id_usuario: nuevoUsuario.id,
+                }, { transaction });
+                yield (transaction === null || transaction === void 0 ? void 0 : transaction.commit());
+                res.redirect('/login');
+                return res;
             }
             catch (error) {
+                yield (transaction === null || transaction === void 0 ? void 0 : transaction.rollback());
                 console.error("Error en register:", error.message);
                 return res.status(500).json({
                     success: false,
@@ -77,5 +99,4 @@ class UsuarioController {
     }
 }
 exports.UsuarioController = UsuarioController;
-// Exporta la clase para usarla en el enrutador
 exports.default = new UsuarioController();

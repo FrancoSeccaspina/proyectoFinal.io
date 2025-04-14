@@ -5,7 +5,7 @@ const sequelize_1 = require("sequelize");
 class Autenticacion extends sequelize_1.Model {
     static associate(models) {
         Autenticacion.belongsTo(models.Usuario, {
-            foreignKey: 'usuarioId',
+            foreignKey: 'id_usuario',
         });
     }
 }
@@ -25,6 +25,16 @@ const initAutenticacionModel = (sequelize) => {
         contrasenia: {
             type: sequelize_1.DataTypes.STRING(255),
             allowNull: false,
+        },
+        id_usuario: {
+            type: sequelize_1.DataTypes.INTEGER,
+            allowNull: false,
+            references: {
+                model: 'usuarios',
+                key: 'id',
+            },
+            onUpdate: 'CASCADE',
+            onDelete: 'CASCADE',
         },
     }, {
         sequelize,

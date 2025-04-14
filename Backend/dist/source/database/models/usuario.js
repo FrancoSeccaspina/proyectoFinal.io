@@ -5,7 +5,7 @@ const sequelize_1 = require("sequelize");
 class Usuario extends sequelize_1.Model {
     static associate(models) {
         Usuario.hasOne(models.Autenticacion, {
-            foreignKey: 'usuarioId',
+            foreignKey: 'id_usuario',
         });
     }
 }
@@ -28,6 +28,14 @@ const initUsuarioModel = (sequelize) => {
         },
         imagen: {
             type: sequelize_1.DataTypes.STRING(255),
+            allowNull: true,
+        },
+        rol: {
+            type: sequelize_1.DataTypes.STRING(20),
+            allowNull: false,
+        },
+        fecha_nacimiento: {
+            type: sequelize_1.DataTypes.DATEONLY,
             allowNull: false,
         },
     }, {

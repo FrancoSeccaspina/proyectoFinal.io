@@ -3,8 +3,13 @@ let db = require('../database/models/index')
 
 
         
-let email = body('email').notEmpty().withMessage('E-Mail no puede quedar vacio').bail().isEmail().custom(function(user,{req}){
-    return db.usuario.findOne({where:
+let email = body('email')
+.notEmpty()
+.withMessage('E-Mail no puede quedar vacio')
+.bail()
+.isEmail()
+.custom(function(user,{req}){
+    return db.Autenticacion.findOne({where:
     {
         email: req.body.email
     }}).then(function(data){
@@ -15,38 +20,25 @@ let email = body('email').notEmpty().withMessage('E-Mail no puede quedar vacio')
         }
     })
 }).withMessage('Email ya registrado')
-let contrasenia = body('contrasenia').notEmpty().withMessage('Por favor, ingrese su contraseña').bail().isLength({min:6}).withMessage('Al menos 10 caracteres')
 
-let usuario = body('usuario').notEmpty().withMessage('El nombre de usuario no puede quedar vacío').
-custom(function(user){
-   return db.usuario.findOne({where:
-    {
-        user: user
-    }}).then(function(data){
-        if(data){
-            throw new Error('used user')
-        }else{
-            return true
-        }
-    })
-}).withMessage('Usuario ya registrado').bail()
-.isLength({min:5,max:20}).withMessage('minimo 5 caracteres, maximo 20')
+let contrasenia = body('contrasenia')
+.notEmpty()
+.withMessage('Por favor, ingrese su contraseña')
+.bail()
+.isLength({min:6})
+.withMessage('Al menos 10 caracteres')
 
+let nombre = body('nombre')
+.notEmpty()
+.withMessage('El nombre de usuario no puede quedar vacío')
+.bail()
+.isLength({min:3,max:20})
+.withMessage('minimo 5 caracteres, maximo 20')
 
-// TODO cambiar validacion de apellido de usuario por email
-let apellido = body('apellido').notEmpty().withMessage('El nombre de usuario no puede quedar vacío').
-custom(function(user){
-   return db.usuario.findOne({where:
-    {
-        user: user
-    }}).then(function(data){
-        if(data){
-            throw new Error('used user')
-        }else{
-            return true
-        }
-    })
-}).withMessage('Usuario ya registrado').bail()
+let apellido = body('apellido')
+.notEmpty()
+.withMessage('El apellido de usuario no puede quedar vacío')
+.bail()
 .isLength({min:4})
 
 const whitelist = [
@@ -56,20 +48,14 @@ const whitelist = [
     'image/webp'
   ]
   
-let imagen = body('imagen').custom(function(value,{req}){
-         if(req.files && req.files.length > 0 && !whitelist.includes(req.files[0].mimetype)){
-            return Promise.reject('Por favor que el archivo sea de tipo png, jpeg, jpg o webp')
-         }else{
-            return true
-         }
-})
+// let imagen = body('imagen').custom(function(value,{req}){
+//          if(req.files && req.files.length > 0 && !whitelist.includes(req.files[0].mimetype)){
+//             return Promise.reject('Por favor que el archivo sea de tipo png, jpeg, jpg o webp')
+//          }else{
+//             return true
+//          }
+// })
 
-
-
-
-
-
-
-let validaciones = [email,contrasenia,usuario,apellido,imagen]
+let validaciones = [email,contrasenia,nombre,apellido]
 
 module.exports = validaciones;

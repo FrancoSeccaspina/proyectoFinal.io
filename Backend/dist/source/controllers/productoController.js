@@ -37,8 +37,7 @@ class productoController {
             try {
                 const productos = yield producto_1.Producto.findAll();
                 console.log(productos);
-                //res.status(200).json(productos);
-                res.render('/productos', { productos });
+                res.render('productos', { productos });
             }
             catch (error) {
                 console.error('Error al listar productos:', error);

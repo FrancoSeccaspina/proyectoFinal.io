@@ -1,50 +1,67 @@
 <!DOCTYPE html>
 <html lang="en">
 
-    <head>
-        <%- include('./partials/head.ejs') %>
-        <link rel="stylesheet" href="/css/register.css">
-    </head>
+<head>
+  <%- include('./partials/head.ejs') %>
+  <link rel="stylesheet" href="/css/register.css" />
+</head>
 
-    <body>
-    
-        <%- include('./partials/header.ejs') %>
+<body>
+  <%- include('./partials/header.ejs') %>
 
-        <main class="mainRegister">
+  <main class="mainRegister">
 
-            <h2 id="h2-Register">Registrate</h2>
-            
-            <form action="/users/save" method="POST">
-                
-                
+    <h2 id="h2-register">Regístrate</h2>
+    <form action="/users/save" method="POST" id="form-register">
 
-                <input type="text" name="nombre" id="nombre" placeholder="Nombre" itemid="nombreUsuari@" class="inputs-register" value="<%= (typeof oldData !== 'undefined' && oldData.usuario) ? oldData.usuario : '' %>"  required>
-                <% 
-                if(locals && locals.errors && errors.user) { 
-                    %>
-                    <p class="feedback"><%= errors.usuario.msg %></p>
-                    <% 
-                } %>
-                    
-                <input type="text" name="apellido" id="apellido" class="inputs-register" placeholder="Apellido" value="<%= (typeof oldData !== 'undefined' && oldData.apellido) ? oldData.apellido : '' %>" required>
+      <!-- Nombre -->
+      <input type="text" name="nombre" id="nombre" placeholder="Nombre" class="inputs-register"
+        value="<%= (typeof oldData !== 'undefined' && oldData.nombre) ? oldData.nombre : '' %>" required>
+      <% if (locals && locals.errors && errors.nombre) { %>
+        <p class="feedback"><%= errors.nombre.msg %></p>
+      <% } %>
 
-                <input type="date" name="fecha_nacimiento" id="fecha_nacimiento" class="inputs-register" placeholder="Fecha de Nacimiento" value="<%= (typeof oldData !== 'undefined' && oldData.fecha_nacimiento) ? oldData.fecha_nacimiento : '' %>" required>
+      <!-- Apellido -->
+      <input type="text" name="apellido" id="apellido" class="inputs-register" placeholder="Apellido"
+        value="<%= (typeof oldData !== 'undefined' && oldData.apellido) ? oldData.apellido : '' %>" required>
+      <% if (locals && locals.errors && errors.apellido) { %>
+        <p class="feedback"><%= errors.apellido.msg %></p>
+      <% } %>
 
-                <input type="email" name="email" id="email" placeholder="Correo Electronico" class="inputs-register" required>
-                
-                <input type="password" name="contrasenia" placeholder="Contraseña" id="contrasenia" class="inputs-register" required>
-                <% if(locals && locals.errors && errors.contrasenia) { %>
-                    <p class="feedback"><%= errors.contrasenia.msg %></p>
-                <% } %>
+      <input type="email" name="email" id="email" placeholder="Correo Electrónico" class="inputs-register"
+        value="<%= (typeof oldData !== 'undefined' && oldData.email) ? oldData.email : '' %>"required>
+      <% if (locals && locals.errors && errors.email) { %>
+        <p class="feedback"><%= errors.email.msg %></p>
+      <% } %>
 
+      <input type="date" name="fecha_nacimiento" id="fecha_nacimiento" class="inputs-register"
+        value="<%= (typeof oldData !== 'undefined' && oldData.fecha_nacimiento) ? oldData.fecha_nacimiento : '' %>" required>
+      <% if (locals && locals.errors && errors.fecha_nacimiento) { %>
+        <p class="feedback"><%= errors.fecha_nacimiento.msg %></p>
+      <% } %>
 
-                <ul class="mensajeError" id="erroresRegister"></ul>
-                <button type="submit" class="btn-register">Registrar</button>
-            </form>
-        </main>
-        <script src="https://unpkg.com/validator@latest/validator.min.js"></script>
-    </body>
-    <footer id="register-footer">
-        <%- include('./partials/footer.ejs') %>
-    </footer>
+      <input type="password" name="contrasenia" placeholder="Contraseña" id="contrasenia" class="inputs-register" required>
+      <% if (locals && locals.errors && errors.contrasenia) { %>
+        <p class="feedback"><%= errors.contrasenia.msg %></p>
+      <% } %>
+
+      
+      <!-- <input type="file" name="image" id="image" class="inputs-register"> -->
+
+      <!-- Botón de registro -->
+      <button id="button-register" type="submit">Registrarse</button>
+
+      <!-- Lista de errores -->
+      <ul class="mensajeError" id="erroresRegister"></ul>
+    </form>
+  </main>
+
+  <script src="https://unpkg.com/validator@latest/validator.min.js"></script>
+  <script src="../js/register.js"></script>
+  <footer id="register-footer">
+    <%- include('./partials/footer.ejs') %>
+  </footer>
+
+</body>
+
 </html>

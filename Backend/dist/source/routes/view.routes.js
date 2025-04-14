@@ -18,7 +18,16 @@ route.get("/rutinas", function (req, res) {
 route.get("/recetas", function (req, res) {
     res.render("recetas");
 });
-route.get("/productos", function (req, res) {
-    res.render("productos");
+route.get("/listaProductos", function (req, res) {
+    res.render("listaProductos");
+});
+route.get("/productDetail", function (req, res) {
+    res.render('productDetail');
+});
+/*route.get("/login", function(req,res){
+    res.render("login");
+});*/
+route.get("/register", function (req, res) {
+    res.render("register");
 });
 exports.default = route;

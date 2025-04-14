@@ -1,3 +1,4 @@
+import { validationResult } from "express-validator";
 import { Request, Response } from "express";
 import { Autenticacion, Usuario } from '../database/models';
 import bcrypt from 'bcryptjs';
@@ -28,17 +29,32 @@ export class UsuarioController {
       });
     }
   }
+
   async save(req: Request, res: Response): Promise<Response> {
     const transaction = await Usuario.sequelize?.transaction();
     try {
+      const reultadosValidacion = validationResult(req);
+      const errores = reultadosValidacion.mapped();
       const { apellido, nombre, imagen, email, contrasenia, fecha_nacimiento} = req.body;
 
       const usuarioExistente = await Autenticacion.findOne({ where: { email } });
-      if (usuarioExistente) {
-          return res.status(400).json({
-              success: false,
-              message: "El correo electrónico ya está registrado.",
-          });
+      if(usuarioExistente){
+          console.log('El email ya existe')
+          res.render('register',{
+              errorEmail:{email:{msg:'Email ya registrado'}},
+              oldData: req.body,
+              errors: errores
+          })
+          return res
+      }
+
+      if(!reultadosValidacion.isEmpty()){
+        res.render('register',{
+            errorEmail:{email:{msg:''}},
+            oldData: req.body,
+            errors: errores
+        })
+        return res
       }
 
       const nuevoUsuario = await Usuario.create(
