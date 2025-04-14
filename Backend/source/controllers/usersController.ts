@@ -28,32 +28,30 @@ export class UsuarioController {
       });
     }
   }
-  async register(req: Request, res: Response): Promise<Response> {
+  async save(req: Request, res: Response): Promise<Response> {
     const transaction = await Usuario.sequelize?.transaction();
     try {
-      const { apellido, nombre, imagen, email, contrasenia } = req.body;
-  
-      if (!apellido || !nombre || !imagen || !email || !contrasenia) {
-        return res.status(400).json({
-          success: false,
-          message: "Faltan campos obligatorios",
-        });
-      }
-  
+      const { apellido, nombre, imagen, email, contrasenia, fecha_nacimiento} = req.body;
+      console.log("ACA ESTOY")
+      console.log(nombre)
+
+
       const usuarioExistente = await Autenticacion.findOne({ where: { email } });
+
       if (usuarioExistente) {
-        return res.status(400).json({
-          success: false,
-          message: "El usuario ya existe",
-        });
+        res.render('register',{errors:{} ,oldData: {}})
+        return res
       }
   
+      console.log("+++2")
+
       const nuevoUsuario = await Usuario.create(
         {
           apellido,
           nombre,
           rol: "cliente", // TODO: definir nombre de rol en una variable de entorno
           imagen,
+          fecha_nacimiento
         },
         { transaction }
       );

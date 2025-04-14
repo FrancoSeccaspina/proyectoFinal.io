@@ -14,21 +14,25 @@
 
             <h2 id="h2-Register">Registrate</h2>
             
-            <form action="/register/save">
+            <form action="/users/save" method="POST" enctype="multipart/form-data">
+                
+                
 
-                <input type="text" name="usuario" id="usuario" placeholder="Nombre Usuario" itemid="nombreUsuari@" class="inputs-register" value="<%= oldData && oldData.usuario ? oldData.usuario : '' %>"  required>
-                <% if(locals && locals.errors && errors.user) { %>
+                <input type="text" name="nombre" id="nombre" placeholder="Nombre" itemid="nombreUsuari@" class="inputs-register" value="<%= (typeof oldData !== 'undefined' && oldData.usuario) ? oldData.usuario : '' %>"  required>
+                <% 
+                if(locals && locals.errors && errors.user) { 
+                    %>
                     <p class="feedback"><%= errors.usuario.msg %></p>
-                <% } %>
+                    <% 
+                } %>
+                    
+                <input type="text" name="apellido" id="apellido" class="inputs-register" placeholder="Apellido" value="<%= (typeof oldData !== 'undefined' && oldData.apellido) ? oldData.apellido : '' %>" required>
+
+                <input type="date" name="fecha_nacimiento" id="fecha_nacimiento" class="inputs-register" placeholder="Fecha de Nacimiento" value="<%= (typeof oldData !== 'undefined' && oldData.fecha_nacimiento) ? oldData.fecha_nacimiento : '' %>" required>
+
+                <input type="email" name="email" id="email" placeholder="Correo Electronico" class="inputs-register" required>
                 
-                <input type="text" name="apellido" id="apellido" class="inputs-register" placeholder="Apodo" value="<%= oldData && oldData.apellido ? oldData.apellido : '' %>" required>
-                
-                <input type="email" name="email" id="email" placeholder="Correo Electronico" class="inputs-register" value="<%= oldData && oldData.email ? oldData.email : '' %>" required>
-                <% if(locals && locals.errors && errors.email) { %>
-                    <p class="feddback"><%= errors.email.msg %></p>
-                <% } %>
-                
-                <input type="password" name="contrasenia" placeholder="Contraseña" id="contrasenia" class="inputs-register" value="<%= oldData && oldData.contrasenia ? oldData.contrasenia : '' %>" required>
+                <input type="password" name="contrasenia" placeholder="Contraseña" id="contrasenia" class="inputs-register" required>
                 <% if(locals && locals.errors && errors.contrasenia) { %>
                     <p class="feedback"><%= errors.contrasenia.msg %></p>
                 <% } %>
@@ -36,10 +40,10 @@
                 <input type="file" name="imagen" id="imgen" class="inputs-register">
 
                 <ul class="mensajeError" id="erroresRegister"></ul>
+                <button type="submit" class="btn-register">Registrar</button>
             </form>
         </main>
         <script src="https://unpkg.com/validator@latest/validator.min.js"></script>
-        <script src="../js/register.js"></script>
     </body>
     <footer id="register-footer">
         <%- include('./partials/footer.ejs') %>

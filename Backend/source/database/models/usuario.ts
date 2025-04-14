@@ -13,6 +13,7 @@ interface UsuarioAttributes {
   nombre: string;
   rol: string;
   imagen: string;
+  fecha_nacimiento: Date;
 }
 
 class Usuario extends Model<InferAttributes<Usuario>, InferCreationAttributes<Usuario>> implements UsuarioAttributes {
@@ -21,6 +22,7 @@ class Usuario extends Model<InferAttributes<Usuario>, InferCreationAttributes<Us
   declare nombre: string;
   declare rol: string;
   declare imagen: string;
+  declare fecha_nacimiento: Date;
 
   static associate(models: any) {
     Usuario.hasOne(models.Autenticacion, {
@@ -52,6 +54,10 @@ const initUsuarioModel = (sequelize: Sequelize) => {
       },
       rol: {
         type: DataTypes.STRING(20),
+        allowNull: false,
+      },
+      fecha_nacimiento: {
+        type: DataTypes.DATEONLY,
         allowNull: false,
       },
     },
