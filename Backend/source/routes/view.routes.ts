@@ -27,8 +27,8 @@ route.get("/productDetail", function (req, res){
 });
 /*route.get("/login", function(req,res){
     res.render("login");
-});
+});*/
 route.get("/register", function (req, res) {
     res.render("register");
-});*/
+});
 export default route;
