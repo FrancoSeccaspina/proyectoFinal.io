@@ -19,14 +19,14 @@
 
                     <label class="none" for="usuario"></label>
                     
-                    <input class="inputs-login" type="text" name="email" id="usuario" placeholder="Correo electronico" required value="<%= oldDataLogin && oldDataLogin.email ? oldDataLogin.email : '' %>">
+                    <input class="inputs-login" type="text" name="email" id="usuario" placeholder="Correo electronico" required value="">
                     <% if(locals && locals.errors && errors.email) { %>
                         <p class="feedback"><%= errors.email.msg %></p>
                     <% } %>
                     
                     <label for="contrasenia" class="none"></label>
                     
-                    <input class="inputs-login" type="text" name="contrasenia" placeholder="Contrasenia" id="contrasenia" value="<%= oldDataLogin && oldDataLogin.contrasenia ? oldDataLogin.contrasenia : '' %>">
+                    <input class="inputs-login" type="text" name="contrasenia" placeholder="Contrasenia" id="contrasenia" value="">
                     <% if(locals && locals.errors && errors.contrasenia) { %>
                         <p class="feedback"><%= errors.contrasenia.msg %></p>
                     <% } %>

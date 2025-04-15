@@ -1,0 +1,147 @@
+.container-image{
+    width: 24rem;
+    margin: auto;
+    height: 24rem;
+}
+.img-juego{
+    width: 100%;
+    height: 100%;
+}
+.main-description{
+    background-color: #858585;
+    margin: 1rem;
+}
+#title-item{
+    border-bottom: 1px solid #050505;
+    color: #dddddd;
+}
+.description{
+    padding: 5%;
+}
+.description p{
+    color: #dddddd;
+    letter-spacing: 2px;
+    margin: 1rem 0;
+}
+.lista-description{
+    padding: 5%;
+}
+.lista-description li{
+    padding-bottom: 0.1rem;
+    color: #dddddd;
+}
+.precios{
+    padding: 0 1rem;   
+}
+.precio-ahora{
+   color: #dddddd;
+   font-size: 1.5rem;
+   font-weight: 600;
+}
+.precio-anterior{
+   text-decoration: line-through;
+   color: #000000;
+}
+.cantidadProductos{
+    display: flex;
+    justify-content: flex-start;
+    align-items: center;
+    margin: 0 1rem;
+}
+.cantidadProductos input{
+    outline: none; 
+    margin-right: 1rem;
+    text-align: center;
+    padding: 0.5rem 3.5rem 0.5rem 0;
+}
+.cantidadProductos input:focus{
+    border: 2px solid #000000;
+}
+.cantidadProductos a:active{
+    color: black;
+    background-color: rgb(255, 255, 255);
+}
+.cantidadProductos a{
+    color: #dddddd;
+    text-align: center;
+    width: 7rem;
+    background-color: #ababab;
+    padding: 0.5rem;
+}
+.cantidadProductos a:hover{
+    background-color: #dddddd;
+    color: #000000;
+    transition-property: background-color color;
+    transition-duration: 0.3s;
+}
+#quantity-items{
+    height: 2.2rem;
+    width: 4rem;
+    background-color: #dddddd;
+    outline: none;
+    font-size: 15px;
+    margin-right: 0.2rem;
+}
+.list-products{
+    padding: 1rem 0;
+}
+
+/*banner header*/
+#banner-image{
+    display: none;
+}
+footer{
+    width: 100%;
+    background-color: #747474;
+}
+@media screen  and (min-width:320px){
+    .container-image {
+        width: 17rem;
+        margin: auto;
+        height: 24rem;
+    }
+}
+@media screen and (min-width:768px){
+    #main-content{
+        display: flex;
+        align-items: center;
+        justify-content: space-evenly;
+    }
+    .container-image{
+        width: 100%;
+        margin: auto;
+        height: 100%;
+    }
+    .section-description{
+        display: flex;
+        align-items: center;
+        justify-content: space-evenly;
+    }
+    .list-products{
+        display: flex;
+        justify-content: space-evenly;
+        align-items: center;
+
+    }
+    .price-content{
+        display: flex;
+        width: 23rem;
+        flex-direction: row;
+        margin-top: 0.3rem;
+    }
+
+    #name-product{
+        margin-left: 15%;
+        margin-bottom: 1rem;
+        font-size: 1.5rem;
+        font-weight: 800;
+    }
+    .lista-description{
+        padding: 1rem 0 0 ;
+    }
+
+    .cantidadProductos{
+        margin: 0;
+    }
+
+}
