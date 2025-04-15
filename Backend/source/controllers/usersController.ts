@@ -63,7 +63,8 @@ export class UsuarioController {
           nombre,
           rol: "cliente", // TODO: definir nombre de rol en una variable de entorno/enums
           imagen,
-          fecha_nacimiento
+          fecha_nacimiento,
+          id_membresia: 1 //Esto se tiene que ver!!!!!!
         },
         { transaction }
       );
@@ -104,6 +105,19 @@ export class UsuarioController {
           message: "Datos incorrectos",
         });
       }
+      const usuario = await Usuario.findOne({ where: { id: usuarioExistente.id_usuario } });
+      if (!usuario) {
+        return res.status(401).json({
+          success: false,
+          message: "Datos incorrectos",
+        });
+      }
+      if (usuario.rol === "Inactivo") {
+        return res.status(401).json({
+          success: false,
+          message: "Usuario eliminado",
+        });
+      }
       const verificarContrasenia = bcrypt.compareSync(contrasenia, usuarioExistente.contrasenia);
       if (!verificarContrasenia) {
         return res.status(401).json({
@@ -118,6 +132,30 @@ export class UsuarioController {
       });
     } catch (error) {
       console.error("Error en login:", (error as Error).message);
+      return res.status(500).json({
+        success: false,
+        message: "Error",
+      });
+    }
+  }
+  async softDelete(req: Request, res: Response): Promise<Response> {
+    try {
+      const { id } = req.params;
+      const usuario = await Usuario.findOne({ where: { id } });
+      if (!usuario) {
+        return res.status(404).json({
+          success: false,
+          message: "Usuario no encontrado",
+        });
+      }
+      await usuario.update({ rol: "Inactivo" }); //nombre del rol para eliminar el usuario
+      return res.status(200).json({
+        success: true,
+        message: "Usuario eliminado correctamente",
+      });
+
+    } catch (error) {
+      console.error("Error al borrar usuario:", (error as Error).message);
       return res.status(500).json({
         success: false,
         message: "Error",

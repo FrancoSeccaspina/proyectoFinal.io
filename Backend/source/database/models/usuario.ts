@@ -14,6 +14,7 @@ interface UsuarioAttributes {
   rol: string;
   imagen: string;
   fecha_nacimiento: Date;
+  id_membresia: number; // Clave foránea hacia membresia
 }
 
 class Usuario extends Model<InferAttributes<Usuario>, InferCreationAttributes<Usuario>> implements UsuarioAttributes {
@@ -23,10 +24,15 @@ class Usuario extends Model<InferAttributes<Usuario>, InferCreationAttributes<Us
   declare rol: string;
   declare imagen: string;
   declare fecha_nacimiento: Date;
+  declare id_membresia: number;
+
 
   static associate(models: any) {
     Usuario.hasOne(models.Autenticacion, {
       foreignKey: 'id_usuario',
+    });
+    Usuario.belongsTo(models.Membresia, {
+      foreignKey: 'id_membresia',
     });
   }
 }
@@ -59,6 +65,16 @@ const initUsuarioModel = (sequelize: Sequelize) => {
       fecha_nacimiento: {
         type: DataTypes.DATEONLY,
         allowNull: false,
+      },
+      id_membresia: {
+        type: DataTypes.INTEGER,
+        allowNull: false,
+        references: {
+          model: 'membresias',
+          key: 'id',
+        },
+        onUpdate: 'CASCADE',
+        onDelete: 'CASCADE',
       },
     },
     {
