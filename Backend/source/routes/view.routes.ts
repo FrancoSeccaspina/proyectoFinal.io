@@ -10,7 +10,7 @@ import usersController from '../controllers/usersController';
 
 const route = express.Router();
 
-route.get("/home", function (req, res) {
+route.get("/", function (req, res) {
     res.render("home");
 });
 route.get("/rutinas", function (req, res) {
@@ -25,10 +25,11 @@ route.get("/listaProductos", function (req, res) {
 route.get("/productDetail", function (req, res){
     res.render('productDetail');
 });
-/*route.get("/login", function(req,res){
+route.get("/login", function(req,res){
     res.render("login");
-});*/
+});
 route.get("/register", function (req, res) {
     res.render("register");
 });
+
 export default route;
