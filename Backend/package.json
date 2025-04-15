@@ -2,7 +2,8 @@
   "scripts": {
     "build": "tsc",
     "start": "node dist/source/app.js",
-    "start:dev": "ts-node ./source/app.ts"
+    "start:dev": "ts-node ./source/app.ts",
+    "init": "ts-node ./source/app.ts"
   },
   "dependencies": {
     "bcryptjs": "^3.0.2",

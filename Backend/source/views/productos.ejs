@@ -15,10 +15,12 @@
                         <a href="/productos/listaProductos/<%= producto.id %>"></a>
                     </li>
                     <div class="productos list-group-item p-3">
-                        <picture>
-                            <img src="../../images/<%= producto.imagen %>" alt="<%= producto.nombre %>"
-                                class="img-juego" />
-                        </picture>
+                        <a href="/productos/<%= producto.id %>">
+                            <picture>
+                                <img src="../../images/<%= producto.imagen %>" alt="<%= producto.nombre %>" class="img-juego" />
+                            </picture>
+                        </a>
+                        
                         <div class="informacion">
 
                             <span class="tipo-envio">En stock</span>

@@ -37,7 +37,7 @@ export class productoController {
             const { id } = req.params;
             const producto = await Producto.findByPk(id);
             if (producto) {
-                res.status(200).json(producto);
+                res.render("productDetail", { producto });
             } else {
                 res.status(404).json({ message: 'Producto no encontrado' });
             }
