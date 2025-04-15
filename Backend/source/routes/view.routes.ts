@@ -32,4 +32,5 @@ route.get("/register", function (req, res) {
     res.render("register");
 });
 
+
 export default route;

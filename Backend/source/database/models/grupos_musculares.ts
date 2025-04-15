@@ -43,5 +43,6 @@ const initGrupoMuscularModel = (sequelize: Sequelize) => {
             paranoid: true,
             timestamps: false,
         }
-    );
+    )
 }
+export {GrupoMuscular, initGrupoMuscularModel};
