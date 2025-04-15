@@ -2,6 +2,7 @@ import { validationResult } from "express-validator";
 import { Request, Response } from "express";
 import { Autenticacion, Usuario } from '../database/models';
 import bcrypt from 'bcryptjs';
+import { error } from "console";
 
 export class UsuarioController {
 
@@ -20,6 +21,33 @@ export class UsuarioController {
       return res.status(404).json({
         success: false,
         message: "Usuario no encontrado",
+      });
+    } catch (error) {
+      console.error("Error en show:", (error as Error).message);
+      return res.status(500).json({
+        success: false,
+        message: "Error interno del servidor",
+      });
+    }
+  }
+  async showAll(req: Request, res: Response): Promise<Response> {
+    try {
+      const usuarios = await Usuario.findAll({
+        include: {
+          model: Autenticacion,
+          attributes: ["email"],
+        },
+      });
+      if (usuarios.length > 0) {
+        return res.status(200).json({
+          success: true,
+          message: "Usuarios encontrados",
+          usuarios,
+        });
+      }
+      return res.status(404).json({
+        success: false,
+        message: "No se encontraron usuarios",
       });
     } catch (error) {
       console.error("Error en show:", (error as Error).message);

@@ -5,7 +5,7 @@ import { initProductoModel, Producto } from './producto';
 import { initCategoriaModel, Categoria } from './categoria';
 
 
-const sequelize = new Sequelize('gimnasio_activa', 'root', '1234', {
+const sequelize = new Sequelize('gimnasio_activa', 'root', '', {
   host: 'localhost',
   dialect: 'mysql',
   logging: false,
