@@ -1,0 +1,113 @@
+.compra-container {
+    max-width: 800px;
+    margin: 60px auto;
+    padding: 30px;
+    background-color: #e5e5e5;
+    border-radius: 16px;
+    box-shadow: 0 0 15px rgba(0,0,0,0.08);
+    text-align: center;
+}
+  
+.compra-container h2 {
+    font-size: 28px;
+    margin-bottom: 30px;
+    color: #009ee3;
+}
+  
+.compra-container h3 {
+    font-size: 22px;
+    margin-top: 40px;
+    color: #333;
+    font-weight: bolder;
+}
+  
+.item-compra {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    background-color: #f7f9fb;
+    border: 1px solid #e0e0e0;
+    border-radius: 12px;
+    padding: 20px;
+    margin-bottom: 20px;
+    flex-wrap: wrap;
+}
+  
+.img-product-cart {
+    width: 100px;
+    height: auto;
+    border-radius: 8px;
+    margin-right: 20px;
+}
+  
+.detalle-producto {
+    flex: 1;
+    text-align: left;
+}
+  
+.detalle-producto h4 {
+    margin: 0 0 8px;
+    font-size: 20px;
+    color: #222;
+}
+  
+.detalle-producto p {
+    margin: 6px 0;
+    color: #555;
+}
+  
+.input-cantidad {
+    width: 60px;
+    padding: 5px;
+    margin-left: 8px;
+    border-radius: 6px;
+    border: 1px solid #ccc;
+    text-align: center;
+}
+  
+.eliminar-btn {
+    background-color: #e74c3c;
+    color: white;
+    border: none;
+    padding: 8px 14px;
+    border-radius: 6px;
+    cursor: pointer;
+    margin-top: 10px;
+    transition: background-color 0.3s ease;
+}
+  
+.eliminar-btn:hover {
+    background-color: #c0392b;
+}
+  
+.volver-link {
+    display: inline-block;
+    margin-top: 30px;
+    text-decoration: none;
+    color: #555;
+    font-size: 15px;
+    transition: color 0.3s ease;
+}
+  
+.volver-link:hover {
+    color: #000;
+    text-decoration: underline;
+}
+footer{
+    width: 100%;
+    background-color: #747474;
+}  
+@media (max-width: 600px) {
+    .item-compra {
+      flex-direction: column;
+      align-items: flex-start;
+    }
+  
+    .img-product-cart {
+      margin-bottom: 15px;
+    }
+  
+    .detalle-producto {
+      text-align: left;
+    }
+}  

@@ -31,6 +31,16 @@ route.get("/login", function(req,res){
 route.get("/register", function (req, res) {
     res.render("register");
 });
-
-
+route.get("/carrito", function (req, res) {
+    res.render("carrito");
+});
+route.get("/mPago", function (req, res) {
+    res.render("mPago");
+});
+route.get("/transferencia", function (req, res) {
+    res.render("transferencia");
+});
+route.get("/finalizarCompra", function (req, res) {
+    res.render("finalizarCompra");
+});
 export default route;

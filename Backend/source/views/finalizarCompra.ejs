@@ -1,0 +1,23 @@
+<!DOCTYPE html>
+<html lang="en">
+
+    <head>
+        <%- include('./partials/head.ejs') %>
+        <link rel="stylesheet" href="/css/finalizarCompra.css">
+    </head>
+
+    <body>
+        <%- include('./partials/header.ejs') %>
+
+        <section class="compra-container"><!--HACER JS PARA TRAER LO QUE SE ENCUENTRA EN EL CARRITO, TIENE QUE PERMITIR EDITA/ELIMINAR/ACTUALIZAR PRECIO Y PRODUCTOS-->
+            <h2>Resumen de tu compra</h2>
+            <div id="carrito-detalle"></div>
+        
+            <h3 id="total-carrito">Total: $0</h3>
+        
+            <a href="/carrito" class="volver-link">Volver al carrito</a>
+          </section>
+
+        <%- include('./partials/footer.ejs') %>
+    </body>
+</html>
