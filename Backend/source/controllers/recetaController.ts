@@ -3,7 +3,7 @@ import { Receta } from '../database/models/receta';
 
 
 export class RecetaController {
-    async mostrarTodo(req: Request, res: Response): Promise<Response> {
+    async listaReceta(req: Request, res: Response): Promise<Response> {
         try {
             const recetas = await Receta.findAll();
             if (recetas.length > 0) {
