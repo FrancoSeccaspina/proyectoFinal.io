@@ -2,7 +2,7 @@
   "scripts": {
     "build": "tsc",
     "start": "node dist/source/app.js",
-    "start:dev": "nodemon --watch source --ext ts --exec ts-node ./source/app.ts",
+    "start:dev": "npm install && nodemon --watch source --ext ts --exec ts-node ./source/app.ts",
     "init": "ts-node ./source/app.ts"
   },
   "dependencies": {
