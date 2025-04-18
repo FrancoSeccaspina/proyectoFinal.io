@@ -11,7 +11,7 @@ interface EjercicioAttributes {
     id: CreationOptional<number>;
     nombre: string;
     descripcion: string;
-    grupo_muscular_id_fk: number;
+    grupo_muscular_id: number;
     video: string;
     titulo: string;
 }
@@ -20,7 +20,7 @@ class Ejercicio extends Model<InferAttributes<Ejercicio>, InferCreationAttribute
     declare id: CreationOptional<number>;
     declare nombre: string;
     declare descripcion: string;
-    declare grupo_muscular_id_fk: number;
+    declare grupo_muscular_id: number;
     declare video: string;
     declare titulo: string;
 
@@ -47,7 +47,7 @@ const initEjercicioModel = (sequelize: Sequelize) => {
                 type: DataTypes.STRING(255),
                 allowNull: false,
             },
-            grupo_muscular_id_fk: {
+            grupo_muscular_id: {
                 type: DataTypes.INTEGER,
                 allowNull: false,
             },
