@@ -3,74 +3,72 @@ import { Receta } from '../database/models/receta';
 
 
 export class RecetaController {
-    async listaReceta(req: Request, res: Response): Promise<Response> {
+    async listaReceta(req: Request, res: Response): Promise<void> {
         try {
             const recetas = await Receta.findAll();
             if (recetas.length > 0) {
-                return res.status(200).json({
-                    success: true,
-                    message: "Recetas encontradas",
-                    recetas,
-                });
+                res.render("recetas", { recetas });
             }
-            return res.status(404).json({
+            res.status(404).json({
                 success: false,
                 message: "No se encontraron recetas",
             });
         } catch (error) {
             console.error("Error en listaRecetas:", (error as Error).message);
-            return res.status(500).json({
+            res.status(500).json({
                 success: false,
                 message: "Error interno del servidor",
             });
         }
     }
-    async mostrarPorCategoria(req: Request, res: Response): Promise<Response> {
+    async mostrarPorCategoria(req: Request, res: Response): Promise<void> {
         try {
+            const categoriaId = req.params.id;
+            if (!categoriaId) {
+                res.status(400).json({
+                    success: false,
+                    message: "ID de categoría no proporcionado",
+                });
+            }
             const recetas = await Receta.findAll({
-                where: { categoria_id_fk: req.params.id },
+                where: { categoriaId: categoriaId },
             });
             if (recetas.length > 0) {
-                return res.status(200).json({
-                    success: true,
-                    message: "Recetas encontradas",
-                    recetas,
+                res.render("recetas", { recetas });
+            } else {
+                res.status(404).json({
+                    success: false,
+                    message: "No se encontraron recetas para esta categoría",
                 });
             }
-            return res.status(404).json({
-                success: false,
-                message: "No se encontraron recetas",
-            });
+
+
         } catch (error) {
             console.error("Error en listaRecetas:", (error as Error).message);
-            return res.status(500).json({
+            res.status(500).json({
                 success: false,
                 message: "Error interno del servidor",
             });
         }
     }
-    async mostrarPorId(req: Request, res: Response): Promise<Response> {
+    async mostrarPorId(req: Request, res: Response): Promise<void> {
         try {
             const receta = await Receta.findOne({
                 where: { id: req.params.id },
             });
             if (receta) {
-                return res.status(200).json({
-                    success: true,
-                    message: "Receta encontrada",
-                    receta,
-                });
+                res.render("receta", { receta });
             }
-            return res.status(404).json({
+            res.status(404).json({
                 success: false,
                 message: "Receta no encontrada",
-            });
+            })
         } catch (error) {
             console.error("Error en listaRecetas:", (error as Error).message);
-            return res.status(500).json({
+            res.status(500).json({
                 success: false,
                 message: "Error interno del servidor",
-            });
+            })
         }
     }
 }

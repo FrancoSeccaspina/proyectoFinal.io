@@ -1,0 +1,47 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <%- include('./partials/head.ejs') %>
+        <meta charset="UTF-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <link rel="stylesheet" href="/css/recetas.css">
+        <title>Detalles de la categoria</title>
+</head>
+
+<body>
+    <%- include('./partials/header.ejs') %>
+        <header>
+            <h1>Detalles de la receta</h1>
+        </header>
+        <main>
+
+            <% if (success) { %>
+                <ul>
+                    <% recetas.forEach(receta=> { %>
+                        <li>
+                            <h2>
+                                <%= receta.nombre %>
+                            </h2>
+                            <p>
+                                <%= receta.descripcion %>
+                            </p>
+                        </li>
+                        <% }); %>
+                </ul>
+                <% } else { %>
+                    <div class="error">
+                        <p>
+                            <%= errors.msg %>
+                        </p>
+                    </div>
+                    <% } %>
+        </main>
+        <footer>
+            <p>&copy; 2025 - Tu aplicación de rutinas</p>
+        </footer>
+
+        <%- include('./partials/footer.ejs') %>
+</body>
+
+</html>

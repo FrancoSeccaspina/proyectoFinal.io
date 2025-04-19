@@ -4,9 +4,10 @@ import { Autenticacion, initAutenticacionModel } from './autenticacion';
 import { initProductoModel, Producto } from './producto';
 import { initCategoriaModel, Categoria } from './categoria';
 import { initEjercicioModel, Ejercicio } from './ejercicio';
+import { initRecetaModel, Receta } from './receta';
 
 
-const sequelize = new Sequelize('gimnasio_activa', 'root', '1234', {
+const sequelize = new Sequelize('gimnasio_activa', 'root', '', {
   host: 'localhost',
   dialect: 'mysql',
   logging: false,
@@ -17,12 +18,14 @@ initAutenticacionModel(sequelize);
 initProductoModel(sequelize);
 initCategoriaModel(sequelize);
 initEjercicioModel(sequelize);
+initRecetaModel(sequelize);
 
-export { 
-  sequelize, 
-  Usuario, 
-  Autenticacion, 
-  Producto, 
+export {
+  sequelize,
+  Usuario,
+  Autenticacion,
+  Producto,
   Categoria,
-  Ejercicio 
+  Ejercicio,
+  Receta,
 };

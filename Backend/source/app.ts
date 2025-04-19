@@ -14,6 +14,7 @@ import viewRoutes from './routes/view.routes';
 import productoRoutes from './routes/producto.routes';
 import categoriaRoutes from './routes/categoria.routes';
 import grupoMuscularRoutes from './routes/grupo_muscular.routes';
+import recetaRoutes from './routes/receta.routes';
 import ejercicioRoutes from './routes/ejercicio.routes';
 
 const app = express();
@@ -52,6 +53,7 @@ app.use('', usersRoutes);
 app.use('', productoRoutes);
 app.use('', grupoMuscularRoutes)
 app.use('', ejercicioRoutes);
+app.use('', recetaRoutes);
 app.use('/categorias', categoriaRoutes);
 // Habilitar CORS
 app.use(cors());

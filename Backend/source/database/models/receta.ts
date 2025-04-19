@@ -11,14 +11,14 @@ interface RecetaAttributes {
     id: CreationOptional<number>;
     nombre: string;
     descripcion: string;
-    categoria_id_fk: number;
+    categoriaId: number;
 }
 
 class Receta extends Model<InferAttributes<Receta>, InferCreationAttributes<Receta>> implements RecetaAttributes {
     declare id: CreationOptional<number>;
     declare nombre: string;
     declare descripcion: string;
-    declare categoria_id_fk: number;
+    declare categoriaId: number; // Relación con la categoría
 
     static associate(models: any) {
         Receta.belongsTo(models.CategoriaReceta, {
@@ -44,9 +44,10 @@ const initRecetaModel = (sequelize: Sequelize) => {
                 type: DataTypes.STRING(255),
                 allowNull: false,
             },
-            categoria_id_fk: {
+            categoriaId: {
                 type: DataTypes.INTEGER,
                 allowNull: false,
+                field: 'categoria_id' // Mapeo al nombre real de la columna en la base de datos
             },
         },
         {
