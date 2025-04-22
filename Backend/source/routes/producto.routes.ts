@@ -18,5 +18,6 @@ route.get('/productos', (req, res) => { productoController.listaProductos(req, r
 //   });
 // Ruta para buscar un producto por ID
 route.get('/productos/:id', (req, res) => { productoController.buscarProductosPorId(req, res) });
-
+route.delete('/productos/:id', (req, res) => { productoController.delete(req, res) });
+route.put('/productos/:id', (req, res) => { productoController.editarProducto(req, res) });
 export default route;
