@@ -191,5 +191,36 @@ export class UsuarioController {
     }
   }
 
+  async update(req: Request, res: Response): Promise<Response> {
+    try {
+      const { id } = req.params;
+      const { apellido, nombre, rol, imagen, id_membresia, fecha_nacimiento } = req.body;
+      const usuario = await Usuario.findOne({ where: { id } });
+      if (!usuario) {
+        return res.status(404).json({
+          success: false,
+          message: "Usuario no encontrado",
+        });
+      }
+      await usuario.update({
+        apellido,
+        nombre,
+        rol,
+        imagen,
+        id_membresia,
+        fecha_nacimiento,
+      });
+      return res.status(200).json({
+        success: true,
+        message: "Usuario actualizado correctamente",
+      });
+    } catch (error) {
+      console.error("Error al actualizar usuario:", (error as Error).message);
+      return res.status(500).json({
+        success: false,
+        message: "Error",
+      });
+    }
+  }
 }
 export default new UsuarioController();
