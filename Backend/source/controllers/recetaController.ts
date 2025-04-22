@@ -1,5 +1,6 @@
 import { Request, Response } from 'express';
 import { Receta } from '../database/models/receta';
+import { error } from 'console';
 
 
 export class RecetaController {
@@ -69,6 +70,79 @@ export class RecetaController {
                 success: false,
                 message: "Error interno del servidor",
             })
+        }
+    }
+    async crearReceta(req: Request, res: Response): Promise<Response> {
+        try {
+            const { nombre, descripcion, categoriaId } = req.body;
+            if (!nombre || !descripcion || !categoriaId) {
+                return res.status(400).json({
+                    success: false,
+                    message: "Faltan datos requeridos",
+                });
+            }
+            const nuevaReceta = await Receta.create({
+                nombre,
+                descripcion,
+                categoriaId,
+            });
+            return res.status(201).json({
+                success: true,
+                message: "Receta creada con éxito",
+                receta: nuevaReceta,
+            });
+        } catch (error) {
+            console.error("Error en crearReceta:", (error as Error).message);
+            return res.status(500).json({
+                success: false,
+                message: "Error interno del servidor",
+            })
+        }
+    }
+    async delete(req: Request, res: Response): Promise<Response> {
+        try {
+            const { id } = req.params;
+            const receta = await Receta.findOne({ where: { id } });
+            if (!receta) {
+                return res.status(404).json({
+                    success: false,
+                    message: "Receta no encontrada",
+                });
+            }
+            await receta.destroy();
+            return res.status(200).json({
+                success: true,
+                message: "Receta eliminada con éxito",
+            });
+        } catch (error) {
+            console.error("Error en deleteReceta:", (error as Error).message);
+            return res.status(500).json({
+                success: false,
+                message: "Error interno del servidor",
+            });
+        }
+    }
+    async editarReceta(req: Request, res: Response): Promise<Response> {
+        try {
+            const { id } = req.params
+            const receta = await Receta.findOne({ where: { id } })
+
+            if (!receta) {
+                return res.status(404).json({
+                    success: false,
+                    message: "Receta no encontrada",
+                })
+            }
+            receta.update(req.body)
+            return res.status(200).json({
+                success: true,
+                message: "Receta editada con éxito",
+                receta: receta,
+            })
+
+        } catch (error) {
+            console.error("Error en EditarReceta:", (error as Error).message)
+            return res.status(500).json({ success: false, message: "Error interno en el servidor" });
         }
     }
 }
