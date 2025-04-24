@@ -2,36 +2,40 @@
 <html lang="es">
     <head>
         <%- include('./partials/head.ejs') %>
-        <link rel="stylesheet" href="/css/rutinas.css">
-        <link rel="stylesheet" href="/css/footer.css">
+        <link rel="stylesheet" href="/css/rutinasDetails.css">
+
     </head>
 <body>
     <%- include('./partials/header.ejs') %>
     <main>
         <% if (success) { %>
-            <h2>Ejercicios para el grupo muscular </h2>
-            <ul>
-                <% ejercicios.forEach(ejercicio => { %>
-                    <li>
-                        <strong>Nombre:</strong> <%= ejercicio.nombre %><br>
-                        <strong>Descripción:</strong> <%= ejercicio.descripcion %><br>
-
-                        <% if (ejercicio.video) { %>
-                            <a href="<%= ejercicio.video %>" target="_blank" class="boton-video">
-                                Ver video
-                            </a>
-                        <% } else { %>
-                            <em>Video no disponible</em>
-                        <% } %>
-                    </li>
+            <h2>Ejercicios para el grupo muscular</h2>
+            <div class="accordion-container">
+                <% ejercicios.forEach((ejercicio, index) => { %>
+                    <div class="accordion-card">
+                        <button class="accordion-toggle" onclick="toggleAccordion('<%= index %>')">
+                            <%= ejercicio.nombre %>
+                            <span class="arrow">&#9662;</span> <!-- Flechita -->
+                        </button>
+                        <div class="accordion-content" id="accordion-<%= index %>">
+                            <p>Descripción: <%= ejercicio.descripcion %></p>
+                            <% if (ejercicio.video) { %>
+                                <a href="<%= ejercicio.video %>" target="_blank" class="boton-video">Ver video</a>
+                            <% } else { %>
+                                <em>Video no disponible</em>
+                            <% } %>
+                        </div>
+                    </div>
                 <% }); %>
-            </ul>
+            </div>
         <% } else { %>
             <div class="error">
                 <p><%= errors.msg %></p>
             </div>
         <% } %>
     </main>
+    <script src="/js/accordion.js"></script>
+    
     <footer class="main-footer">
         <%- include('./partials/footer.ejs') %>
     </footer>
