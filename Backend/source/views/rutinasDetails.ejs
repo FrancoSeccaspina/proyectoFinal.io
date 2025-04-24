@@ -1,23 +1,28 @@
 <!DOCTYPE html>
 <html lang="es">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Detalles de Rutinas</title>
-    <link rel="stylesheet" href="/styles.css"> <!-- Ruta a tu archivo CSS -->
-</head>
+    <head>
+        <%- include('./partials/head.ejs') %>
+        <link rel="stylesheet" href="/css/rutinas.css">
+        <link rel="stylesheet" href="/css/footer.css">
+    </head>
 <body>
-    <header>
-        <h1>Detalles de Rutinas</h1>
-    </header>
+    <%- include('./partials/header.ejs') %>
     <main>
         <% if (success) { %>
-            <h2>Ejercicios para el grupo muscular <%= grupoMuscularId %></h2>
+            <h2>Ejercicios para el grupo muscular </h2>
             <ul>
                 <% ejercicios.forEach(ejercicio => { %>
                     <li>
                         <strong>Nombre:</strong> <%= ejercicio.nombre %><br>
-                        <strong>Descripción:</strong> <%= ejercicio.descripcion %>
+                        <strong>Descripción:</strong> <%= ejercicio.descripcion %><br>
+
+                        <% if (ejercicio.video) { %>
+                            <a href="<%= ejercicio.video %>" target="_blank" class="boton-video">
+                                Ver video
+                            </a>
+                        <% } else { %>
+                            <em>Video no disponible</em>
+                        <% } %>
                     </li>
                 <% }); %>
             </ul>
@@ -27,8 +32,8 @@
             </div>
         <% } %>
     </main>
-    <footer>
-        <p>&copy; 2025 - Tu aplicación de rutinas</p>
+    <footer class="main-footer">
+        <%- include('./partials/footer.ejs') %>
     </footer>
 </body>
 </html>
