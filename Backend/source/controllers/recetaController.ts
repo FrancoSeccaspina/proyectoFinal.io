@@ -35,7 +35,7 @@ export class RecetaController {
                 where: { categoriaId: categoriaId },
             });
             if (recetas.length > 0) {
-                res.render("recetas", { recetas });
+                res.render("recetasPorGrupo", { recetas });
             } else {
                 res.status(404).json({
                     success: false,
