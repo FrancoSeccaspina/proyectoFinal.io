@@ -13,14 +13,13 @@
         <ul>
             <% recetas.forEach(receta=> { %>
                 <li>
-                    <h2>
-                        <%= receta.nombre %>
-                    </h2>
-                    <p>
-                        <%= receta.descripcion %>
-                    </p>
+                    <h3><%= receta.nombre %></h3>
                 </li>
-                <% }); %>
+                <p>
+                    <%= receta.descripcion %>
+                </p>
+                   
+            <% }); %>
         </ul>
 
 
