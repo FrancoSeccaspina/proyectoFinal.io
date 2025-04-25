@@ -3,6 +3,7 @@ h2{
     align-items: center;
     justify-content: center;
     padding: 1rem;
+    width: 100%;
 }
 
 .accordion-container {
@@ -67,4 +68,74 @@ p{
 
 .boton-video:hover {
     background-color: #b5b5b5;
+}
+
+@media screen and (min-width:320px) {
+    body > main > div > div:nth-child(1) > button, body > main > div > div:nth-child(2) > button, body > main > div > div:nth-child(3) > button,
+    body > main > div > div:nth-child(4) > button, body > main > div > div:nth-child(5) > button, body > main > div > div:nth-child(6) > button
+    ,body > main > div > div:nth-child(7) > button, body > main > div > div:nth-child(8) > button, body > main > div > div:nth-child(9) > button,
+    body > main > div > div:nth-child(10) > button,body > main > div > div:nth-child(11) > button, body > main > div > div:nth-child(12) > button, 
+    body > main > div > div:nth-child(13) > button, body > main > div > div:nth-child(14) > button, body > main > div > div:nth-child(15) > button,
+    body > main > div > div:nth-child(16) > button, body > main > div > div:nth-child(17) > button, body > main > div > div:nth-child(18) > button,
+    body > main > div > div:nth-child(19) > button, body > main > div > div:nth-child(20) > button, body > main > div > div:nth-child(21) > button{
+        font-size: 12px;
+        width: 100%;
+        align-items: center;
+        justify-content: center;
+    }
+    p{
+        font-size: 10px;
+        font-weight: bolder;
+    }
+    h2{
+        font-size: 17px;
+    }
+}
+@media screen and (min-width:768px) {
+    body > main > div > div:nth-child(1) > button, body > main > div > div:nth-child(2) > button, body > main > div > div:nth-child(3) > button,
+    body > main > div > div:nth-child(4) > button, body > main > div > div:nth-child(5) > button, body > main > div > div:nth-child(6) > button
+    ,body > main > div > div:nth-child(7) > button, body > main > div > div:nth-child(8) > button, body > main > div > div:nth-child(9) > button,
+    body > main > div > div:nth-child(10) > button,body > main > div > div:nth-child(11) > button, body > main > div > div:nth-child(12) > button, 
+    body > main > div > div:nth-child(13) > button, body > main > div > div:nth-child(14) > button, body > main > div > div:nth-child(15) > button,
+    body > main > div > div:nth-child(16) > button, body > main > div > div:nth-child(17) > button, body > main > div > div:nth-child(18) > button,
+    body > main > div > div:nth-child(19) > button, body > main > div > div:nth-child(20) > button, body > main > div > div:nth-child(21) > button{
+        width: 100%;
+        font-size: 15px;
+    }
+    p{
+        font-size: 15px;
+        font-weight: bolder;
+    }
+}
+@media screen and (min-width:1024px) {
+    body > main > div > div:nth-child(1) > button, body > main > div > div:nth-child(2) > button, body > main > div > div:nth-child(3) > button,
+    body > main > div > div:nth-child(4) > button, body > main > div > div:nth-child(5) > button, body > main > div > div:nth-child(6) > button
+    ,body > main > div > div:nth-child(7) > button, body > main > div > div:nth-child(8) > button, body > main > div > div:nth-child(9) > button,
+    body > main > div > div:nth-child(10) > button,body > main > div > div:nth-child(11) > button, body > main > div > div:nth-child(12) > button, 
+    body > main > div > div:nth-child(13) > button, body > main > div > div:nth-child(14) > button, body > main > div > div:nth-child(15) > button,
+    body > main > div > div:nth-child(16) > button, body > main > div > div:nth-child(17) > button, body > main > div > div:nth-child(18) > button,
+    body > main > div > div:nth-child(19) > button, body > main > div > div:nth-child(20) > button, body > main > div > div:nth-child(21) > button{
+        width: 100%;
+        font-size: 18px;
+    }
+    p{
+        font-size: 17px;
+        font-weight: bolder;
+    }
+}
+@media screen and (min-width:1024px) {
+    body > main > div > div:nth-child(1) > button, body > main > div > div:nth-child(2) > button, body > main > div > div:nth-child(3) > button,
+    body > main > div > div:nth-child(4) > button, body > main > div > div:nth-child(5) > button, body > main > div > div:nth-child(6) > button
+    ,body > main > div > div:nth-child(7) > button, body > main > div > div:nth-child(8) > button, body > main > div > div:nth-child(9) > button,
+    body > main > div > div:nth-child(10) > button,body > main > div > div:nth-child(11) > button, body > main > div > div:nth-child(12) > button, 
+    body > main > div > div:nth-child(13) > button, body > main > div > div:nth-child(14) > button, body > main > div > div:nth-child(15) > button,
+    body > main > div > div:nth-child(16) > button, body > main > div > div:nth-child(17) > button, body > main > div > div:nth-child(18) > button,
+    body > main > div > div:nth-child(19) > button, body > main > div > div:nth-child(20) > button, body > main > div > div:nth-child(21) > button{
+        width: 100%;
+        font-size: 20px;
+    }
+    p{
+        font-size: 17px;
+        font-weight: bolder;
+    }
 }

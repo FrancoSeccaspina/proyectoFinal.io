@@ -1,47 +1,32 @@
 <!DOCTYPE html>
 <html lang="en">
 
-<head>
-    <%- include('./partials/head.ejs') %>
-        <meta charset="UTF-8">
-        <meta name="viewport" content="width=device-width, initial-scale=1.0">
-        <link rel="stylesheet" href="/css/recetas.css">
-        <title>Detalles de la categoria</title>
-</head>
+    <head>
+        <%- include('./partials/head.ejs') %>
+        <link rel="stylesheet" href="/css/recetaDetail.css">
+        <link rel="stylesheet" href="/css/footer.css">
+    </head>
 
-<body>
-    <%- include('./partials/header.ejs') %>
-        <header>
-            <h1>Detalles de la receta</h1>
-        </header>
-        <main>
-
-            <% if (success) { %>
-                <ul>
-                    <% recetas.forEach(receta=> { %>
-                        <li>
-                            <h2>
-                                <%= receta.nombre %>
-                            </h2>
-                            <p>
-                                <%= receta.descripcion %>
-                            </p>
-                        </li>
-                        <% }); %>
-                </ul>
-                <% } else { %>
-                    <div class="error">
-                        <p>
-                            <%= errors.msg %>
+    <body>
+        <%- include('./partials/header.ejs') %>
+    
+        <div class="accordion-container">
+            <% recetas.forEach(receta => { %>
+                <div class="accordion-card">
+                    <button class="accordion-toggle" onclick="this.parentNode.classList.toggle('open')">
+                        <h2><%= receta.nombre %></h2>
+                        <span class="arrow">&#9660;</span>
+                    </button>
+                    <div class="accordion-content">
+                        <p style="white-space: pre-line;">
+                            <%= receta.descripcion %>
                         </p>
                     </div>
-                    <% } %>
-        </main>
-        <footer>
-            <p>&copy; 2025 - Tu aplicación de rutinas</p>
-        </footer>
-
+                </div>
+            <% }); %>
+        </div>
+    </body>
+    <footer class="main-footer">
         <%- include('./partials/footer.ejs') %>
-</body>
-
+    </footer>
 </html>
