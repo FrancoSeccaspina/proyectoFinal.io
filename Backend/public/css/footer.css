@@ -1,224 +1,153 @@
 .main-footer {
-    width: 100%;
-    background-color: #747474;
-  }
-  
+  width: 100%;
+  background-color: #1b1b1b; /* mismo fondo que el header */
+  color: #ffffff;
+  padding: 2rem 0;
+}
+
+.links {
+  display: flex;
+  justify-content: space-between;
+  align-items: flex-start;
+  width: 100%;
+  padding: 1rem 2rem;
+  flex-wrap: wrap;
+}
+
+.logo-footer {
+  width: 10vw;
+}
+
+.lista-footer {
+  display: flex;
+  flex-direction: column;
+  gap: 0.5rem; /* separación uniforme */
+  font-size: 16px; /* igual al texto de contacto */
+  color: #dddddd;
+}
+
+.lista-footer li {
+  list-style: none;
+  display: flex;
+  align-items: center;
+  gap: 0.5rem; /* simula el espacio entre ícono y texto en contact-location */
+}
+
+.lista-footer a {
+  color: #dddddd;
+  text-decoration: none;
+  font-size: 16px; /* igual que contact-location p */
+  transition: color 0.3s;
+}
+
+.lista-footer a:hover {
+  color: #ffffff;
+}
+
+.Title-social {
+  color: #ffffff;
+  font-weight: 600;
+  font-size: 18px;
+  margin-bottom: 0.5rem;
+}
+
+.icons-footer {
+  display: flex;
+  flex-direction: column;
+}
+
+.icons-footer a {
+  color: #dddddd;
+  font-size: 20px;
+  margin-top: 0.5rem;
+  transition: color 0.3s;
+}
+
+.icons-footer a:hover {
+  color: #ffffff;
+}
+
+.mover {
+  display: flex;
+  align-items: center;
+  gap: 1rem;
+}
+
+.btn-wsp {
+  position: fixed;
+  width: 55px;
+  height: 55px;
+  bottom: 30px;
+  right: 30px;
+  background-color: #0df053;
+  color: white;
+  border-radius: 50%;
+  text-align: center;
+  font-size: 40px;
+  box-shadow: 0 1px 10px rgba(0, 0, 0, 0.3);
+  z-index: 100;
+  transition: 0.3s;
+}
+
+.btn-wsp:hover {
+  background-color: white;
+  color: #0df053;
+}
+
+.content {
+  width: 100%;
+}
+
+.contact-location {
+  display: flex;
+  flex-direction: column;
+  gap: 0.5rem;
+}
+
+.contact-location li {
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+  color: #dddddd;
+}
+
+.contact-location p {
+  font-size: 16px;
+  margin: 0;
+}
+
+.contact-location i {
+  color: #dddddd;
+}
+
+.contact-location li:hover i {
+  color: #ffffff;
+  cursor: pointer;
+}
+
+@media (max-width: 769px) {
   .links {
-    display: flex;
-    justify-content: space-between;
+    flex-direction: column;
     align-items: center;
-    width: 100%;
-    padding: 1rem 2rem;
-  }
-  
-  .logo-footer {
-    width: 10vw;
-  }
-  
-  /* Aumentamos el tamaño de letra */
-  .lista-footer {
-    display: flex;
-    flex-direction: column;
-    font-size: 18px;
-    height: 11rem;
-  }
-  
-  .lista-footer a {
-    color: #000000;
-    font-size: 18px; /* subido de 14px a 18px */
-    text-decoration: revert;
-    transition: 0.3s;
-  }
-  
-  .lista-footer a:hover {
-    color: #ffffff;
-    transition: color 0.3s;
-  }
-  
-  .lista-footer p {
-    font-weight: 600;
-    color: #dddddd;
-  }
-  
-  .Title-social {
-    color: #dddddd;
-    font-weight: 600;
-    font-size: 18px;
-  }
-  
-  .lista-footer li {
-    margin-top: 1rem;
-    list-style: none;
-  }
-  
-  .icons-footer {
-    display: flex;
-    flex-direction: column;
-  }
-  
-  .icons-footer a {
-    color: #dddddd;
-    padding: 3px;
-    display: flex;
-    margin-top: 1rem;
-    max-width: min-content;
-    transition: 0.3s;
-  }
-  
-  .icons-footer a p {
-    color: #000000;
-    font-size: 18px; /* subido de 14px a 18px */
-    padding-left: 3px;
-    transition: 0.3s;
-  }
-  
-  .mover {
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    gap: 1rem;
-  }
-  
-  .icons-footer a:hover,
-  .icons-footer a:hover p {
-    color: #000000;
-    transition-property: color;
-    transition-duration: 0.3s;
-  }
-  
-  .btn-wsp {
-    position: fixed;
-    width: 55px;
-    height: 55px;
-    line-height: 55px;
-    bottom: 30px;
-    right: 30px;
-    background-color: #0df053;
-    color: var(--whiteLetter);
-    border-radius: 50px;
-    text-align: center;
-    font-size: 40px;
-    box-shadow: 0 1px 10px rgba(0, 0, 0, 0.3);
-    z-index: 100;
-    transition: 0.3s;
-  }
-  
-  .btn-wsp:hover {
-    text-decoration: none;
-    color: #0df053;
-    background-color: white;
-    transition-property: color;
-    transition-duration: 0.3s;
-  }
-  
-  .content {
-    width: 100%;
-  }
-  
-  .contact-location {
-    display: flex;
-    flex-direction: column;
-    flex-wrap: wrap;
-    align-items: stretch;
-  }
-  
-  .contact-location li {
-    display: flex;
-    align-items: baseline;
-    margin-top: 1rem;
-  }
-  
-  .contact-location p {
-    font-size: 16px; /* subido de 12px a 16px */
-    margin-left: 5px;
-    margin-top: 4%;
-    color: #dddddd;
-  }
-  
-  .contact-location i {
-    color: #000000;
-  }
-  
-  .contact-location li:hover i {
-    color: #ffffff;
-    cursor: pointer;
-    transition: color 0.3s;
-  }
-  
-  /* MEDIA QUERIES */
-  @media (min-width: 320px) and (max-width: 769px) {
-    .links {
-      flex-direction: column;
-      align-items: center;
-      justify-content: center;
-      text-align: center;
-      gap: 1.5rem;
-      padding: 1rem;
-    }
-  
-    .logo-footer {
-      width: 40vw;
-    }
-  
-    .lista-footer {
-      align-items: center;
-      height: auto;
-    }
-  
-    .lista-footer p,
-    .lista-footer a {
-      text-align: center;
-    }
-  
-    .icons-footer {
-      flex-direction: column;
-      align-items: center;
-    }
-  
-    .icons-footer a {
-      justify-content: center;
-    }
-  
-    .mover {
-      align-items: center;
-      justify-content: center;
-      gap: 1rem;
-    }
-  
-    .contact-location {
-      align-items: center;
-      justify-content: center;
-      margin-right: 10%;
+    gap: 2rem;
+    padding: 1rem;
   }
 
-    /*.contact-location {
-      align-items: center;
-    }*/
-  
-    .contact-location li {
-      justify-content: center;
-    }
+  .logo-footer {
+    width: 40vw;
   }
-  
-  @media (min-width: 769px) and (max-width: 1025px) {
-    .links {
-      gap: 1rem;
-      display: flex;
-      flex-wrap: nowrap;
-      margin: auto;
-    }
-  
-    .lista-footer {
-      font-size: 18px;
-      height: auto;
-    }
-  
-    .icons-footer {
-      flex-wrap: wrap;
-    }
-  
-    .logo-footer {
-      width: 20vw;
-    }
+
+  .lista-footer {
+    align-items: center;
+    text-align: center;
   }
-  
+
+  .icons-footer {
+    align-items: center;
+  }
+
+  .contact-location {
+    align-items: center;
+    text-align: center;
+  }
+}
