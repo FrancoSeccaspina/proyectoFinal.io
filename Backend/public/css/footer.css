@@ -1,8 +1,9 @@
 .main-footer {
   width: 100%;
-  background-color: #1b1b1b; /* mismo fondo que el header */
+  background-color: #1b1b1b;
   color: #ffffff;
   padding: 2rem 0;
+  position: relative;
 }
 
 .links {
@@ -21,8 +22,8 @@
 .lista-footer {
   display: flex;
   flex-direction: column;
-  gap: 0.5rem; /* separación uniforme */
-  font-size: 16px; /* igual al texto de contacto */
+  gap: 0.5rem;
+  font-size: 16px;
   color: #dddddd;
 }
 
@@ -30,13 +31,13 @@
   list-style: none;
   display: flex;
   align-items: center;
-  gap: 0.5rem; /* simula el espacio entre ícono y texto en contact-location */
+  gap: 0.5rem;
 }
 
 .lista-footer a {
   color: #dddddd;
   text-decoration: none;
-  font-size: 16px; /* igual que contact-location p */
+  font-size: 16px;
   transition: color 0.3s;
 }
 
@@ -125,6 +126,25 @@
   cursor: pointer;
 }
 
+/* NUEVO BLOQUE PARA CENTRALIZAR EL ÍCONO DE ACCESO */
+.admin-access-wrapper {
+  width: 100%;
+  display: flex;
+  justify-content: center;
+  margin-top: 2rem;
+}
+
+.admin-access {
+  color: #888;
+  font-size: 20px;
+  transition: color 0.3s;
+}
+
+.admin-access:hover {
+  color: #ffffff;
+  cursor: pointer;
+}
+
 @media (max-width: 769px) {
   .links {
     flex-direction: column;
@@ -150,4 +170,9 @@
     align-items: center;
     text-align: center;
   }
+
+  .admin-access {
+    font-size: 18px;
+  }
 }
+
