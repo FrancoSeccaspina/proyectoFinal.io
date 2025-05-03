@@ -13,6 +13,9 @@ const route = express.Router();
 route.get("/", function (req, res) {
     res.render("home");
 });
+// route.get('/', isAuthenticated, (req, res) => {
+//     res.render('home', { user: req.session.user });
+// });
 route.get("/rutinas", function (req, res) {
     res.render("rutinas");
 });

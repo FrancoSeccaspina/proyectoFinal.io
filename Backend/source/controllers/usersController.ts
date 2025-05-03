@@ -123,6 +123,54 @@ export class UsuarioController {
       });
     }
   }
+  // async login(req: Request, res: Response): Promise<void> {
+  //   try {
+  //     const { email, contrasenia } = req.body;
+  //     const usuarioExistente = await Autenticacion.findOne({ where: { email } });
+  //     if (!usuarioExistente) {
+  //       return res.status(401).render('login', {
+  //         error: 'Datos incorrectos',
+  //         oldData: req.body
+  //       });
+  //     }
+
+  //     const usuario = await Usuario.findOne({ where: { id: usuarioExistente.id_usuario } });
+  //     if (!usuario || usuario.rol === "Inactivo") {
+  //       return res.status(401).render('login', {
+  //         error: 'Usuario no encontrado o eliminado',
+  //         oldData: req.body
+  //       });
+  //     }
+
+  //     const verificarContrasenia = bcrypt.compareSync(contrasenia, usuarioExistente.contrasenia);
+  //     if (!verificarContrasenia) {
+  //       return res.status(401).render('login', {
+  //         error: 'Contraseña incorrecta',
+  //         oldData: req.body
+  //       });
+  //     }
+
+  //     // Almacenar información del usuario en la sesión
+  //     req.session.user = {
+  //       id: usuario.id,
+  //       nombre: usuario.nombre,
+  //       email: usuarioExistente.email,
+  //       rol: usuario.rol
+  //     }
+
+  //     // Redirigir a la página principal
+  //     res.redirect('/');
+
+
+  //   } catch (error) {
+  //     console.error("Error en login:", (error as Error).message);
+  //     res.status(500).json({
+  //       success: false,
+  //       message: "Error",
+  //     });
+  //   }
+  // }
+
   async login(req: Request, res: Response): Promise<Response> {
     try {
       const { email, contrasenia } = req.body;
@@ -166,6 +214,7 @@ export class UsuarioController {
       });
     }
   }
+
   async softDelete(req: Request, res: Response): Promise<Response> {
     try {
       const { id } = req.params;

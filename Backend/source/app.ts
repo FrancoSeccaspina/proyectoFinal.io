@@ -6,7 +6,6 @@ import cors from 'cors';
 import methodOverride from 'method-override';
 import session from 'express-session';
 import cookieParser from 'cookie-parser';
-
 // Middlewares y rutas
 // import userMiddleware from './middlewares/user';
 import usersRoutes from './routes/users.routes';
@@ -32,11 +31,12 @@ app.use(express.urlencoded({ extended: true }));
 app.use(express.json());
 
 // Sessions
-// app.use(session({
-//     secret: 'clave',
-//     resave: true,
-//     saveUninitialized: true
-// }));
+app.use(session({
+    secret: 'clave',
+    resave: true,
+    saveUninitialized: false,
+    cookie: { secure: false } // Cambiar a true en producción
+}));
 
 // Cookies
 // app.use(cookieParser());
