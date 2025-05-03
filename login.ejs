@@ -1,0 +1,65 @@
+<!DOCTYPE html>
+<html lang="en">
+
+    <head>
+        <%- include('./partials/head.ejs') %>
+        <link rel="stylesheet" href="/css/login.css">
+    </head>
+
+    <body>
+        <%- include('./partials/header.ejs') %>
+        
+        <main class="mainLogin">
+            
+            <div id="left-login">
+                
+                <h2>Iniciar Sesión</h2>
+                
+                <form action="/login/access" method="POST">
+
+                    <label class="none" for="usuario"></label>
+                    
+                    <input class="inputs-login" type="text" name="email" id="usuario" placeholder="Correo electronico" required value="">
+                    <% if(locals && locals.errors && errors.email) { %>
+                        <p class="feedback"><%= errors.email.msg %></p>
+                    <% } %>
+                    
+                    <label for="contrasenia" class="none"></label>
+                    
+                    <input class="inputs-login" type="text" name="contrasenia" placeholder="Contrasenia" id="contrasenia" value="">
+                    <% if(locals && locals.errors && errors.contrasenia) { %>
+                        <p class="feedback"><%= errors.contrasenia.msg %></p>
+                    <% } %>
+                    
+                    <div id="recordame-me">
+                        <input type="checkbox" name="recordame" id="recordame" class="radio-options" value="recordame">
+                        <p>Recordame</p>
+                    </div>
+                    
+                    <ul class="errorOculto" id="erroresLogin"></ul>
+
+                    <button id="iniciar-sesion" type="submit">Ingresar</button>
+                    
+                </form>
+                
+                <div id="olvide-contraseña">
+                    <a href="/olvideContra">¿Has olvidado la contraseña?</a>
+                </div>
+            </div>
+
+            <div id="registrate">
+                <a href="/register"><i class="fa-regular fa-circle-user"></i>Registrate</a>
+            </div>
+
+            <picture id="right-login">
+                <img src="../images/banner-jp.jpg" alt="" id="image-login">
+            </picture>    
+        </main>
+            
+        <footer id="login-footer">
+            <%- include('./partials/footer.ejs') %>
+        </footer>
+        <script src="https://unpkg.com/validator@latest/validator.min.js"></script>
+        <script src="../js/login.js"></script>        
+    </body>    
+</html>
