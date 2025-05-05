@@ -2,7 +2,20 @@ import { validationResult } from "express-validator";
 import { Request, Response } from "express";
 import { Autenticacion, Usuario } from '../database/models';
 import bcrypt from 'bcryptjs';
+import { Roles } from "../constants/roles";
 import { error } from "console";
+import "express-session";
+
+// TODO: mover a un archivo de interfaces personalizadas
+declare module "express-session" {
+  interface SessionData {
+    usuario?: {
+      id: number;
+      email: string;
+      rol: string;
+    };
+  }
+}
 
 export class UsuarioController {
 
@@ -30,6 +43,7 @@ export class UsuarioController {
       });
     }
   }
+  
   async showAll(req: Request, res: Response): Promise<Response> {
     try {
       const usuarios = await Usuario.findAll({
@@ -89,15 +103,14 @@ export class UsuarioController {
         {
           apellido,
           nombre,
-          rol: "cliente", // TODO: definir nombre de rol en una variable de entorno/enums
+          rol: Roles.CLIENTE, // TODO: Cambiar a valor por defecto desde la BD
           imagen,
           fecha_nacimiento,
-          id_membresia: 1 //Esto se tiene que ver!!!!!!
+          id_membresia: 1 // TODO: Cambiar a valor por defecto desde la BD
         },
         { transaction }
       );
 
-      // TODO: agregar el numero de vueltas en una variable de entorno
       const hashedPassword = bcrypt.hashSync(contrasenia, 10);
       await Autenticacion.create(
         {
@@ -123,96 +136,104 @@ export class UsuarioController {
       });
     }
   }
-  // async login(req: Request, res: Response): Promise<void> {
-  //   try {
-  //     const { email, contrasenia } = req.body;
-  //     const usuarioExistente = await Autenticacion.findOne({ where: { email } });
-  //     if (!usuarioExistente) {
-  //       return res.status(401).render('login', {
-  //         error: 'Datos incorrectos',
-  //         oldData: req.body
-  //       });
-  //     }
 
-  //     const usuario = await Usuario.findOne({ where: { id: usuarioExistente.id_usuario } });
-  //     if (!usuario || usuario.rol === "Inactivo") {
-  //       return res.status(401).render('login', {
-  //         error: 'Usuario no encontrado o eliminado',
-  //         oldData: req.body
-  //       });
-  //     }
-
-  //     const verificarContrasenia = bcrypt.compareSync(contrasenia, usuarioExistente.contrasenia);
-  //     if (!verificarContrasenia) {
-  //       return res.status(401).render('login', {
-  //         error: 'Contraseña incorrecta',
-  //         oldData: req.body
-  //       });
-  //     }
-
-  //     // Almacenar información del usuario en la sesión
-  //     req.session.user = {
-  //       id: usuario.id,
-  //       nombre: usuario.nombre,
-  //       email: usuarioExistente.email,
-  //       rol: usuario.rol
-  //     }
-
-  //     // Redirigir a la página principal
-  //     res.redirect('/');
-
-
-  //   } catch (error) {
-  //     console.error("Error en login:", (error as Error).message);
-  //     res.status(500).json({
-  //       success: false,
-  //       message: "Error",
-  //     });
-  //   }
-  // }
-
-  async login(req: Request, res: Response): Promise<Response> {
+  /**
+ * Método para manejar el inicio de sesión de un usuario.
+ * Verifica las credenciales proporcionadas (email y contraseña) y, si son válidas,
+ * guarda los datos del usuario en la sesión. Redirige al dashboard si el usuario es administrador
+ * o a la página principal si es un cliente.
+ *
+ * @param {Request} req 
+ * @param {Response} res 
+ * @returns {Promise<Response | void>}
+ *
+ * @example
+ * // Ejemplo de datos enviados en el cuerpo de la solicitud:
+ * {
+ *   "email": "usuario@example.com",
+ *   "contrasenia": "password123"
+ * }
+ *
+ * @example
+ * // Respuesta en caso de error:
+ * {
+ *   "error": "Email no registrado",
+ *   "oldData": { "email": "usuario@example.com" }
+ * }
+ */
+  async login(req: Request, res: Response): Promise<Response | void> {
     try {
       const { email, contrasenia } = req.body;
+
       const usuarioExistente = await Autenticacion.findOne({ where: { email } });
       if (!usuarioExistente) {
-        return res.status(401).json({
-          success: false,
-          message: "Datos incorrectos",
+        return res.status(401).render("login", {
+          error: "Email no registrado",
+          oldData: req.body
         });
       }
+
+      const contraseniaOk = bcrypt.compareSync(contrasenia, usuarioExistente.contrasenia);
+      if (!contraseniaOk) {
+        return res.status(401).render("login", {
+          error: "Contraseña incorrecta",
+          oldData: req.body
+        });
+      }
+
       const usuario = await Usuario.findOne({ where: { id: usuarioExistente.id_usuario } });
       if (!usuario) {
-        return res.status(401).json({
-          success: false,
-          message: "Datos incorrectos",
+        return res.status(401).render("login", {
+          error: "Usuario no encontrado",
+          oldData: req.body
         });
       }
-      if (usuario.rol === "Inactivo") {
-        return res.status(401).json({
-          success: false,
-          message: "Usuario eliminado",
-        });
+
+      req.session.usuario = {
+        id: usuario.id,
+        email: usuarioExistente.email,
+        rol: usuario.rol,
+      };
+
+      console.log("Usuario logueado:", req.session.usuario);
+
+      if (usuario.rol == Roles.ADMIN) {
+        // TODO: cambiar por redireccion a admin dashboard
+        return res.send(`
+          <!DOCTYPE html>
+          <html lang="es">
+          <head>
+              <meta charset="UTF-8">
+              <meta name="viewport" content="width=device-width, initial-scale=1.0">
+              <title>Próximamente Dashboard</title>
+          </head>
+          <body>
+              <h1>Próximamente Dashboard REACT</h1>
+          </body>
+          </html>
+      `);
       }
-      const verificarContrasenia = bcrypt.compareSync(contrasenia, usuarioExistente.contrasenia);
-      if (!verificarContrasenia) {
-        return res.status(401).json({
-          success: false,
-          message: "Contraseña incorrecta",
-        });
-      }
-      return res.status(200).json({
-        success: true,
-        message: "Usuario logueado correctamente",
-        usuarioExistente,
-      });
+
+      return res.redirect("/");
+
     } catch (error) {
+
       console.error("Error en login:", (error as Error).message);
-      return res.status(500).json({
-        success: false,
-        message: "Error",
-      });
+      return res.status(500).render("error", { message: "Error del servidor" });
+
     }
+  }
+
+  async logout(req: Request, res: Response): Promise<Response | void> {
+    req.session.destroy(err => {
+      if (err) {
+        console.error("Error al cerrar sesión:", err);
+        console.log("Error al cerrar sesión:", err);
+        return res.redirect("/");
+      }
+      res.clearCookie("connect.sid");
+      res.redirect("/"); 
+    });
   }
 
   async softDelete(req: Request, res: Response): Promise<Response> {

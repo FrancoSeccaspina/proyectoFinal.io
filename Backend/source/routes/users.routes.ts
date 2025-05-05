@@ -7,15 +7,11 @@ const route = express.Router();
 route.get('/users/form', (req, res) => {
     res.render('register');
 });
-
-route.get('/users/:id', (req, res) => { usersController.show(req, res) });
-route.post('/users/save', registerValidator, (req, res) => { usersController.save(req, res) });
-route.post('/users/login', (req, res) => { usersController.login(req, res) });
-
-// route.post('/register/save', (req, res) => { usersController.register(req, res) });
-
-// route.get('/register', (req, res) => { usersController.register(req, res) });
+route.get('/users/show/:id', (req, res) => { usersController.show(req, res) });
 route.delete('/users/:id', (req, res) => { usersController.softDelete(req, res) });
 route.put('/users/:id', (req, res) => { usersController.update(req, res) });
+route.post('/users/save', registerValidator, (req, res) => { usersController.save(req, res) });
+route.post('/users/login', (req, res) => { usersController.login(req, res) });
+route.get('/users/logout', (req, res) => { usersController.logout(req, res) });
 
 export default route;
