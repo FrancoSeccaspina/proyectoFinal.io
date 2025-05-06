@@ -48,13 +48,6 @@ const whitelist = [
     'image/webp'
   ]
   
-// let imagen = body('imagen').custom(function(value,{req}){
-//          if(req.files && req.files.length > 0 && !whitelist.includes(req.files[0].mimetype)){
-//             return Promise.reject('Por favor que el archivo sea de tipo png, jpeg, jpg o webp')
-//          }else{
-//             return true
-//          }
-// })
 
 let validaciones = [email,contrasenia,nombre,apellido]
 

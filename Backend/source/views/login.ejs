@@ -19,7 +19,7 @@
 
                     <label class="none" for="usuario"></label>
                     
-                    <input class="inputs-login" type="text" name="email" id="usuario" placeholder="Correo electronico" required value="">
+                    <input class="inputs-login" type="text" name="email" id="usuario" placeholder="Correo electronico" value="<%= typeof oldData !== 'undefined' && oldData.email ? oldData.email : '' %>">
                     <% if(locals && locals.errors && errors.email) { %>
                         <p class="feedback"><%= errors.email.msg %></p>
                     <% } %>

@@ -7,7 +7,7 @@ import { initEjercicioModel, Ejercicio } from './ejercicio';
 import { initRecetaModel, Receta } from './receta';
 
 
-const sequelize = new Sequelize('gimnasio_activa', 'root', '', {
+const sequelize = new Sequelize('gimnasio_activa', 'root', '1234', {
   host: 'localhost',
   dialect: 'mysql',
   logging: false,
