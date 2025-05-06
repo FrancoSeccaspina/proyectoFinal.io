@@ -16,6 +16,7 @@ import grupoMuscularRoutes from './routes/grupo_muscular.routes';
 import recetaRoutes from './routes/receta.routes';
 import ejercicioRoutes from './routes/ejercicio.routes';
 import isAuthenticated from './middlewares/isAuthenticated';
+import rutaNoEncontrada from './middlewares/rutaNoEncontrada';
 import dotenv from 'dotenv';
 
 // carga las variables de entorno en este caso del archivo .env
@@ -49,7 +50,6 @@ app.use(session({
 
 // Verifica si hay un usuario en la sesión
 app.use(isAuthenticated.setUsuarioLogueado);
-
 // Cookies
 // app.use(cookieParser());
 
@@ -67,6 +67,9 @@ app.use('', grupoMuscularRoutes)
 app.use('', ejercicioRoutes);
 app.use('', recetaRoutes);
 app.use('/categorias', categoriaRoutes);
+
+// verifica que las rutas no existan y redirige a la página de error 404
+app.use(rutaNoEncontrada);
 
 // Habilitar CORS
 app.use(cors());

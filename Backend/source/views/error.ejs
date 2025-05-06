@@ -1,0 +1,18 @@
+<!DOCTYPE html>
+<html lang="es">
+  <head>
+    <meta charset="UTF-8" />
+    <title><%= code || 404 %></title>
+    <link rel="stylesheet" href="/css/error.css" />
+  </head>
+  <body>
+    <div class="error-container">
+      <div class="error-code"><%= code || 404 %></div>
+      <div class="error-message"><%= message || 'Página no encontrada' %></div>
+      <div class="error-description">
+        <%= description || 'La página que buscás no existe o fue movida.' %>
+      </div>
+      <a href="/">Volver al inicio</a>
+    </div>
+  </body>
+</html>

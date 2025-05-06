@@ -127,13 +127,15 @@ export class UsuarioController {
       return res
 
     } catch (error) {
-
-      await transaction?.rollback();
-      console.error("Error en register:", (error as Error).message);
-      return res.status(500).json({
-        success: false,
-        message: "Error interno del servidor",
+      console.error("Error en login:", (error as Error).message);
+      res.status(500).render("error", {
+          title: "Error del servidor",
+          code: 500,
+          message: "Error del servidor",
+          description: "Ocurrió un error inesperado durante el inicio de sesión. Por favor, inténtelo de nuevo más tarde.",
+          error: (error as Error).message // Opcional: para mostrar detalles del error en desarrollo
       });
+      return res;
     }
   }
 
@@ -162,15 +164,8 @@ export class UsuarioController {
  * }
  */
   async login(req: Request, res: Response): Promise<Response | void> {
-    const errors = validationResult(req);
-    if (!errors.isEmpty()) {
-        return res.status(400).render("login", {
-            errors: errors.mapped(),
-            oldData: req.body
-        });
-    }
-
     try {
+      
       const { email, contrasenia } = req.body;
 
       const usuarioExistente = await Autenticacion.findOne({ where: { email } });
@@ -216,7 +211,7 @@ export class UsuarioController {
       };
 
       console.log("Usuario logueado:", req.session.usuario);
-
+      
       if (usuario.rol === Roles.ADMIN) {
         // TODO: cambiar por redirección a admin dashboard
         return res.send(`
@@ -233,18 +228,19 @@ export class UsuarioController {
                 </html>
             `);
       }
-
       return res.redirect("/");
 
     } catch (error) {
+
       console.error("Error en login:", (error as Error).message);
-      return res.status(500).json({
-          success: false,
+      return res.status(500).render("error", {
+          title: "Error del servidor",
+          code: 500,
           message: "Error del servidor",
-          error: (error as Error).message // Opcional
+          description: "Ocurrió un error inesperado durante el inicio de sesión. Por favor, inténtelo de nuevo más tarde.",
+          error: (error as Error).message // Opcional: para mostrar detalles del error en desarrollo
       });
-      // console.error("Error en login:", (error as Error).message);
-      // return res.status(500).render("error", { message: "Error del servidor" });
+
     }
   }
 

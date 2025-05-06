@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: localhost
--- Generation Time: Apr 15, 2025 at 05:41 AM
+-- Generation Time: May 06, 2025 at 05:38 AM
 -- Server version: 8.0.38
 -- PHP Version: 8.2.12
 
@@ -39,7 +39,8 @@ CREATE TABLE `autenticacion` (
 --
 
 INSERT INTO `autenticacion` (`id`, `email`, `contrasenia`, `id_usuario`) VALUES
-(1, 'admin@activafitness.com', 'admin123', NULL);
+(1, 'admin@activafitness.com', '$2b$10$RCIHIHvb6asptQgSa.Yc.eTaj1N.VlCWFsNnsoPxuY.bELwO95QsG', 1),
+(14, 'gustavo.jimenez.crespo@gmail.com', '$2b$10$RgvEe5ipcZmhg9BPLRaLO.6402kiFiOywRX0Z2L12V31rX/x0UI/6', 23);
 
 -- --------------------------------------------------------
 
@@ -385,7 +386,8 @@ CREATE TABLE `usuarios` (
 --
 
 INSERT INTO `usuarios` (`id`, `apellido`, `nombre`, `rol`, `imagen`, `id_membresia`, `fecha_nacimiento`) VALUES
-(1, 'admin', 'admin', 'admin', 'admin', 1, '2025-04-09');
+(1, 'admin', 'admin', 'admin', 'admin', 1, '2025-04-09'),
+(23, 'Jimenez', 'Gus', 'cliente', NULL, 1, '1995-10-17');
 
 --
 -- Indexes for dumped tables
@@ -458,7 +460,7 @@ ALTER TABLE `usuarios`
 -- AUTO_INCREMENT for table `autenticacion`
 --
 ALTER TABLE `autenticacion`
-  MODIFY `id` int NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=14;
+  MODIFY `id` int NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=15;
 
 --
 -- AUTO_INCREMENT for table `categorias`
@@ -506,7 +508,7 @@ ALTER TABLE `recetas`
 -- AUTO_INCREMENT for table `usuarios`
 --
 ALTER TABLE `usuarios`
-  MODIFY `id` int NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=23;
+  MODIFY `id` int NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=24;
 
 --
 -- Constraints for dumped tables

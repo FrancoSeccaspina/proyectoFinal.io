@@ -43,4 +43,12 @@ route.get("/transferencia", function (req, res) {
 route.get("/finalizarCompra", function (req, res) {
     res.render("finalizarCompra");
 });
+route.get("/error", function (req, res) {
+    res.render('error', {
+        code: 404,
+        message: 'Página no encontrada',
+        description: 'La página solicitada no existe.'
+      });
+});
+
 export default route;

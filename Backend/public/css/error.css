@@ -1,0 +1,48 @@
+body {
+    margin: 0;
+    padding: 0;
+    background-color: #fefdfb;
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+    color: #2e2e2e;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 100vh;
+    text-align: center;
+  }
+
+  .error-container {
+    max-width: 600px;
+    padding: 40px;
+    border: 2px solid #ef3237;
+    border-radius: 12px;
+    box-shadow: 0 0 10px rgba(46, 46, 46, 0.1);
+  }
+
+  .error-code {
+    font-size: 5rem;
+    color: #ef3237;
+    margin-bottom: 20px;
+  }
+
+  .error-message {
+    font-size: 1.5rem;
+    margin-bottom: 10px;
+  }
+
+  .error-description {
+    font-size: 1rem;
+    color: #2e2e2e;
+  }
+
+  a {
+    color: #ef3237;
+    text-decoration: none;
+    font-weight: bold;
+    display: inline-block;
+    margin-top: 20px;
+  }
+
+  a:hover {
+    text-decoration: underline;
+  }
