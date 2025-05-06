@@ -16,31 +16,31 @@
 
       <!-- Nombre -->
       <input type="text" name="nombre" id="nombre" placeholder="Nombre" class="inputs-register"
-        value="<%= (typeof oldData !== 'undefined' && oldData.nombre) ? oldData.nombre : '' %>" required>
+        value="<%= (typeof oldData !== 'undefined' && oldData.nombre) ? oldData.nombre : '' %>"  >
       <% if (locals && locals.errors && errors.nombre) { %>
         <p class="feedback"><%= errors.nombre.msg %></p>
       <% } %>
 
       <!-- Apellido -->
       <input type="text" name="apellido" id="apellido" class="inputs-register" placeholder="Apellido"
-        value="<%= (typeof oldData !== 'undefined' && oldData.apellido) ? oldData.apellido : '' %>" required>
+        value="<%= (typeof oldData !== 'undefined' && oldData.apellido) ? oldData.apellido : '' %>"  >
       <% if (locals && locals.errors && errors.apellido) { %>
         <p class="feedback"><%= errors.apellido.msg %></p>
       <% } %>
 
       <input type="email" name="email" id="email" placeholder="Correo Electrónico" class="inputs-register"
-        value="<%= (typeof oldData !== 'undefined' && oldData.email) ? oldData.email : '' %>"required>
+        value="<%= (typeof oldData !== 'undefined' && oldData.email) ? oldData.email : '' %>" >
       <% if (locals && locals.errors && errors.email) { %>
         <p class="feedback"><%= errors.email.msg %></p>
       <% } %>
 
       <input type="date" name="fecha_nacimiento" id="fecha_nacimiento" class="inputs-register"
-        value="<%= (typeof oldData !== 'undefined' && oldData.fecha_nacimiento) ? oldData.fecha_nacimiento : '' %>" required>
+        value="<%= (typeof oldData !== 'undefined' && oldData.fecha_nacimiento) ? oldData.fecha_nacimiento : '' %>"  >
       <% if (locals && locals.errors && errors.fecha_nacimiento) { %>
         <p class="feedback"><%= errors.fecha_nacimiento.msg %></p>
       <% } %>
 
-      <input type="password" name="contrasenia" placeholder="Contraseña" id="contrasenia" class="inputs-register" required>
+      <input type="password" name="contrasenia" placeholder="Contraseña" id="contrasenia" class="inputs-register"  >
       <% if (locals && locals.errors && errors.contrasenia) { %>
         <p class="feedback"><%= errors.contrasenia.msg %></p>
       <% } %>
