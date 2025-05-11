@@ -1,4 +1,4 @@
-import { Sequelize } from 'sequelize';
+import { conexionDB, sequelize } from '../connection/connection'
 import { initUsuarioModel, Usuario } from './usuario';
 import { Autenticacion, initAutenticacionModel } from './autenticacion';
 import { initProductoModel, Producto } from './producto';
@@ -7,21 +7,25 @@ import { initEjercicioModel, Ejercicio } from './ejercicio';
 import { initRecetaModel, Receta } from './receta';
 
 
-const sequelize = new Sequelize('gimnasio_activa', 'root', '1234', {
-  host: 'localhost',
-  dialect: 'mysql',
-  logging: false,
-});
+const inicializarDB = async () => {
+  try {
+    await conexionDB();
+    initUsuarioModel(sequelize);
+    initAutenticacionModel(sequelize);
+    initProductoModel(sequelize);
+    initCategoriaModel(sequelize);
+    initEjercicioModel(sequelize);
+    initRecetaModel(sequelize);
+  
+    console.log('Modelos inicializados') 
+  } catch (error) {
+    console.error('Error al inicializar Modelos:', error);  
+  }
+}
 
-initUsuarioModel(sequelize);
-initAutenticacionModel(sequelize);
-initProductoModel(sequelize);
-initCategoriaModel(sequelize);
-initEjercicioModel(sequelize);
-initRecetaModel(sequelize);
+inicializarDB()
 
 export {
-  sequelize,
   Usuario,
   Autenticacion,
   Producto,
