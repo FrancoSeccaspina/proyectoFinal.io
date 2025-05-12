@@ -19,6 +19,15 @@ import isAuthenticated from './middlewares/isAuthenticated';
 import rutaNoEncontrada from './middlewares/rutaNoEncontrada';
 import dotenv from 'dotenv';
 
+//apis
+import productsApiRoutes from './routes/api/products.api.routes';
+import usuariosAPIController from './routes/api/users.api.routes';
+import ejercicioApiController from './routes/api/ejercicio.api.routes';
+import recetaApiController from './routes/api/receta.api.routes';
+import categoriaApiController from './routes/api/categoria.api.routes';
+import categoriesRecetaAPIController from './routes/api/categoriaReceta.api.routes';
+import categoriesGrupoMuscularAPIController from './routes/api/categoriaGrupoMuscular.api.routes'
+import proveedorAPIController from './routes/api/proveedores.api.routes'
 // carga las variables de entorno en este caso del archivo .env
 dotenv.config();
 
@@ -67,6 +76,10 @@ app.use('', grupoMuscularRoutes)
 app.use('', ejercicioRoutes);
 app.use('', recetaRoutes);
 app.use('/categorias', categoriaRoutes);
+
+
+//APIS
+app.use('/api', productsApiRoutes, usuariosAPIController, ejercicioApiController, recetaApiController, categoriaApiController, categoriesRecetaAPIController, categoriesGrupoMuscularAPIController, proveedorAPIController);
 
 // verifica que las rutas no existan y redirige a la página de error 404
 app.use(rutaNoEncontrada);

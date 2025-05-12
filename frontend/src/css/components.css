@@ -1,0 +1,111 @@
+*{
+    font-family: 'Roboto', sans-serif;
+    box-sizing: border-box;
+    padding: 0;
+    margin: 0;
+    border: none;
+}
+
+body{
+    background-color: #000000;
+}
+#header-dashboard{
+    display: flex;
+    align-items: center;
+    justify-content: space-around;
+}
+#header-dashboard a{
+    padding: 12px;
+    color: white;
+    background-color: rgb(0, 0, 0);
+    text-decoration: none;
+    font-weight: 700;
+    border-radius: 5px;
+    margin: 0.3rem;
+}
+#header-dashboard a:hover{
+    padding: 12px;
+    color: rgb(0, 0, 0);
+    background-color: rgb(255, 255, 255);
+    transition-property: background-color color;
+    transition-duration: 0.3s;
+}
+.logo-image{
+    width: 7rem;
+}
+.title-products{
+    padding-top: 0.5rem;
+    font-size: 14px;
+    padding-bottom: 0.5rem;
+    font-weight: bolder;
+    text-decoration: underline black;
+}
+.game-image{
+    width: 10rem;
+    height: 14rem;
+    display: flex;
+    margin: auto;
+}
+.container-products{
+    text-align: center;
+    background-color: rgb(0, 0, 0);
+    border-top: solid 3px rgb(255, 255, 255);
+    width: 100%;
+    margin: auto;
+}
+.list-container{
+    display: flex;
+    gap: 1.5rem;
+    justify-content: center;
+    align-items: center;
+    flex-direction: row;
+    flex-wrap: wrap;
+}
+.list-container li{
+    list-style: none;
+}
+.box-title{
+    color: #ffffff;
+    font-size: 22px;
+    padding-top: 1.5rem;
+    font-weight: bolder;
+}
+.user-image{
+    margin-top: 0.5rem;
+    width: 7rem;
+    height: 7rem;
+    border-radius: 50%;
+}
+.h3-user{
+    color: #ffffff;
+}
+h3, h4{
+    padding-top: 0.5rem;
+    color: white;
+    font-size: 18px;
+}
+h6{
+    text-align: left;
+}
+.header-a{
+    display: flex;
+    flex-direction: row;
+    flex-wrap: wrap;
+    justify-content: flex-end;
+}
+.category-filter, .category-name{
+    color: white;
+}
+.mover_abajo {
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    align-content: center;
+    flex-wrap: wrap;
+    padding: 1rem;
+}
+@media screen and (min-width: 1240px) {
+    .title-products{
+        font-size: 18px;
+    }
+}
