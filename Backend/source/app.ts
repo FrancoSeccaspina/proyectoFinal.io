@@ -33,6 +33,8 @@ dotenv.config();
 
 const app = express();
 
+// Habilitar CORS
+app.use(cors());
 // Ruta pública
 const publicPath = path.resolve(__dirname, '../public/');
 app.use(staticHandler(publicPath));
@@ -84,8 +86,6 @@ app.use('/api', productsApiRoutes, usuariosAPIController, ejercicioApiController
 // verifica que las rutas no existan y redirige a la página de error 404
 app.use(rutaNoEncontrada);
 
-// Habilitar CORS
-app.use(cors());
 
 // Escuchar el servidor
 app.listen(port, start);
