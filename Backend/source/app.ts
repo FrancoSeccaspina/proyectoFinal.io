@@ -9,6 +9,7 @@ import cors from 'cors';
 import methodOverride from 'method-override';
 import session from 'express-session';
 import usersRoutes from './routes/users.routes';
+import carritoRoutes from './routes/carrito.routes';
 import viewRoutes from './routes/view.routes';
 import productoRoutes from './routes/producto.routes';
 import categoriaRoutes from './routes/categoria.routes';
@@ -28,6 +29,8 @@ import categoriaApiController from './routes/api/categoria.api.routes';
 import categoriesRecetaAPIController from './routes/api/categoriaReceta.api.routes';
 import categoriesGrupoMuscularAPIController from './routes/api/categoriaGrupoMuscular.api.routes'
 import proveedorAPIController from './routes/api/proveedores.api.routes'
+
+
 // carga las variables de entorno en este caso del archivo .env
 dotenv.config();
 
@@ -77,6 +80,7 @@ app.use('', productoRoutes);
 app.use('', grupoMuscularRoutes)
 app.use('', ejercicioRoutes);
 app.use('', recetaRoutes);
+app.use('', carritoRoutes);
 app.use('/categorias', categoriaRoutes);
 
 
