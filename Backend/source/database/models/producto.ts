@@ -13,6 +13,7 @@ interface ProductoAttributes {
     nombre: string;
     descripcion: string;
     precio: number;
+    categoriaId: number;
     imagen: string;
     stock: number;
 }
@@ -22,6 +23,7 @@ class Producto extends Model<InferAttributes<Producto>, InferCreationAttributes<
     declare nombre: string;
     declare descripcion: string;
     declare precio: number;
+    declare categoriaId: number;
     declare imagen: string;
     declare stock: number;
 
@@ -49,6 +51,10 @@ const initProductoModel = (sequelize: Sequelize) => {
             },
             precio: {
                 type: DataTypes.DECIMAL(10, 2),
+                allowNull: false,
+            },
+            categoriaId: {
+                type: DataTypes.INTEGER,
                 allowNull: false,
             },
             imagen: {

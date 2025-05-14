@@ -74,8 +74,8 @@ export class RecetaController {
     }
     async crearReceta(req: Request, res: Response): Promise<Response> {
         try {
-            const { nombre, descripcion, categoriaId } = req.body;
-            if (!nombre || !descripcion || !categoriaId) {
+            const { nombre, descripcion, categoriaId, imagen } = req.body;
+            if (!nombre || !descripcion || !categoriaId || !imagen) {
                 return res.status(400).json({
                     success: false,
                     message: "Faltan datos requeridos",
@@ -85,6 +85,7 @@ export class RecetaController {
                 nombre,
                 descripcion,
                 categoriaId,
+                imagen,
             });
             return res.status(201).json({
                 success: true,
