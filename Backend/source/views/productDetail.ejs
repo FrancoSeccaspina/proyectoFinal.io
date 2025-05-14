@@ -1,76 +1,58 @@
 <!DOCTYPE html>
 <html lang="en">
 
-    <head>
+<head>
+    <%- include('./partials/head.ejs') %>
+        <link rel="stylesheet" href="/css/productDetail.css" />
+</head>
 
-        <%- include('./partials/head.ejs') %>
-        <link rel="stylesheet" href="/css/productDetail.css">
+<body>
+    <%- include('./partials/header.ejs') %>
 
-    </head>
-
-    <body>
-        
-        <%- include('./partials/header.ejs') %>
-        
         <main>
-
             <div id="main-content">
-               <div class="container-image">
-                   
-                   <img src="../../images/<%= producto.imagen %>" alt="<%= producto.nombre %>"class="img-juego" />
-               </div>
-                
-                
+                <div class="container-image">
+                    <img src="../../images/<%= producto.imagen %>" alt="<%= producto.nombre %>" class="img-juego" />
+                </div>
+
                 <div class="main-description">
-
                     <section class="section-description">
-
                         <div class="description">
                             <h2 id="title-item">Descripción del producto</h2>
-                            <p><%= producto.descripcion %></p>
-                        </div>    
+                            <p>
+                                <%= producto.descripcion %>
+                            </p>
+                        </div>
                     </section>
-                            
-                    <section class="list-products">
 
+                    <section class="list-products">
                         <ul class="lista-description">
                             <li>Paso a paso de como utilizar el producto</li>
                             <li>Instructivo en español</li>
                             <li>Buscar video de como ingerirlo de manera correcta</li>
-                            <li style="color: #bbbbbb; font-weight:bolder">Entrega Inmediata</li>
+                            <li style="color: #bbbbbb; font-weight: bolder">
+                                Entrega Inmediata
+                            </li>
                         </ul>
-                    
+
                         <div class="price-content">
-
                             <div class="precios">
-                                <span class="precio-ahora">$<%= (producto.precio - (producto.precio*0.1)) %></span>
-                                <span class="precio-previo">$<%= producto.precio %></span>
+                                <span class="precio-ahora">$<%= (producto.precio) %></span>
+                                <!-- <span class="precio-previo">$<%= producto.precio %></span> -->
                             </div>
-                            
-                            <form class="cantidadProductos">
 
-                                <select name="quantity-items" id="quantity-items">
-
-                                    <option value="">1</option>
-                                    <option value="">2</option>
-                                    <option value="">3</option>
-                                    <option value="">4</option>
-                                    <option value="">5</option>
-                                    <option value="">6</option>
-                                    <option value="">7</option>
-                                    <option value="">8</option>
-                                    <option value="">9</option>
-                                    <option value="">10</option>
-                                </select>
-                                <a href="/carrito" class="crear">Comprar<i class="fa-solid fa-cart-shopping"></i></a>  
+                            <form class="cantidadProductos" action="/carrito/agregar" method="POST">
+                                <span>Stock disponible: <%= producto.stock %></span>
+                                <input type="hidden" name="id_producto" value="<%= producto.id %>">
+                                <input type="number" name="cantidad" min="1" max="<%= producto.stock %>" value="1" required>
+                                <button type="submit" class="crear">Comprar<i class="fa-solid fa-cart-shopping"></i></button>
                             </form>
                         </div>
                     </section>
                 </div>
             </div>
         </main>
-        <footer>
-            <%- include('./partials/footer.ejs') %>
-        </footer>
-    </body>
+        <footer><%- include('./partials/footer.ejs') %></footer>
+</body>
+
 </html>

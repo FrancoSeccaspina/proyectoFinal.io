@@ -127,13 +127,15 @@ export class UsuarioController {
       return res
 
     } catch (error) {
-      console.error("Error en login:", (error as Error).message);
+      
+      console.error("Error: ", (error as Error).message);
+
       res.status(500).render("error", {
           title: "Error del servidor",
           code: 500,
           message: "Error del servidor",
-          description: "Ocurrió un error inesperado durante el inicio de sesión. Por favor, inténtelo de nuevo más tarde.",
-          error: (error as Error).message // Opcional: para mostrar detalles del error en desarrollo
+          description: "Ocurrió un error inesperado durante el registro.",
+          error: (error as Error).message
       });
       return res;
     }

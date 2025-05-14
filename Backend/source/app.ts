@@ -1,6 +1,7 @@
 // import cookieParser from 'cookie-parser';
 // Middlewares y rutas
 // import userMiddleware from './middlewares/user';
+import dotenv from 'dotenv';
 import express from 'express';
 import path, { join } from 'path';
 import { port, start } from './modules/server';
@@ -8,6 +9,7 @@ import staticHandler from './modules/static';
 import cors from 'cors';
 import methodOverride from 'method-override';
 import session from 'express-session';
+
 import usersRoutes from './routes/users.routes';
 import viewRoutes from './routes/view.routes';
 import productoRoutes from './routes/producto.routes';
@@ -15,9 +17,10 @@ import categoriaRoutes from './routes/categoria.routes';
 import grupoMuscularRoutes from './routes/grupo_muscular.routes';
 import recetaRoutes from './routes/receta.routes';
 import ejercicioRoutes from './routes/ejercicio.routes';
+import carritoRoutes from './routes/carrito.routes';
+
 import isAuthenticated from './middlewares/isAuthenticated';
 import rutaNoEncontrada from './middlewares/rutaNoEncontrada';
-import dotenv from 'dotenv';
 
 //apis
 import productsApiRoutes from './routes/api/products.api.routes';
@@ -28,6 +31,7 @@ import categoriaApiController from './routes/api/categoria.api.routes';
 import categoriesRecetaAPIController from './routes/api/categoriaReceta.api.routes';
 import categoriesGrupoMuscularAPIController from './routes/api/categoriaGrupoMuscular.api.routes'
 import proveedorAPIController from './routes/api/proveedores.api.routes'
+
 // carga las variables de entorno en este caso del archivo .env
 dotenv.config();
 
@@ -77,6 +81,7 @@ app.use('', productoRoutes);
 app.use('', grupoMuscularRoutes)
 app.use('', ejercicioRoutes);
 app.use('', recetaRoutes);
+app.use('', carritoRoutes);
 app.use('/categorias', categoriaRoutes);
 
 

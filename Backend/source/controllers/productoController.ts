@@ -47,6 +47,7 @@ export class productoController {
             res.status(500).json({ message: 'Error al obtener el producto' });
         }
     }
+
     async delete(req: Request, res: Response): Promise<void> {
         try {
             const { id } = req.params;
@@ -62,6 +63,7 @@ export class productoController {
             res.status(500).json({ message: 'Error al eliminar el producto' });
         }
     }
+    
     async editarProducto(req: Request, res: Response): Promise<void> {
         try {
             const { id } = req.params;

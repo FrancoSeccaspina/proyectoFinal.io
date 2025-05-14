@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: localhost
--- Generation Time: May 13, 2025 at 03:08 AM
+-- Generation Time: May 14, 2025 at 03:46 PM
 -- Server version: 8.0.38
 -- PHP Version: 8.2.12
 
@@ -29,8 +29,8 @@ SET time_zone = "+00:00";
 
 CREATE TABLE `autenticacion` (
   `id` int NOT NULL,
-  `email` varchar(100) COLLATE utf8mb4_general_ci NOT NULL,
-  `contrasenia` varchar(255) COLLATE utf8mb4_general_ci NOT NULL,
+  `email` varchar(100) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci NOT NULL,
+  `contrasenia` varchar(255) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci NOT NULL,
   `id_usuario` int DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
@@ -39,7 +39,29 @@ CREATE TABLE `autenticacion` (
 --
 
 INSERT INTO `autenticacion` (`id`, `email`, `contrasenia`, `id_usuario`) VALUES
-(1, 'admin@activafitness.com', '$2b$10$RCIHIHvb6asptQgSa.Yc.eTaj1N.VlCWFsNnsoPxuY.bELwO95QsG', 1);
+(1, 'admin@activafitness.com', '$2b$10$RCIHIHvb6asptQgSa.Yc.eTaj1N.VlCWFsNnsoPxuY.bELwO95QsG', 1),
+(15, 'gustavo.jimenez.crespo@gmail.com', '$2b$10$t8fvTPyB79bQ2ChpdZ04guvIbyJ9.Tzj2NG1xb9ri0Np97U080QJO', 23);
+
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `carrito`
+--
+
+CREATE TABLE `carrito` (
+  `id` int NOT NULL,
+  `id_usuario` int NOT NULL,
+  `id_producto` int NOT NULL,
+  `cantidad` int DEFAULT '1',
+  `fecha_agregado` datetime DEFAULT CURRENT_TIMESTAMP
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
+
+--
+-- Dumping data for table `carrito`
+--
+
+INSERT INTO `carrito` (`id`, `id_usuario`, `id_producto`, `cantidad`, `fecha_agregado`) VALUES
+(1, 23, 8, 1, '2025-05-13 16:38:24');
 
 -- --------------------------------------------------------
 
@@ -49,7 +71,7 @@ INSERT INTO `autenticacion` (`id`, `email`, `contrasenia`, `id_usuario`) VALUES
 
 CREATE TABLE `categorias` (
   `id` int NOT NULL,
-  `nombre` varchar(50) COLLATE utf8mb4_general_ci NOT NULL
+  `nombre` varchar(50) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
 --
@@ -69,7 +91,7 @@ INSERT INTO `categorias` (`id`, `nombre`) VALUES
 
 CREATE TABLE `categoria_recetas` (
   `id` int NOT NULL,
-  `nombre` varchar(50) COLLATE utf8mb4_general_ci NOT NULL
+  `nombre` varchar(50) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
 --
@@ -87,17 +109,30 @@ INSERT INTO `categoria_recetas` (`id`, `nombre`) VALUES
 -- --------------------------------------------------------
 
 --
+-- Table structure for table `compras`
+--
+
+CREATE TABLE `compras` (
+  `id` int NOT NULL,
+  `id_usuario` int NOT NULL,
+  `fecha_compra` datetime DEFAULT CURRENT_TIMESTAMP,
+  `total` int NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
+
+-- --------------------------------------------------------
+
+--
 -- Table structure for table `ejercicios`
 --
 
 CREATE TABLE `ejercicios` (
   `id` int NOT NULL,
-  `nombre` varchar(50) COLLATE utf8mb4_general_ci NOT NULL,
-  `descripcion` text COLLATE utf8mb4_general_ci,
+  `nombre` varchar(50) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci NOT NULL,
+  `descripcion` text CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci,
   `grupo_muscular_id` int DEFAULT NULL,
-  `video` varchar(255) COLLATE utf8mb4_general_ci DEFAULT NULL,
-  `titulo` varchar(255) COLLATE utf8mb4_general_ci DEFAULT NULL,
-  `imagen` varchar(255) COLLATE utf8mb4_general_ci DEFAULT NULL
+  `video` varchar(255) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci DEFAULT NULL,
+  `titulo` varchar(255) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci DEFAULT NULL,
+  `imagen` varchar(255) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
 --
@@ -237,7 +272,7 @@ INSERT INTO `ejercicios` (`id`, `nombre`, `descripcion`, `grupo_muscular_id`, `v
 
 CREATE TABLE `grupos_musculares` (
   `id` int NOT NULL,
-  `nombre` varchar(50) COLLATE utf8mb4_general_ci NOT NULL
+  `nombre` varchar(50) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
 --
@@ -277,11 +312,11 @@ CREATE TABLE `membresias` (
 
 CREATE TABLE `productos` (
   `id` int NOT NULL,
-  `nombre` varchar(50) COLLATE utf8mb4_general_ci NOT NULL,
-  `descripcion` varchar(500) COLLATE utf8mb4_general_ci DEFAULT NULL,
+  `nombre` varchar(50) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci NOT NULL,
+  `descripcion` varchar(500) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci DEFAULT NULL,
   `precio` int NOT NULL,
   `categoriaId` int NOT NULL,
-  `imagen` varchar(255) COLLATE utf8mb4_general_ci NOT NULL,
+  `imagen` varchar(255) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci NOT NULL,
   `stock` int NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
@@ -304,8 +339,8 @@ INSERT INTO `productos` (`id`, `nombre`, `descripcion`, `precio`, `categoriaId`,
 
 CREATE TABLE `proveedores` (
   `id` int NOT NULL,
-  `nombre` varchar(100) COLLATE utf8mb4_general_ci NOT NULL,
-  `apellido` varchar(100) COLLATE utf8mb4_general_ci NOT NULL,
+  `nombre` varchar(100) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci NOT NULL,
+  `apellido` varchar(100) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci NOT NULL,
   `celular` int NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
@@ -326,10 +361,10 @@ INSERT INTO `proveedores` (`id`, `nombre`, `apellido`, `celular`) VALUES
 
 CREATE TABLE `recetas` (
   `id` int NOT NULL,
-  `nombre` varchar(50) COLLATE utf8mb4_general_ci NOT NULL,
-  `descripcion` text COLLATE utf8mb4_general_ci,
+  `nombre` varchar(50) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci NOT NULL,
+  `descripcion` text CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci,
   `categoria_id` int DEFAULT NULL,
-  `imagen` varchar(500) COLLATE utf8mb4_general_ci DEFAULT NULL
+  `imagen` varchar(500) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
 --
@@ -398,23 +433,23 @@ INSERT INTO `recetas` (`id`, `nombre`, `descripcion`, `categoria_id`, `imagen`) 
 
 CREATE TABLE `usuarios` (
   `id` int NOT NULL,
-  `apellido` varchar(50) COLLATE utf8mb4_general_ci NOT NULL,
-  `nombre` varchar(20) COLLATE utf8mb4_general_ci NOT NULL,
-  `rol` varchar(20) COLLATE utf8mb4_general_ci NOT NULL,
-  `imagen` varchar(500) COLLATE utf8mb4_general_ci DEFAULT NULL,
+  `apellido` varchar(50) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci NOT NULL,
+  `nombre` varchar(20) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci NOT NULL,
+  `rol` varchar(20) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci NOT NULL,
+  `imagen` varchar(500) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci DEFAULT NULL,
   `id_membresia` int DEFAULT NULL,
-  `id_autenticacion` int DEFAULT NULL,
   `fecha_nacimiento` date DEFAULT NULL,
-  `celular` varchar(20) COLLATE utf8mb4_general_ci DEFAULT NULL,
-  `aptoMedico` varchar(500) COLLATE utf8mb4_general_ci DEFAULT NULL
+  `celular` varchar(20) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci DEFAULT NULL,
+  `aptoMedico` varchar(500) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
 --
 -- Dumping data for table `usuarios`
 --
 
-INSERT INTO `usuarios` (`id`, `apellido`, `nombre`, `rol`, `imagen`, `id_membresia`, `id_autenticacion`, `fecha_nacimiento`, `celular`, `aptoMedico`) VALUES
-(1, 'admin', 'admin', 'admin', 'perfil.jpg', 1, 1, '2025-04-09', '1193868511', 'xd');
+INSERT INTO `usuarios` (`id`, `apellido`, `nombre`, `rol`, `imagen`, `id_membresia`, `fecha_nacimiento`, `celular`, `aptoMedico`) VALUES
+(1, 'admin', 'admin', 'admin', 'perfil.jpg', 1, '2025-04-09', '1193868511', 'xd'),
+(23, 'Jimenez', 'Gustavo', 'cliente', NULL, 1, '2025-05-13', NULL, NULL);
 
 --
 -- Indexes for dumped tables
@@ -428,6 +463,14 @@ ALTER TABLE `autenticacion`
   ADD KEY `id_usuario` (`id_usuario`);
 
 --
+-- Indexes for table `carrito`
+--
+ALTER TABLE `carrito`
+  ADD PRIMARY KEY (`id`),
+  ADD KEY `id_usuario` (`id_usuario`),
+  ADD KEY `id_producto` (`id_producto`);
+
+--
 -- Indexes for table `categorias`
 --
 ALTER TABLE `categorias`
@@ -438,6 +481,13 @@ ALTER TABLE `categorias`
 --
 ALTER TABLE `categoria_recetas`
   ADD PRIMARY KEY (`id`);
+
+--
+-- Indexes for table `compras`
+--
+ALTER TABLE `compras`
+  ADD PRIMARY KEY (`id`),
+  ADD KEY `id_usuario` (`id_usuario`);
 
 --
 -- Indexes for table `ejercicios`
@@ -478,8 +528,7 @@ ALTER TABLE `recetas`
 --
 ALTER TABLE `usuarios`
   ADD PRIMARY KEY (`id`),
-  ADD KEY `fk_membresia` (`id_membresia`),
-  ADD KEY `fk_autenticacion` (`id_autenticacion`);
+  ADD KEY `fk_membresia` (`id_membresia`);
 
 --
 -- AUTO_INCREMENT for dumped tables
@@ -489,7 +538,13 @@ ALTER TABLE `usuarios`
 -- AUTO_INCREMENT for table `autenticacion`
 --
 ALTER TABLE `autenticacion`
-  MODIFY `id` int NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=15;
+  MODIFY `id` int NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=16;
+
+--
+-- AUTO_INCREMENT for table `carrito`
+--
+ALTER TABLE `carrito`
+  MODIFY `id` int NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2;
 
 --
 -- AUTO_INCREMENT for table `categorias`
@@ -502,6 +557,12 @@ ALTER TABLE `categorias`
 --
 ALTER TABLE `categoria_recetas`
   MODIFY `id` int NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=7;
+
+--
+-- AUTO_INCREMENT for table `compras`
+--
+ALTER TABLE `compras`
+  MODIFY `id` int NOT NULL AUTO_INCREMENT;
 
 --
 -- AUTO_INCREMENT for table `ejercicios`
@@ -537,17 +598,24 @@ ALTER TABLE `recetas`
 -- AUTO_INCREMENT for table `usuarios`
 --
 ALTER TABLE `usuarios`
-  MODIFY `id` int NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=23;
+  MODIFY `id` int NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=24;
 
 --
 -- Constraints for dumped tables
 --
 
 --
--- Constraints for table `autenticacion`
+-- Constraints for table `carrito`
 --
-ALTER TABLE `autenticacion`
-  ADD CONSTRAINT `autenticacion_ibfk_1` FOREIGN KEY (`id`) REFERENCES `usuarios` (`id_autenticacion`) ON DELETE CASCADE;
+ALTER TABLE `carrito`
+  ADD CONSTRAINT `carrito_ibfk_1` FOREIGN KEY (`id_usuario`) REFERENCES `usuarios` (`id`) ON DELETE CASCADE,
+  ADD CONSTRAINT `carrito_ibfk_2` FOREIGN KEY (`id_producto`) REFERENCES `productos` (`id`) ON DELETE CASCADE;
+
+--
+-- Constraints for table `compras`
+--
+ALTER TABLE `compras`
+  ADD CONSTRAINT `compras_ibfk_1` FOREIGN KEY (`id_usuario`) REFERENCES `usuarios` (`id`) ON DELETE CASCADE;
 
 --
 -- Constraints for table `ejercicios`
