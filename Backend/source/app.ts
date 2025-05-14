@@ -36,6 +36,8 @@ import proveedorAPIController from './routes/api/proveedores.api.routes'
 dotenv.config();
 
 const app = express();
+// Habilitar CORS
+app.use(cors());
 
 // Habilitar CORS
 app.use(cors());
@@ -84,13 +86,11 @@ app.use('', recetaRoutes);
 app.use('', carritoRoutes);
 app.use('/categorias', categoriaRoutes);
 
-
 //APIS
 app.use('/api', productsApiRoutes, usuariosAPIController, ejercicioApiController, recetaApiController, categoriaApiController, categoriesRecetaAPIController, categoriesGrupoMuscularAPIController, proveedorAPIController);
 
 // verifica que las rutas no existan y redirige a la página de error 404
 app.use(rutaNoEncontrada);
-
 
 // Escuchar el servidor
 app.listen(port, start);

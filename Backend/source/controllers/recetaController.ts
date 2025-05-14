@@ -74,7 +74,11 @@ export class RecetaController {
     }
     async crearReceta(req: Request, res: Response): Promise<Response> {
         try {
+<<<<<<< HEAD
+            const { nombre, descripcion, categoriaId, imagen } = req.body;
+=======
             const { nombre, descripcion, categoriaId, imagen} = req.body;
+>>>>>>> 91e82696598ce8eaa40fa19497247a043c3a1287
             if (!nombre || !descripcion || !categoriaId || !imagen) {
                 return res.status(400).json({
                     success: false,

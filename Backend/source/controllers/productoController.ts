@@ -5,8 +5,8 @@ export class productoController {
 
     async crearProducto(req: Request, res: Response): Promise<void> {
         try {
-            const { nombre, precio, descripcion } = req.body;
-            const nuevoProducto = await Producto.create({ nombre, descripcion, precio, imagen: '', stock: 0 });
+            const { nombre, precio,categoriaId, descripcion } = req.body;
+            const nuevoProducto = await Producto.create({ nombre, descripcion, precio, categoriaId, imagen: '', stock: 0 });
             res.status(201).json({
                 message: 'Producto creado exitosamente',
                 producto: nuevoProducto,

@@ -1,8 +1,12 @@
-import { Router } from 'express';
-import carritoController from '../controllers/carritoController';
-const route = Router();
+import { Router } from "express";
+import carritoController from "../controllers/carritoController";
 
+const router = Router();
 
-route.post('/carrito/agregar', (res, req) => { carritoController.agregarProducto(res, req) })
+// Rutas del carrito
+router.post("/carrito/agregar", (req, res) => carritoController.agregarProducto(req, res));
+router.delete("/carrito/eliminar/:id", (req, res) => carritoController.eliminarProducto(req, res));
+router.get("/carrito", (req, res) => carritoController.verCarrito(req, res));
+router.post("/carrito/finalizar", (req, res) => carritoController.finalizarCompra(req, res));
 
-export default route;
+export default router;
