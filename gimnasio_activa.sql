@@ -2,10 +2,10 @@
 -- version 5.2.1
 -- https://www.phpmyadmin.net/
 --
--- Servidor: 127.0.0.1
--- Tiempo de generación: 12-05-2025 a las 21:27:40
--- Versión del servidor: 10.4.32-MariaDB
--- Versión de PHP: 8.2.12
+-- Host: localhost
+-- Generation Time: May 13, 2025 at 03:08 AM
+-- Server version: 8.0.38
+-- PHP Version: 8.2.12
 
 SET SQL_MODE = "NO_AUTO_VALUE_ON_ZERO";
 START TRANSACTION;
@@ -18,43 +18,42 @@ SET time_zone = "+00:00";
 /*!40101 SET NAMES utf8mb4 */;
 
 --
--- Base de datos: `gimnasio_activa`
+-- Database: `gimnasio_activa`
 --
 
 -- --------------------------------------------------------
 
 --
--- Estructura de tabla para la tabla `autenticacion`
+-- Table structure for table `autenticacion`
 --
 
 CREATE TABLE `autenticacion` (
-  `id` int(11) NOT NULL,
-  `email` varchar(100) NOT NULL,
-  `contrasenia` varchar(255) NOT NULL,
-  `id_usuario` int(11) DEFAULT NULL
+  `id` int NOT NULL,
+  `email` varchar(100) COLLATE utf8mb4_general_ci NOT NULL,
+  `contrasenia` varchar(255) COLLATE utf8mb4_general_ci NOT NULL,
+  `id_usuario` int DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
 --
--- Volcado de datos para la tabla `autenticacion`
+-- Dumping data for table `autenticacion`
 --
 
 INSERT INTO `autenticacion` (`id`, `email`, `contrasenia`, `id_usuario`) VALUES
-(1, 'admin@activafitness.com', '$2b$10$RCIHIHvb6asptQgSa.Yc.eTaj1N.VlCWFsNnsoPxuY.bELwO95QsG', 1),
-(14, 'gustavo.jimenez.crespo@gmail.com', '$2b$10$RgvEe5ipcZmhg9BPLRaLO.6402kiFiOywRX0Z2L12V31rX/x0UI/6', 23);
+(1, 'admin@activafitness.com', '$2b$10$RCIHIHvb6asptQgSa.Yc.eTaj1N.VlCWFsNnsoPxuY.bELwO95QsG', 1);
 
 -- --------------------------------------------------------
 
 --
--- Estructura de tabla para la tabla `categorias`
+-- Table structure for table `categorias`
 --
 
 CREATE TABLE `categorias` (
-  `id` int(11) NOT NULL,
-  `nombre` varchar(50) NOT NULL
+  `id` int NOT NULL,
+  `nombre` varchar(50) COLLATE utf8mb4_general_ci NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
 --
--- Volcado de datos para la tabla `categorias`
+-- Dumping data for table `categorias`
 --
 
 INSERT INTO `categorias` (`id`, `nombre`) VALUES
@@ -65,16 +64,16 @@ INSERT INTO `categorias` (`id`, `nombre`) VALUES
 -- --------------------------------------------------------
 
 --
--- Estructura de tabla para la tabla `categoria_recetas`
+-- Table structure for table `categoria_recetas`
 --
 
 CREATE TABLE `categoria_recetas` (
-  `id` int(11) NOT NULL,
-  `nombre` varchar(50) NOT NULL
+  `id` int NOT NULL,
+  `nombre` varchar(50) COLLATE utf8mb4_general_ci NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
 --
--- Volcado de datos para la tabla `categoria_recetas`
+-- Dumping data for table `categoria_recetas`
 --
 
 INSERT INTO `categoria_recetas` (`id`, `nombre`) VALUES
@@ -88,21 +87,21 @@ INSERT INTO `categoria_recetas` (`id`, `nombre`) VALUES
 -- --------------------------------------------------------
 
 --
--- Estructura de tabla para la tabla `ejercicios`
+-- Table structure for table `ejercicios`
 --
 
 CREATE TABLE `ejercicios` (
-  `id` int(11) NOT NULL,
-  `nombre` varchar(50) NOT NULL,
-  `descripcion` text DEFAULT NULL,
-  `grupo_muscular_id` int(11) DEFAULT NULL,
-  `video` varchar(255) DEFAULT NULL,
-  `titulo` varchar(255) DEFAULT NULL,
-  `imagen` varchar(255) DEFAULT NULL
+  `id` int NOT NULL,
+  `nombre` varchar(50) COLLATE utf8mb4_general_ci NOT NULL,
+  `descripcion` text COLLATE utf8mb4_general_ci,
+  `grupo_muscular_id` int DEFAULT NULL,
+  `video` varchar(255) COLLATE utf8mb4_general_ci DEFAULT NULL,
+  `titulo` varchar(255) COLLATE utf8mb4_general_ci DEFAULT NULL,
+  `imagen` varchar(255) COLLATE utf8mb4_general_ci DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
 --
--- Volcado de datos para la tabla `ejercicios`
+-- Dumping data for table `ejercicios`
 --
 
 INSERT INTO `ejercicios` (`id`, `nombre`, `descripcion`, `grupo_muscular_id`, `video`, `titulo`, `imagen`) VALUES
@@ -233,16 +232,16 @@ INSERT INTO `ejercicios` (`id`, `nombre`, `descripcion`, `grupo_muscular_id`, `v
 -- --------------------------------------------------------
 
 --
--- Estructura de tabla para la tabla `grupos_musculares`
+-- Table structure for table `grupos_musculares`
 --
 
 CREATE TABLE `grupos_musculares` (
-  `id` int(11) NOT NULL,
-  `nombre` varchar(50) NOT NULL
+  `id` int NOT NULL,
+  `nombre` varchar(50) COLLATE utf8mb4_general_ci NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
 --
--- Volcado de datos para la tabla `grupos_musculares`
+-- Dumping data for table `grupos_musculares`
 --
 
 INSERT INTO `grupos_musculares` (`id`, `nombre`) VALUES
@@ -259,21 +258,35 @@ INSERT INTO `grupos_musculares` (`id`, `nombre`) VALUES
 -- --------------------------------------------------------
 
 --
--- Estructura de tabla para la tabla `productos`
+-- Table structure for table `membresias`
+--
+
+CREATE TABLE `membresias` (
+  `id_membresia` int NOT NULL,
+  `tipo` varchar(100) NOT NULL,
+  `fecha_inicio` date NOT NULL,
+  `fecha_fin` date NOT NULL,
+  `id_usuario` int NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
+
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `productos`
 --
 
 CREATE TABLE `productos` (
-  `id` int(11) NOT NULL,
-  `nombre` varchar(50) NOT NULL,
-  `descripcion` varchar(500) DEFAULT NULL,
-  `precio` int(11) NOT NULL,
-  `categoriaId` int(11) NOT NULL,
-  `imagen` varchar(255) NOT NULL,
-  `stock` int(11) NOT NULL
+  `id` int NOT NULL,
+  `nombre` varchar(50) COLLATE utf8mb4_general_ci NOT NULL,
+  `descripcion` varchar(500) COLLATE utf8mb4_general_ci DEFAULT NULL,
+  `precio` int NOT NULL,
+  `categoriaId` int NOT NULL,
+  `imagen` varchar(255) COLLATE utf8mb4_general_ci NOT NULL,
+  `stock` int NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
 --
--- Volcado de datos para la tabla `productos`
+-- Dumping data for table `productos`
 --
 
 INSERT INTO `productos` (`id`, `nombre`, `descripcion`, `precio`, `categoriaId`, `imagen`, `stock`) VALUES
@@ -286,18 +299,18 @@ INSERT INTO `productos` (`id`, `nombre`, `descripcion`, `precio`, `categoriaId`,
 -- --------------------------------------------------------
 
 --
--- Estructura de tabla para la tabla `proveedores`
+-- Table structure for table `proveedores`
 --
 
 CREATE TABLE `proveedores` (
-  `id` int(11) NOT NULL,
-  `nombre` varchar(100) NOT NULL,
-  `apellido` varchar(100) NOT NULL,
-  `celular` int(10) NOT NULL
+  `id` int NOT NULL,
+  `nombre` varchar(100) COLLATE utf8mb4_general_ci NOT NULL,
+  `apellido` varchar(100) COLLATE utf8mb4_general_ci NOT NULL,
+  `celular` int NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
 --
--- Volcado de datos para la tabla `proveedores`
+-- Dumping data for table `proveedores`
 --
 
 INSERT INTO `proveedores` (`id`, `nombre`, `apellido`, `celular`) VALUES
@@ -308,19 +321,19 @@ INSERT INTO `proveedores` (`id`, `nombre`, `apellido`, `celular`) VALUES
 -- --------------------------------------------------------
 
 --
--- Estructura de tabla para la tabla `recetas`
+-- Table structure for table `recetas`
 --
 
 CREATE TABLE `recetas` (
-  `id` int(11) NOT NULL,
-  `nombre` varchar(50) NOT NULL,
-  `descripcion` text DEFAULT NULL,
-  `categoria_id` int(11) DEFAULT NULL,
-  `imagen` varchar(500) DEFAULT NULL
+  `id` int NOT NULL,
+  `nombre` varchar(50) COLLATE utf8mb4_general_ci NOT NULL,
+  `descripcion` text COLLATE utf8mb4_general_ci,
+  `categoria_id` int DEFAULT NULL,
+  `imagen` varchar(500) COLLATE utf8mb4_general_ci DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
 --
--- Volcado de datos para la tabla `recetas`
+-- Dumping data for table `recetas`
 --
 
 INSERT INTO `recetas` (`id`, `nombre`, `descripcion`, `categoria_id`, `imagen`) VALUES
@@ -380,81 +393,88 @@ INSERT INTO `recetas` (`id`, `nombre`, `descripcion`, `categoria_id`, `imagen`) 
 -- --------------------------------------------------------
 
 --
--- Estructura de tabla para la tabla `usuarios`
+-- Table structure for table `usuarios`
 --
 
 CREATE TABLE `usuarios` (
-  `id` int(11) NOT NULL,
-  `apellido` varchar(50) NOT NULL,
-  `nombre` varchar(20) NOT NULL,
-  `rol` varchar(20) NOT NULL,
-  `imagen` varchar(500) DEFAULT NULL,
-  `id_membresia` int(11) DEFAULT NULL,
-  `id_autenticacion` int(11) DEFAULT NULL,
+  `id` int NOT NULL,
+  `apellido` varchar(50) COLLATE utf8mb4_general_ci NOT NULL,
+  `nombre` varchar(20) COLLATE utf8mb4_general_ci NOT NULL,
+  `rol` varchar(20) COLLATE utf8mb4_general_ci NOT NULL,
+  `imagen` varchar(500) COLLATE utf8mb4_general_ci DEFAULT NULL,
+  `id_membresia` int DEFAULT NULL,
+  `id_autenticacion` int DEFAULT NULL,
   `fecha_nacimiento` date DEFAULT NULL,
-  `celular` varchar(20) DEFAULT NULL,
-  `aptoMedico` varchar(500) DEFAULT NULL
+  `celular` varchar(20) COLLATE utf8mb4_general_ci DEFAULT NULL,
+  `aptoMedico` varchar(500) COLLATE utf8mb4_general_ci DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
 --
--- Volcado de datos para la tabla `usuarios`
+-- Dumping data for table `usuarios`
 --
 
 INSERT INTO `usuarios` (`id`, `apellido`, `nombre`, `rol`, `imagen`, `id_membresia`, `id_autenticacion`, `fecha_nacimiento`, `celular`, `aptoMedico`) VALUES
 (1, 'admin', 'admin', 'admin', 'perfil.jpg', 1, 1, '2025-04-09', '1193868511', 'xd');
 
 --
--- Índices para tablas volcadas
+-- Indexes for dumped tables
 --
 
 --
--- Indices de la tabla `autenticacion`
+-- Indexes for table `autenticacion`
 --
 ALTER TABLE `autenticacion`
   ADD PRIMARY KEY (`id`),
   ADD KEY `id_usuario` (`id_usuario`);
 
 --
--- Indices de la tabla `categorias`
+-- Indexes for table `categorias`
 --
 ALTER TABLE `categorias`
   ADD PRIMARY KEY (`id`);
 
 --
--- Indices de la tabla `categoria_recetas`
+-- Indexes for table `categoria_recetas`
 --
 ALTER TABLE `categoria_recetas`
   ADD PRIMARY KEY (`id`);
 
 --
--- Indices de la tabla `ejercicios`
+-- Indexes for table `ejercicios`
 --
 ALTER TABLE `ejercicios`
   ADD PRIMARY KEY (`id`),
   ADD KEY `grupo_muscular_id` (`grupo_muscular_id`);
 
 --
--- Indices de la tabla `grupos_musculares`
+-- Indexes for table `grupos_musculares`
 --
 ALTER TABLE `grupos_musculares`
   ADD PRIMARY KEY (`id`);
 
 --
--- Indices de la tabla `productos`
+-- Indexes for table `membresias`
+--
+ALTER TABLE `membresias`
+  ADD PRIMARY KEY (`id_membresia`),
+  ADD KEY `fk_usuario` (`id_usuario`);
+
+--
+-- Indexes for table `productos`
 --
 ALTER TABLE `productos`
   ADD PRIMARY KEY (`id`),
   ADD KEY `categoriaId` (`categoriaId`);
 
 --
--- Indices de la tabla `recetas`
+-- Indexes for table `recetas`
 --
 ALTER TABLE `recetas`
   ADD PRIMARY KEY (`id`),
   ADD KEY `categoria_id` (`categoria_id`);
 
 --
--- Indices de la tabla `usuarios`
+-- Indexes for table `usuarios`
 --
 ALTER TABLE `usuarios`
   ADD PRIMARY KEY (`id`),
@@ -462,75 +482,93 @@ ALTER TABLE `usuarios`
   ADD KEY `fk_autenticacion` (`id_autenticacion`);
 
 --
--- AUTO_INCREMENT de las tablas volcadas
+-- AUTO_INCREMENT for dumped tables
 --
 
 --
--- AUTO_INCREMENT de la tabla `autenticacion`
+-- AUTO_INCREMENT for table `autenticacion`
 --
 ALTER TABLE `autenticacion`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=15;
+  MODIFY `id` int NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=15;
 
 --
--- AUTO_INCREMENT de la tabla `categorias`
+-- AUTO_INCREMENT for table `categorias`
 --
 ALTER TABLE `categorias`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=6;
+  MODIFY `id` int NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=6;
 
 --
--- AUTO_INCREMENT de la tabla `categoria_recetas`
+-- AUTO_INCREMENT for table `categoria_recetas`
 --
 ALTER TABLE `categoria_recetas`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=7;
+  MODIFY `id` int NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=7;
 
 --
--- AUTO_INCREMENT de la tabla `ejercicios`
+-- AUTO_INCREMENT for table `ejercicios`
 --
 ALTER TABLE `ejercicios`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=130;
+  MODIFY `id` int NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=130;
 
 --
--- AUTO_INCREMENT de la tabla `grupos_musculares`
+-- AUTO_INCREMENT for table `grupos_musculares`
 --
 ALTER TABLE `grupos_musculares`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=10;
+  MODIFY `id` int NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=10;
 
 --
--- AUTO_INCREMENT de la tabla `productos`
+-- AUTO_INCREMENT for table `membresias`
+--
+ALTER TABLE `membresias`
+  MODIFY `id_membresia` int NOT NULL AUTO_INCREMENT;
+
+--
+-- AUTO_INCREMENT for table `productos`
 --
 ALTER TABLE `productos`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=13;
+  MODIFY `id` int NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=13;
 
 --
--- AUTO_INCREMENT de la tabla `recetas`
+-- AUTO_INCREMENT for table `recetas`
 --
 ALTER TABLE `recetas`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=53;
+  MODIFY `id` int NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=53;
 
 --
--- AUTO_INCREMENT de la tabla `usuarios`
+-- AUTO_INCREMENT for table `usuarios`
 --
 ALTER TABLE `usuarios`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=23;
+  MODIFY `id` int NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=23;
 
 --
--- Restricciones para tablas volcadas
+-- Constraints for dumped tables
 --
 
 --
--- Filtros para la tabla `ejercicios`
+-- Constraints for table `autenticacion`
+--
+ALTER TABLE `autenticacion`
+  ADD CONSTRAINT `autenticacion_ibfk_1` FOREIGN KEY (`id`) REFERENCES `usuarios` (`id_autenticacion`) ON DELETE CASCADE;
+
+--
+-- Constraints for table `ejercicios`
 --
 ALTER TABLE `ejercicios`
   ADD CONSTRAINT `ejercicios_ibfk_1` FOREIGN KEY (`grupo_muscular_id`) REFERENCES `grupos_musculares` (`id`) ON DELETE SET NULL;
 
 --
--- Filtros para la tabla `productos`
+-- Constraints for table `membresias`
+--
+ALTER TABLE `membresias`
+  ADD CONSTRAINT `membresias_ibfk_1` FOREIGN KEY (`id_usuario`) REFERENCES `usuarios` (`id`) ON DELETE CASCADE;
+
+--
+-- Constraints for table `productos`
 --
 ALTER TABLE `productos`
   ADD CONSTRAINT `productos_ibfk_1` FOREIGN KEY (`categoriaId`) REFERENCES `categorias` (`id`);
 
 --
--- Filtros para la tabla `recetas`
+-- Constraints for table `recetas`
 --
 ALTER TABLE `recetas`
   ADD CONSTRAINT `recetas_ibfk_1` FOREIGN KEY (`categoria_id`) REFERENCES `categoria_recetas` (`id`) ON DELETE CASCADE;

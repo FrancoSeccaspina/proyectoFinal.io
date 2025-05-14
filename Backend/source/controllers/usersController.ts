@@ -213,20 +213,7 @@ export class UsuarioController {
       console.log("Usuario logueado:", req.session.usuario);
       
       if (usuario.rol === Roles.ADMIN) {
-        // TODO: cambiar por redirección a admin dashboard
-        return res.send(`
-                <!DOCTYPE html>
-                <html lang="es">
-                <head>
-                    <meta charset="UTF-8">
-                    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-                    <title>Próximamente Dashboard</title>
-                </head>
-                <body>
-                    <h1>Próximamente Dashboard REACT</h1>
-                </body>
-                </html>
-            `);
+        return res.redirect("http://localhost:3000");
       }
       return res.redirect("/");
 
@@ -238,7 +225,7 @@ export class UsuarioController {
           code: 500,
           message: "Error del servidor",
           description: "Ocurrió un error inesperado durante el inicio de sesión. Por favor, inténtelo de nuevo más tarde.",
-          error: (error as Error).message // Opcional: para mostrar detalles del error en desarrollo
+          error: (error as Error).message
       });
 
     }

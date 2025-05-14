@@ -1,6 +1,4 @@
 import React from "react";
-import CategoriaProductos from './CategoriaProductos';
-import Productos from "./Productos"; 
 
 
 function Home() {

@@ -21,7 +21,10 @@ class Receta extends Model<InferAttributes<Receta>, InferCreationAttributes<Rece
     declare descripcion: string;
     declare categoriaId: number; // Relación con la categoría
     declare imagen: string;
+<<<<<<< HEAD
 
+=======
+>>>>>>> 91e82696598ce8eaa40fa19497247a043c3a1287
     static associate(models: any) {
         Receta.belongsTo(models.CategoriaReceta, {
             foreignKey: 'categoria_id_fk',
@@ -51,10 +54,17 @@ const initRecetaModel = (sequelize: Sequelize) => {
                 allowNull: false,
                 field: 'categoria_id' // Mapeo al nombre real de la columna en la base de datos
             },
+<<<<<<< HEAD
             imagen:{
                 type:DataTypes.STRING(500),
                 allowNull: false
             }
+=======
+            imagen: {
+                type: DataTypes.STRING(255),
+                allowNull: false,
+            },
+>>>>>>> 91e82696598ce8eaa40fa19497247a043c3a1287
         },
         {
             sequelize,
