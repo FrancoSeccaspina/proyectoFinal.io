@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: localhost
--- Generation Time: May 14, 2025 at 03:46 PM
+-- Generation Time: May 15, 2025 at 08:12 PM
 -- Server version: 8.0.38
 -- PHP Version: 8.2.12
 
@@ -440,16 +440,17 @@ CREATE TABLE `usuarios` (
   `id_membresia` int DEFAULT NULL,
   `fecha_nacimiento` date DEFAULT NULL,
   `celular` varchar(20) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci DEFAULT NULL,
-  `aptoMedico` varchar(500) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci DEFAULT NULL
+  `aptoMedico` varchar(500) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci DEFAULT NULL,
+  `dni` varchar(255) COLLATE utf8mb4_general_ci DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
 --
 -- Dumping data for table `usuarios`
 --
 
-INSERT INTO `usuarios` (`id`, `apellido`, `nombre`, `rol`, `imagen`, `id_membresia`, `fecha_nacimiento`, `celular`, `aptoMedico`) VALUES
-(1, 'admin', 'admin', 'admin', 'perfil.jpg', 1, '2025-04-09', '1193868511', 'xd'),
-(23, 'Jimenez', 'Gustavo', 'cliente', NULL, 1, '2025-05-13', NULL, NULL);
+INSERT INTO `usuarios` (`id`, `apellido`, `nombre`, `rol`, `imagen`, `id_membresia`, `fecha_nacimiento`, `celular`, `aptoMedico`, `dni`) VALUES
+(1, 'admin', 'admin', 'admin', 'perfil.jpg', 1, '2025-04-09', '1193868511', 'xd', NULL),
+(23, 'Jimenez', 'Gustavo', 'cliente', NULL, 1, '2025-05-13', NULL, NULL, NULL);
 
 --
 -- Indexes for dumped tables
