@@ -14,7 +14,6 @@ interface UsuarioAttributes {
   rol: string;
   imagen: string;
   id_membresia: number; // Clave foránea hacia membresia
-  id_autenticacion: number;
   fecha_nacimiento: Date;
   celular: number;
   aptoMedico: string;
@@ -29,7 +28,6 @@ class Usuario extends Model<InferAttributes<Usuario>, InferCreationAttributes<Us
   declare rol: string;
   declare imagen: string;
   declare id_membresia: number;
-  declare id_autenticacion: number;
   declare fecha_nacimiento: Date;
   declare celular: number;
   declare aptoMedico: string;
@@ -81,16 +79,6 @@ const initUsuarioModel = (sequelize: Sequelize) => {
         onUpdate: 'CASCADE',
         onDelete: 'CASCADE',
       },
-      id_autenticacion: {
-        type: DataTypes.INTEGER,
-        allowNull: false,
-        references: {
-          model: 'autenticacion',
-          key: 'id',
-        },
-        onUpdate: 'CASCADE',
-        onDelete: 'CASCADE',
-      },
       fecha_nacimiento: {
         type: DataTypes.DATEONLY,
         allowNull: false,
@@ -104,7 +92,7 @@ const initUsuarioModel = (sequelize: Sequelize) => {
         allowNull: true,
       },
       dni: {
-        type: DataTypes.INTEGER,
+        type: DataTypes.STRING(255),
         allowNull: false,
       },
       

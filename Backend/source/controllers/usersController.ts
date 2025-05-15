@@ -4,18 +4,7 @@ import { Autenticacion, Usuario } from '../database/models';
 import bcrypt from 'bcryptjs';
 import { Roles } from "../constants/roles";
 import { error } from "console";
-import "express-session";
-
-// TODO: mover a un archivo de interfaces personalizadas
-declare module "express-session" {
-  interface SessionData {
-    usuario?: {
-      id: number;
-      email: string;
-      rol: string;
-    };
-  }
-}
+import { SessionService } from '../services/serivicioSesion'
 
 export class UsuarioController {
 
@@ -106,12 +95,10 @@ export class UsuarioController {
           rol: Roles.CLIENTE, // TODO: Cambiar a valor por defecto desde la BD
           imagen,
           id_membresia: 1, // TODO: Cambiar a valor por defecto desde la BD
-          id_autenticacion: 1, // TODO: Cambiar a valor por defecto desde la BD
           fecha_nacimiento,
           celular,
           aptoMedico,
           dni,
-          
         },
         { transaction }
       );
@@ -211,11 +198,11 @@ export class UsuarioController {
         });
       }
 
-      req.session.usuario = {
-        id: usuario.id,
+      SessionService.guardarSessionUsuario(req, {
+        id: usuario.id, 
         email: usuarioExistente.email,
-        rol: usuario.rol,
-      };
+        rol: usuario.rol
+      });
 
       console.log("Usuario logueado:", req.session.usuario);
       
@@ -245,7 +232,6 @@ export class UsuarioController {
         console.log("Error al cerrar sesión:", err);
         return res.redirect("/");
       }
-      res.clearCookie("connect.sid");
       res.redirect("/");
     });
   }
@@ -295,7 +281,7 @@ export class UsuarioController {
         fecha_nacimiento,
         celular,
         aptoMedico,
-        dni
+        // dni
         
       });
       return res.status(200).json({
