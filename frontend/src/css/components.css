@@ -104,6 +104,10 @@ h6{
     flex-wrap: wrap;
     padding: 1rem;
 }
+.btn {
+    width: auto;
+  
+  }
 @media screen and (min-width: 1240px) {
     .title-products{
         font-size: 18px;

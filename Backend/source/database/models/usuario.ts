@@ -13,8 +13,13 @@ interface UsuarioAttributes {
   nombre: string;
   rol: string;
   imagen: string;
-  fecha_nacimiento: Date;
   id_membresia: number; // Clave foránea hacia membresia
+  id_autenticacion: number;
+  fecha_nacimiento: Date;
+  celular: number;
+  aptoMedico: string;
+  dni: string;
+
 }
 
 class Usuario extends Model<InferAttributes<Usuario>, InferCreationAttributes<Usuario>> implements UsuarioAttributes {
@@ -23,8 +28,12 @@ class Usuario extends Model<InferAttributes<Usuario>, InferCreationAttributes<Us
   declare nombre: string;
   declare rol: string;
   declare imagen: string;
-  declare fecha_nacimiento: Date;
   declare id_membresia: number;
+  declare id_autenticacion: number;
+  declare fecha_nacimiento: Date;
+  declare celular: number;
+  declare aptoMedico: string;
+  declare dni: string;
 
 
   static associate(models: any) {
@@ -54,17 +63,13 @@ const initUsuarioModel = (sequelize: Sequelize) => {
         type: DataTypes.STRING(20),
         allowNull: false,
       },
-      imagen: {
-        type: DataTypes.STRING(255),
-        allowNull: true,
-      },
       rol: {
         type: DataTypes.STRING(20),
         allowNull: false,
       },
-      fecha_nacimiento: {
-        type: DataTypes.DATEONLY,
-        allowNull: false,
+      imagen: {
+        type: DataTypes.STRING(255),
+        allowNull: true,
       },
       id_membresia: {
         type: DataTypes.INTEGER,
@@ -76,6 +81,33 @@ const initUsuarioModel = (sequelize: Sequelize) => {
         onUpdate: 'CASCADE',
         onDelete: 'CASCADE',
       },
+      id_autenticacion: {
+        type: DataTypes.INTEGER,
+        allowNull: false,
+        references: {
+          model: 'autenticacion',
+          key: 'id',
+        },
+        onUpdate: 'CASCADE',
+        onDelete: 'CASCADE',
+      },
+      fecha_nacimiento: {
+        type: DataTypes.DATEONLY,
+        allowNull: false,
+      },
+      celular: {
+        type: DataTypes.INTEGER,
+        allowNull: false,
+      },
+      aptoMedico: {
+        type: DataTypes.STRING(255),
+        allowNull: true,
+      },
+      dni: {
+        type: DataTypes.INTEGER,
+        allowNull: false,
+      },
+      
     },
     {
       sequelize,

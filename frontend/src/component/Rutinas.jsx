@@ -56,14 +56,39 @@ return (
                 <thead>
                         <tr>
                             <th>Nombre</th>
-                            <th>Se hace con:</th>
+                            <th>Descripcion</th>
+                            <th>Ejecucion</th>
+                            <th>Video</th>
+                            <th>Acciones</th>
+                            
                         </tr>
                 </thead>
                 <tbody>
                     { ejerciciosFiltrados.map((ejercicios) =>(
                         <tr key={ejercicios.id}>
                             <td>{ejercicios.nombre}</td>
+                            <td>
+                      <div class="accordion bg-dark text-white" id="accordionExample">
+                      <div class="accordion-item bg-dark text-white">
+    <h2 class="accordion-header" id="headingOne">
+      <button class="accordion-button bg-dark text-white" type="button" data-bs-toggle="collapse" data-bs-target="#collapseOne" aria-expanded="true" aria-controls="collapseOne">
+        Ver Descripcion
+      </button>
+    </h2>
+    <div id="collapseOne" class="accordion-collapse collapse" aria-labelledby="headingOne" data-bs-parent="#accordionExample">
+      <div class="accordion-body">{ejercicios.descripcion}</div>
+    </div>
+    </div>
+    </div>
+                      </td>
                             <td>{ejercicios.titulo}</td>
+                            <td>
+                        <a href={ejercicios.video} target="_blank" rel="noopener noreferrer">
+                          Ir al video
+                         </a>
+                            </td>
+                            <td><button type="button" class="btn btn-success">Editar</button><button type="button" class="btn btn-danger">Eliminar</button></td>
+                        
                         </tr>
                     ))}
                 </tbody>

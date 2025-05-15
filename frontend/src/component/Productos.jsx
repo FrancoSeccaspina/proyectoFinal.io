@@ -53,14 +53,29 @@ function Productos() {
       </div>
 
       <ul className='list-container'>
-              {productosFiltrados.map((products) => (
-                  <li className='list-products' key= {products.id}>
-                      <h3 className='title-products'>{products.nombre}</h3>
-                      <section className="game-image">
-                      <img src={`http://localhost:3032/images/${products.imagen}`} alt="" width='150' className='game-image' />
-                      </section>
-                  </li>
-              ))}
+                  <table className='table table-dark table-striped'>
+                    <thead>
+                      <tr>
+                        <th>Nombre</th>
+                        <th>Imagen</th>
+                        <th>Stock</th>
+                        <th>Precio</th>
+                        <th>Acciones</th>
+                      </tr>
+                    </thead>
+                    <tbody>
+                    {productosFiltrados.map((products) => (
+                  <tr key= {products.id}>
+                      <td>{products.nombre}</td>
+                      <td><img src={`http://localhost:3032/images/${products.imagen}`} alt="" width='150' className='game-image' /></td>
+                      <td>{products.stock}</td>
+                      <td>$ {products.precio}</td>
+                      <td><button type="button" class="btn btn-success">Editar</button><button type="button" class="btn btn-danger">Eliminar</button></td>
+                        
+                      </tr>
+                  ))}
+                    </tbody>
+                  </table>
           </ul>
     </div>
   );

@@ -77,7 +77,7 @@ export class UsuarioController {
     try {
       const reultadosValidacion = validationResult(req);
       const errores = reultadosValidacion.mapped();
-      const { apellido, nombre, imagen, email, contrasenia, fecha_nacimiento } = req.body;
+      const { apellido, nombre, imagen, email, contrasenia, fecha_nacimiento, celular, aptoMedico,dni } = req.body;
 
       const usuarioExistente = await Autenticacion.findOne({ where: { email } });
       if (usuarioExistente) {
@@ -105,8 +105,13 @@ export class UsuarioController {
           nombre,
           rol: Roles.CLIENTE, // TODO: Cambiar a valor por defecto desde la BD
           imagen,
+          id_membresia: 1, // TODO: Cambiar a valor por defecto desde la BD
+          id_autenticacion: 1, // TODO: Cambiar a valor por defecto desde la BD
           fecha_nacimiento,
-          id_membresia: 1 // TODO: Cambiar a valor por defecto desde la BD
+          celular,
+          aptoMedico,
+          dni,
+          
         },
         { transaction }
       );
@@ -273,7 +278,7 @@ export class UsuarioController {
   async update(req: Request, res: Response): Promise<Response> {
     try {
       const { id } = req.params;
-      const { apellido, nombre, rol, imagen, id_membresia, fecha_nacimiento } = req.body;
+      const { apellido, nombre, rol, imagen, id_membresia, fecha_nacimiento, celular, aptoMedico, dni  } = req.body;
       const usuario = await Usuario.findOne({ where: { id } });
       if (!usuario) {
         return res.status(404).json({
@@ -288,6 +293,10 @@ export class UsuarioController {
         imagen,
         id_membresia,
         fecha_nacimiento,
+        celular,
+        aptoMedico,
+        dni
+        
       });
       return res.status(200).json({
         success: true,

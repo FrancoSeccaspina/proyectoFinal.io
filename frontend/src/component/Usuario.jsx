@@ -1,6 +1,7 @@
 
 import React, {useState, useEffect} from 'react'
 
+
 const Usuarios = () => {
     const [usuarios, setUsuarios] = useState([])
     const [search, setSearch] = useState("")
@@ -17,14 +18,15 @@ const Usuarios = () => {
     }
 
     //Metodo de filtrado
-    let resultado = []
-    if(!search){
-        resultado = usuarios;
-    }else{
-        resultado = usuarios.filter( (dato) => 
-        dato.nombre.toLowerCase().includes(search.toLowerCase())
-        )
+    let resultado = [];
+    if (!search) {
+    resultado = usuarios;
+        } else {
+    resultado = usuarios.filter((dato) => 
+        dato.dni.toString().includes(search)
+        );
     }
+
 
     useEffect(() => {
         showData();
@@ -33,15 +35,16 @@ const Usuarios = () => {
   return (
     
     <div className='mover_abajo'>
-        <input value={search} onChange={searcher} type="text" placeholder='Buscar por Nombre' className='form-control'/>
+        <input value={search} onChange={searcher} type="text" placeholder='Buscar por DNI' className='form-control'/>
         <table className='table table-dark table-striped'>
                 <thead>
                         <tr>
                             <th>Nombre</th>
                             <th>Apellido</th>
                             <th>Celular</th>
-                            <th>Imagen</th>
+                            <th>DNI</th>
                             <th>Apto Medico</th>
+                            <th>Acciones</th>
                         </tr>
                 </thead>
                 <tbody>
@@ -50,8 +53,9 @@ const Usuarios = () => {
                             <td>{usuarios.nombre}</td>
                             <td>{usuarios.apellido}</td>
                             <td>{usuarios.celular}</td>
-                            <td>{usuarios.imagen}</td>
+                            <td>{usuarios.dni}</td>
                             <td>{usuarios.aptoMedico}</td>
+                            <td><button type="button" class="btn btn-success">Editar</button><button type="button" class="btn btn-danger">Eliminar</button></td>
                         </tr>
                     ))}
                 </tbody>
