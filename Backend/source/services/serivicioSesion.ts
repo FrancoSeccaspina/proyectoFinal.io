@@ -30,12 +30,6 @@ export const SessionService = {
         const carrito = this.obtenerCarrito(req);
         const productoExistente = carrito.find(producto => producto.id_producto === id_producto);
 
-        console.log("Tipo de productoExistente.cantidad:", typeof productoExistente?.cantidad);
-        console.log("Valor de productoExistente.cantidad:", productoExistente?.cantidad);
-
-        console.log("Tipo de cantidad:", typeof cantidad);
-        console.log("Valor de cantidad:", cantidad);
-
         if (productoExistente) {
         const cantidadActual = parseInt(productoExistente.cantidad.toString(), 10);
         const cantidadNueva = parseInt(cantidad.toString(), 10);
@@ -48,6 +42,7 @@ export const SessionService = {
             carrito.push(nuevoProducto);
         }
         req.session.carrito = carrito;
+        
     },
 
     borrarProductoDelCarrito(req: Request, id_producto: number) {

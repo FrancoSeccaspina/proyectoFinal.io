@@ -3,75 +3,126 @@
 
 <head>
     <%- include('./partials/head.ejs') %>
-    <link rel="stylesheet" href="/css/carrito.css">
+        <link rel="stylesheet" href="/css/carrito.css">
+
+        <style>
+            .lista-productos {
+                list-style: none;
+                padding: 0;
+                margin: 0;
+            }
+
+            .producto {
+                margin-bottom: 20px;
+                padding-bottom: 15px;
+                border-bottom: 1px solid #ddd;
+            }
+
+            .producto>div {
+                display: flex;
+                align-items: center;
+                gap: 20px;
+            }
+
+            .producto img {
+                width: 100px;
+                height: 100px;
+                object-fit: cover;
+                border-radius: 8px;
+            }
+
+            .producto-info {
+                display: flex;
+                flex-direction: column;
+                justify-content: center;
+            }
+        </style>
 </head>
 
 <body>
-    
+
     <%- include('./partials/header.ejs') %>
 
-    <main class="container-allMain-cart">
+        <main class="container-allMain-cart">
 
-        <section id="header-cart">
+            <section id="header-cart">
 
-            <h1>Carrito<p class="details-p">(x productos)</p></h1><!--HACER LOGICA EN CSS PARA QUE SE AUTOINCREMENTE Y DOGA CANT EXACTA DE PRODUCTOS-->
-            <div id="warning-sentence">
-                <img src="/images/exclamation.png" alt="">
-                <p>Agregar productos al carrito no garantiza su reserva. La compra se completa únicamente al finalizar el proceso de pago.</p>
-            </div>
-        </section>
-        
-        <section id="cards-products">
-            <section id="products-description-cart">
-                <div id="terms-products">
-                    <p>Estas comprando en <b>Activa fitness</b></p>
-                    <p>Al hacer compras en nuestra pagina aceltas los <a href="/terminos">terminos y condiciones</a></p>
-                </div>
-                
-                <div id="description-product-cart">
-                    <div class="product-name-img">
-                        <img src="/images/EnaProteinBar_banansplit.jpg" class="img-product-cart" alt=""><!--ELIMINAR Y VER COMO HACER PARA QUE SEA MAS DINAMICO EL CARRITO-->                        
-                        <div class="name-ul-product">
-                            <h2>Barra Proteica Ena - Entrega Inmediata</h2>
-                            <div class="quantity-box">
-                                <form>
-                                    <select name="quantity-items" id="quantity-items">
-                                        <option value="">1</option>
-                                        <option value="">2</option>
-                                        <option value="">3</option>
-                                        <option value="">4</option>
-                                        <option value="">5</option>
-                                        <option value="">6</option>
-                                        <option value="">7</option>
-                                        <option value="">8</option>
-                                        <option value="">9</option>
-                                        <option value="">10</option>
-                                    </select>
-                                    <button type="reset" class="trash-button"><i class="fa-sharp fa-solid fa-trash"></i></button>
-                                </form>
-                                <p class="product-price">$36000</p>
-                            </div>
-                        </div>
-                    </div>
+                <h1>Carrito<p class="details-p">(x productos)</p>
+                </h1><!--HACER LOGICA EN CSS PARA QUE SE AUTOINCREMENTE Y DOGA CANT EXACTA DE PRODUCTOS-->
+                <div id="warning-sentence">
+                    <img src="/images/exclamation.png" alt="">
+                    <p>Agregar productos al carrito no garantiza su reserva. La compra se completa únicamente al
+                        finalizar el proceso de pago.</p>
                 </div>
             </section>
-        </section>    
-                        
-        <section id="payments">
-            <div class="pay-sentence">
-              <p>Elegí tu método de pago</p>
-            </div>
-            <div class="methods-img">
-              <a href="/transferencia"><button id="transferencia-btn">Transferencia Bancaria</button></a>
-              <a href="/mPago"><button id="mercadopago-btn">Mercado Pago</button></a>
-            </div>
-        </section> 
-        <section id="buy-product"><!--HACER QUE EL TOTAL DEL PRECIO SE EN BASE A CANT. PROD. Y PRECIO ACTUALIZANDO CONSTANTEMENTE-->
-            <p>Precio total</p>
-            <div id="price">
-                <p>$36000</p>
-            </div>
-        </section>
-    </main>
+
+            <section id="cards-products">
+                <section id="products-description-cart">
+                    <div id="terms-products">
+                        <p>Estas comprando en <b>Activa fitness</b></p>
+                        <p>Al hacer compras en nuestra pagina aceltas los <a href="/terminos">terminos y condiciones</a>
+                        </p>
+                    </div>
+
+                    <div class="carrito-container">
+                        <h2>Mi Carrito</h2>
+
+                        <ul class="lista-productos">
+
+                            <% productos.forEach(function(producto) { %>
+                                <li class="producto">
+                                    <div>
+                                        <img src="/images/<%= producto.imagen %>" alt="<%= producto.nombre %>">
+                                        <div class="producto-info">
+                                            <h4>
+                                                <%= producto.nombre %>
+                                            </h4>
+                                            <p>
+                                                <%= producto.descripcion %>
+                                            </p>
+                                            <p>precio: $<%= producto.cantidad%>
+                                            </p>
+                                            <p>precio: $<%= producto.precio%>
+                                            </p>
+                                        </div>
+                                    </div>
+                                </li>
+                                <% }) %>
+
+
+                                    <!-- Total -->
+                                    <li class="total-carrito">
+                                        <strong>Total: $</strong>
+                                    </li>
+                        </ul>
+
+                        <!-- Total -->
+                        <div class="total-carrito">
+                            Total: $
+                        </div>
+                    </div>
+
+                    </div>
+                </section>
+            </section>
+
+            <section id="payments">
+                <div class="pay-sentence">
+                    <p>Elegí tu método de pago</p>
+                </div>
+                <div class="methods-img">
+                    <a href="/transferencia"><button id="transferencia-btn">Transferencia Bancaria</button></a>
+                    <a href="/mPago"><button id="mercadopago-btn">Mercado Pago</button></a>
+                </div>
+            </section>
+            <section id="buy-product">
+                <!--HACER QUE EL TOTAL DEL PRECIO SE EN BASE A CANT. PROD. Y PRECIO ACTUALIZANDO CONSTANTEMENTE-->
+                <p>Precio total</p>
+                <div id="price">
+                    <p>$36000</p>
+                </div>
+            </section>
+        </main>
 </body>
+
 </html>

@@ -10,47 +10,58 @@
     <%- include('./partials/header.ejs') %>
 
         <main>
-            <div id="main-content">
-                <div class="container-image">
-                    <img src="../../images/<%= producto.imagen %>" alt="<%= producto.nombre %>" class="img-juego" />
+            <!-- Mostrar mensaje si existe -->
+            <% if (typeof message !=='undefined' && message) { %>
+                <div class="alert alert-success">
+                    <p>
+                        <%= message %>
+                    </p>
                 </div>
+                <% } %>
 
-                <div class="main-description">
-                    <section class="section-description">
-                        <div class="description">
-                            <h2 id="title-item">Descripción del producto</h2>
-                            <p>
-                                <%= producto.descripcion %>
-                            </p>
+                    <div id="main-content">
+                        <div class="container-image">
+                            <img src="../../images/<%= producto.imagen %>" alt="<%= producto.nombre %>"
+                                class="img-juego" />
                         </div>
-                    </section>
 
-                    <section class="list-products">
-                        <ul class="lista-description">
-                            <li>Paso a paso de como utilizar el producto</li>
-                            <li>Instructivo en español</li>
-                            <li>Buscar video de como ingerirlo de manera correcta</li>
-                            <li style="color: #bbbbbb; font-weight: bolder">
-                                Entrega Inmediata
-                            </li>
-                        </ul>
+                        <div class="main-description">
+                            <section class="section-description">
+                                <div class="description">
+                                    <h2 id="title-item">Descripción del producto</h2>
+                                    <p>
+                                        <%= producto.descripcion %>
+                                    </p>
+                                </div>
+                            </section>
+                            <section class="list-products">
+                                <ul class="lista-description">
+                                    <li>Paso a paso de como utilizar el producto</li>
+                                    <li>Instructivo en español</li>
+                                    <li>Buscar video de como ingerirlo de manera correcta</li>
+                                    <li style="color: #bbbbbb; font-weight: bolder">
+                                        Entrega Inmediata
+                                    </li>
+                                </ul>
 
-                        <div class="price-content">
-                            <div class="precios">
-                                <span class="precio-ahora">$<%= (producto.precio) %></span>
-                                <!-- <span class="precio-previo">$<%= producto.precio %></span> -->
-                            </div>
+                                <div class="price-content">
+                                    <div class="precios">
+                                        <span class="precio-ahora">$<%= (producto.precio) %></span>
+                                        <!-- <span class="precio-previo">$<%= producto.precio %></span> -->
+                                    </div>
 
-                            <form class="cantidadProductos" action="/carrito/agregar" method="POST">
-                                <span>Stock disponible: <%= producto.stock %></span>
-                                <input type="hidden" name="id_producto" value="<%= producto.id %>">
-                                <input type="number" name="cantidad" min="1" max="<%= producto.stock %>" value="1" required>
-                                <button type="submit" class="crear">Comprar<i class="fa-solid fa-cart-shopping"></i></button>
-                            </form>
+                                    <form class="cantidadProductos" action="/carrito/agregar" method="POST">
+                                        <span>Stock disponible: <%= producto.stock %></span>
+                                        <input type="hidden" name="id_producto" value="<%= producto.id %>">
+                                        <input type="number" name="cantidad" min="1" max="<%= producto.stock %>"
+                                            value="1" required>
+                                        <button type="submit" class="crear">Comprar<i
+                                                class="fa-solid fa-cart-shopping"></i></button>
+                                    </form>
+                                </div>
+                            </section>
                         </div>
-                    </section>
-                </div>
-            </div>
+                    </div>
         </main>
         <footer><%- include('./partials/footer.ejs') %></footer>
 </body>
