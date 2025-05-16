@@ -66,7 +66,7 @@ class carritoController {
 
             const itemCarrito = carritoParseInt.find((item: any) => item.id_producto == producto.id);
             producto.cantidad = itemCarrito? itemCarrito.cantidad : 0;
-            producto.subtotals = producto.precio * producto.cantidad
+            producto.subtotal = producto.precio * producto.cantidad
             return producto;
         });
     }
