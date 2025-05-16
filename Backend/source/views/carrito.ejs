@@ -69,7 +69,7 @@
 
                         <ul class="lista-productos">
 
-                            <% productos.forEach(function(producto) { %>
+                            <% productosCarrito.forEach(function(producto) { %>
                                 <li class="producto">
                                     <div>
                                         <img src="/images/<%= producto.imagen %>" alt="<%= producto.nombre %>">
@@ -77,13 +77,20 @@
                                             <h4>
                                                 <%= producto.nombre %>
                                             </h4>
+
                                             <p>
                                                 <%= producto.descripcion %>
                                             </p>
-                                            <p>precio: $<%= producto.cantidad%>
+
+                                            <p>cantidad: <%= producto.cantidad%>
                                             </p>
+
                                             <p>precio: $<%= producto.precio%>
                                             </p>
+
+                                            <p>subtotal: $<%= producto.subtotal%>
+                                            </p>
+
                                         </div>
                                     </div>
                                 </li>

@@ -1,6 +1,4 @@
 import { Request } from "express";
-import { Producto } from '../database/models/producto'
-import { get } from "http";
 
 declare module "express-session" {
     interface SessionData {

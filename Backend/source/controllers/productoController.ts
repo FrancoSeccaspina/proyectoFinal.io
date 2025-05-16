@@ -23,7 +23,6 @@ export class productoController {
     async listaProductos(req: Request, res: Response): Promise<void> {
         try {
             const productos = await Producto.findAll();
-            console.log(productos)
             res.render('productos', { productos });
 
         } catch (error) {
