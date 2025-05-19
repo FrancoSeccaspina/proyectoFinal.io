@@ -62,7 +62,7 @@
                           </div>
                           <div class="cart-actions">
                             <form action="/carrito/eliminar/<%= producto.id %>?_method=DELETE" method="POST">
-                              <button type="submit" class="cart-remove-button eliminar-btn"
+                              <button type="submit" class="cart-remove-button btn-confirmar"
                                 data-id="<%= producto.id %>">
                                 <span class="visually-hidden">Eliminar producto</span>
                                 <svg xmlns="http://www.w3.org/2000/svg" width="32" height="32" fill="#000000"
@@ -102,21 +102,13 @@
     </section>
   </main>
 
-  <!-- Modal de confirmación -->
-  <section>
-    <div class="modal-overlay" role="dialog" aria-modal="true" aria-labelledby="modalTitle">
-      <div class="modal-content">
-        <h2 id="modalTitle" class="modal-title">¿Eliminar producto?</h2>
-        <div class="modal-body">
-          <p>¿Estás seguro de que deseas eliminar este producto del carrito?</p>
-        </div>
-        <footer class="modal-footer">
-          <button type="button" class="btn btn-cancel">Cancelar</button>
-          <button type="button" class="btn btn-confirm">Eliminar</button>
-        </footer>
-      </div>
-    </div>
-  </section>
+  <div>
+    <%- include('./partials/modalConfirmacion.ejs') %>
+  </div>
+
+  <footer class="main-footer">
+    <%- include('./partials/footer.ejs') %>
+  </footer>
 
   <script src="/js/carrito.js"></script>
 </body>
