@@ -45,7 +45,7 @@ export const SessionService = {
 
     borrarProductoDelCarrito(req: Request, id_producto: number) {
         const carrito = this.obtenerCarrito(req);
-        const nuevoCarrito = carrito.filter(producto => producto.id_producto !== id_producto);
+        const nuevoCarrito = carrito.filter(producto => producto.id_producto != id_producto);
         req.session.carrito = nuevoCarrito;
     },
 

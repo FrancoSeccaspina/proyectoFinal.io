@@ -23,7 +23,7 @@ class carritoController {
      * 
      * @param req 
      * @param carrito
-     * @returns array mapeado agregando la clave valor cantidad y total ProductoCarrito[]
+     * @returns array mapeado agregando la clave/valor cantidad y total ProductoCarrito[]
      * 
      * @example
      * [
@@ -40,8 +40,8 @@ class carritoController {
         }
         ]
      */
-    private async mapCarritoProductos(req: Request, carrito:Array<{ id_producto: number, cantidad: number }>): Promise<ProductoCarrito[]> {
-        if(carrito.length === 0) {
+    private async obtenerProductosEnCarrito(req: Request, carrito: Array<{ id_producto: number, cantidad: number }>): Promise<ProductoCarrito[]> {
+        if (carrito.length === 0) {
             return [];
         }
 
@@ -65,7 +65,7 @@ class carritoController {
         return productosJson.map((producto: any) => {
 
             const itemCarrito = carritoParseInt.find((item: any) => item.id_producto == producto.id);
-            producto.cantidad = itemCarrito? itemCarrito.cantidad : 0;
+            producto.cantidad = itemCarrito ? itemCarrito.cantidad : 0;
             producto.subtotal = producto.precio * producto.cantidad
             return producto;
         });
@@ -93,24 +93,33 @@ class carritoController {
         }
     }
 
-    public eliminarProducto(req: Request, res: Response) {
+    public async eliminarProducto(req: Request, res: Response) {
         try {
-            const { id } = req.body;
-            SessionService.borrarProductoDelCarrito(req, id)
-            res.status(200).json({ message: "Producto eliminado del carrito" });
 
+            const { id } = req.params;
+            const id_producto = parseInt(id, 10);
+            SessionService.borrarProductoDelCarrito(req, id_producto)
+            return res.redirect("/carrito/mostrar");
         } catch (error) {
-            console.error("Error al eliminar producto del carrito:", error);
-            res.status(500).json({ message: "Error al eliminar producto del carrito" });
+
+            console.error("Error al ver carrito:", (error as Error).message);
+            return res.status(500).render("error", {
+                title: "Error del servidor",
+                code: 500,
+                message: "Error del servidor",
+                description: "Ocurrió un error inesperado.",
+                error: (error as Error).message
+            });
         }
     }
 
     public async mostrarCarrito(req: Request, res: Response) {
         try {
+
             const carrito = SessionService.obtenerCarrito(req);
-            const productosCarrito = await this.mapCarritoProductos(req, carrito);
-            const total = productosCarrito.reduce((acc: number, producto: ProductoCarrito) => {return acc + producto.subtotal;}, 0);
-            res.render("carrito", { productosCarrito , total});
+            const productosCarrito = await this.obtenerProductosEnCarrito(req, carrito);
+            const total = productosCarrito.reduce((acc: number, producto: ProductoCarrito) => { return acc + producto.subtotal; }, 0);
+            res.render("carrito", { productosCarrito, total });
 
         } catch (error) {
             console.error("Error al ver carrito:", (error as Error).message);

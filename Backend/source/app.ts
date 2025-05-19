@@ -71,7 +71,7 @@ app.use(isAuthenticated.setUsuarioLogueado);
 // app.use(cookieParser());
 
 // Method Override para PUT, PATCH y DELETE
-app.use(methodOverride('m'));
+app.use(methodOverride('_method'));
 
 // Middleware personalizado
 // app.use(userMiddleware);

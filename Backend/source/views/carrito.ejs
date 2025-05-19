@@ -2,130 +2,131 @@
 <html lang="en">
 
 <head>
-    <%- include('./partials/head.ejs') %>
-        <link rel="stylesheet" href="/css/carrito.css">
-
-        <style>
-            .lista-productos {
-                list-style: none;
-                padding: 0;
-                margin: 0;
-            }
-
-            .producto {
-                margin-bottom: 20px;
-                padding-bottom: 15px;
-                border-bottom: 1px solid #ddd;
-            }
-
-            .producto>div {
-                display: flex;
-                align-items: center;
-                gap: 20px;
-            }
-
-            .producto img {
-                width: 100px;
-                height: 100px;
-                object-fit: cover;
-                border-radius: 8px;
-            }
-
-            .producto-info {
-                display: flex;
-                flex-direction: column;
-                justify-content: center;
-            }
-        </style>
+  <%- include('./partials/head.ejs') %>
+    <link rel="stylesheet" href="/css/carrito.css">
 </head>
 
 <body>
 
-    <%- include('./partials/header.ejs') %>
+  <%- include('./partials/header.ejs') %>
 
-        <main class="container-allMain-cart">
+    <main class="container-allMain-cart">
 
-            <section id="header-cart">
+      <section id="header-cart">
 
-                <h1>Carrito<p class="details-p">(x productos)</p>
-                </h1><!--HACER LOGICA EN CSS PARA QUE SE AUTOINCREMENTE Y DOGA CANT EXACTA DE PRODUCTOS-->
-                <div id="warning-sentence">
-                    <img src="/images/exclamation.png" alt="">
-                    <p>Agregar productos al carrito no garantiza su reserva. La compra se completa únicamente al
-                        finalizar el proceso de pago.</p>
-                </div>
-            </section>
+        <h1>Carrito<p class="details-p">(x productos)</p>
+        </h1><!--HACER LOGICA EN CSS PARA QUE SE AUTOINCREMENTE Y DOGA CANT EXACTA DE PRODUCTOS-->
+        <div id="warning-sentence">
+          <img src="/images/exclamation.png" alt="">
+          <p>Agregar productos al carrito no garantiza su reserva. La compra se completa únicamente al
+            finalizar el proceso de pago.</p>
+        </div>
+      </section>
 
-            <section id="cards-products">
-                <section id="products-description-cart">
-                    <div id="terms-products">
-                        <p>Estas comprando en <b>Activa fitness</b></p>
-                        <p>Al hacer compras en nuestra pagina aceltas los <a href="/terminos">terminos y condiciones</a>
-                        </p>
-                    </div>
+      <section id="cards-products">
+        <section id="products-description-cart">
+          <div id="terms-products">
+            <p>Estas comprando en <b>Activa fitness</b></p>
+            <p>Al hacer compras en nuestra pagina aceltas los <a href="/terminos">terminos y condiciones</a>
+            </p>
+          </div>
+          <div class="carrito-container">
+            <h2>Mi Carrito</h2>
 
-                    <div class="carrito-container">
-                        <h2>Mi Carrito</h2>
+            <!-- Productos -->
+            <ul class="lista-productos">
+              <% productosCarrito.forEach(function(producto) { %>
+                <div class="cart-container">
+                  <div class="cart-wrapper">
 
-                        <ul class="lista-productos">
+                    <li class="producto">
+                      <div class="cart-list">
+                        <ul class="cart-items">
+                          <li class="cart-item">
+                            <img src="/images/<%= producto.imagen %>" alt="<%= producto.nombre %>" class="cart-image" />
 
-                            <% productosCarrito.forEach(function(producto) { %>
-                                <li class="producto">
-                                    <div>
-                                        <img src="/images/<%= producto.imagen %>" alt="<%= producto.nombre %>">
-                                        <div class="producto-info">
-                                            <h4>
-                                                <%= producto.nombre %>
-                                            </h4>
+                            <div class="cart-details">
+                              <h3 class="cart-product-name">
+                                <%= producto.nombre %>
+                              </h3>
+                              <dl class="cart-attributes">
+                                <div>
+                                  <dt>Descripcion : </dt>
+                                  <dd>
+                                    <%= producto.descripcion %>
+                                  </dd>
+                                </div>
+                                <div>
+                                  <dt>Precio : </dt>
+                                  <dd>
+                                    <%= producto.precio %>
+                                  </dd>
+                                </div>
 
-                                            <p>
-                                                <%= producto.descripcion %>
-                                            </p>
+                                <div>
+                                  <dt>Cantidad : </dt>
+                                  <dd>
+                                    <%= producto.cantidad %>
+                                  </dd>
+                                </div>
+                              </dl>
+                            </div>
 
-                                            <p>cantidad: <%= producto.cantidad%>
-                                            </p>
+                            <div>
+                              $<%= producto.subtotal %>
+                            </div>
 
-                                            <p>precio: $<%= producto.precio%>
-                                            </p>
+                            <div class="cart-actions">
+                              <form action="/carrito/eliminar/<%= producto.id %>?_method=DELETE" method="POST">
 
-                                            <p>subtotal: $<%= producto.subtotal%>
-                                            </p>
+                                <button type="submit" class="cart-remove-button eliminar-btn"
+                                  data-id="<%= producto.id %>">
+                                  <span class="visually-hidden">Eliminar producto</span>
+                                  <svg xmlns="http://www.w3.org/2000/svg" width="32" height="32" fill="#000000"
+                                    viewBox="0 0 256 256">
+                                    <path
+                                      d="M216,48H176V40a24,24,0,0,0-24-24H104A24,24,0,0,0,80,40v8H40a8,8,0,0,0,0,16h8V208a16,16,0,0,0,16,16H192a16,16,0,0,0,16-16V64h8a8,8,0,0,0,0-16ZM96,40a8,8,0,0,1,8-8h48a8,8,0,0,1,8,8v8H96Zm96,168H64V64H192ZM112,104v64a8,8,0,0,1-16,0V104a8,8,0,0,1,16,0Zm48,0v64a8,8,0,0,1-16,0V104a8,8,0,0,1,16,0Z">
+                                    </path>
+                                  </svg>
+                                </button>
+                              </form>
+                            </div>
 
-                                        </div>
-                                    </div>
-                                </li>
-                                <% }) %>
 
 
+                          </li>
                         </ul>
+                      </div>
+                    </li>
+                    <% }) %>
 
-                        <!-- Total -->
-                        <li class="total-carrito">
-                            <strong>Total: $ <%= total %></strong>
-                        </li>
-                    </div>
+                  </div>
+                </div>
 
-                    </div>
-                </section>
-            </section>
+            </ul>
 
-            <section id="payments">
-                <div class="pay-sentence">
-                    <p>Elegí tu método de pago</p>
-                </div>
-                <div class="methods-img">
-                    <a href="/transferencia"><button id="transferencia-btn">Transferencia Bancaria</button></a>
-                    <a href="/mPago"><button id="mercadopago-btn">Mercado Pago</button></a>
-                </div>
-            </section>
-            <section id="buy-product">
-                <!--HACER QUE EL TOTAL DEL PRECIO SE EN BASE A CANT. PROD. Y PRECIO ACTUALIZANDO CONSTANTEMENTE-->
-                <p>Precio total</p>
-                <div id="price">
-                    <p>$36000</p>
-                </div>
-            </section>
-        </main>
+            <!-- Total -->
+            <li class="total-carrito">
+              <strong>Total: $ <%= total %></strong>
+            </li>
+          </div>
+
+          </div>
+        </section>
+      </section>
+
+      <section id="payments">
+        <div class="pay-sentence">
+          <p>Elegí tu método de pago</p>
+        </div>
+        <div class="methods-img">
+          <a href="/transferencia"><button id="transferencia-btn">Transferencia Bancaria</button></a>
+          <a href="/mPago"><button id="mercadopago-btn">Mercado Pago</button></a>
+        </div>
+      </section>
+      </section>
+    </main>
+    <script src="/js/carrito.js"></script>
 </body>
 
 </html>
