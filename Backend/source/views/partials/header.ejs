@@ -1,31 +1,91 @@
+<style>
+  .nav-links {
+    display: flex;
+    list-style: none;
+    padding: 0;
+    margin: 0;
+  }
+
+  .nav-container {
+    display: flex;
+    align-items: center;
+    justify-content: flex-end;
+    gap: 1rem;
+    width: 100%;
+  }
+
+  .item-nav {
+    color: #fff;
+    transition: color 0.2s;
+  }
+
+  .item-nav:hover {
+    color: red;
+  }
+</style>
 <header>
   <div id="header-container">
 
     <!-- Línea superior: Logo a la izquierda, Carrito a la derecha -->
     <div id="top-bar">
+
       <div id="logo-container">
         <a href="/">
           <img src="/images/logo.png" alt="Logo Activa Fitness" id="logo-img">
         </a>
       </div>
-    
 
-      <div id="cart-container">
-        <a href="/carrito/mostrar">
-          <i class="fa-solid fa-cart-shopping" title="Carrito"></i>
+
+      <div class="nav-container">
+        <a class="item-nav" href="/carrito/mostrar">
+          <div>
+            <svg fill="currentColor" width="40" height="40" viewBox="0 0 30 30" xmlns="http://www.w3.org/2000/svg">
+              <path
+                d="M10.5 17h14c.278 0 .5.223.5.5s-.222.5-.5.5h-14c-.276 0-.5-.223-.5-.5s.224-.5.5-.5zm-1-4h16c.278 0 .5.223.5.5s-.222.5-.5.5h-16c-.276 0-.5-.223-.5-.5s.224-.5.5-.5zm-9-8c-.653 0-.67 1 0 1h3.6c.078.346.64 2.81 1.312 5.736.717 3.126 1.452 7.32 1.606 7.893.132.494.255 1.055.62 1.544.362.488 1 .826 1.862.826h16c.86 0 1.5-.338 1.863-.826.364-.49.487-1.05.62-1.545.265-.993 1.62-6.944 1.89-7.952.152-.566.202-1.156.022-1.69-.18-.534-.72-.988-1.395-.988h-20c-.653 0-.66 1 0 1h20c.325 0 .366.07.447.31.08.238.076.674-.04 1.108-.267.992-1.62 6.945-1.89 7.953-.135.506-.262.945-.456 1.206-.194.262-.42.424-1.06.424h-16c-.64 0-.866-.162-1.06-.424-.195-.26-.322-.7-.458-1.205-.114-.426-.88-4.732-1.595-7.856-.717-3.125-1.4-6.125-1.4-6.125C4.938 5.16 4.735 5 4.5 5zm23 18c-1.373 0-2.5 1.125-2.5 2.5s1.127 2.5 2.5 2.5c1.376 0 2.5-1.125 2.5-2.5S24.877 23 23.5 23zm0 1c.836 0 1.5.666 1.5 1.5s-.664 1.5-1.5 1.5c-.833 0-1.5-.666-1.5-1.5s.667-1.5 1.5-1.5zm-12-1C10.128 23 9 24.125 9 25.5s1.127 2.5 2.5 2.5c1.376 0 2.5-1.125 2.5-2.5S12.877 23 11.5 23zm0 1c.836 0 1.5.666 1.5 1.5s-.664 1.5-1.5 1.5c-.833 0-1.5-.666-1.5-1.5s.667-1.5 1.5-1.5z" />
+            </svg>
+          </div>
         </a>
+
+        <a class="item-nav" href="/register">
+          <div>
+            <svg width="32" height="32" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+              <path fill-rule="evenodd" clip-rule="evenodd"
+                d="M13.3249 15.0763C12.8883 15.0257 12.4456 15 12 15C10.0188 15 8.09292 15.5085 6.52112 16.4465C5.30069 17.1749 4.34666 18.1307 3.74108 19.2183C3.46638 19.7117 3.79562 20.2902 4.34843 20.4054C7.85678 21.1365 11.4437 21.3594 15 21.074V21H14C12.3431 21 11 19.6569 11 18C11 16.5753 11.9932 15.3825 13.3249 15.0763Z"
+                fill="currentColor" />
+              <path d="M18 14L18 22" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" />
+              <path d="M22 18L14 18" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" />
+              <circle cx="12" cy="8" r="5" fill="currentColor" />
+            </svg>
+          </div>
+        </a>
+
+        <% if (usuarioLogueado) { %>
+          <a class="item-nav" href="/users/logout" class="admin-access" title="Cerrar Sesión">
+            <div>
+              <svg width="38" height="38" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+                <path d="M10 12H20M20 12L17 9M20 12L17 15" stroke="currentColor" stroke-width="1.5"
+                  stroke-linecap="round" stroke-linejoin="round" />
+                <path d="M4 12C4 7.58172 7.58172 4 12 4M12 20C9.47362 20 7.22075 18.8289 5.75463 17"
+                  stroke="currentColor" stroke-width="1.5" stroke-linecap="round" />
+              </svg>
+            </div>
+          </a>
+          <% } else { %>
+            <a class="item-nav" href="/login" class="admin-access" title="Iniciar Sesión">
+              <div>
+
+                <svg width="32" height="32" viewBox="0 0 24 24" fill="currentColor" xmlns="http://www.w3.org/2000/svg">
+                  <!-- Pecho y hombros completos -->
+                  <path fill="currentColor" d="M4 21c0-3.866 4.03-7 8-7s8 3.134 8 7v1H4v-1z" />
+                  <!-- Cabeza -->
+                  <circle cx="12" cy="8" r="5" fill="currentColor" />
+                </svg>
+              </div>
+            </a>
+            <% } %>
+
+
       </div>
-
-      <% if (usuarioLogueado) { %>
-        <a href="/users/logout" class="admin-access" title="Cerrar Sesión">
-            <i class="fa-solid fa-right-from-bracket"></i>
-          </a>
-      <% } else { %>
-          <a href="/login" class="admin-access" title="Iniciar Sesión">
-              <i class="fa-solid fa-user"></i>
-          </a>
-      <% } %>
-
     </div>
 
     <!-- Línea inferior: Menú de navegación -->
