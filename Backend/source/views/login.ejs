@@ -4,6 +4,7 @@
     <head>
         <%- include('./partials/head.ejs') %>
         <link rel="stylesheet" href="/css/login.css">
+        <link rel="stylesheet" href="/css/button-form.css" />
     </head>
 
     <body>
@@ -36,10 +37,9 @@
                         <p>Recordame</p>
                     </div>
                     
-                    <ul class="errorOculto" id="erroresLogin"></ul>
+                    <!-- <ul class="errorOculto" id="erroresLogin"></ul> -->
 
-                    <button id="iniciar-sesion" type="submit">Ingresar</button>
-                    
+                    <button class="button-form"  type="submit" >Ingresar</button>                    
                 </form>
                 
                 <div id="olvide-contraseña">
@@ -59,6 +59,7 @@
         <footer id="login-footer">
             <%- include('./partials/footer.ejs') %>
         </footer>
+
         <script src="https://unpkg.com/validator@latest/validator.min.js"></script>
         <script src="../js/login.js"></script>        
     </body>    

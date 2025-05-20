@@ -1,103 +1,116 @@
 <!DOCTYPE html>
 <html lang="en">
-
 <head>
   <%- include('./partials/head.ejs') %>
-    <link rel="stylesheet" href="/css/register.css" />
-    <link rel="stylesheet" href="/css/button-form.css" />
+  <link rel="stylesheet" href="/css/register.css" />
+  <link rel="stylesheet" href="/css/button-form.css" />
 </head>
-
 
 <body>
   <%- include('./partials/header.ejs') %>
 
-    <main class="mainRegister">
-      <h2 id="h2-register">Regístrate</h2>
-      <form action="/users/save" method="POST" id="form-register" class="form-container">
-        <div class="flex-container-row">
-          <!-- Nombre -->
-          <input type="text" name="nombre" id="nombre" placeholder="Nombre" class="inputs-register"
-            value="<%= (typeof oldData !== 'undefined' && oldData.nombre) ? oldData.nombre : '' %>" required/>
-          <% if (locals && locals.errors && errors.nombre) { %>
-            <p class="feedback">
-              <%= errors.nombre.msg %>
-            </p>
-            <% } %>
+  <main class="mainRegister">
+    <h2 id="h2-register">Regístrate</h2>
+    <form action="/users/save" method="POST" id="form-register" class="form-container">
 
-          <!-- Apellido -->
+      <div class="flex-container-row">
+        <!-- Nombre -->
+         <div class="div-flex-100" >
+            <input type="text" name="nombre" id="nombre" placeholder="Nombre" class="inputs-register"
+              value="<%= (typeof oldData !== 'undefined' && oldData.nombre) ? oldData.nombre : '' %>" required />
+            <% if (locals && locals.errors && errors.nombre) { %>
+              <p class="feedback"><%= errors.nombre.msg %></p>
+            <% } %>
+         </div>
+
+
+        <!-- Apellido -->
+         <div class="div-flex-100" >
           <input type="text" name="apellido" id="apellido" class="inputs-register" placeholder="Apellido"
-            value="<%= (typeof oldData !== 'undefined' && oldData.apellido) ? oldData.apellido : '' %>" required/>
+            value="<%= (typeof oldData !== 'undefined' && oldData.apellido) ? oldData.apellido : '' %>" required />
           <% if (locals && locals.errors && errors.apellido) { %>
-            <p class="feedback">
-              <%= errors.apellido.msg %>
-            </p>
+            <p class="feedback"><%= errors.apellido.msg %></p>
+          <% } %>
+         </div>
+      </div>
+
+      <!-- Email -->
+      <input type="email" name="email" id="email" placeholder="Correo Electrónico" class="inputs-register"
+        value="<%= (typeof oldData !== 'undefined' && oldData.email) ? oldData.email : '' %>" required />
+      <% if (locals && locals.errors && errors.email) { %>
+        <p class="feedback"><%= errors.email.msg %></p>
+      <% } %>
+
+      <div class="flex-container-row">
+        <!-- Fecha de nacimiento -->
+        <input type="date" name="fecha_nacimiento" id="fecha_nacimiento" class="inputs-register"
+          value="<%= (typeof oldData !== 'undefined' && oldData.fecha_nacimiento) ? oldData.fecha_nacimiento : '' %>" required />
+        <% if (locals && locals.errors && errors.fecha_nacimiento) { %>
+          <p class="feedback"><%= errors.fecha_nacimiento.msg %></p>
+        <% } %>
+
+        <!-- DNI -->
+         <div class="div-flex-100">
+           <input type="text" id="dni" name="dni" maxlength="8" pattern="\d{7,8}" required placeholder="DNI"
+           class="inputs-register" value="<%= (typeof oldData !== 'undefined' && oldData.dni) ? oldData.dni : '' %>" />
+           <% if (locals && locals.errors && errors.dni) { %>
+            <p class="feedback"><%= errors.dni.msg %></p>
             <% } %>
         </div>
+      </div>
 
-        <input type="email" name="email" id="email" placeholder="Correo Electrónico" class="inputs-register"
-          value="<%= (typeof oldData !== 'undefined' && oldData.email) ? oldData.email : '' %>" required />
-        <% if (locals && locals.errors && errors.email) { %>
-          <p class="feedback">
-            <%= errors.email.msg %>
-          </p>
-        <% } %>
+      <!-- Telefono -->
+      <input type="tel" name="telefono" id="telefono" class="inputs-register"
+        placeholder="Ej: 11 2345 6789"
+        pattern="[0-9]{2,4}\s?[0-9]{3,4}\s?[0-9]{3,4}"
+        maxlength="15"
+         />
+      <% if (locals && locals.errors && errors.telefono) { %>
+        <p class="feedback"><%= errors.telefono.msg %></p>
+      <% } %>
 
-        <div class="flex-container-row">
-          <input type="date" name="fecha_nacimiento" id="fecha_nacimiento" class="inputs-register"
-            value="<%= (typeof oldData !== 'undefined' && oldData.fecha_nacimiento) ? oldData.fecha_nacimiento : '' %>" required/>
-          <% if (locals && locals.errors && errors.fecha_nacimiento) { %>
-            <p class="feedback">
-              <%= errors.fecha_nacimiento.msg %>
-            </p>
-            <% } %>
 
-          <input type="text" id="dni" name="dni" maxlength="8" pattern="\d{7,8}" required placeholder="DNI"
-            class="inputs-register" />
-          <% if (locals && locals.errors && errors.contrasenia) { %>
-            <p class="feedback">
-              <%= errors.contrasenia.msg %>
-            </p>
-            <% } %>
-        </div>
+      <!-- Contraseña -->
+      <input type="password" name="contrasenia" placeholder="Contraseña" id="contrasenia"
+        class="inputs-register" required />
+      <% if (locals && locals.errors && errors.contrasenia) { %>
+        <p class="feedback"><%= errors.contrasenia.msg %></p>
+      <% } %>
 
-        <input type="password" name="contrasenia" placeholder="Contraseña" id="contrasenia"
-          class="inputs-register" />
-        <% if (locals && locals.errors && errors.contrasenia) { %>
-          <p class="feedback">
-            <%= errors.contrasenia.msg %>
-          </p>
-        <% } %>
+      <!-- Confirmar contraseña -->
+      <input type="password" name="confirmar_contrasenia" placeholder="Confirmar Contraseña"
+        id="confirmar-contraseña" class="inputs-register" required />
+      <% if (locals && locals.errors && errors.confirmar_contrasenia) { %>
+        <p class="feedback"><%= errors.confirmar_contrasenia.msg %></p>
+      <% } %>
 
-        <input type="password" name="confirmar-contraseña" placeholder="confirmar-contraseña"
-          id="confirmar-contraseña" class="inputs-register" />
-        <% if (locals && locals.errors && errors.contrasenia) { %>
-          <p class="feedback">
-            <%= errors.contrasenia.msg %>
-          </p>
-        <% } %>
+      <!-- Botón de registro -->
+      <button type="submit" class="button-form button-register btn-confirmar">
+        <span class="label">Registrarse</span>
+        <svg class="icon" xmlns="http://www.w3.org/2000/svg" fill="none" width="30" height="30"
+          viewBox="0 0 24 24" stroke="currentColor">
+          <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+            d="M17 8l4 4m0 0l-4 4m4-4H3" />
+        </svg>
+      </button>
 
-          <!-- <input type="file" name="image" id="image" class="inputs-register"> -->
+    </form>
+  </main>
 
-          <!-- Botón de registro -->
+  <script src="https://unpkg.com/validator@latest/validator.min.js"></script>
+  <script src="../js/register.js"></script>
 
-          <button class="button-register">
-            <div class="button-form button-register">
-              <span class="label">registrarse</span>
-              <svg class="icon" xmlns="http://www.w3.org/2000/svg" fill="none" width="30" height="30"
-                viewBox="0 0 24 24" stroke="currentColor">
-                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
-                  d="M17 8l4 4m0 0l-4 4m4-4H3" />
-              </svg>
-            </div>
-          </button>
-      </form>
-    </main>
+  <div>
+    <%- include('./partials/modalConfirmacion.ejs', {
+    modalTitle: '¿Confirmar registro?',
+    modalMessage: 'registro ...'
+    }) %>
+  </div>
 
-    <script src="https://unpkg.com/validator@latest/validator.min.js"></script>
-    <script src="../js/register.js"></script>
-    <footer id="register-footer">
-      <%- include('./partials/footer.ejs') %>
-    </footer>
+
+
+  <footer id="register-footer">
+    <%- include('./partials/footer.ejs') %>
+  </footer>
 </body>
-
 </html>

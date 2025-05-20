@@ -61,12 +61,12 @@ export class UsuarioController {
     }
   }
 
-  async save(req: Request, res: Response): Promise<Response> {
+  async registrar(req: Request, res: Response): Promise<Response> {
     const transaction = await Usuario.sequelize?.transaction();
     try {
       const reultadosValidacion = validationResult(req);
       const errores = reultadosValidacion.mapped();
-      const { apellido, nombre, imagen, email, contrasenia, fecha_nacimiento, celular, aptoMedico,dni } = req.body;
+      const { apellido, nombre, imagen, email, contrasenia, fecha_nacimiento, celular, aptoMedico, dni } = req.body;
 
       const usuarioExistente = await Autenticacion.findOne({ where: { email } });
       if (usuarioExistente) {
@@ -121,7 +121,6 @@ export class UsuarioController {
     } catch (error) {
       
       console.error("Error: ", (error as Error).message);
-
       res.status(500).render("error", {
           title: "Error del servidor",
           code: 500,

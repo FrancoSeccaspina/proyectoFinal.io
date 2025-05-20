@@ -85,7 +85,7 @@ const initUsuarioModel = (sequelize: Sequelize) => {
       },
       celular: {
         type: DataTypes.INTEGER,
-        allowNull: false,
+        allowNull: true,
       },
       aptoMedico: {
         type: DataTypes.STRING(255),
