@@ -3,113 +3,163 @@
 
 <head>
   <%- include('./partials/head.ejs') %>
-  <link rel="stylesheet" href="/css/carrito.css">
+    <link rel="stylesheet" href="/css/carrito.css">
 </head>
+
+<style>
+  
+</style>
 
 <body>
 
   <%- include('./partials/header.ejs') %>
 
-  <main class="container-allMain-cart">
+    <main class="container-allMain-cart">
 
-    <section id="header-cart">
-      <h1>Carrito <p class="details-p">(x productos)</p></h1>
-      <div id="warning-sentence">
-        <img src="/images/exclamation.png" alt="">
-        <p>Agregar productos al carrito no garantiza su reserva. La compra se completa únicamente al
-          finalizar el proceso de pago.</p>
-      </div>
-    </section>
-
-    <section id="cards-products">
-      <section id="products-description-cart">
-        <div id="terms-products">
-          <p>Estas comprando en <b>Activa fitness</b></p>
-          <p>Al hacer compras en nuestra pagina aceptas los <a href="/terminos">términos y condiciones</a></p>
-        </div>
-        <div class="carrito-container">
-          <h2>Mi Carrito</h2>
-
-          <!-- Productos -->
-          <ul class="lista-productos">
-            <% productosCarrito.forEach(function(producto) { %>
-              <li class="producto">
-                <div class="cart-container">
-                  <div class="cart-wrapper">
-                    <div class="cart-list">
-                      <ul class="cart-items">
-                        <li class="cart-item">
-                          <img src="/images/<%= producto.imagen %>" alt="<%= producto.nombre %>" class="cart-image" />
-                          <div class="cart-details">
-                            <h3 class="cart-product-name"><%= producto.nombre %></h3>
-                            <dl class="cart-attributes">
-                              <div>
-                                <dt>Descripcion : </dt>
-                                <dd><%= producto.descripcion %></dd>
-                              </div>
-                              <div>
-                                <dt>Precio : </dt>
-                                <dd><%= producto.precio %></dd>
-                              </div>
-                              <div>
-                                <dt>Cantidad : </dt>
-                                <dd><%= producto.cantidad %></dd>
-                              </div>
-                            </dl>
-                          </div>
-                          <div>
-                            $<%= producto.subtotal %>
-                          </div>
-                          <div class="cart-actions">
-                            <form action="/carrito/eliminar/<%= producto.id %>?_method=DELETE" method="POST">
-                              <button type="submit" class="cart-remove-button btn-confirmar"
-                                data-id="<%= producto.id %>">
-                                <span class="visually-hidden">Eliminar producto</span>
-                                <svg xmlns="http://www.w3.org/2000/svg" width="32" height="32" fill="#000000"
-                                  viewBox="0 0 256 256">
-                                  <path
-                                    d="M216,48H176V40a24,24,0,0,0-24-24H104A24,24,0,0,0,80,40v8H40a8,8,0,0,0,0,16h8V208a16,16,0,0,0,16,16H192a16,16,0,0,0,16-16V64h8a8,8,0,0,0,0-16ZM96,40a8,8,0,0,1,8-8h48a8,8,0,0,1,8,8v8H96Zm96,168H64V64H192ZM112,104v64a8,8,0,0,1-16,0V104a8,8,0,0,1,16,0Zm48,0v64a8,8,0,0,1-16,0V104a8,8,0,0,1,16,0Z">
-                                  </path>
-                                </svg>
-                              </button>
-                            </form>
-                          </div>
-                        </li>
-                      </ul>
-                    </div>
-                  </div>
-                </div>
-              </li>
-            <% }) %>
-          </ul>
-
-          <!-- Total -->
-          <li class="total-carrito">
-            <strong>Total: $ <%= total %></strong>
-          </li>
+      <section id="header-cart">
+        <h1>Carrito <p class="details-p">(<%= cantidadDeProductos %> productos)</p>
+        </h1>
+        <div id="warning-sentence">
+          <img src="/images/exclamation.png" alt="">
+          <p>Agregar productos al carrito no garantiza su reserva. La compra se completa únicamente al
+            finalizar el proceso de pago.</p>
         </div>
       </section>
-    </section>
 
-    <section id="payments">
-      <div class="pay-sentence">
-        <p>Elegí tu método de pago</p>
-      </div>
-      <div class="methods-img">
-        <a href="/transferencia"><button id="transferencia-btn">Transferencia Bancaria</button></a>
-        <a href="/mPago"><button id="mercadopago-btn">Mercado Pago</button></a>
-      </div>
-    </section>
-  </main>
+      <section id="cards-products">
+        <section class="carrito-container" id="products-description-cart">
+          <div id="terms-products">
+            <div>
+              <p>Estas comprando en <b>Activa fitness</b></p>
+              <p>Al hacer compras en nuestra pagina aceptas los <a href="/terminos">términos y condiciones</a></p>
+            </div>
 
-  <div>
-    <%- include('./partials/modalConfirmacion.ejs') %>
-  </div>
+            <!-- icono carrito -->
+            <div>
+              <svg height="60" viewBox="0 0 30 30" width="60" xmlns="http://www.w3.org/2000/svg">
+                <path
+                  d="M10.5 17h14c.278 0 .5.223.5.5s-.222.5-.5.5h-14c-.276 0-.5-.223-.5-.5s.224-.5.5-.5zm-1-4h16c.278 0 .5.223.5.5s-.222.5-.5.5h-16c-.276 0-.5-.223-.5-.5s.224-.5.5-.5zm-9-8c-.653 0-.67 1 0 1h3.6c.078.346.64 2.81 1.312 5.736.717 3.126 1.452 7.32 1.606 7.893.132.494.255 1.055.62 1.544.362.488 1 .826 1.862.826h16c.86 0 1.5-.338 1.863-.826.364-.49.487-1.05.62-1.545.265-.993 1.62-6.944 1.89-7.952.152-.566.202-1.156.022-1.69-.18-.534-.72-.988-1.395-.988h-20c-.653 0-.66 1 0 1h20c.325 0 .366.07.447.31.08.238.076.674-.04 1.108-.267.992-1.62 6.945-1.89 7.953-.135.506-.262.945-.456 1.206-.194.262-.42.424-1.06.424h-16c-.64 0-.866-.162-1.06-.424-.195-.26-.322-.7-.458-1.205-.114-.426-.88-4.732-1.595-7.856-.717-3.125-1.4-6.125-1.4-6.125C4.938 5.16 4.735 5 4.5 5zm23 18c-1.373 0-2.5 1.125-2.5 2.5s1.127 2.5 2.5 2.5c1.376 0 2.5-1.125 2.5-2.5S24.877 23 23.5 23zm0 1c.836 0 1.5.666 1.5 1.5s-.664 1.5-1.5 1.5c-.833 0-1.5-.666-1.5-1.5s.667-1.5 1.5-1.5zm-12-1C10.128 23 9 24.125 9 25.5s1.127 2.5 2.5 2.5c1.376 0 2.5-1.125 2.5-2.5S12.877 23 11.5 23zm0 1c.836 0 1.5.666 1.5 1.5s-.664 1.5-1.5 1.5c-.833 0-1.5-.666-1.5-1.5s.667-1.5 1.5-1.5z" />
+              </svg>
+            </div>
 
-  <footer class="main-footer">
-    <%- include('./partials/footer.ejs') %>
-  </footer>
+          </div>
 
-  <script src="/js/carrito.js"></script>
+          <div>
+            <!-- Productos -->
+            <ul class="lista-productos">
+              <% productosCarrito.forEach(function(producto) { %>
+                <li class="producto">
+                  <div class="cart-container">
+                    <div class="cart-wrapper">
+                      <div class="cart-list">
+                        <ul class="cart-items">
+                          <li class="cart-item">
+                            <img src="/images/<%= producto.imagen %>" alt="<%= producto.nombre %>" class="cart-image" />
+                            <div class="cart-details">
+                              <h3 class="cart-product-name">
+                                <%= producto.nombre %>
+                              </h3>
+                              <dl class="cart-attributes">
+                                <div>
+                                  <dt>Descripcion : </dt>
+                                  <dd>
+                                    <%= producto.descripcion %>
+                                  </dd>
+                                </div>
+                                <div>
+                                  <dt>Precio : </dt>
+                                  <dd>
+                                    <%= producto.precio %>
+                                  </dd>
+                                </div>
+                                <div>
+                                  <dt>Cantidad : </dt>
+                                  <dd>
+                                    <%= producto.cantidad %>
+                                  </dd>
+                                </div>
+                              </dl>
+                            </div>
+                            <div>
+                              $<%= producto.subtotal %>
+                            </div>
+                            <div class="cart-actions">
+                              <form action="/carrito/eliminar/<%= producto.id %>?_method=DELETE" method="POST">
+                                <button type="submit" class="cart-remove-button btn-confirmar"
+                                  data-id="<%= producto.id %>">
+                                  <span class="visually-hidden">Eliminar producto</span>
+                                  <svg xmlns="http://www.w3.org/2000/svg" width="32" height="32" fill="#000000"
+                                    viewBox="0 0 256 256">
+                                    <path
+                                      d="M216,48H176V40a24,24,0,0,0-24-24H104A24,24,0,0,0,80,40v8H40a8,8,0,0,0,0,16h8V208a16,16,0,0,0,16,16H192a16,16,0,0,0,16-16V64h8a8,8,0,0,0,0-16ZM96,40a8,8,0,0,1,8-8h48a8,8,0,0,1,8,8v8H96Zm96,168H64V64H192ZM112,104v64a8,8,0,0,1-16,0V104a8,8,0,0,1,16,0Zm48,0v64a8,8,0,0,1-16,0V104a8,8,0,0,1,16,0Z">
+                                    </path>
+                                  </svg>
+                                </button>
+                              </form>
+                            </div>
+                          </li>
+                        </ul>
+                      </div>
+                    </div>
+                  </div>
+                </li>
+                <% }) %>
+            </ul>
+
+            <!-- Total -->
+            <div class="flex-container">
+              <div class="item1">
+                <article class="card-precio">
+                  <span class="icon">
+                    <svg xmlns="http://www.w3.org/2000/svg" class="svg-icon" fill="none" viewBox="0 0 24 24"
+                      stroke="currentColor" stroke-width="2">
+                      <path stroke-linecap="round" stroke-linejoin="round"
+                        d="M17 9V7a2 2 0 00-2-2H5a2 2 0 00-2 2v6a2 2 0 002 2h2m2 4h10a2 2 0 002-2v-6a2 2 0 00-2-2H9a2 2 0 00-2 2v6a2 2 0 002 2zm7-5a2 2 0 11-4 0 2 2 0 014 0z" />
+                    </svg>
+                  </span>
+
+                  <div class="info">
+                    <p class="amount">$ <%=total%>
+                    </p>
+                  </div>
+                </article>
+              </div>
+
+              <div class="item2">
+                <a href="#" class="compra-button">
+                  <span class="label">Comprar</span>
+                  <svg class="icon" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24"
+                    stroke="currentColor">
+                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                      d="M17 8l4 4m0 0l-4 4m4-4H3" />
+                  </svg>
+                </a>
+              </div>
+            </div>
+          </div>
+        </section>
+      </section>
+
+      <!-- <section id="payments">
+        <div class="pay-sentence">
+          <p>Elegí tu método de pago</p>
+        </div>
+        <div class="methods-img">
+          <a href="/transferencia"><button id="transferencia-btn">Transferencia Bancaria</button></a>
+          <a href="/mPago"><button id="mercadopago-btn">Mercado Pago</button></a>
+        </div>
+      </section> -->
+    </main>
+
+    <div>
+      <%- include('./partials/modalConfirmacion.ejs') %>
+    </div>
+
+    <footer class="main-footer">
+      <%- include('./partials/footer.ejs') %>
+    </footer>
+
+    <script src="/js/carrito.js"></script>
 </body>
+
 </html>

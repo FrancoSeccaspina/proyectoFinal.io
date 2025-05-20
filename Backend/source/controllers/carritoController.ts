@@ -117,9 +117,13 @@ class carritoController {
         try {
 
             const carrito = SessionService.obtenerCarrito(req);
+
+            const cantidadDeProductos = carrito.reduce((acc: number, producto) => {
+                return acc + producto.cantidad;
+            }, 0);
             const productosCarrito = await this.obtenerProductosEnCarrito(req, carrito);
             const total = productosCarrito.reduce((acc: number, producto: ProductoCarrito) => { return acc + producto.subtotal; }, 0);
-            res.render("carrito", { productosCarrito, total });
+            res.render("carrito", { productosCarrito: productosCarrito, total : total , cantidadDeProductos : cantidadDeProductos});
 
         } catch (error) {
             console.error("Error al ver carrito:", (error as Error).message);

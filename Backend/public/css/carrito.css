@@ -46,6 +46,12 @@ main {
     border-bottom: 1px solid #ccc;
 }
 
+#terms-products {
+    display: flex;
+    justify-content: space-around;
+    align-items: center;
+}
+
 .details-p {
     color: #979797;
 }
@@ -115,7 +121,8 @@ main {
 
 #cards-products {
     margin: 1rem;
-    border: 2px solid #000000;
+    border-radius: 0.5rem;
+    /* border: 2px solid #000000; */
     background: #ffffffa6;
 }
 
@@ -160,7 +167,6 @@ main {
 
 #payments {
     padding: 1rem 0;
-    border-bottom: 2px dashed #000000;
 }
 
 @media screen and (min-width:320px) {
@@ -315,9 +321,6 @@ main {
         width: 45rem;
     }
 
-    #payments {
-        padding: 1rem 5rem;
-    }
 }
 
 @media screen and (min-width: 1024px) {
@@ -325,4 +328,121 @@ main {
         margin: auto;
         width: 55rem;
     }
+}
+
+
+.card-precio {
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
+    padding: 0.5rem;
+    flex-direction: row;
+    width: 100%;
+}
+
+.icon {
+    background-color: #dbeafe;
+    color: #2563eb;
+    border-radius: 9999px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.svg-icon {
+    width: 2.5rem;
+    /* height: 1rem; */
+}
+
+.info .amount {
+    font-size: 1rem;
+    font-weight: 500;
+    color: #111827;
+    /* text-gray-900 */
+    margin: 0;
+}
+
+.info .label {
+    font-size: 0.875rem;
+    color: #6b7280;
+    /* text-gray-500 */
+    margin: 0;
+}
+
+.total-container {
+    display: grid;
+    grid-template-columns: 22fr;
+    gap: 1rem;
+}
+
+.compra-button {
+    width: 100%;
+    display: inline-flex;
+    align-items: center;
+    gap: 0.5rem;
+    padding: 0.75rem 2rem;
+    font-size: 0.875rem;
+    font-weight: 500;
+    color: white;
+    background-color: #4f46e5;
+    /* indigo-600 */
+    border: 1px solid #4f46e5;
+    border-radius: 0.125rem;
+    /* rounded-sm */
+    text-decoration: none;
+    transition: all 0.2s ease-in-out;
+    justify-content: center;
+}
+
+.compra-button:hover {
+    background-color: transparent;
+    color: #4f46e5;
+}
+
+.compra-button:hover .icon {
+    stroke: #4f46e5;
+}
+
+.compra-button:focus {
+    outline: none;
+    box-shadow: 0 0 0 3px rgba(99, 102, 241, 0.5);
+    /* focus:ring-3 */
+}
+
+.label {
+    font-size: 0.875rem;
+}
+
+.icon {
+    width: 1.25rem;
+    height: 1.25rem;
+    stroke: currentColor;
+    transition: stroke 0.2s ease-in-out;
+}
+
+.flex-container {
+    display: flex;
+}
+
+.item1 {
+    flex: 3;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.item2 {
+    flex: 1;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+
+.carrito-container {
+    padding: 2rem;
+}
+
+.container-allMain-cart {
+    padding: 2rem;
 }
