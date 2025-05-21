@@ -1,8 +1,10 @@
+import { validationResult } from "express-validator";
 import { Op } from "sequelize";
 import { Request, Response } from "express";
 import { Producto } from '../database/models/producto';
 import { SessionService } from '../services/serivicioSesion'
 import { Json } from "sequelize/types/utils";
+import { error } from "console";
 interface ProductoCarrito {
     id: number;
     nombre: string;
@@ -115,15 +117,19 @@ class carritoController {
 
     public async mostrarCarrito(req: Request, res: Response) {
         try {
-
             const carrito = SessionService.obtenerCarrito(req);
-
             const cantidadDeProductos = carrito.reduce((acc: number, producto) => {
                 return acc + producto.cantidad;
             }, 0);
             const productosCarrito = await this.obtenerProductosEnCarrito(req, carrito);
             const total = productosCarrito.reduce((acc: number, producto: ProductoCarrito) => { return acc + producto.subtotal; }, 0);
-            res.render("carrito", { productosCarrito: productosCarrito, total : total , cantidadDeProductos : cantidadDeProductos});
+            res.render("carrito", { 
+                productosCarrito: productosCarrito, 
+                total : total , 
+                cantidadDeProductos : cantidadDeProductos,
+                showModal: false,
+                errors: undefined
+            });
 
         } catch (error) {
             console.error("Error al ver carrito:", (error as Error).message);
@@ -137,27 +143,39 @@ class carritoController {
         }
     }
 
+    public async reservarCompra(req: Request, res: Response) {
+        try {
+            const errors = (req as any).validationErrors;
+            
+            if (errors) {
+                const carrito = SessionService.obtenerCarrito(req);
+                const cantidadDeProductos = carrito.reduce((acc: number, producto) => {
+                    return acc + producto.cantidad;
+                }, 0);
+                const productosCarrito = await this.obtenerProductosEnCarrito(req, carrito);
+                const total = productosCarrito.reduce((acc: number, producto: ProductoCarrito) => { return acc + producto.subtotal; }, 0);
 
-    // confirmada la reserva con los datos del formulario ( dni o email del usuario) pasar los datos a la tabla reserva y detalle de reserva y aliminar el carrito
+                return res.render('carrito', { 
+                    productosCarrito: productosCarrito, 
+                    total : total , 
+                    cantidadDeProductos : cantidadDeProductos,
+                    showModal: true,
+                    errors: errors
+                });
+            }
+            // TODO : falta agregar logica para guardar en la base de datos y mostrar la vista de formas de pago (notificar por gmail?)
 
-    // public finalizarCompra(req: Request, res: Response) {
-    //     try {
-    //         carritoController.inicializarCarrito(req, res);
-    //         const carrito = req.session.carrito;
-    //         if (carrito.length === 0) {
-    //            , return res.status(400).json({ message: "El carrito está vacío" });
-    //         }
-    //         // Aquí puedes agregar la lógica para procesar el pago y finalizar la compra
-    //         // Por ejemplo, guardar la compra en la base de datos o enviar un correo de confirmación
-
-    //         // Limpiar el carrito después de finalizar la compra
-    //         req.session.carrito = [];
-    //         res.status(200).json({ message: "Compra finalizada con éxito" });
-    //     } catch (error) {
-    //         console.error("Error al finalizar compra:", error);
-    //         res.status(500).json({ message: "Error al finalizar compra" });
-    //     }
-    // }
+        } catch (error) {
+            console.error("Error al reservar compra:", (error as Error).message);
+            return res.status(500).render("error", {
+                title: "Error del servidor",
+                code: 500,
+                message: "Error del servidor",
+                description: "Ocurrió un error inesperado.",
+                error: (error as Error).message
+            });
+        }
+    }
 
 }
 export default new carritoController();

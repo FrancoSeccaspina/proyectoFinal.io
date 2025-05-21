@@ -3,6 +3,7 @@
 
 <head>
   <%- include('./partials/head.ejs') %>
+    <link rel="stylesheet" href="/css/register.css" />
     <link rel="stylesheet" href="/css/carrito.css">
     <link rel="stylesheet" href="/css/button-form.css">
 </head>
@@ -46,6 +47,26 @@
           </div>
 
           <div>
+            <% if (productosCarrito.length === 0) { %>
+              <li class="producto">
+                <div class="cart-container">
+                  <div class="cart-wrapper">
+                    <div class="cart-list">
+                      <ul class="cart-items
+                        <li class="cart-item">
+                          <div class="cart-details">
+                            <h3 class="cart-product-name">
+                              No hay productos en el carrito
+                            </h3>
+                          </div>
+                        </li>
+                      </ul>
+                    </div>
+                  </div>
+                </div>
+              </li>
+            <% } %>
+
             <!-- Productos -->
             <ul class="lista-productos">
               <% productosCarrito.forEach(function(producto) { %>
@@ -127,10 +148,10 @@
               </div>
 
               <div class="item2">
-                <a href="#">
+                <button class="btn-confirmar-reserva" style="border: none;">
                   <div class="button-form">
 
-                      <span class="label">Comprar</span>
+                      <span class="label">Reservar</span>
                       <svg class="icon" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24"
                       stroke="currentColor">
                       <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
@@ -138,7 +159,7 @@
                     </svg>
 
                   </div>
-                </a>
+                </button>
               </div>
             </div>
           </div>
@@ -162,6 +183,10 @@
         modalTitle: '¿Eliminar producto?',
         modalMessage: '¿Estás seguro de que deseas eliminar este producto del carrito?'
       }) %>
+    </div>
+
+    <div>
+      <%- include('./partials/modalReserva.ejs') %>
     </div>
 
     <footer class="main-footer">

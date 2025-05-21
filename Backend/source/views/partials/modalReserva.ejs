@@ -1,0 +1,178 @@
+<style>
+  /* Modal overlay */
+  .modal-reserva {
+    position: fixed;
+    inset: 0;
+    z-index: 50;
+    display: grid;
+    place-content: center;
+    background-color: rgba(0, 0, 0, 0.5);
+    padding: 1rem;
+    /* Oculto por defecto */
+    display: none;
+  }
+
+  .modal-reserva.active {
+    display: grid;
+  }
+
+  /* Modal box */
+  .modal-content {
+    overflow: hidden;
+    max-width: 28rem;
+    background-color: #ffffff;
+    padding: 1.5rem;
+    border-radius: 0.5rem;
+    border-top: 5px solid red;
+    border-bottom: 5px solid red;
+    box-shadow: 0 10px 15px rgba(0, 0, 0, 0.1);
+  }
+
+  @media (prefers-color-scheme: dark) {
+    .modal-content {
+      background-color: #000000;
+      color: #f1f5f9;
+    }
+  }
+
+  .modal-title {
+    font-size: 1.25rem;
+    font-weight: bold;
+    color: white;
+  }
+
+  .modal-body {
+    margin-top: 1rem;
+    color: white;
+    line-height: 1.6;
+  }
+
+  .modal-footer {
+    margin-top: 1.5rem;
+    display: flex;
+    justify-content: flex-end;
+    gap: 0.5rem;
+  }
+
+  .btn {
+    padding: 0.5rem 1rem;
+    font-size: 0.875rem;
+    font-weight: 500;
+    border: none;
+    border-radius: 0.375rem;
+    cursor: pointer;
+    transition: background-color 0.2s ease;
+  }
+
+  .btn-volver {
+    background-color: #f3f4f6;
+    color: #374151;
+  }
+
+  .btn-volver:hover {
+    background-color: #e5e7eb;
+  }
+
+  @media (prefers-color-scheme: dark) {
+    .btn-volver {
+      background-color: #2d3748;
+      color: #e2e8f0;
+    }
+
+    .btn-volver:hover {
+      background-color: #4a5568;
+    }
+  }
+
+  .btn-reservar {
+    background-color: #2563eb;
+    color: white;
+  }
+
+  .btn-reservar:hover {
+    background-color: #1d4ed8;
+  }
+
+  .modal-form {
+    display: flex;
+    flex-direction: column;
+    gap: 1rem;
+  }
+
+  .modal-form div>input {
+    height: 3rem;
+  }
+</style>
+
+<!-- Modal de confirmación -->
+<div class="modal-reserva <%= showModal ? 'active' : '' %>" role="dialog" aria-modal="true" aria-labelledby="modalTitle" >
+  <div class="modal-content">
+    <h2 id="modalTitle" class="modal-title">
+      Confirmar reserva
+    </h2>
+    <div class="modal-body">
+      <p>
+        Ingrese su correo electrónico para recibir la confirmación de la reserva.
+      </p>
+    </div>
+
+    <form action="/carrito/reservar" method="POST">
+
+      <div class="modal-form">
+
+        <div>
+          <input type="email" name="email" id="email" placeholder="Correo Electrónico" class="inputs-register"
+            value="<%= (typeof oldData !== 'undefined' && oldData.email) ? oldData.email : '' %>" />
+          <% if (errors && errors.email) { %>
+            <p class="feedback"><%= errors.email.msg %></p>
+          <% } %>
+        </div>
+        <div>
+          <input type="email" name="confirmar_email" id="confirmar_email" placeholder="Correo Electrónico (nuevamente)"
+            class="inputs-register"
+            value="<%= (typeof oldData !== 'undefined' && oldData.email) ? oldData.email : '' %>" />
+          <% if (errors && errors.confirmar_email) { %>
+            <p class="feedback"><%= errors.confirmar_email.msg %></p>
+          <% } %>
+        </div>
+
+      </div>
+      <footer class="modal-footer">
+        <button type="button" class="btn btn-volver">Volver</button>
+        <button type="submit" class="btn btn-reservar">Reservar</button>
+      </footer>
+    </form>
+  </div>
+</div>
+
+<script>
+  document.addEventListener('DOMContentLoaded', function () {
+    // Evento para cerrar el modal con "Volver"
+    const btnVolver = document.querySelector('.btn-volver');
+    if (btnVolver) {
+      btnVolver.onclick = function () {
+        document.querySelector('.modal-reserva').classList.remove('active');
+      };
+    }
+
+    // Evento para abrir el modal desde el botón de confirmar reserva
+    const btnConfirmar = document.querySelector('.btn-confirmar-reserva');
+    if (btnConfirmar) {
+      btnConfirmar.addEventListener('click', function (e) {
+        e.preventDefault();
+        document.querySelector('.modal-reserva').classList.add('active');
+      });
+    }
+
+    // Evento para enviar el formulario desde el botón "Reservar"
+    const btnReservar = document.querySelector('.btn-reservar');
+    if (btnReservar) {
+      btnReservar.onclick = function (e) {
+        // Aquí puedes agregar validaciones JS si quieres
+        // Si todo está bien, envía el formulario:
+        btnReservar.closest('form').submit();
+      };
+    }
+  });
+
+</script>
