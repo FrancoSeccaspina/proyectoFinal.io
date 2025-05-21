@@ -19,7 +19,7 @@
     <main class="container-allMain-cart">
 
       <section id="header-cart">
-        <h1>Carrito <p class="details-p">(<%= cantidadDeProductos %> productos)</p>
+        <h1>Carrito <p class="details-p">(<%= productosCarrito.resultados.cantidadDeProductos %> productos)</p>
         </h1>
         <div id="warning-sentence">
           <img src="/images/exclamation.png" alt="">
@@ -47,7 +47,7 @@
           </div>
 
           <div>
-            <% if (productosCarrito.length === 0) { %>
+            <% if (productosCarrito.productos.length === 0) { %>
               <li class="producto">
                 <div class="cart-container">
                   <div class="cart-wrapper">
@@ -69,7 +69,7 @@
 
             <!-- Productos -->
             <ul class="lista-productos">
-              <% productosCarrito.forEach(function(producto) { %>
+              <% productosCarrito.productos.forEach(function(producto) { %>
                 <li class="producto">
                   <div class="cart-container">
                     <div class="cart-wrapper">
@@ -141,7 +141,7 @@
                   </span>
 
                   <div class="info">
-                    <p class="amount">$ <%=total%>
+                    <p class="amount">$ <%= productosCarrito.resultados.total %>
                     </p>
                   </div>
                 </article>

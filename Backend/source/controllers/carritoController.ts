@@ -28,32 +28,43 @@ class carritoController {
      * @returns array mapeado agregando la clave/valor cantidad y total ProductoCarrito[]
      * 
      * @example
-     * [
-        {
-            id: 1,
-            nombre: '..',
-            descripcion: '....',    
-            precio: 0,
-            categoriaId: 0,
-            imagen: '...jpg',
-            stock: 0,
-            cantidad: 0,
-            total: 0
+     * {
+        productos: [
+            {
+            id: ,
+            nombre: ,
+            descripcion: ,
+            precio: ,
+            categoriaId: ,
+            imagen: '.jpg',
+            stock: ,
+            cantidad: ,
+            subtotal: 
+            }
+        ],
+        resultados: { total: , cantidadDeProductos: '' }
         }
-        ]
      */
-    private async obtenerProductosEnCarrito(req: Request, carrito: Array<{ id_producto: number, cantidad: number }>): Promise<ProductoCarrito[]> {
+    private async obtenerProductosEnCarrito(req: Request): Promise<{}> {
+        const carrito = SessionService.obtenerCarrito(req);
         if (carrito.length === 0) {
-            return [];
+            return {
+                productos: [],
+                resultados: {
+                    total: 0,
+                    cantidadDeProductos: 0}
+            }
         }
 
+        const cantidadDeProductos = carrito.reduce((acc: number, producto) => {
+            return acc + producto.cantidad;
+        }, 0);
         const carritoParseInt = carrito.map((item: any) => {
             return {
                 id_producto: parseInt(item.id_producto, 10),
                 cantidad: parseInt(item.cantidad, 10)
             }
         });
-
         const idsProductosCarrito = carritoParseInt.map((item: any) => item.id_producto);
         const productos = await Producto.findAll({
             where: {
@@ -62,15 +73,25 @@ class carritoController {
                 },
             },
         });
-
         const productosJson = productos.map((producto: any) => producto.toJSON());
-        return productosJson.map((producto: any) => {
+        const productosCarrito = productosJson.map((producto: any) => {
 
             const itemCarrito = carritoParseInt.find((item: any) => item.id_producto == producto.id);
             producto.cantidad = itemCarrito ? itemCarrito.cantidad : 0;
             producto.subtotal = producto.precio * producto.cantidad
             return producto;
         });
+        const total = productosCarrito.reduce((acc: number, producto: ProductoCarrito) => { return acc + producto.subtotal; }, 0);
+
+        const resultadoJson = {
+            productos: productosCarrito,
+            resultados: {
+                total: total,
+                cantidadDeProductos: cantidadDeProductos
+            }
+        };
+        
+        return resultadoJson;
     }
 
     async agregarProducto(req: Request, res: Response) {
@@ -117,16 +138,9 @@ class carritoController {
 
     public async mostrarCarrito(req: Request, res: Response) {
         try {
-            const carrito = SessionService.obtenerCarrito(req);
-            const cantidadDeProductos = carrito.reduce((acc: number, producto) => {
-                return acc + producto.cantidad;
-            }, 0);
-            const productosCarrito = await this.obtenerProductosEnCarrito(req, carrito);
-            const total = productosCarrito.reduce((acc: number, producto: ProductoCarrito) => { return acc + producto.subtotal; }, 0);
-            res.render("carrito", { 
-                productosCarrito: productosCarrito, 
-                total : total , 
-                cantidadDeProductos : cantidadDeProductos,
+            const productosCarrito = await this.obtenerProductosEnCarrito(req);
+            res.render("carrito", {
+                productosCarrito: productosCarrito,
                 showModal: false,
                 errors: undefined
             });
@@ -146,19 +160,11 @@ class carritoController {
     public async reservarCompra(req: Request, res: Response) {
         try {
             const errors = (req as any).validationErrors;
-            
-            if (errors) {
-                const carrito = SessionService.obtenerCarrito(req);
-                const cantidadDeProductos = carrito.reduce((acc: number, producto) => {
-                    return acc + producto.cantidad;
-                }, 0);
-                const productosCarrito = await this.obtenerProductosEnCarrito(req, carrito);
-                const total = productosCarrito.reduce((acc: number, producto: ProductoCarrito) => { return acc + producto.subtotal; }, 0);
 
-                return res.render('carrito', { 
-                    productosCarrito: productosCarrito, 
-                    total : total , 
-                    cantidadDeProductos : cantidadDeProductos,
+            if (errors) {
+                const productosCarrito = await this.obtenerProductosEnCarrito(req);
+                return res.render('carrito', {
+                    productosCarrito: productosCarrito,
                     showModal: true,
                     errors: errors
                 });
