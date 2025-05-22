@@ -8,15 +8,9 @@
     place-content: center;
     background-color: rgba(0, 0, 0, 0.5);
     padding: 1rem;
-    /* Oculto por defecto */
     display: none;
   }
 
-  .modal-reserva.active {
-    display: grid;
-  }
-
-  /* Modal box */
   .modal-content {
     overflow: hidden;
     max-width: 28rem;
@@ -36,8 +30,8 @@
   }
 
   .modal-title {
-    font-size: 1.25rem;
-    font-weight: bold;
+    font-weight: 50;
+    font-size: 1.6rem;
     color: white;
   }
 
@@ -83,12 +77,13 @@
       background-color: #4a5568;
     }
   }
-
+  .btn-login-register,
   .btn-reservar {
     background-color: #2563eb;
     color: white;
   }
 
+  .btn-login-register,
   .btn-reservar:hover {
     background-color: #1d4ed8;
   }
@@ -102,77 +97,80 @@
   .modal-form div>input {
     height: 3rem;
   }
+
+  .modal-reserva-logo-container{
+    display: flex;
+    justify-content: center;
+    margin-bottom: 1rem;
+    align-items: center;
+    gap: 2rem;
+  }
 </style>
 
 <!-- Modal de confirmación -->
-<div class="modal-reserva <%= showModal ? 'active' : '' %>" role="dialog" aria-modal="true" aria-labelledby="modalTitle" >
+<div class="modal-reserva" role="dialog" aria-modal="true" aria-labelledby="modalTitle" >
   <div class="modal-content">
-    <h2 id="modalTitle" class="modal-title">
-      Confirmar reserva
-    </h2>
-    <div class="modal-body">
-      <p>
-        Ingrese su correo electrónico para recibir la confirmación de la reserva.
-      </p>
-    </div>
 
-    <form action="/carrito/reservar" method="POST">
+    <div class="modal-form">
+      <form action="/carrito/reservar" method="POST">
 
-      <div class="modal-form">
-
-        <div>
-          <input type="email" name="email" id="email" placeholder="Correo Electrónico" class="inputs-register"
-            value="<%= (typeof oldData !== 'undefined' && oldData.email) ? oldData.email : '' %>" />
-          <% if (errors && errors.email) { %>
-            <p class="feedback"><%= errors.email.msg %></p>
-          <% } %>
-        </div>
-        <div>
-          <input type="email" name="confirmar_email" id="confirmar_email" placeholder="Correo Electrónico (nuevamente)"
-            class="inputs-register"
-            value="<%= (typeof oldData !== 'undefined' && oldData.email) ? oldData.email : '' %>" />
-          <% if (errors && errors.confirmar_email) { %>
-            <p class="feedback"><%= errors.confirmar_email.msg %></p>
-          <% } %>
+        <div class="modal-reserva-logo-container">
+          <a href="/">
+            <img src="/images/logo.png" alt="Logo Activa Fitness" id="logo-img">
+          </a>
+          <h2 id="modalTitle" class="modal-title">
+            !Confirma la reserva!
+          </h2>
         </div>
 
-      </div>
-      <footer class="modal-footer">
-        <button type="button" class="btn btn-volver">Volver</button>
-        <button type="submit" class="btn btn-reservar">Reservar</button>
-      </footer>
-    </form>
+        <% if (!usuarioLogueado) { %>
+          <div class="modal-body">
+            <p>
+              “Para continuar, debes iniciar sesión o registrarte.”
+            </p>
+          </div>
+        <% } %>
+
+        <footer class="modal-footer">
+          <button type="button" class="btn btn-volver">Volver</button>
+          <% if (usuarioLogueado) { %>
+            <button type="submit" class="btn btn-reservar">Reservar</button>
+          <% } else { %>
+            <a href="/login" class="btn btn-login-register">Login</a>
+            
+            <a href="/register" class="btn btn-login-register">Registrarse</a>
+          <% } %>
+        </footer>
+      </form>
+  </div> 
   </div>
 </div>
 
 <script>
   document.addEventListener('DOMContentLoaded', function () {
-    // Evento para cerrar el modal con "Volver"
-    const btnVolver = document.querySelector('.btn-volver');
-    if (btnVolver) {
-      btnVolver.onclick = function () {
-        document.querySelector('.modal-reserva').classList.remove('active');
-      };
-    }
+  document.querySelectorAll('.btn-confirmar-reserva').forEach(btn => {
+    btn.addEventListener('click', function (e) {
+      e.preventDefault();
+      const form = this.closest('form');
+      document.querySelector('.modal-reserva').style.display = 'grid';
 
-    // Evento para abrir el modal desde el botón de confirmar reserva
-    const btnConfirmar = document.querySelector('.btn-confirmar-reserva');
-    if (btnConfirmar) {
-      btnConfirmar.addEventListener('click', function (e) {
-        e.preventDefault();
-        document.querySelector('.modal-reserva').classList.add('active');
-      });
-    }
-
-    // Evento para enviar el formulario desde el botón "Reservar"
-    const btnReservar = document.querySelector('.btn-reservar');
-    if (btnReservar) {
-      btnReservar.onclick = function (e) {
-        // Aquí puedes agregar validaciones JS si quieres
-        // Si todo está bien, envía el formulario:
-        btnReservar.closest('form').submit();
-      };
-    }
+      // Evento para cerrar el modal con "Cancelar"
+      const btnCancelar = document.querySelector('.btn-volver');
+      if (btnCancelar) {
+        btnCancelar.onclick = function () {
+          document.querySelector('.modal-reserva').style.display = 'none';
+        };
+      }
+      
+      // Evento para enviar el formulario desde el botón "Reservar"
+      const btnReservar = document.querySelector('.btn-reservar');
+      if (btnReservar) {
+        btnReservar.onclick = function (e) {
+          btnReservar.closest('form').submit();
+        };
+      }
+    });
+  })
   });
 
 </script>

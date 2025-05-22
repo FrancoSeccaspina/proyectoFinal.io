@@ -139,10 +139,11 @@ class carritoController {
     public async mostrarCarrito(req: Request, res: Response) {
         try {
             const productosCarrito = await this.obtenerProductosEnCarrito(req);
+            const usuarioLogueado = SessionService.usuarioLogeado(req);
             res.render("carrito", {
                 productosCarrito: productosCarrito,
                 showModal: false,
-                errors: undefined
+                usuarioLogueado: usuarioLogueado
             });
 
         } catch (error) {
@@ -159,6 +160,8 @@ class carritoController {
 
     public async reservarCompra(req: Request, res: Response) {
         try {
+
+            return res.send('<html><body><h1>carrito</h1></body></html>');
             const errors = (req as any).validationErrors;
 
             if (errors) {

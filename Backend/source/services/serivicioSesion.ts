@@ -56,4 +56,8 @@ export const SessionService = {
     guardarSessionUsuario(req: Request, usuario: { id: number, email: string, rol: string }) {
         req.session.usuario = usuario;
     },
+
+    usuarioLogeado(req: Request): boolean {
+        return !!req.session.usuario;
+    }
 };
