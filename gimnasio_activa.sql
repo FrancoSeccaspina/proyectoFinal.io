@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: localhost
--- Generation Time: May 15, 2025 at 08:12 PM
+-- Generation Time: May 23, 2025 at 04:55 PM
 -- Server version: 8.0.38
 -- PHP Version: 8.2.12
 
@@ -41,27 +41,6 @@ CREATE TABLE `autenticacion` (
 INSERT INTO `autenticacion` (`id`, `email`, `contrasenia`, `id_usuario`) VALUES
 (1, 'admin@activafitness.com', '$2b$10$RCIHIHvb6asptQgSa.Yc.eTaj1N.VlCWFsNnsoPxuY.bELwO95QsG', 1),
 (15, 'gustavo.jimenez.crespo@gmail.com', '$2b$10$t8fvTPyB79bQ2ChpdZ04guvIbyJ9.Tzj2NG1xb9ri0Np97U080QJO', 23);
-
--- --------------------------------------------------------
-
---
--- Table structure for table `carrito`
---
-
-CREATE TABLE `carrito` (
-  `id` int NOT NULL,
-  `id_usuario` int NOT NULL,
-  `id_producto` int NOT NULL,
-  `cantidad` int DEFAULT '1',
-  `fecha_agregado` datetime DEFAULT CURRENT_TIMESTAMP
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
-
---
--- Dumping data for table `carrito`
---
-
-INSERT INTO `carrito` (`id`, `id_usuario`, `id_producto`, `cantidad`, `fecha_agregado`) VALUES
-(1, 23, 8, 1, '2025-05-13 16:38:24');
 
 -- --------------------------------------------------------
 
@@ -109,14 +88,14 @@ INSERT INTO `categoria_recetas` (`id`, `nombre`) VALUES
 -- --------------------------------------------------------
 
 --
--- Table structure for table `compras`
+-- Table structure for table `detalle_reservas`
 --
 
-CREATE TABLE `compras` (
-  `id` int NOT NULL,
-  `id_usuario` int NOT NULL,
-  `fecha_compra` datetime DEFAULT CURRENT_TIMESTAMP,
-  `total` int NOT NULL
+CREATE TABLE `detalle_reservas` (
+  `id_detalle_reserva` int NOT NULL,
+  `id_reserva` int NOT NULL,
+  `id_producto` int NOT NULL,
+  `cantidad` int NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
 
 -- --------------------------------------------------------
@@ -428,6 +407,20 @@ INSERT INTO `recetas` (`id`, `nombre`, `descripcion`, `categoria_id`, `imagen`) 
 -- --------------------------------------------------------
 
 --
+-- Table structure for table `reservas`
+--
+
+CREATE TABLE `reservas` (
+  `id_reserva` int NOT NULL,
+  `id_usuario` int NOT NULL,
+  `fecha` date NOT NULL,
+  `total` float NOT NULL,
+  `estado` varchar(255) NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
+
+-- --------------------------------------------------------
+
+--
 -- Table structure for table `usuarios`
 --
 
@@ -441,7 +434,7 @@ CREATE TABLE `usuarios` (
   `fecha_nacimiento` date DEFAULT NULL,
   `celular` varchar(20) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci DEFAULT NULL,
   `aptoMedico` varchar(500) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci DEFAULT NULL,
-  `dni` varchar(255) COLLATE utf8mb4_general_ci DEFAULT NULL
+  `dni` varchar(255) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
 --
@@ -464,14 +457,6 @@ ALTER TABLE `autenticacion`
   ADD KEY `id_usuario` (`id_usuario`);
 
 --
--- Indexes for table `carrito`
---
-ALTER TABLE `carrito`
-  ADD PRIMARY KEY (`id`),
-  ADD KEY `id_usuario` (`id_usuario`),
-  ADD KEY `id_producto` (`id_producto`);
-
---
 -- Indexes for table `categorias`
 --
 ALTER TABLE `categorias`
@@ -484,11 +469,10 @@ ALTER TABLE `categoria_recetas`
   ADD PRIMARY KEY (`id`);
 
 --
--- Indexes for table `compras`
+-- Indexes for table `detalle_reservas`
 --
-ALTER TABLE `compras`
-  ADD PRIMARY KEY (`id`),
-  ADD KEY `id_usuario` (`id_usuario`);
+ALTER TABLE `detalle_reservas`
+  ADD PRIMARY KEY (`id_detalle_reserva`);
 
 --
 -- Indexes for table `ejercicios`
@@ -525,6 +509,13 @@ ALTER TABLE `recetas`
   ADD KEY `categoria_id` (`categoria_id`);
 
 --
+-- Indexes for table `reservas`
+--
+ALTER TABLE `reservas`
+  ADD PRIMARY KEY (`id_reserva`),
+  ADD KEY `fk_usuario` (`id_usuario`);
+
+--
 -- Indexes for table `usuarios`
 --
 ALTER TABLE `usuarios`
@@ -542,12 +533,6 @@ ALTER TABLE `autenticacion`
   MODIFY `id` int NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=16;
 
 --
--- AUTO_INCREMENT for table `carrito`
---
-ALTER TABLE `carrito`
-  MODIFY `id` int NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2;
-
---
 -- AUTO_INCREMENT for table `categorias`
 --
 ALTER TABLE `categorias`
@@ -560,10 +545,10 @@ ALTER TABLE `categoria_recetas`
   MODIFY `id` int NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=7;
 
 --
--- AUTO_INCREMENT for table `compras`
+-- AUTO_INCREMENT for table `detalle_reservas`
 --
-ALTER TABLE `compras`
-  MODIFY `id` int NOT NULL AUTO_INCREMENT;
+ALTER TABLE `detalle_reservas`
+  MODIFY `id_detalle_reserva` int NOT NULL AUTO_INCREMENT;
 
 --
 -- AUTO_INCREMENT for table `ejercicios`
@@ -596,6 +581,12 @@ ALTER TABLE `recetas`
   MODIFY `id` int NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=53;
 
 --
+-- AUTO_INCREMENT for table `reservas`
+--
+ALTER TABLE `reservas`
+  MODIFY `id_reserva` int NOT NULL AUTO_INCREMENT;
+
+--
 -- AUTO_INCREMENT for table `usuarios`
 --
 ALTER TABLE `usuarios`
@@ -604,19 +595,6 @@ ALTER TABLE `usuarios`
 --
 -- Constraints for dumped tables
 --
-
---
--- Constraints for table `carrito`
---
-ALTER TABLE `carrito`
-  ADD CONSTRAINT `carrito_ibfk_1` FOREIGN KEY (`id_usuario`) REFERENCES `usuarios` (`id`) ON DELETE CASCADE,
-  ADD CONSTRAINT `carrito_ibfk_2` FOREIGN KEY (`id_producto`) REFERENCES `productos` (`id`) ON DELETE CASCADE;
-
---
--- Constraints for table `compras`
---
-ALTER TABLE `compras`
-  ADD CONSTRAINT `compras_ibfk_1` FOREIGN KEY (`id_usuario`) REFERENCES `usuarios` (`id`) ON DELETE CASCADE;
 
 --
 -- Constraints for table `ejercicios`

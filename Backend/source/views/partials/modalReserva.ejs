@@ -148,29 +148,29 @@
 
 <script>
   document.addEventListener('DOMContentLoaded', function () {
-  document.querySelectorAll('.btn-confirmar-reserva').forEach(btn => {
-    btn.addEventListener('click', function (e) {
-      e.preventDefault();
-      const form = this.closest('form');
-      document.querySelector('.modal-reserva').style.display = 'grid';
+    document.querySelectorAll('.btn-confirmar-reserva').forEach(btn => {
+      btn.addEventListener('click', function (e) {
+        e.preventDefault();
+        const form = this.closest('form');
+        document.querySelector('.modal-reserva').style.display = 'grid';
 
-      // Evento para cerrar el modal con "Cancelar"
-      const btnCancelar = document.querySelector('.btn-volver');
-      if (btnCancelar) {
-        btnCancelar.onclick = function () {
-          document.querySelector('.modal-reserva').style.display = 'none';
-        };
-      }
-      
-      // Evento para enviar el formulario desde el botón "Reservar"
-      const btnReservar = document.querySelector('.btn-reservar');
-      if (btnReservar) {
-        btnReservar.onclick = function (e) {
-          btnReservar.closest('form').submit();
-        };
-      }
-    });
-  })
+        // Evento para cerrar el modal con "Cancelar"
+        const btnCancelar = document.querySelector('.btn-volver');
+        if (btnCancelar) {
+          btnCancelar.onclick = function () {
+            document.querySelector('.modal-reserva').style.display = 'none';
+          };
+        }
+        
+        // Evento para enviar el formulario desde el botón "Reservar"
+        const btnReservar = document.querySelector('.btn-reservar');
+        if (btnReservar) {
+          btnReservar.onclick = function (e) {
+            btnReservar.closest('form').submit();
+          };
+        }
+      });
+    })
   });
 
 </script>
