@@ -4,7 +4,8 @@ import { Producto } from '../database/models/producto';
 import { Reserva } from '../database/models/reserva';
 import { SessionService } from '../services/serivicioSesion';
 import { EstadosReserva } from '../constants/estadoReserva';
-import { Usuario } from "../database/models";
+import { DetalleReserva, Usuario } from "../database/models";
+import { forEach } from "../validations/productCreate";
 
 interface ProductoCarrito {
     id: number;
@@ -174,15 +175,6 @@ class carritoController {
 
             const productosEnCarrito = await this.obtenerProductosEnCarrito(req);
             const usuarioLogueado = SessionService.obtenerSessionUsuario(req);
-            // if (!usuarioLogueado) {
-            //     return res.status(401).render("error", {
-            //         title: "Error de autenticación",
-            //         code: 401,
-            //         message: "Error de autenticación",
-            //         description: "No estás
-            //         error: "No estás autenticado"
-            //     });
-            // }
             console.log("usuarioLogueado carrito", usuarioLogueado);
             const usuario = await Usuario.findByPk(usuarioLogueado?.id);
             const id_usuario = usuario!.id; // validar
@@ -197,6 +189,19 @@ class carritoController {
                 total: total,
                 estado: estadoPendiente,
                 vencimiento: horaVencimiento
+            });
+
+            productosEnCarrito.productos.forEach(async (producto: ProductoCarrito) => {
+                const id_producto = producto.id;
+                const cantidad = producto.cantidad;
+                const id_reserva = reserva.id_reserva;
+
+                await DetalleReserva.create({
+                    id_producto: id_producto,
+                    cantidad: cantidad,
+                    id_reserva: id_reserva
+                });
+                // Aquí tu lógica para cada producto
             });
 
             return res.send('<html><body><h1> proximamente confirmar carrito </h1></body></html>');

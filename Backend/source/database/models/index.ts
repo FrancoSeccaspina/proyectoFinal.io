@@ -1,3 +1,4 @@
+import { conexionDB, sequelize } from '../connection/connection'
 import { initUsuarioModel, Usuario } from './usuario';
 import { Autenticacion, initAutenticacionModel } from './autenticacion';
 import { initProductoModel, Producto } from './producto';
@@ -9,7 +10,7 @@ import { initGrupoMuscularModel, GrupoMuscular } from './grupos_musculares'
 import { initProveedorModel, Proveedor } from './proveedores';
 import { initCompraModel, Compra } from './compra'
 import { initReservaModel, Reserva } from './reserva'
-import { conexionDB, sequelize } from '../connection/connection'
+import { initDetalleReservaModel, DetalleReserva } from './detalleReserva'
 
 const inicializarDB = async () => {
   try {
@@ -26,6 +27,7 @@ const inicializarDB = async () => {
     initProveedorModel(sequelize);
     initCompraModel(sequelize);
     initReservaModel(sequelize);
+    initDetalleReservaModel(sequelize);
 
     console.log('Modelos inicializados')
   } catch (error) {
@@ -47,5 +49,6 @@ export {
   GrupoMuscular,
   Proveedor,
   Compra,
-  Reserva
+  Reserva,
+  DetalleReserva
 };
