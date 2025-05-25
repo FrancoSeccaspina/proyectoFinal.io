@@ -1,10 +1,11 @@
-import { validationResult } from "express-validator";
 import { Op } from "sequelize";
 import { Request, Response } from "express";
 import { Producto } from '../database/models/producto';
-import { SessionService } from '../services/serivicioSesion'
-import { Json } from "sequelize/types/utils";
-import { error } from "console";
+import { Reserva } from '../database/models/reserva';
+import { SessionService } from '../services/serivicioSesion';
+import { EstadosReserva } from '../constants/estadoReserva';
+import { Usuario } from "../database/models";
+
 interface ProductoCarrito {
     id: number;
     nombre: string;
@@ -16,6 +17,15 @@ interface ProductoCarrito {
     cantidad: number;
     subtotal: number;
 }
+
+interface ResultadoCarrito {
+    productos: ProductoCarrito[];
+    resultados: {
+        total: number;
+        cantidadDeProductos: number;
+    };
+}
+
 
 class carritoController {
     /**
@@ -45,7 +55,7 @@ class carritoController {
         resultados: { total: , cantidadDeProductos: '' }
         }
      */
-    private async obtenerProductosEnCarrito(req: Request): Promise<{}> {
+    private async obtenerProductosEnCarrito(req: Request): Promise<ResultadoCarrito> {
         const carrito = SessionService.obtenerCarrito(req);
         if (carrito.length === 0) {
             return {
@@ -91,6 +101,7 @@ class carritoController {
             }
         };
         
+        console.log("productosCarrito", resultadoJson);
         return resultadoJson;
     }
 
@@ -161,18 +172,34 @@ class carritoController {
     public async reservarCompra(req: Request, res: Response) {
         try {
 
-            return res.send('<html><body><h1>carrito</h1></body></html>');
-            const errors = (req as any).validationErrors;
+            const productosEnCarrito = await this.obtenerProductosEnCarrito(req);
+            const usuarioLogueado = SessionService.obtenerSessionUsuario(req);
+            // if (!usuarioLogueado) {
+            //     return res.status(401).render("error", {
+            //         title: "Error de autenticación",
+            //         code: 401,
+            //         message: "Error de autenticación",
+            //         description: "No estás
+            //         error: "No estás autenticado"
+            //     });
+            // }
+            console.log("usuarioLogueado carrito", usuarioLogueado);
+            const usuario = await Usuario.findByPk(usuarioLogueado?.id);
+            const id_usuario = usuario!.id; // validar
+            const fechaActual = new Date();
+            const total = productosEnCarrito?.resultados.total;
+            const estadoPendiente = EstadosReserva.PENDIENTE;
+            const horaVencimiento = new Date(fechaActual.getTime() + 30 * 60000);
 
-            if (errors) {
-                const productosCarrito = await this.obtenerProductosEnCarrito(req);
-                return res.render('carrito', {
-                    productosCarrito: productosCarrito,
-                    showModal: true,
-                    errors: errors
-                });
-            }
-            // TODO : falta agregar logica para guardar en la base de datos y mostrar la vista de formas de pago (notificar por gmail?)
+            const reserva = await Reserva.create({
+                id_usuario: id_usuario,
+                fecha: fechaActual,
+                total: total,
+                estado: estadoPendiente,
+                vencimiento: horaVencimiento
+            });
+
+            return res.send('<html><body><h1> proximamente confirmar carrito </h1></body></html>');
 
         } catch (error) {
             console.error("Error al reservar compra:", (error as Error).message);

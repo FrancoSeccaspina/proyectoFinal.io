@@ -7,8 +7,8 @@ import { initRecetaModel, Receta } from './receta';
 import { initCategoriaRecetaModel, CategoriaReceta } from './categoria_receta'
 import { initGrupoMuscularModel, GrupoMuscular } from './grupos_musculares'
 import { initProveedorModel, Proveedor } from './proveedores';
-import { initCarritoModel, Carrito } from './carrito'
 import { initCompraModel, Compra } from './compra'
+import { initReservaModel, Reserva } from './reserva'
 import { conexionDB, sequelize } from '../connection/connection'
 
 const inicializarDB = async () => {
@@ -24,8 +24,8 @@ const inicializarDB = async () => {
     initCategoriaRecetaModel(sequelize);
     initGrupoMuscularModel(sequelize);
     initProveedorModel(sequelize);
-    initCarritoModel(sequelize);
     initCompraModel(sequelize);
+    initReservaModel(sequelize);
 
     console.log('Modelos inicializados')
   } catch (error) {
@@ -46,6 +46,6 @@ export {
   CategoriaReceta,
   GrupoMuscular,
   Proveedor,
-  Carrito,
-  Compra
+  Compra,
+  Reserva
 };

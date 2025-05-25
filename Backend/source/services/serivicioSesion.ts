@@ -57,6 +57,10 @@ export const SessionService = {
         req.session.usuario = usuario;
     },
 
+    obtenerSessionUsuario(req: Request) {
+        return req.session.usuario;
+    },
+    
     usuarioLogeado(req: Request): boolean {
         return !!req.session.usuario;
     }
