@@ -1,11 +1,8 @@
 import { Op } from "sequelize";
 import { Request, Response } from "express";
-import { Producto } from '../database/models/producto';
-import { Reserva } from '../database/models/reserva';
 import { SessionService } from '../services/serivicioSesion';
 import { EstadosReserva } from '../constants/estadoReserva';
-import { DetalleReserva, Usuario } from "../database/models";
-import { forEach } from "../validations/productCreate";
+import { Usuario, Reserva, DetalleReserva, Producto } from "../database/models";
 
 interface ProductoCarrito {
     id: number;
@@ -36,7 +33,7 @@ class carritoController {
      * 
      * @param req 
      * @param carrito
-     * @returns array mapeado agregando la clave/valor cantidad y total ProductoCarrito[]
+     * @returns array mapeado agregando la clave/valor cantidad y total ResultadoCarrito
      * 
      * @example
      * {
@@ -53,7 +50,10 @@ class carritoController {
             subtotal: 
             }
         ],
-        resultados: { total: , cantidadDeProductos: '' }
+        resultados: { 
+            total: 0, 
+            cantidadDeProductos: '' 
+            }
         }
      */
     private async obtenerProductosEnCarrito(req: Request): Promise<ResultadoCarrito> {
@@ -63,7 +63,8 @@ class carritoController {
                 productos: [],
                 resultados: {
                     total: 0,
-                    cantidadDeProductos: 0}
+                    cantidadDeProductos: 0
+                }
             }
         }
 
@@ -101,13 +102,13 @@ class carritoController {
                 cantidadDeProductos: cantidadDeProductos
             }
         };
-        
-        console.log("productosCarrito", resultadoJson);
+
         return resultadoJson;
     }
 
     async agregarProducto(req: Request, res: Response) {
         try {
+            // TODO: validar que usuario esta logueado y que la cantidad no pase del stock disponible
 
             const carrito = SessionService.obtenerCarrito(req);
             const { id_producto, cantidad } = req.body;
@@ -175,11 +176,22 @@ class carritoController {
 
             const productosEnCarrito = await this.obtenerProductosEnCarrito(req);
             const usuarioLogueado = SessionService.obtenerSessionUsuario(req);
-            console.log("usuarioLogueado carrito", usuarioLogueado);
+            if (!usuarioLogueado) {
+                throw new Error("Debes iniciar sesión para reservar");
+            }
+
+            if (!productosEnCarrito.productos || productosEnCarrito.productos.length === 0) {
+                throw new Error("No hay productos en el carrito");
+            }
+
             const usuario = await Usuario.findByPk(usuarioLogueado?.id);
-            const id_usuario = usuario!.id; // validar
+            if (!usuario) {
+                throw new Error("Usuario no encontrado");
+            }
+
+            const id_usuario = usuario.id;
             const fechaActual = new Date();
-            const total = productosEnCarrito?.resultados.total;
+            const total = productosEnCarrito.resultados.total;
             const estadoPendiente = EstadosReserva.PENDIENTE;
             const horaVencimiento = new Date(fechaActual.getTime() + 30 * 60000);
 
@@ -201,10 +213,9 @@ class carritoController {
                     cantidad: cantidad,
                     id_reserva: id_reserva
                 });
-                // Aquí tu lógica para cada producto
             });
 
-            return res.send('<html><body><h1> proximamente confirmar carrito </h1></body></html>');
+            return res.redirect("/carrito/mostrar/reservas");
 
         } catch (error) {
             console.error("Error al reservar compra:", (error as Error).message);
@@ -218,5 +229,48 @@ class carritoController {
         }
     }
 
+    public async mostrarReservas(req: Request, res: Response) {
+        try {
+            const usuarioLogueado = SessionService.obtenerSessionUsuario(req);
+            if (!usuarioLogueado) {
+                throw new Error("Debes iniciar sesión para ver tus reservas");
+            }
+
+            const reserva = await Reserva.findOne({
+                where: { id_usuario: usuarioLogueado.id },
+                order: [['id_reserva', 'DESC']]
+            });
+
+            if (!reserva) {
+                return res.render("reservaDetail", { reserva: null, detalleReserva: [] });
+            }
+
+            const reservaPlain = reserva.get({ plain: true });
+            const detalleReserva = await DetalleReserva.findAll({
+                where: { id_reserva: reservaPlain.id_reserva },
+                include: [{
+                    model: Producto,
+                    attributes: ['id', 'nombre', 'descripcion', 'precio', 'imagen']
+                }]
+            });
+            const detalleReservaPlain = detalleReserva.map(detalle => detalle.get({ plain: true }));
+
+            res.render("reservaDetail", {
+                reserva: reservaPlain,
+                detalleReserva: detalleReservaPlain
+            });
+            
+        } catch (error) {
+            console.error("Error al mostrar reservas:", (error as Error).message);
+            res.status(500).render("error", {
+                title: "Error del servidor",
+                code: 500,
+                message: "Error al mostrar reservas",
+                description: "Ocurrió un error inesperado.",
+                error: (error as Error).message
+            });
+        }
+    }
 }
+
 export default new carritoController();

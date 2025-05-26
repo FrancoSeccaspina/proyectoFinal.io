@@ -1,0 +1,94 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <%- include('./partials/head.ejs') %>
+    <link rel="stylesheet" href="/css/register.css" />
+    <link rel="stylesheet" href="/css/carrito.css">
+    <link rel="stylesheet" href="/css/button-form.css">
+</head>
+
+<style>
+    .contenedor-compras {
+        max-width: 500px;
+        margin: 50px auto;
+        padding: 20px;
+        background-color: #f8fafc;
+        border: 1px solid #e2e8f0;
+        border-radius: 12px;
+        box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
+        font-family: Arial, sans-serif;
+    }
+
+    .contenedor-compras h2 {
+        text-align: center;
+        margin-bottom: 20px;
+        color: #2d3748;
+    }
+
+    .compra {
+        background-color: #edf2f7;
+        padding: 15px;
+        margin-bottom: 15px;
+        border-radius: 8px;
+    }
+
+    .compra p {
+        margin: 5px 0;
+        color: #4a5568;
+    }
+</style>
+
+<body>
+
+    <%- include('./partials/header.ejs') %>
+
+    <main class="container-allMain-cart">
+        <section id="header-cart">
+            <h1>¡Reserva confirmada!</h1>
+            <div id="warning-sentence">
+                <img src="/images/exclamation.png" alt="">
+                <p><strong>Importante:</strong> Realiza el pago para poder obtener los productos.</p>
+            </div>
+        </section>
+
+        <div class="contenedor-compras">
+            <h2>Detalle de tu reserva</h2>
+            <% if (reserva && detalleReserva && detalleReserva.length > 0) { %>
+                <% detalleReserva.forEach(function(detalle) { %>
+                    <div class="compra">
+                        <p><strong>Fecha:</strong> <%= reserva.fecha ? reserva.fecha.toLocaleString ? reserva.fecha.toLocaleString() : reserva.fecha : '' %></p>
+                        <p><strong>Producto:</strong> <%= detalle.Producto ? detalle.Producto.nombre : '' %></p>
+                        <p><strong>Cantidad:</strong> <%= detalle.cantidad %></p>
+                        <p><strong>Monto:</strong> $<%= detalle.Producto ? detalle.Producto.precio : '' %></p>
+                    </div>
+                <% }) %>
+                <div class="compra" style="background:#e2e8f0;">
+                    <p><strong>Total de la reserva:</strong> $<%= reserva.total %></p>
+                </div>
+            <% } else { %>
+                <div class="compra">
+                    <p>No hay detalles para esta reserva.</p>
+                </div>
+            <% } %>
+        </div>
+
+        <section id="payments">
+            <div class="pay-sentence">
+                <p>Elegí tu método de pago</p>
+            </div>
+            <div class="methods-img">
+                <a href="/transferencia"><button id="transferencia-btn">Transferencia Bancaria</button></a>
+                <a href="/mPago"><button id="mercadopago-btn">Mercado Pago</button></a>
+            </div>
+        </section>
+    </main>
+
+    <footer class="main-footer">
+        <%- include('./partials/footer.ejs') %>
+    </footer>
+
+    <script src="/js/carrito.js"></script>
+</body>
+
+</html>

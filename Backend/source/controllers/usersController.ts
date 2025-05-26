@@ -202,9 +202,6 @@ export class UsuarioController {
         email: usuarioExistente.email,
         rol: usuario.rol
       });
-
-      console.log("Usuario logueado:", req.session.usuario);
-      console.log("obtener usuario logueado:", SessionService.obtenerSessionUsuario(req));
       
       if (usuario.rol === Roles.ADMIN) {
         return res.redirect("http://localhost:3000");

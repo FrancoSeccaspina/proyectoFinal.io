@@ -30,6 +30,11 @@ const inicializarDB = async () => {
     initDetalleReservaModel(sequelize);
 
     console.log('Modelos inicializados')
+
+    Producto.associate({ DetalleReserva });
+    DetalleReserva.associate({ Producto, Reserva });
+
+    console.log('Asociaciones de modelos establecidas');
   } catch (error) {
     console.error('Error al inicializar Modelos:', error);
   }

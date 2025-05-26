@@ -28,8 +28,10 @@ class Producto extends Model<InferAttributes<Producto>, InferCreationAttributes<
     declare stock: number;
 
     static associate(models: any) {
+        Producto.hasMany(models.DetalleReserva, {
+            foreignKey: 'id_producto',
+        });
     }
-
 }
 
 const initProductoModel = (sequelize: Sequelize) => {

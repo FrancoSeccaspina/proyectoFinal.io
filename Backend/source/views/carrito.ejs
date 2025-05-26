@@ -18,6 +18,7 @@
 
     <main class="container-allMain-cart">
 
+      <!-- cantidad productos -->
       <section id="header-cart">
         <h1>Carrito <p class="details-p">(<%= productosCarrito.resultados.cantidadDeProductos %> productos)</p>
         </h1>
@@ -28,8 +29,10 @@
         </div>
       </section>
 
+      <!-- lista productos -->
       <section id="cards-products">
         <section class="carrito-container" id="products-description-cart">
+          <!-- header div -->
           <div id="terms-products">
             <div>
               <p>Estas comprando en <b>Activa fitness</b></p>
@@ -45,14 +48,16 @@
             </div>
 
           </div>
-
+          
+          <!-- lista productos -->
           <div>
+            <!-- no hay products en el carrito -->
             <% if (productosCarrito.productos.length === 0) { %>
               <li class="producto">
                 <div class="cart-container">
                   <div class="cart-wrapper">
                     <div class="cart-list">
-                      <ul class="cart-items
+                      <ul class="cart-items">
                         <li class="cart-item">
                           <div class="cart-details">
                             <h3 class="cart-product-name">
@@ -149,7 +154,7 @@
 
               <!-- boton reservar -->
               <div class="item2">
-                <form action="/carrito/reservar" method="POST">
+                <form action="/carrito/mostrar/reservas" method="POST">
                   <button type="submit" class="btn-confirmar-reserva" style="border: none;">
                     <div class="button-form">
   
@@ -168,16 +173,6 @@
           </div>
         </section>
       </section>
-
-      <!-- <section id="payments">
-        <div class="pay-sentence">
-          <p>Elegí tu método de pago</p>
-        </div>
-        <div class="methods-img">
-          <a href="/transferencia"><button id="transferencia-btn">Transferencia Bancaria</button></a>
-          <a href="/mPago"><button id="mercadopago-btn">Mercado Pago</button></a>
-        </div>
-      </section> -->
     </main>
 
     
