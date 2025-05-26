@@ -215,7 +215,7 @@ class carritoController {
                 });
             });
 
-            return res.redirect("/carrito/mostrar/reservas");
+            return res.redirect("/carrito/mostrar/ultimaReserva");
 
         } catch (error) {
             console.error("Error al reservar compra:", (error as Error).message);
@@ -229,7 +229,7 @@ class carritoController {
         }
     }
 
-    public async mostrarReservas(req: Request, res: Response) {
+    public async mostrarUltimaReserva(req: Request, res: Response) {
         try {
             const usuarioLogueado = SessionService.obtenerSessionUsuario(req);
             if (!usuarioLogueado) {
@@ -259,7 +259,54 @@ class carritoController {
                 reserva: reservaPlain,
                 detalleReserva: detalleReservaPlain
             });
-            
+
+        } catch (error) {
+            console.error("Error al mostrar reservas:", (error as Error).message);
+            res.status(500).render("error", {
+                title: "Error del servidor",
+                code: 500,
+                message: "Error al mostrar reservas",
+                description: "Ocurrió un error inesperado.",
+                error: (error as Error).message
+            });
+        }
+    }
+
+    public async mostrarTodasLasReservas(req: Request, res: Response) {
+        try {
+            const usuarioLogueado = SessionService.obtenerSessionUsuario(req);
+            if (!usuarioLogueado) {
+                throw new Error("Debes iniciar sesión para ver tus reservas");
+            }
+
+            const reservas = await Reserva.findAll({
+                where: { id_usuario: usuarioLogueado.id },
+                order: [['id_reserva', 'DESC']]
+            });
+
+            if (!reservas || reservas.length === 0) {
+                return res.render("reservas", { reservas: [] });
+            }
+
+            // Para cada reserva, traer sus detalles y productos
+            const reservasConDetalles = await Promise.all(reservas.map(async (reserva) => {
+                const reservaPlain = reserva.get({ plain: true });
+                const detalleReserva = await DetalleReserva.findAll({
+                    where: { id_reserva: reservaPlain.id_reserva },
+                    include: [{
+                        model: Producto,
+                        attributes: ['id', 'nombre', 'descripcion', 'precio', 'imagen']
+                    }]
+                });
+                const detalleReservaPlain = detalleReserva.map(detalle => detalle.get({ plain: true }));
+                return {
+                    ...reservaPlain,
+                    detalleReserva: detalleReservaPlain
+                };
+            }));
+
+            res.render("reservas", { reservas: reservasConDetalles });
+
         } catch (error) {
             console.error("Error al mostrar reservas:", (error as Error).message);
             res.status(500).render("error", {

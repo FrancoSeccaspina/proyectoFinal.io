@@ -10,6 +10,7 @@ router.get("/carrito/mostrar", (req: Request, res: Response) => {carritoControll
 router.post("/carrito/reservar", (req: Request, res: Response) => {
   carritoController.reservarCompra(req, res);
 });
-router.get("/carrito/mostrar/reservas", (req: Request, res: Response) => {carritoController.mostrarReservas(req, res)});
+router.get("/carrito/mostrar/ultimaReserva", (req: Request, res: Response) => {carritoController.mostrarUltimaReserva(req, res)});
+router.get("/carrito/mostrar/reservas", (req: Request, res: Response) => {carritoController.mostrarTodasLasReservas(req, res)});
 
 export default router;

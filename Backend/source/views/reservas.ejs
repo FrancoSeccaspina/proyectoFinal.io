@@ -3,9 +3,9 @@
 
 <head>
     <%- include('./partials/head.ejs') %>
-        <link rel="stylesheet" href="/css/register.css" />
-        <link rel="stylesheet" href="/css/carrito.css">
-        <link rel="stylesheet" href="/css/button-form.css">
+    <link rel="stylesheet" href="/css/register.css" />
+    <link rel="stylesheet" href="/css/carrito.css">
+    <link rel="stylesheet" href="/css/button-form.css">
 </head>
 
 <style>
@@ -37,54 +37,68 @@
         margin: 5px 0;
         color: #4a5568;
     }
+    .compra-total {
+        background: #e2e8f0;
+        padding: 10px;
+        border-radius: 8px;
+        margin-bottom: 25px;
+        font-weight: bold;
+    }
 </style>
 
 <body>
 
     <%- include('./partials/header.ejs') %>
 
-        <main class="container-allMain-cart">
-            <!-- cantidad productos -->
-            <section id="header-cart">
-                <h1>Reservas</p>
-                </h1>
-                <div id="warning-sentence">
-                    <img src="/images/exclamation.png" alt="">
-                    <p>Verifica el estado de su reserva.</p>
-                </div>
-            </section>
-
-            <div class="contenedor-compras">
-                <h2>Compras por Fecha</h2>
-                <div class="compra">
-                    <p><strong>Fecha:</strong> 2025-05-20</p>
-                    <p><strong>Producto:</strong> Zapatillas</p>
-                    <p><strong>Monto:</strong> $12.000</p>
-                </div>
-                <div class="compra">
-                    <p><strong>Fecha:</strong> 2025-05-21</p>
-                    <p><strong>Producto:</strong> Remera</p>
-                    <p><strong>Monto:</strong> $3.500</p>
-                </div>
+    <main class="container-allMain-cart">
+        <section id="header-cart">
+            <h1>Reservas</h1>
+            <div id="warning-sentence">
+                <img src="/images/exclamation.png" alt="">
+                <p>Verifica el estado de tu reserva.</p>
             </div>
+        </section>
 
-            <section id="payments">
-                <div class="pay-sentence">
-                    <p>Elegí tu método de pago</p>
+        <div class="contenedor-compras">
+            <h2>Compras por Fecha</h2>
+            <% if (reservas && reservas.length > 0) { %>
+                <% reservas.forEach(function(reserva) { %>
+                    <% if (reserva.detalleReserva && reserva.detalleReserva.length > 0) { %>
+                        <% reserva.detalleReserva.forEach(function(detalle) { %>
+                            <div class="compra">
+                                <p><strong>Fecha:</strong> <%= reserva.fecha ? reserva.fecha.toLocaleString ? reserva.fecha.toLocaleString() : reserva.fecha : '' %></p>
+                                <p><strong>Producto:</strong> <%= detalle.Producto ? detalle.Producto.nombre : '' %></p>
+                                <p><strong>Cantidad:</strong> <%= detalle.cantidad %></p>
+                                <p><strong>Monto:</strong> $<%= detalle.Producto ? detalle.Producto.precio : '' %></p>
+                            </div>
+                        <% }) %>
+                        <div class="compra-total">
+                            <p><strong>Total de la reserva:</strong> $<%= reserva.total %></p>
+                        </div>
+                    <% } %>
+                <% }) %>
+            <% } else { %>
+                <div class="compra">
+                    <p>No hay reservas para mostrar.</p>
                 </div>
-                <div class="methods-img">
-                    <a href="/transferencia"><button id="transferencia-btn">Transferencia Bancaria</button></a>
-                    <a href="/mPago"><button id="mercadopago-btn">Mercado Pago</button></a>
-                </div>
-            </section>
+            <% } %>
+        </div>
 
-        </main>
+        <section id="payments">
+            <div class="pay-sentence">
+                <p>Elegí tu método de pago</p>
+            </div>
+            <div class="methods-img">
+                <a href="/transferencia"><button id="transferencia-btn">Transferencia Bancaria</button></a>
+                <a href="/mPago"><button id="mercadopago-btn">Mercado Pago</button></a>
+            </div>
+        </section>
+    </main>
 
-        <footer class="main-footer">
-            <%- include('./partials/footer.ejs') %>
-        </footer>
+    <footer class="main-footer">
+        <%- include('./partials/footer.ejs') %>
+    </footer>
 
-        <script src="/js/carrito.js"></script>
+    <script src="/js/carrito.js"></script>
 </body>
-
 </html>

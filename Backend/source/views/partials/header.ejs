@@ -109,6 +109,16 @@
             <span>Productos</span>
           </a>
         </li>
+
+        <% if (usuarioLogueado) { %>
+          <li class="nav-item">
+            <a href="/carrito/mostrar/reservas">
+              <i class="fa-solid fa-calendar-check"></i>
+              <span>Reservas</span>
+            </a>
+          </li>
+        <% }%>
+
         <li class="nav-item search-wrapper">
           <div class="search-box">
             <input type="text" placeholder="Buscar" id="search-input">
