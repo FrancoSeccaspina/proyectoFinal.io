@@ -10,6 +10,7 @@ import cors from 'cors';
 import methodOverride from 'method-override';
 import session from 'express-session';
 
+// Importación de rutas
 import usersRoutes from './routes/users.routes';
 import viewRoutes from './routes/view.routes';
 import productoRoutes from './routes/producto.routes';
@@ -18,6 +19,7 @@ import grupoMuscularRoutes from './routes/grupo_muscular.routes';
 import recetaRoutes from './routes/receta.routes';
 import ejercicioRoutes from './routes/ejercicio.routes';
 import carritoRoutes from './routes/carrito.routes';
+import reservaRoutes from './routes/reserva.routes';
 
 import isAuthenticated from './middlewares/isAuthenticated';
 import rutaNoEncontrada from './middlewares/rutaNoEncontrada';
@@ -84,6 +86,7 @@ app.use('', grupoMuscularRoutes)
 app.use('', ejercicioRoutes);
 app.use('', recetaRoutes);
 app.use('', carritoRoutes);
+app.use('', reservaRoutes);
 app.use('/categorias', categoriaRoutes);
 
 //APIS
