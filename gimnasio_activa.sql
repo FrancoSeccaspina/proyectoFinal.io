@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: localhost
--- Generation Time: May 23, 2025 at 04:55 PM
+-- Generation Time: May 26, 2025 at 06:42 PM
 -- Server version: 8.0.38
 -- PHP Version: 8.2.12
 
@@ -93,9 +93,9 @@ INSERT INTO `categoria_recetas` (`id`, `nombre`) VALUES
 
 CREATE TABLE `detalle_reservas` (
   `id_detalle_reserva` int NOT NULL,
-  `id_reserva` int NOT NULL,
   `id_producto` int NOT NULL,
-  `cantidad` int NOT NULL
+  `cantidad` int NOT NULL,
+  `id_reserva` int DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
 
 -- --------------------------------------------------------
@@ -415,7 +415,8 @@ CREATE TABLE `reservas` (
   `id_usuario` int NOT NULL,
   `fecha` date NOT NULL,
   `total` float NOT NULL,
-  `estado` varchar(255) NOT NULL
+  `estado` varchar(255) NOT NULL,
+  `vencimiento` date NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
 
 -- --------------------------------------------------------
@@ -472,7 +473,8 @@ ALTER TABLE `categoria_recetas`
 -- Indexes for table `detalle_reservas`
 --
 ALTER TABLE `detalle_reservas`
-  ADD PRIMARY KEY (`id_detalle_reserva`);
+  ADD PRIMARY KEY (`id_detalle_reserva`),
+  ADD KEY `fk_reserva` (`id_reserva`);
 
 --
 -- Indexes for table `ejercicios`
@@ -548,7 +550,7 @@ ALTER TABLE `categoria_recetas`
 -- AUTO_INCREMENT for table `detalle_reservas`
 --
 ALTER TABLE `detalle_reservas`
-  MODIFY `id_detalle_reserva` int NOT NULL AUTO_INCREMENT;
+  MODIFY `id_detalle_reserva` int NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=18;
 
 --
 -- AUTO_INCREMENT for table `ejercicios`
@@ -584,7 +586,7 @@ ALTER TABLE `recetas`
 -- AUTO_INCREMENT for table `reservas`
 --
 ALTER TABLE `reservas`
-  MODIFY `id_reserva` int NOT NULL AUTO_INCREMENT;
+  MODIFY `id_reserva` int NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=22;
 
 --
 -- AUTO_INCREMENT for table `usuarios`
@@ -595,6 +597,12 @@ ALTER TABLE `usuarios`
 --
 -- Constraints for dumped tables
 --
+
+--
+-- Constraints for table `detalle_reservas`
+--
+ALTER TABLE `detalle_reservas`
+  ADD CONSTRAINT `fk_detalle_reserva` FOREIGN KEY (`id_reserva`) REFERENCES `reservas` (`id_reserva`) ON DELETE CASCADE;
 
 --
 -- Constraints for table `ejercicios`
