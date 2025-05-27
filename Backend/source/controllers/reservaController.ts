@@ -2,8 +2,8 @@ import { Request, Response } from "express";
 import { SessionService } from '../services/serivicioSesion';
 import { obtenerProductosEnCarrito } from '../services/carritoServices';
 import { EstadosReserva } from '../constants/estadoReserva';
-import { Usuario, Reserva, DetalleReserva, Producto } from "../database/models";
-
+import { Usuario, Reserva, DetalleReserva, Producto, sequelize } from "../database/models";
+import { Sequelize } from "sequelize";
 interface ProductoCarrito {
     id: number;
     nombre: string;
@@ -26,15 +26,17 @@ interface ResultadoCarrito {
 
 class carritoController {
     public async reservarCompra(req: Request, res: Response) {
+            const t = await sequelize.transaction();
         try {
-
             const productosEnCarrito = await obtenerProductosEnCarrito(req);
             const usuarioLogueado = SessionService.obtenerSessionUsuario(req);
             if (!usuarioLogueado) {
+                // TODO : agregar mensaje en vista
                 throw new Error("Debes iniciar sesión para reservar");
             }
 
             if (!productosEnCarrito.productos || productosEnCarrito.productos.length === 0) {
+                // TODO : agregar mensaje en vista
                 throw new Error("No hay productos en el carrito");
             }
 
@@ -57,18 +59,19 @@ class carritoController {
                 vencimiento: horaVencimiento
             });
 
-            productosEnCarrito.productos.forEach(async (producto: ProductoCarrito) => {
-                const id_producto = producto.id;
-                const cantidad = producto.cantidad;
-                const id_reserva = reserva.id_reserva;
-
+            await Promise.all(productosEnCarrito.productos.map(async (producto: ProductoCarrito) => {
+                await Producto.decrement(
+                    { stock: producto.cantidad },
+                    { where: { id: producto.id }, transaction: t }
+                );
                 await DetalleReserva.create({
-                    id_producto: id_producto,
-                    cantidad: cantidad,
-                    id_reserva: id_reserva
-                });
-            });
-
+                    id_producto: producto.id,
+                    cantidad: producto.cantidad,
+                    id_reserva: reserva.id_reserva
+                }, { transaction: t });
+            }));
+            
+            await t.commit();
             return res.redirect("/reserva/mostrar/ultimaReserva");
 
         } catch (error) {

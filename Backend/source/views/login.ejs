@@ -27,7 +27,7 @@
                     
                     <label for="contrasenia" class="none"></label>
                     
-                    <input class="inputs-login" type="text" name="contrasenia" placeholder="Contrasenia" id="contrasenia" value="">
+                    <input class="inputs-login" type="password" name="contrasenia" placeholder="Contrasenia" id="contrasenia" value="">
                     <% if(locals && locals.errors && errors.contrasenia) { %>
                         <p class="feedback"><%= errors.contrasenia.msg %></p>
                     <% } %>
