@@ -66,6 +66,7 @@
                     <% if (reserva.detalleReserva && reserva.detalleReserva.length > 0) { %>
                         <% reserva.detalleReserva.forEach(function(detalle) { %>
                             <div class="compra">
+                                <a href="/reserva/mostrar/reserva/<%= reserva.id_reserva ? reserva.id_reserva : '' %>"> ver </a>
                                 <% if ( reserva.estado && reserva.estado == 'pendiente'){ %>
                                     <p><strong>La reserva vence en:</strong> <span class="cuenta-regresiva" data-vencimiento="<%= reserva.vencimiento %>"></span></p>
                                 <% } %>
@@ -73,7 +74,6 @@
                                 <p><strong>Fecha:</strong> <%= reserva.fecha ? reserva.fecha.toLocaleString ? reserva.fecha.toLocaleString() : reserva.fecha : '' %></p>
                                 <p><strong>Producto:</strong> <%= detalle.Producto ? detalle.Producto.nombre : '' %></p>
                                 <p><strong>Cantidad:</strong> <%= detalle.cantidad %></p>
-                                <p><strong>Monto:</strong> $<%= detalle.Producto ? detalle.Producto.precio : '' %></p>
                             </div>
                         <% }) %>
                         <div class="compra-total">

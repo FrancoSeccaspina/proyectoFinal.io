@@ -1,6 +1,6 @@
 import { Request, Response } from "express";
 import { SessionService } from '../services/serivicioSesion';
-import { obtenerProductosEnCarrito } from '../services/carritoServices';
+import { obtenerProductosEnCarrito } from '../services/servicioCarrito';
 import { EstadosReserva } from '../constants/estadoReserva';
 import { Usuario, Reserva, DetalleReserva, Producto, sequelize } from "../database/models";
 
@@ -26,7 +26,7 @@ interface ResultadoCarrito {
 
 class carritoController {
     public async reservarCompra(req: Request, res: Response) {
-            const t = await sequelize.transaction();
+        const t = await sequelize.transaction();
         try {
             const productosEnCarrito = await obtenerProductosEnCarrito(req);
             const usuarioLogueado = SessionService.obtenerSessionUsuario(req);
@@ -67,10 +67,11 @@ class carritoController {
                 await DetalleReserva.create({
                     id_producto: producto.id,
                     cantidad: producto.cantidad,
-                    id_reserva: reserva.id_reserva
+                    id_reserva: reserva.id_reserva,
+                    subtotal: producto.subtotal
                 }, { transaction: t });
             }));
-            
+
             await t.commit();
             SessionService.limpiarCarrito(req)
             return res.redirect("/reserva/mostrar/ultimaReserva");
@@ -99,6 +100,51 @@ class carritoController {
                 where: { id_usuario: usuarioLogueado.id },
                 order: [['id_reserva', 'DESC']]
             });
+
+            if (!reserva) {
+                return res.render("reservaDetail", { reserva: null, detalleReserva: [] });
+            }
+
+            const reservaPlain = reserva.get({ plain: true });
+            const detalleReserva = await DetalleReserva.findAll({
+                where: { id_reserva: reservaPlain.id_reserva },
+                include: [{
+                    model: Producto,
+                    attributes: ['id', 'nombre', 'descripcion', 'precio', 'imagen']
+                }]
+            });
+            const detalleReservaPlain = detalleReserva.map(detalle => detalle.get({ plain: true }));
+
+            res.render("reservaDetail", {
+                reserva: reservaPlain,
+                detalleReserva: detalleReservaPlain
+            });
+
+        } catch (error) {
+            console.error("Error al mostrar reservas:", (error as Error).message);
+            res.status(500).render("error", {
+                title: "Error del servidor",
+                code: 500,
+                message: "Error al mostrar reservas",
+                description: "Ocurrió un error inesperado.",
+                error: (error as Error).message
+            });
+        }
+    }
+
+    public async mostrarReservaPorId(req: Request, res: Response) {
+        try {
+            const usuarioLogueado = SessionService.obtenerSessionUsuario(req);
+            if (!usuarioLogueado) {
+                // TODO : renderizar mensaje a la vista
+                throw new Error("Debes iniciar sesión para ver tus reservas");
+            }
+
+            const idReserva = req.params.id;
+
+            const reserva = await Reserva.findOne({
+                    where: { id_reserva: idReserva, id_usuario: usuarioLogueado.id }
+                });
 
             if (!reserva) {
                 return res.render("reservaDetail", { reserva: null, detalleReserva: [] });

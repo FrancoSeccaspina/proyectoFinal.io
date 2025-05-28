@@ -48,7 +48,7 @@
             <h1>¡Reserva confirmada!</h1>
             <div id="warning-sentence">
                 <img src="/images/exclamation.png" alt="">
-                <p><strong>Importante:</strong> Realiza el pago para poder obtener los productos.</p>
+                <p><strong>Importante:</strong> La compra se completa únicamente al finalizar el proceso de pago.</p>
             </div>
         </section>
 
@@ -57,10 +57,17 @@
             <% if (reserva && detalleReserva && detalleReserva.length > 0) { %>
                 <% detalleReserva.forEach(function(detalle) { %>
                     <div class="compra">
+                        <% if ( reserva.estado && reserva.estado == 'pendiente'){ %>
+                            <p><strong>La reserva vence en:</strong> <span class="cuenta-regresiva" data-vencimiento="<%= reserva.vencimiento %>"></span></p>
+                        <% } %>
+                        <p><strong>Estado:</strong> <%= reserva.estado ? reserva.estado : '' %></p>
                         <p><strong>Fecha:</strong> <%= reserva.fecha ? reserva.fecha.toLocaleString ? reserva.fecha.toLocaleString() : reserva.fecha : '' %></p>
                         <p><strong>Producto:</strong> <%= detalle.Producto ? detalle.Producto.nombre : '' %></p>
                         <p><strong>Cantidad:</strong> <%= detalle.cantidad %></p>
-                        <p><strong>Monto:</strong> $<%= detalle.Producto ? detalle.Producto.precio : '' %></p>
+                        <p><strong>Precio:</strong> $<%= detalle.Producto.precio ? detalle.Producto.precio : '' %></p>
+                        <p>$<%= detalle.Producto.descripcion ? detalle.Producto.descripcion : '' %></p>
+                        <p><strong>Sub Total:</strong> $<%= detalle.subtotal ? detalle.subtotal : '' %></p>
+
                     </div>
                 <% }) %>
                 <div class="compra" style="background:#e2e8f0;">
@@ -89,6 +96,7 @@
     </footer>
 
     <script src="/js/carrito.js"></script>
+    <script src="/js/estadoProductos.js"></script>
 </body>
 
 </html>

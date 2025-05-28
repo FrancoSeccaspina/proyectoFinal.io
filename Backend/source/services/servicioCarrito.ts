@@ -1,6 +1,6 @@
 import { Producto } from "../database/models";
 import { Op } from "sequelize";
-import { SessionService } from '../services/serivicioSesion';
+import { SessionService } from './serivicioSesion';
 import { Request } from "express";
 
 interface ProductoCarrito {
@@ -24,7 +24,8 @@ interface ResultadoCarrito {
 }
 
 /**
- * Obtiene los productos desde la DB filtrando por los ids del carrito 
+ * 
+ * Obtiene los productos desde la DB filtrando por los ids de los productos del carrito en sesion
  * mapea los productos con la cantidad y el total
  * y devuelve un array con los productos mapeados.
  * 
@@ -62,36 +63,36 @@ export async function obtenerProductosEnCarrito(req: Request): Promise<Resultado
                 total: 0,
                 cantidadDeProductos: 0
             }
-        }
+        };
     }
 
-    const cantidadDeProductos = carrito.reduce((acc: number, producto) => acc + producto.cantidad, 0);
     const carritoParseInt = carrito.map((item: any) => ({
         id_producto: parseInt(item.id_producto, 10),
         cantidad: parseInt(item.cantidad, 10)
     }));
-    const idsProductosCarrito = carritoParseInt.map((item: any) => item.id_producto);
+
+    const idsProductosCarrito = carritoParseInt.map(item => item.id_producto);
+    const cantidadDeProductos = carritoParseInt.reduce((acc, item) => acc + item.cantidad, 0);
+    const cantidadPorId = new Map(carritoParseInt.map(item => [item.id_producto, item.cantidad]));
+
     const productos = await Producto.findAll({
-        where: {
-            id: {
-                [Op.in]: idsProductosCarrito,
-            },
-        },
+        where: { id: { [Op.in]: idsProductosCarrito } }
     });
-    const productosJson = productos.map((producto: any) => producto.toJSON());
-    const productosCarrito = productosJson.map((producto: any) => {
-        const itemCarrito = carritoParseInt.find((item: any) => item.id_producto == producto.id);
-        producto.cantidad = itemCarrito ? itemCarrito.cantidad : 0;
-        producto.subtotal = producto.precio * producto.cantidad
-        return producto;
+
+    let total = 0;
+    const productosCarrito = productos.map((producto: any) => {
+        const plain = producto.get({ plain: true });
+        const cantidad = cantidadPorId.get(plain.id) || 0;
+        const subtotal = plain.precio * cantidad;
+        total += subtotal;
+        return { ...plain, cantidad, subtotal };
     });
-    const total = productosCarrito.reduce((acc: number, producto: ProductoCarrito) => acc + producto.subtotal, 0);
 
     return {
         productos: productosCarrito,
         resultados: {
-            total: total,
-            cantidadDeProductos: cantidadDeProductos
+            total,
+            cantidadDeProductos
         }
     };
 }

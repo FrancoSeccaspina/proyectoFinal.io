@@ -1,6 +1,6 @@
 import { Request, Response } from "express";
 import { SessionService } from '../services/serivicioSesion';
-import { obtenerProductosEnCarrito } from '../services/carritoServices';
+import { obtenerProductosEnCarrito } from '../services/servicioCarrito';
 import { Producto } from "../database/models";
 
 interface ProductoCarrito {

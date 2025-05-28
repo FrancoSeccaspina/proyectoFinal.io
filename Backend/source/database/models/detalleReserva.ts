@@ -12,16 +12,19 @@ interface DetalleReservaAttributes {
   id_producto: number;
   cantidad: number;
   id_reserva: number;
+  subtotal:number
 }
 
 class DetalleReserva extends Model<
   InferAttributes<DetalleReserva>,
   InferCreationAttributes<DetalleReserva>
-> implements DetalleReservaAttributes {
+> 
+implements DetalleReservaAttributes {
   declare id_detalle_reserva: CreationOptional<number>;
   declare id_producto: number;
   declare cantidad: number;
   declare id_reserva: number;
+  declare subtotal: number;
 
   static associate(models: any) {
     DetalleReserva.belongsTo(models.Reserva, {
@@ -67,6 +70,10 @@ const initDetalleReservaModel = (sequelize: Sequelize) => {
         onUpdate: 'CASCADE',
         onDelete: 'CASCADE',
       },
+                  subtotal: {
+                type: DataTypes.DECIMAL(10, 2),
+                allowNull: false,
+            },
     },
     {
       sequelize,
