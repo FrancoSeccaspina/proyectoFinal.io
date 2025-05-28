@@ -1,5 +1,7 @@
 import { useEffect, useState } from "react"; /*PASA A PRODUCTOS.JSX*/ 
 import { useLocation } from 'react-router-dom';
+import { Link } from "react-router-dom";
+import axios from "axios";
 function Recetas() {
   console.log('Se está renderizando <Productos />');
   const [recetas, setRecetas] = useState([]);
@@ -30,14 +32,27 @@ function Recetas() {
     getCategorias();
   }, [])
 
+  const handleDelete = async (id) => {
+    if (window.confirm("¿Estás seguro de que querés eliminar esta rutina?")) {
+      try {
+        await axios.delete(`http://localhost:3032/api/recetas/${id}`);
+        setRecetas(prevRecetas => prevRecetas.filter(r => r.id !== id));
+      } catch (error) {
+        console.error('Error al eliminar recetas:', error);
+        alert(`Error: ${error.response?.data?.message || error.message}`);
+      }
+    }
+  };
+
   const recetasFiltradas = categoriaSeleccionada === 'Todos'
       ? recetas
       : recetas.filter(recetas => recetas.categoriaId === parseInt(categoriaSeleccionada));
     
       return (
         <div className="container-products">
+          
           <h2 className='box-title'>Lista de Recetas  : {recetasFiltradas.length}</h2>
-    
+          <Link to={`/recetaNueva`} class="btn btn-primary" >Agregar Nuevo</Link>
           <div className='category-filter'>
           <label>Filtrar por categoría: </label><br/>
                   <select
@@ -69,19 +84,22 @@ function Recetas() {
                       <td><img src={`http://localhost:3032/images/${recetas.imagen}`} alt="" width='150' className='game-image' /></td>
                       <td>
                       <div class="accordion bg-dark text-white" id="accordionExample">
-                      <div class="accordion-item bg-dark text-white">
-    <h2 class="accordion-header" id="headingOne">
-      <button class="accordion-button bg-dark text-white" type="button" data-bs-toggle="collapse" data-bs-target="#collapseOne" aria-expanded="true" aria-controls="collapseOne">
-        Ver Descripcion
-      </button>
-    </h2>
-    <div id="collapseOne" class="accordion-collapse collapse" aria-labelledby="headingOne" data-bs-parent="#accordionExample">
-      <div class="accordion-body">{recetas.descripcion}</div>
-    </div>
-    </div>
-    </div>
+                        <div class="accordion-item bg-dark text-white">
+                          <h2 class="accordion-header" id="headingOne">
+                            <button class="accordion-button bg-dark text-white" type="button" data-bs-toggle="collapse" data-bs-target="#collapseOne" aria-expanded="true" aria-controls="collapseOne">
+                              Ver Descripcion
+                            </button>
+                          </h2>
+                          <div id="collapseOne" class="accordion-collapse collapse" aria-labelledby="headingOne" data-bs-parent="#accordionExample">
+                            <div class="accordion-body">{recetas.descripcion}</div>
+                          </div>
+                        </div>
+                      </div>
                       </td>
-                      <td><button type="button" class="btn btn-success">Editar</button><button type="button" class="btn btn-danger">Eliminar</button></td>
+                      <td>  
+                        <Link to={`/recetas/editar/${recetas.id}`} className="btn btn-success">Editar</Link>
+                        <button class="btn btn-danger" onClick={() => handleDelete(recetas.id)}>Eliminar</button>
+                      </td>
                         
                       </tr>
                   ))}

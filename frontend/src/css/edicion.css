@@ -1,0 +1,52 @@
+h2, label{
+    color: white;
+    padding: 1rem;
+    align-items: center;
+    display: flex;
+    justify-content: center;
+}
+.contenedor{
+    width: 100%;
+}
+.formulario{
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    border: 2px solid #ffffff;        /* Borde de color */
+    border-radius: 10px;              /* Esquinas redondeadas */
+    padding: 30px;                    /* Espacio interno */
+    background-color: #111;           /* Fondo (más claro que el negro total) */
+    width: 500px;                     /* Ancho fijo opcional */
+    margin: 0 auto;                   /* Centrado horizontal */
+    box-shadow: 0 0 15px rgba(246, 252, 251, 0.4);  
+}
+.boton{
+    padding: 0.2rem;
+    background-color: rgb(255, 255, 255);
+    color: rgb(0, 0, 0);
+    border-radius: 5%;
+}
+.boton:hover{
+    background-color: rgb(0, 0, 0);
+    color: rgb(255, 255, 255);
+}
+.atras a{
+    padding: 0.2rem;
+    background-color: rgb(255, 255, 255);
+    color: rgb(0, 0, 0);
+    border-radius: 5%;
+    text-decoration: none;
+}
+.atras:hover a{
+    background-color: rgb(0, 0, 0);
+    color: rgb(255, 255, 255);
+}
+.acomodar{
+    width: 100%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    gap: 1rem;
+    padding-top: 1rem;
+}

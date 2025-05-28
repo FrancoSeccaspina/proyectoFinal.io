@@ -1,6 +1,7 @@
 
 import React, {useState, useEffect} from 'react'
-
+import { Link  } from 'react-router-dom'
+import axios from 'axios';
 
 const Usuarios = () => {
     const [usuarios, setUsuarios] = useState([])
@@ -8,6 +9,7 @@ const Usuarios = () => {
     const showData = async ()=> {
         const response = await fetch("http://localhost:3032/api/usuarios");
         const data = await response.json();
+        console.log('DATA RECIBIDA:', data);
         setUsuarios(data);
 
     }
@@ -32,9 +34,24 @@ const Usuarios = () => {
         showData();
       }, [])
     
+
+  const handleDelete = async (id) => {
+    if (window.confirm("¿Estás seguro de que querés eliminar esta rutina?")) {
+      try {
+        await axios.delete(`http://localhost:3032/api/usuarios/${id}`);
+        setUsuarios(prevUsuarios => prevUsuarios.filter(u => u.id !== id));
+      } catch (error) {
+        console.error('Error al eliminar usuarios:', error);
+        alert(`Error: ${error.response?.data?.message || error.message}`);
+      }
+    }
+  };
+
   return (
     
     <div className='mover_abajo'>
+    <h2 className='box-title'>Lista de Usuarios</h2>
+    <Link to={`http://localhost:3032/register`} class="btn btn-primary" >Agregar Nuevo</Link>
         <input value={search} onChange={searcher} type="text" placeholder='Buscar por DNI' className='form-control'/>
         <table className='table table-dark table-striped'>
                 <thead>
@@ -55,7 +72,11 @@ const Usuarios = () => {
                             <td>{usuarios.celular}</td>
                             <td>{usuarios.dni}</td>
                             <td>{usuarios.aptoMedico}</td>
-                            <td><button type="button" class="btn btn-success">Editar</button><button type="button" class="btn btn-danger">Eliminar</button></td>
+                            <td>
+                              <Link to={`/usuarios/editar/${usuarios.id}`} className="btn btn-success">Editar</Link>
+                              <button class="btn btn-danger" onClick={() => handleDelete(usuarios.id)}>Eliminar</button>
+                              <button className="btn btn-primary"> Cuota</button>
+                            </td>
                         </tr>
                     ))}
                 </tbody>

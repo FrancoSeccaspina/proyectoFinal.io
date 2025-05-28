@@ -10,7 +10,6 @@ import cors from 'cors';
 import methodOverride from 'method-override';
 import session from 'express-session';
 
-// Importación de rutas
 import usersRoutes from './routes/users.routes';
 import viewRoutes from './routes/view.routes';
 import productoRoutes from './routes/producto.routes';
@@ -88,12 +87,15 @@ app.use('', recetaRoutes);
 app.use('', carritoRoutes);
 app.use('', reservaRoutes);
 app.use('/categorias', categoriaRoutes);
+app.use('/images', express.static('public/images'));
 
 //APIS
 app.use('/api', productsApiRoutes, usuariosAPIController, ejercicioApiController, recetaApiController, categoriaApiController, categoriesRecetaAPIController, categoriesGrupoMuscularAPIController, proveedorAPIController);
 
 // verifica que las rutas no existan y redirige a la página de error 404
 app.use(rutaNoEncontrada);
+app.use('/public', express.static(path.join(__dirname, 'public'))); 
+app.use('/uploads', express.static('uploads'));
 
 // Escuchar el servidor
 app.listen(port, start);

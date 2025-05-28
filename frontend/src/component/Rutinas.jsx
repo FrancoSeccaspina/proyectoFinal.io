@@ -1,6 +1,7 @@
 import { useEffect, useState } from "react"; /*PASA A PRODUCTOS.JSX*/ 
 import { useLocation } from 'react-router-dom';
-
+import { Link } from "react-router-dom";
+import axios from 'axios';
 function Ejercicios() {
   const [ejercicios, setEjercicios] = useState([]);
   const [categorias, setCategoria] = useState([]);
@@ -29,8 +30,19 @@ function Ejercicios() {
     getEjercicios();
     getCategorias();
   }, [])
-
-
+  //Botón para eliminar 
+  const handleDelete = async (id) => {
+    if (window.confirm("¿Estás seguro de que querés eliminar esta rutina?")) {
+      try {
+        await axios.delete(`http://localhost:3032/api/ejercicios/${id}`);
+        setEjercicios(prevRutinas => prevRutinas.filter(r => r.id !== id));
+      } catch (error) {
+        console.error('Error al eliminar rutina:', error);
+        alert(`Error: ${error.response?.data?.message || error.message}`);
+      }
+    }
+  };
+  
   const ejerciciosFiltrados = categoriaSeleccionada === 'Todos'
   ? ejercicios
   : ejercicios.filter(ejercicios => ejercicios.grupo_muscular_id === parseInt(categoriaSeleccionada));
@@ -38,7 +50,9 @@ function Ejercicios() {
 return (
 <div className="container-products">
   <h2 className='box-title'>Lista de Ejercicios: {ejerciciosFiltrados.length}</h2>
-
+  <Link to={`/rutinaNueva`} className="btn btn-primary">
+                          Agregar Nuevo
+                        </Link>
   <div className='category-filter'>
   <label>Filtrar por categoría: </label><br/>
           <select
@@ -69,17 +83,17 @@ return (
                             <td>{ejercicios.nombre}</td>
                             <td>
                       <div class="accordion bg-dark text-white" id="accordionExample">
-                      <div class="accordion-item bg-dark text-white">
-    <h2 class="accordion-header" id="headingOne">
-      <button class="accordion-button bg-dark text-white" type="button" data-bs-toggle="collapse" data-bs-target="#collapseOne" aria-expanded="true" aria-controls="collapseOne">
-        Ver Descripcion
-      </button>
-    </h2>
-    <div id="collapseOne" class="accordion-collapse collapse" aria-labelledby="headingOne" data-bs-parent="#accordionExample">
-      <div class="accordion-body">{ejercicios.descripcion}</div>
-    </div>
-    </div>
-    </div>
+                        <div class="accordion-item bg-dark text-white">
+                          <h2 class="accordion-header" id="headingOne">
+                            <button class="accordion-button bg-dark text-white" type="button" data-bs-toggle="collapse" data-bs-target="#collapseOne" aria-expanded="true" aria-controls="collapseOne">
+                              Ver Descripcion
+                            </button>
+                          </h2>
+                          <div id="collapseOne" class="accordion-collapse collapse" aria-labelledby="headingOne" data-bs-parent="#accordionExample">
+                            <div class="accordion-body">{ejercicios.descripcion}</div>
+                          </div>
+                        </div>
+                      </div>
                       </td>
                             <td>{ejercicios.titulo}</td>
                             <td>
@@ -87,7 +101,10 @@ return (
                           Ir al video
                          </a>
                             </td>
-                            <td><button type="button" class="btn btn-success">Editar</button><button type="button" class="btn btn-danger">Eliminar</button></td>
+                            <td>
+                               <Link to={`/rutinas/editar/${ejercicios.id}`} className="btn btn-success">Editar</Link>
+                              <button class="btn btn-danger" onClick={() => handleDelete(ejercicios.id)}>Eliminar</button>
+                            </td>
                         
                         </tr>
                     ))}

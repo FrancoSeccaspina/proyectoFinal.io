@@ -1,4 +1,6 @@
 import { useEffect, useState } from "react";
+import { Link } from 'react-router-dom';
+import axios from "axios";
 import { useLocation } from 'react-router-dom'; /*PASA A PRODUCTOS.JSX*/ 
 function Productos() {
   console.log('Se está renderizando <Productos />');
@@ -30,6 +32,18 @@ function Productos() {
     getCategorias();
   }, [])
 
+  const handleDelete = async (id) => {
+    if (window.confirm("¿Estás seguro de que querés eliminar esta producto?")) {
+      try {
+        await axios.delete(`http://localhost:3032/api/productos/${id}`);
+        setProducts(prevProductos => prevProductos.filter(r => r.id !== id));
+      } catch (error) {
+        console.error('Error al eliminar producto:', error);
+        alert(`Error: ${error.response?.data?.message || error.message}`);
+      }
+    }
+  };
+
   const productosFiltrados = categoriaSeleccionada === 'Todos'
       ? products
       : products.filter(products => products.categoriaId === parseInt(categoriaSeleccionada));
@@ -37,7 +51,9 @@ function Productos() {
   return (
     <div className="container-products">
       <h2 className='box-title'>Lista de Productos: {productosFiltrados.length}</h2>
-
+      <Link to={`/productoNuevo`} className="btn btn-primary">
+                          Agregar Nuevo
+                        </Link>
       <div className='category-filter'>
       <label>Filtrar por categoría: </label><br/>
               <select
@@ -70,7 +86,12 @@ function Productos() {
                       <td><img src={`http://localhost:3032/images/${products.imagen}`} alt="" width='150' className='game-image' /></td>
                       <td>{products.stock}</td>
                       <td>$ {products.precio}</td>
-                      <td><button type="button" class="btn btn-success">Editar</button><button type="button" class="btn btn-danger">Eliminar</button></td>
+                      <td>
+                        <Link to={`/productos/editar/${products.id}`} className="btn btn-success">
+                          Editar
+                        </Link>
+                              <button class="btn btn-danger" onClick={() => handleDelete(products.id)}>Eliminar</button>
+                      </td>
                         
                       </tr>
                   ))}
