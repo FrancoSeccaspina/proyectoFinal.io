@@ -163,7 +163,7 @@ class carritoController {
                     detalleReserva: detalleReservaPlain
                 };
             }));
-            console.log( "mostrar reservas :::", reservasConDetalles)
+            
             res.render("reservas", { reservas: reservasConDetalles });
 
         } catch (error) {
