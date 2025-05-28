@@ -3,7 +3,7 @@ import { SessionService } from '../services/serivicioSesion';
 import { obtenerProductosEnCarrito } from '../services/carritoServices';
 import { EstadosReserva } from '../constants/estadoReserva';
 import { Usuario, Reserva, DetalleReserva, Producto, sequelize } from "../database/models";
-import { Sequelize } from "sequelize";
+
 interface ProductoCarrito {
     id: number;
     nombre: string;
@@ -72,6 +72,7 @@ class carritoController {
             }));
             
             await t.commit();
+            SessionService.limpiarCarrito(req)
             return res.redirect("/reserva/mostrar/ultimaReserva");
 
         } catch (error) {
@@ -162,7 +163,7 @@ class carritoController {
                     detalleReserva: detalleReservaPlain
                 };
             }));
-
+            console.log( "mostrar reservas :::", reservasConDetalles)
             res.render("reservas", { reservas: reservasConDetalles });
 
         } catch (error) {

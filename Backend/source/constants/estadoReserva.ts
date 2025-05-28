@@ -13,7 +13,7 @@
  */
 export enum EstadosReserva {
     PENDIENTE = 'pendiente',
-    CONFIRMADA = 'confirmada',
-    CANCELADA = 'cancelada',
+    CONFIRMADO = 'confirmado',
+    CANCELADO = 'cancelado',
   }
   
