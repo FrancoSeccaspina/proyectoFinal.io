@@ -33,6 +33,65 @@ export class cuotasApiController {
             res.status(500).json({ message: 'Error al obtener las cuotas' });
         }
     }
+    async buscarCuotasPorId(req: Request, res: Response): Promise<void> {
+        try {
+            const { id } = req.params;
+            const cuota = await Cuota.findByPk(id);
+            if (cuota) {
+                console.log(cuota)
+                res.json(cuota);
+              } else {
+                  res.status(404).json({ message: 'cuota no encontrada' });
+              }
+        } catch (error) {
+            console.error('Error al buscar las cuotas:', error);
+            res.status(500).json({ message: 'Error al obtener las cuotas' });
+        }
+    }
+    async editarCuota(req: Request, res: Response): Promise<void> {
+        try{
+            const { id } = req.params;
+            const { fecha, descripcion, monto, estado } = req.body;
+            const cuota = await Cuota.findByPk(id);
+    
+            if (cuota) {
+                await cuota.update({ fecha, descripcion,monto, estado });
+                res.status(200).json({ message: 'cuota actualizado exitosamente', cuota });
+            } else {
+                res.status(404).json({ message: 'cuota no encontrado' });
+            }
+        } catch (error) {
+            console.error('Error al editar el cuota:', error);
+            res.status(500).json({ message: 'Error al editar el cuota' });
+        }
+    }
+    async delete(req: Request, res: Response): Promise<Response> {
+        try {
+          const { id } = req.params;
+          const cuota = await Cuota.findOne({ where: { id } });
+  
+          if (!cuota) {
+            return res.status(404).json({
+              success: false,
+              message: "cuota no encontrada"
+            });
+          }
+  
+          await cuota.destroy();
+  
+          return res.status(200).json({
+            success: true,
+            message: "cuota eliminada con éxito"
+          });
+  
+        } catch (error) {
+          console.error("Error en deletecuota:", (error as Error).message);
+          return res.status(500).json({
+            success: false,
+            message: "Error interno del servidor"
+          });
+        }
+      }
 }
 
 

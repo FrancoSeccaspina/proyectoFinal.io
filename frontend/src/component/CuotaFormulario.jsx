@@ -1,4 +1,5 @@
 import { useParams } from 'react-router-dom';
+import { Link } from 'react-router-dom';
 import { useState, useEffect } from 'react';
 import axios from 'axios';
 
@@ -18,7 +19,7 @@ const CuotaFormulario = () => {
       try {
         const [usuarioRes, cuotasRes] = await Promise.all([
           axios.get(`http://localhost:3032/api/usuarios/${id}`),
-          axios.get(`http://localhost:3032/api/cuota/${id}`)
+          axios.get(`http://localhost:3032/api/cuotasdelUsuario/${id}`)
         ]);
         setUsuario(usuarioRes.data);
         setCuotas(cuotasRes.data);
@@ -46,6 +47,17 @@ const CuotaFormulario = () => {
     } catch (err) {
       console.error(err);
       alert('Error al registrar cuota');
+    }
+  };
+  const handleDelete = async (id) => {
+    if (window.confirm("¿Estás seguro de que querés eliminar esta Cuota?")) {
+      try {
+        await axios.delete(`http://localhost:3032/api/cuotas/${id}`);
+        setCuotas(prevCuotas => prevCuotas.filter(c => c.id !== id));
+      } catch (error) {
+        console.error('Error al eliminar cuota:', error);
+        alert(`Error: ${error.response?.data?.message || error.message}`);
+      }
     }
   };
 
@@ -80,9 +92,10 @@ const CuotaFormulario = () => {
               <td>${cuota.monto}</td>
               <td>{cuota.estado}</td>
               <td>
-                {/* Placeholder icons */}
-                <button title="Editar">✏️</button>
-                <button title="Eliminar">🗑️</button>
+                <Link to={`/cuota/editarCuota/${cuota.id}`} className="btn btn-success">
+                                          Editar
+                                        </Link>
+                                        <button class="btn btn-danger" onClick={() => handleDelete(cuota.id)}>Eliminar</button>
               </td>
             </tr>
           ))}

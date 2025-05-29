@@ -15,6 +15,7 @@ import EdicionProductos from './ABM/EdicionProd';
 import AltaProd from './ABM/AltaProd';
 import AltaRuti from './ABM/AltaRuti';
 import AltaRece from './ABM/AltaRece';
+import EdicionCuota from './ABM/EdicionCuota';
 
 function App(){
   return (
@@ -36,6 +37,7 @@ function App(){
          <Route path="/rutinaNueva" element={<AltaRuti />} />
          <Route path='/recetaNueva' element={<AltaRece />} />
          <Route path="/cuota/:id" element={<CuotaFormulario />} />
+         <Route path="/cuota/editarCuota/:id" element={<EdicionCuota />} />
       </Routes>
       </BrowserRouter>
     </div>
