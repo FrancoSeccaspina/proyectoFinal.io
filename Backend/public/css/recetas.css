@@ -10,7 +10,7 @@
     width: 90%;
 }
 #recetas h2{
-    font-size: 18px;    
+    font-size: 20px;    
 }
 .titulo h4{
     align-items: center;
@@ -52,21 +52,32 @@
     border-radius: 8px;
 }
 .btn-primary {
-    width: 100%; 
+    width: 100%;
     display: flex;
     align-items: center;
     justify-content: center;
     text-decoration: none;
-    color: black;
+    color: #000000;
+    background-color: #cecccc;
+    border: 1px solid #000000;
+    border-radius: 6px;
+    padding: 10px 15px;
+    font-weight: 500;
+    cursor: pointer;
 }
 .consultar a{
     text-decoration: none;
     color: black;
+    background-color: #cecccc;
     text-align: center;
+    border: 1px solid #000000;
+    padding: 10px 15px;
+    font-weight: 500;
+    cursor: pointer;
 }
 @media screen and (min-width:320px) {
     .titulo{
-        font-size: 12px;
+        font-size: 17px;
     }
     .titulo p{
         display: flex;
@@ -75,7 +86,7 @@
     }
     .titulo h4{
         padding-top: 1rem;
-        font-size: 15px;
+        font-size: 18px;
         display: flex;
         align-items: center;
         justify-content: center;
