@@ -32,6 +32,7 @@ import categoriaApiController from './routes/api/categoria.api.routes';
 import categoriesRecetaAPIController from './routes/api/categoriaReceta.api.routes';
 import categoriesGrupoMuscularAPIController from './routes/api/categoriaGrupoMuscular.api.routes'
 import proveedorAPIController from './routes/api/proveedores.api.routes'
+import cuotaApiController from './routes/api/cuota.api.routes';
 
 // carga las variables de entorno en este caso del archivo .env
 dotenv.config();
@@ -90,7 +91,7 @@ app.use('/categorias', categoriaRoutes);
 app.use('/images', express.static('public/images'));
 
 //APIS
-app.use('/api', productsApiRoutes, usuariosAPIController, ejercicioApiController, recetaApiController, categoriaApiController, categoriesRecetaAPIController, categoriesGrupoMuscularAPIController, proveedorAPIController);
+app.use('/api', productsApiRoutes, usuariosAPIController, ejercicioApiController, recetaApiController, categoriaApiController, categoriesRecetaAPIController, categoriesGrupoMuscularAPIController, proveedorAPIController, cuotaApiController);
 
 // verifica que las rutas no existan y redirige a la página de error 404
 app.use(rutaNoEncontrada);

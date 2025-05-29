@@ -11,6 +11,7 @@ import { initProveedorModel, Proveedor } from './proveedores';
 import { initCompraModel, Compra } from './compra'
 import { initReservaModel, Reserva } from './reserva'
 import { initDetalleReservaModel, DetalleReserva } from './detalleReserva'
+import { initCuotaModel, Cuota } from './cuota';
 
 const inicializarDB = async () => {
   try {
@@ -28,6 +29,7 @@ const inicializarDB = async () => {
     initCompraModel(sequelize);
     initReservaModel(sequelize);
     initDetalleReservaModel(sequelize);
+    initCuotaModel(sequelize);
 
     console.log('Modelos inicializados')
 
@@ -55,5 +57,6 @@ export {
   Proveedor,
   Compra,
   Reserva,
-  DetalleReserva
+  DetalleReserva,
+  Cuota
 };

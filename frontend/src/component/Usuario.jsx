@@ -75,7 +75,7 @@ const Usuarios = () => {
                             <td>
                               <Link to={`/usuarios/editar/${usuarios.id}`} className="btn btn-success">Editar</Link>
                               <button class="btn btn-danger" onClick={() => handleDelete(usuarios.id)}>Eliminar</button>
-                              <button className="btn btn-primary"> Cuota</button>
+                              <Link to={`/cuota/${usuarios.id}`} className="btn btn-primary">Cuota</Link>
                             </td>
                         </tr>
                     ))}
