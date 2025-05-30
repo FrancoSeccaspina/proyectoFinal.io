@@ -1,9 +1,14 @@
+/* header.css */
+
 #header-container {
   background-color: #2e2e2e;
   display: flex;
   flex-direction: column;
   padding: 1rem;
   width: 100%;
+  position: sticky;    
+  top: 0;
+  z-index: 1000;       
 }
 
 #top-bar {
@@ -133,3 +138,4 @@
     width: 100%;
   }
 }
+

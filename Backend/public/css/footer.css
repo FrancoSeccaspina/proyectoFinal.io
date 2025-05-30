@@ -1,10 +1,12 @@
 .main-footer {
-  width: 100%;
-  background-color: #1b1b1b;
-  color: #ffffff;
-  padding: 2rem 0;
-  position: relative;
+    background-color: #222;
+    color: #fff;
+    padding: 0.5rem 1rem; /* antes podía ser más grande, como 2rem */
+    font-size: 0.8rem;
+    text-align: center;
+    height: auto; /* por si tiene un height fijo, eliminamos eso */
 }
+
 
 .links {
   display: flex;
