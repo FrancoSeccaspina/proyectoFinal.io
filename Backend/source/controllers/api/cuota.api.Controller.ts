@@ -3,6 +3,32 @@ import { Cuota } from '../../database/models/cuota';
 import { Usuario } from '../../database/models/usuario';
 import { error } from 'console';
 export class cuotasApiController {
+
+
+async crearCuota(req: Request, res: Response): Promise<void> {
+    try {
+    const { fecha, descripcion, monto, estado, id_usuario } = req.body;
+
+    if (!fecha || !descripcion || !monto || !estado || !id_usuario) {
+        res.status(400).json({ message: "Faltan datos obligatorios" });
+        return;
+    }
+    const nuevaCuota = await Cuota.create({
+        fecha,
+        descripcion,
+        monto,
+        estado,
+        id_usuario
+    });
+
+    res.status(201).json({ message: "Cuota creada con éxito", cuota: nuevaCuota });
+    } catch (error) {
+    console.error('Error al crear la cuota:', error);
+    res.status(500).json({ message: "Error al crear la cuota" });
+    }
+}
+
+
     async listaCuotas(req: Request, res: Response): Promise<void> {
         try {
             const cuotas = await Cuota.findAll();
