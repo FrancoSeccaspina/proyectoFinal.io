@@ -2,6 +2,8 @@ import { useEffect, useState } from "react"; /*PASA A PRODUCTOS.JSX*/
 import { useLocation } from 'react-router-dom';
 import { Link } from "react-router-dom";
 import axios from "axios";
+import '../css/header.css'
+
 function Recetas() {
   console.log('Se está renderizando <Productos />');
   const [recetas, setRecetas] = useState([]);
@@ -50,10 +52,14 @@ function Recetas() {
     
       return (
         <div className="container-products">
-          
-          <h2 className='box-title'>Lista de Recetas  : {recetasFiltradas.length}</h2>
+        <section className="moverJuntos">
+          <h2 className='box-title'>Lista de Receta</h2>
           <Link to={`/recetaNueva`} class="btn btn-primary" >Agregar Nuevo</Link>
-          <div className='category-filter'>
+        </section>
+          <h3 className='box-title'>Lista de Recetas  : {recetasFiltradas.length}</h3>
+
+          
+          <div className='category-filters'>
           <label>Filtrar por categoría: </label><br/>
                   <select
                       value={categoriaSeleccionada}

@@ -2,6 +2,8 @@ import { useEffect, useState } from "react"; /*PASA A PRODUCTOS.JSX*/
 import { useLocation } from 'react-router-dom';
 import { Link } from "react-router-dom";
 import axios from 'axios';
+import '../css/header.css'
+
 function Ejercicios() {
   const [ejercicios, setEjercicios] = useState([]);
   const [categorias, setCategoria] = useState([]);
@@ -49,11 +51,15 @@ function Ejercicios() {
 
 return (
 <div className="container-products">
-  <h2 className='box-title'>Lista de Ejercicios: {ejerciciosFiltrados.length}</h2>
-  <Link to={`/rutinaNueva`} className="btn btn-primary">
-                          Agregar Nuevo
-                        </Link>
-  <div className='category-filter'>
+  <section className="moverJuntos">
+    <h2 className='box-title'>Lista de Ejercicios:</h2>
+    <Link to={`/rutinaNueva`} className="btn btn-primary">
+      Agregar Nuevo
+    </Link>
+  </section>
+    <h2 className='box-title'>Lista de Ejercicios: {ejerciciosFiltrados.length}</h2>
+
+  <div className='category-filters'>
   <label>Filtrar por categoría: </label><br/>
           <select
               value={categoriaSeleccionada}

@@ -65,13 +65,6 @@ const CuotaFormulario = () => {
     <div style={{ padding: '1rem' }}>
       <h2>Cuotas de {usuario?.nombre} - DNI: {usuario?.dni}</h2>
 
-      <form onSubmit={handleAgregarCuota} style={{ marginBottom: '2rem' }}>
-        <label>Fecha: <input type="date" name="fecha" value={nuevaCuota.fecha} onChange={handleInputChange} required /></label>
-        <label>Descripción: <input name="descripcion" value={nuevaCuota.descripcion} onChange={handleInputChange} required /></label>
-        <label>Monto: <input type="number" name="monto" value={nuevaCuota.monto} onChange={handleInputChange} required /></label>
-        <button type="submit">Agregar</button>
-      </form>
-
       <table border="1" cellPadding="6" style={{ width: '100%', textAlign: 'center' }}>
         <thead>
           <tr>
@@ -107,3 +100,16 @@ const CuotaFormulario = () => {
 
 export default CuotaFormulario;
 
+/*
+      <form onSubmit={handleAgregarCuota} style={{ marginBottom: '2rem' }}>
+        <label>Fecha: <input type="date" name="fecha" value={nuevaCuota.fecha} onChange={handleInputChange} required /></label>
+        <label>Descripción: <input name="descripcion" value={nuevaCuota.descripcion} onChange={handleInputChange} required /></label>
+        <label>Monto: <input type="number" name="monto" value={nuevaCuota.monto} onChange={handleInputChange} required /></label>
+        <button type="submit">Agregar</button>
+      </form>
+      <form onSubmit={handleAgregarCuota} style={{ marginBottom: '2rem' }}>
+        <label>Fecha: <input type="date" name="fecha" value={nuevaCuota.fecha} onChange={handleInputChange} required /></label>
+        <label>Descripción: <input name="descripcion" value={nuevaCuota.descripcion} onChange={handleInputChange} required /></label>
+        <label>Monto: <input type="number" name="monto" value={nuevaCuota.monto} onChange={handleInputChange} required /></label>
+        <button type="submit">Agregar</button>
+      </form>*/ 
