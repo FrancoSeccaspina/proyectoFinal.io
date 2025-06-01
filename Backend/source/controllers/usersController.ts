@@ -1,6 +1,7 @@
 import { validationResult } from "express-validator";
 import { Request, Response } from "express";
-import { Autenticacion, Usuario } from '../database/models';
+import { Autenticacion } from '../database/models/autenticacion';
+import { Usuario } from '../database/models/usuario';
 import bcrypt from 'bcryptjs';
 import { Roles } from "../constants/roles";
 import { error } from "console";

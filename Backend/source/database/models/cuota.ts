@@ -24,9 +24,7 @@ import {
     declare id_usuario: number;
 
     static associate(models: any) {
-        Cuota.hasMany(models.DetalleReserva, {
-            foreignKey: 'id_cuota',
-        });
+
         Cuota.belongsTo(models.Membresia, {
             foreignKey: 'id_membresia',
           });

@@ -1,4 +1,4 @@
-import { Producto } from "../database/models";
+import { Producto } from "../database/models/producto";
 import { Op } from "sequelize";
 import { SessionService } from './serivicioSesion';
 import { Request } from "express";

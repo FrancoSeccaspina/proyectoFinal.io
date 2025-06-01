@@ -2,7 +2,12 @@ import { Request, Response } from "express";
 import { SessionService } from '../services/serivicioSesion';
 import { obtenerProductosEnCarrito } from '../services/servicioCarrito';
 import { EstadosReserva } from '../constants/estadoReserva';
-import { Usuario, Reserva, DetalleReserva, Producto, sequelize } from "../database/models";
+import { sequelize } from "../database/models";
+import { Usuario } from "../database/models/usuario";
+import { Reserva } from "../database/models/reserva";
+import { DetalleReserva } from "../database/models/detalleReserva";
+import { Producto } from "../database/models/producto";
+import { Op } from 'sequelize';
 
 interface ProductoCarrito {
     id: number;
@@ -143,8 +148,8 @@ class carritoController {
             const idReserva = req.params.id;
 
             const reserva = await Reserva.findOne({
-                    where: { id_reserva: idReserva, id_usuario: usuarioLogueado.id }
-                });
+                where: { id_reserva: idReserva, id_usuario: usuarioLogueado.id }
+            });
 
             if (!reserva) {
                 return res.render("reservaDetail", { reserva: null, detalleReserva: [] });
@@ -179,6 +184,7 @@ class carritoController {
 
     public async mostrarReservas(req: Request, res: Response) {
         try {
+            // this.devolverStockReservasVencidas(req, res)
             const usuarioLogueado = SessionService.obtenerSessionUsuario(req);
             if (!usuarioLogueado) {
                 // TODO : renderizar mensaje a la vista
@@ -209,8 +215,50 @@ class carritoController {
                     detalleReserva: detalleReservaPlain
                 };
             }));
-            
+
             res.render("reservas", { reservas: reservasConDetalles });
+
+        } catch (error) {
+            console.error("Error al mostrar reservas:", (error as Error).message);
+            res.status(500).render("error", {
+                title: "Error del servidor",
+                code: 500,
+                message: "Error al mostrar reservas",
+                description: "Ocurrió un error inesperado.",
+                error: (error as Error).message
+            });
+        }
+    }
+
+    public async devolverStockReservasVencidas(req: Request, res: Response) {
+        const t = await sequelize.transaction()
+        try {
+
+            const reservasVencidas = await Reserva.findAll({
+                where: {
+                    vencimiento: { [Op.lt]: new Date() },
+                    estado: 'activa'
+                },
+                include: [{
+                    model: DetalleReserva
+                }],
+                transaction: t
+            });
+            console.log("reservas vencidas : ", reservasVencidas)
+            // const [cantidadActualizadas] = await Reserva.update(
+            //     { estado: EstadosReserva.CANCELADO },
+            //     {
+            //         where: {
+            //             vencimiento: {
+            //                 [Op.lt]: new Date()
+            //             },
+            //             estado: EstadosReserva.PENDIENTE
+            //         }
+            //     }
+            // );
+
+            // console.log(`✅ ${cantidadActualizadas} reservas vencidas actualizadas.`);
+
 
         } catch (error) {
             console.error("Error al mostrar reservas:", (error as Error).message);

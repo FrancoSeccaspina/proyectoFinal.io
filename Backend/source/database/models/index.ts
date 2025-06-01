@@ -12,11 +12,13 @@ import { initCompraModel, Compra } from './compra'
 import { initReservaModel, Reserva } from './reserva'
 import { initDetalleReservaModel, DetalleReserva } from './detalleReserva'
 import { initCuotaModel, Cuota } from './cuota';
+import { initMembresiaModel, Membresia } from './membresia';
 
-const inicializarDB = async () => {
+const inicializarDB = async (models: Record<string, any>) => {
   try {
     await conexionDB();
 
+    // TODO : resolver con un metodo statico en cada modelo
     initUsuarioModel(sequelize);
     initAutenticacionModel(sequelize);
     initProductoModel(sequelize);
@@ -30,11 +32,15 @@ const inicializarDB = async () => {
     initReservaModel(sequelize);
     initDetalleReservaModel(sequelize);
     initCuotaModel(sequelize);
+    initMembresiaModel(sequelize);
 
     console.log('Modelos inicializados')
 
-    Producto.associate({ DetalleReserva });
-    DetalleReserva.associate({ Producto, Reserva });
+    Object.values(models).forEach(model => {
+      if (model.associate) {
+        model.associate(models);
+      }
+    });
 
     console.log('Asociaciones de modelos establecidas');
   } catch (error) {
@@ -42,10 +48,7 @@ const inicializarDB = async () => {
   }
 }
 
-inicializarDB()
-
-export {
-  sequelize,
+export const models = {
   Usuario,
   Autenticacion,
   Producto,
@@ -58,5 +61,12 @@ export {
   Compra,
   Reserva,
   DetalleReserva,
-  Cuota
+  Cuota,
+  Membresia
+};
+
+inicializarDB(models)
+
+export {
+  sequelize
 };

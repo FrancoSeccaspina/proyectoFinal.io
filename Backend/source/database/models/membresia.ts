@@ -28,6 +28,7 @@ class Membresia extends Model<InferAttributes<Membresia>, InferCreationAttribute
         });
     }
 }
+
 const initMembresiaModel = (sequelize: Sequelize) => {
     Membresia.init(
         {
