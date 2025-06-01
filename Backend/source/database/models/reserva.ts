@@ -6,6 +6,7 @@ import {
   InferCreationAttributes,
   CreationOptional,
 } from 'sequelize';
+import { DetalleReserva } from './detalleReserva'; // Asegúrate de importar el modelo correcto
 
 interface ReservaAttributes {
   id_reserva: number;
@@ -23,6 +24,8 @@ class Reserva extends Model<InferAttributes<Reserva>, InferCreationAttributes<Re
   declare total: number;
   declare estado: string;
   declare vencimiento: Date;
+
+  declare DetalleReservas?: DetalleReserva[];
 
   static associate(models: any) {
     Reserva.belongsTo(models.Usuario, {

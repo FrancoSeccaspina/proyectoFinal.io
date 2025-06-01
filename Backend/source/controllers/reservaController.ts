@@ -8,6 +8,7 @@ import { Reserva } from "../database/models/reserva";
 import { DetalleReserva } from "../database/models/detalleReserva";
 import { Producto } from "../database/models/producto";
 import { Op } from 'sequelize';
+import { forEach } from "../validations/productCreate";
 
 interface ProductoCarrito {
     id: number;
@@ -184,7 +185,6 @@ class carritoController {
 
     public async mostrarReservas(req: Request, res: Response) {
         try {
-            // this.devolverStockReservasVencidas(req, res)
             const usuarioLogueado = SessionService.obtenerSessionUsuario(req);
             if (!usuarioLogueado) {
                 // TODO : renderizar mensaje a la vista
@@ -230,47 +230,43 @@ class carritoController {
         }
     }
 
-    public async devolverStockReservasVencidas(req: Request, res: Response) {
-        const t = await sequelize.transaction()
+    public async devolverStockReservasVencidas() {
+        const t = await sequelize.transaction();
         try {
-
             const reservasVencidas = await Reserva.findAll({
                 where: {
                     vencimiento: { [Op.lt]: new Date() },
-                    estado: 'activa'
+                    estado: EstadosReserva.PENDIENTE
                 },
                 include: [{
-                    model: DetalleReserva
+                    model: DetalleReserva,
                 }],
                 transaction: t
             });
-            console.log("reservas vencidas : ", reservasVencidas)
-            // const [cantidadActualizadas] = await Reserva.update(
-            //     { estado: EstadosReserva.CANCELADO },
-            //     {
-            //         where: {
-            //             vencimiento: {
-            //                 [Op.lt]: new Date()
-            //             },
-            //             estado: EstadosReserva.PENDIENTE
-            //         }
-            //     }
-            // );
 
-            // console.log(`✅ ${cantidadActualizadas} reservas vencidas actualizadas.`);
+            for (const reserva of reservasVencidas) {
+                const detalles = reserva.DetalleReservas || [];
 
+                for (const detalle of detalles) {
+                    await Producto.increment(
+                        { stock: detalle.cantidad },
+                        { where: { id: detalle.id_producto }, transaction: t }
+                    );
+                }
+
+                await reserva.update(
+                    { estado: EstadosReserva.CANCELADO },
+                    { transaction: t }
+                );
+            }
+            await t.commit();
 
         } catch (error) {
-            console.error("Error al mostrar reservas:", (error as Error).message);
-            res.status(500).render("error", {
-                title: "Error del servidor",
-                code: 500,
-                message: "Error al mostrar reservas",
-                description: "Ocurrió un error inesperado.",
-                error: (error as Error).message
-            });
+            await t.rollback();
+            console.error("Error al devolver stock de reservas vencidas:", (error as Error).message);
         }
     }
+
 }
 
 export default new carritoController();

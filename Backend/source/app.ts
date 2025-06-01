@@ -34,6 +34,9 @@ import categoriesGrupoMuscularAPIController from './routes/api/categoriaGrupoMus
 import proveedorAPIController from './routes/api/proveedores.api.routes'
 import cuotaApiController from './routes/api/cuota.api.routes';
 
+// cron
+import './cron-task/devolver-stock-reservas-vencidas'
+
 // carga las variables de entorno en este caso del archivo .env
 dotenv.config();
 
