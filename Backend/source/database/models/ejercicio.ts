@@ -26,7 +26,7 @@ class Ejercicio extends Model<InferAttributes<Ejercicio>, InferCreationAttribute
 
     static associate(models: any) {
         Ejercicio.belongsTo(models.GrupoMuscular, {
-            foreignKey: 'grupo_muscular_id_fk',
+            foreignKey: 'grupo_muscular_id',
         });
     }
 }

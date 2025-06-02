@@ -23,7 +23,7 @@ class Receta extends Model<InferAttributes<Receta>, InferCreationAttributes<Rece
     declare imagen: string;
     static associate(models: any) {
         Receta.belongsTo(models.CategoriaReceta, {
-            foreignKey: 'categoria_id_fk',
+            foreignKey: 'categoria_id',
         });
     }
 }

@@ -18,7 +18,7 @@ class CategoriaReceta extends Model<InferAttributes<CategoriaReceta>, InferCreat
 
     static associate(models: any) {
         CategoriaReceta.hasOne(models.Receta, {
-            foreignKey: 'categoria_id_fk',
+            foreignKey: 'categoria_id',
         })
     }
 }

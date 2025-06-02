@@ -17,7 +17,7 @@ class GrupoMuscular extends Model<InferAttributes<GrupoMuscular>, InferCreationA
 
     static associate(models: any) {
         GrupoMuscular.hasOne(models.Ejercicio, {
-            foreignKey: 'grupo_muscular_id_fk',
+            foreignKey: 'grupo_muscular_id',
         });
     }
 }
@@ -45,4 +45,4 @@ const initGrupoMuscularModel = (sequelize: Sequelize) => {
         }
     )
 }
-export {GrupoMuscular, initGrupoMuscularModel};
+export { GrupoMuscular, initGrupoMuscularModel };

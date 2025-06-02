@@ -1,7 +1,15 @@
 {
+  "scripts": {
+    "start": "concurrently \"npm run server\" \"npm run client\"",
+    "server": "cd backend && npm run start:dev",
+    "client": "cd frontend && npm start"
+  },
   "dependencies": {
     "@types/multer": "^1.4.12",
     "multer": "^2.0.0",
     "react-axios": "^2.0.6"
+  },
+  "devDependencies": {
+    "concurrently": "^9.1.2"
   }
 }
