@@ -8,3 +8,6 @@ npm run start:dev
 ## credenciales ADMIN
 admin@activafitness.com
 admin123
+
+## tiempo de vida de una reserva .env
+TIEMPO_CONTROL_STOCK=30

@@ -8,7 +8,9 @@ import { Reserva } from "../database/models/reserva";
 import { DetalleReserva } from "../database/models/detalleReserva";
 import { Producto } from "../database/models/producto";
 import { Op } from 'sequelize';
-import { forEach } from "../validations/productCreate";
+import dotenv from 'dotenv';
+
+dotenv.config();
 
 interface ProductoCarrito {
     id: number;
@@ -30,7 +32,10 @@ interface ResultadoCarrito {
     };
 }
 
-class carritoController {
+class reservaController {
+    /***
+     * Tiempo de vida de cada reserva .env TIEMPO_CONTROL_STOCK=30
+     */
     public async reservarCompra(req: Request, res: Response) {
         const t = await sequelize.transaction();
         try {
@@ -50,12 +55,12 @@ class carritoController {
             if (!usuario) {
                 throw new Error("Usuario no encontrado");
             }
-
+            const tiempoControlStock = parseInt(process.env.TIEMPO_CONTROL_STOCK || "0", 10);
             const id_usuario = usuario.id;
             const fechaActual = new Date();
             const total = productosEnCarrito.resultados.total;
             const estadoPendiente = EstadosReserva.PENDIENTE;
-            const horaVencimiento = new Date(fechaActual.getTime() + 30 * 60000);
+            const horaVencimiento = new Date(fechaActual.getTime() + tiempoControlStock * 60000);
 
             const reserva = await Reserva.create({
                 id_usuario: id_usuario,
@@ -305,4 +310,4 @@ class carritoController {
     }
 }
 
-export default new carritoController();
+export default new reservaController();
