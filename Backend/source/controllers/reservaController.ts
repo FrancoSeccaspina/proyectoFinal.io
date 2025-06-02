@@ -230,6 +230,43 @@ class carritoController {
         }
     }
 
+    public async cancelarReservaPorId(req: Request, res: Response) {
+        try {
+            const { id } = req.params;
+            const id_reserva = parseInt(id, 10);
+
+            const reserva = await Reserva.findOne({
+                where: { id_reserva },
+                include: [{
+                    model: DetalleReserva,
+                    attributes: ['id_producto', 'cantidad']
+                }]
+            });
+
+            if (reserva && reserva.DetalleReservas) {
+                await Promise.all(reserva.DetalleReservas.map(detalle =>
+                    Producto.increment(
+                        { stock: detalle.cantidad },
+                        { where: { id: detalle.id_producto } }
+                    )
+                ));
+
+                await Reserva.update(
+                    { estado: EstadosReserva.CANCELADO },
+                    { where: { id_reserva } }
+                );
+            }
+
+            res.redirect('/reserva/mostrar/reservas');
+        } catch (error) {
+            console.error("Error al cancelar reserva:", (error as Error).message);
+            res.status(500).json({
+                message: "Error al cancelar reserva",
+                error: (error as Error).message
+            });
+        }
+    }
+
     public async devolverStockReservasVencidas() {
         const t = await sequelize.transaction();
         try {
@@ -255,7 +292,7 @@ class carritoController {
                 }
 
                 await reserva.update(
-                    { estado: EstadosReserva.CANCELADO },
+                    { estado: EstadosReserva.EXPIRADO },
                     { transaction: t }
                 );
             }
@@ -266,7 +303,6 @@ class carritoController {
             console.error("Error al devolver stock de reservas vencidas:", (error as Error).message);
         }
     }
-
 }
 
 export default new carritoController();

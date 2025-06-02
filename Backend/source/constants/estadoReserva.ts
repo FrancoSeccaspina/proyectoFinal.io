@@ -15,5 +15,6 @@ export enum EstadosReserva {
     PENDIENTE = 'pendiente',
     CONFIRMADO = 'confirmado',
     CANCELADO = 'cancelado',
+    EXPIRADO = 'expirado'
   }
   
