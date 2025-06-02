@@ -73,6 +73,8 @@ const CuotaFormulario = () => {
             <th>Descripción</th>
             <th>Monto</th>
             <th>Estado</th>
+            <th>Deuda</th>
+            <th>Ganacia</th>
             <th>Acciones</th>
           </tr>
         </thead>
@@ -84,8 +86,10 @@ const CuotaFormulario = () => {
               <td>{cuota.descripcion}</td>
               <td>${cuota.monto}</td>
               <td>{cuota.estado}</td>
+              <td>${cuota.faltante}</td>
+              <td>${cuota.sobrante}</td>
               <td>
-                <Link to={`/cuota/editarCuota/${cuota.id}`} className="btn btn-success">
+                <Link to={`/cuota/editar/${cuota.id}`} className="btn btn-success">
                                           Editar
                                         </Link>
                                         <button class="btn btn-danger" onClick={() => handleDelete(cuota.id)}>Eliminar</button>

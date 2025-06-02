@@ -2,23 +2,27 @@ import { Request, Response } from 'express';
 import { Cuota } from '../../database/models/cuota';
 import { Usuario } from '../../database/models/usuario';
 import { error } from 'console';
+import { calcularMontoActual } from '../../utils/calcularMontoActual';
 export class cuotasApiController {
 
 
-async crearCuota(req: Request, res: Response): Promise<void> {
+/*async crearCuota(req: Request, res: Response): Promise<void> {
     try {
-    const { fecha, descripcion, monto, estado, id_usuario } = req.body;
+    const { fecha, descripcion, monto, estado, id_usuario, sobrante, faltante} = req.body;
 
-    if (!fecha || !descripcion || !monto || !estado || !id_usuario) {
-        res.status(400).json({ message: "Faltan datos obligatorios" });
-        return;
+    res.status(400).json({ message: "Faltan datos obligatorios" });
+    if (!fecha || !descripcion || !monto || !estado || !id_usuario || !faltante || !sobrante) {
+        res.status(400).json({ success: false, message: "Faltan datos requeridos", });
+
     }
     const nuevaCuota = await Cuota.create({
         fecha,
         descripcion,
         monto,
         estado,
-        id_usuario
+        id_usuario,
+        faltante,
+        sobrante
     });
 
     res.status(201).json({ message: "Cuota creada con éxito", cuota: nuevaCuota });
@@ -26,8 +30,31 @@ async crearCuota(req: Request, res: Response): Promise<void> {
     console.error('Error al crear la cuota:', error);
     res.status(500).json({ message: "Error al crear la cuota" });
     }
-}
+}*/
+async crearCuota(req: Request, res: Response): Promise<void> {
+    try {
+        const { fecha, descripcion, monto, estado, id_usuario, sobrante, faltante} = req.body;
 
+        if (!fecha || !descripcion || !monto || !estado || !id_usuario || faltante === undefined || sobrante === undefined) {
+            res.status(400).json({ success: false, message: "Faltan datos requeridos" });
+        }
+
+        const nuevaCuota = await Cuota.create({
+            fecha,
+            descripcion,
+            monto,
+            estado,
+            id_usuario,
+            faltante,
+            sobrante
+        });
+
+      res.status(201).json({ message: "Cuota creada con éxito", cuota: nuevaCuota });
+    } catch (error) {
+        console.error('Error al crear la cuota:', error);
+      res.status(500).json({ message: "Error al crear la cuota" });
+    }
+}
 
     async listaCuotas(req: Request, res: Response): Promise<void> {
         try {
@@ -74,7 +101,40 @@ async crearCuota(req: Request, res: Response): Promise<void> {
             res.status(500).json({ message: 'Error al obtener las cuotas' });
         }
     }
+
     async editarCuota(req: Request, res: Response): Promise<void> {
+  try {
+    const { id } = req.params;
+    const { fecha, descripcion, monto, estado, faltante, sobrante } = req.body;
+
+    // Traemos la cuota por id
+    const cuota = await Cuota.findByPk(Number(id));
+
+    if (!cuota) {
+      res.status(404).json({ message: 'Cuota no encontrada' });
+      return;
+    }
+
+    // Actualizamos la cuota con los campos que queramos
+    await cuota.update({
+      fecha,
+      descripcion,
+      monto,
+      estado,
+      faltante,
+      sobrante,
+    });
+
+    res.status(200).json({ message: 'Cuota actualizada exitosamente', cuota });
+
+  } catch (error) {
+    console.error('Error al editar la cuota:', error);
+    res.status(500).json({ message: 'Error al editar la cuota' });
+  }
+}
+
+
+    /*async editarCuota(req: Request, res: Response): Promise<void> {
         try{
             const { id } = req.params;
             const { fecha, descripcion, monto, estado } = req.body;
@@ -90,7 +150,7 @@ async crearCuota(req: Request, res: Response): Promise<void> {
             console.error('Error al editar el cuota:', error);
             res.status(500).json({ message: 'Error al editar el cuota' });
         }
-    }
+    }*/
     async delete(req: Request, res: Response): Promise<Response> {
         try {
           const { id } = req.params;
@@ -117,7 +177,39 @@ async crearCuota(req: Request, res: Response): Promise<void> {
             message: "Error interno del servidor"
           });
         }
-      }
+    }
+    registrarCuota = async (req: Request, res: Response): Promise<Response> => {
+  try {
+    const { id_usuario, fecha, pagado } = req.body;
+
+    const montoCalculado = calcularMontoActual(fecha);
+
+    let faltante = 0;
+    let sobrante = 0;
+
+    if (pagado < montoCalculado) {
+      faltante = montoCalculado - pagado;
+    } else if (pagado > montoCalculado) {
+      sobrante = pagado - montoCalculado;
+    }
+
+    const nuevaCuota = await Cuota.create({
+      id_usuario,
+      fecha,
+      monto: montoCalculado,
+      estado: 'PENDIENTE',
+      descripcion: req.body.descripcion || '',
+      faltante,
+      sobrante,
+    });
+
+    return res.status(201).json(nuevaCuota);  // <-- return aquí
+
+  } catch (error) {
+    console.error(error);
+    return res.status(500).json({ error: 'Error al crear la cuota' }); // <-- return aquí
+  }
+};
 }
 
 

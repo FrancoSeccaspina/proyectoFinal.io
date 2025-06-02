@@ -9,7 +9,9 @@ const EdicionCuota = () => {
         fecha:'',
         descripcion:'',
         monto:'',
-        estado:''
+        estado:'',
+        sobrante:'',
+        faltante:''
     });
 
     useEffect(() => {
@@ -67,6 +69,24 @@ const EdicionCuota = () => {
         <textarea
           name="estado"
           value={cuota.estado}
+          onChange={handleChange}
+          required
+        />
+
+         <label>Deuda</label>
+        <input
+          type="number"
+          name="faltante"
+          value={cuota.faltante}
+          onChange={handleChange}
+          required
+        />
+
+         <label>Ganacia</label>
+        <input
+          type="number"
+          name="sobrante"
+          value={cuota.sobrante}
           onChange={handleChange}
           required
         />

@@ -14,6 +14,8 @@ import {
     monto: number;
     estado: string;
     id_usuario: number;
+    faltante: Number;
+    sobrante: Number
   }
   class Cuota extends Model<InferAttributes<Cuota>, InferCreationAttributes<Cuota>> implements CuotaAttributes {
     declare id: CreationOptional<number>;
@@ -22,6 +24,8 @@ import {
     declare monto: number;
     declare estado: string;
     declare id_usuario: number;
+    declare faltante: Number;
+    declare sobrante: Number;
 
     static associate(models: any) {
 
@@ -65,6 +69,14 @@ const initCuotaModel = (sequelize: Sequelize) => {
                 onUpdate: 'CASCADE',
                 onDelete: 'CASCADE',
               },
+               faltante: {
+                type: DataTypes.FLOAT(10, 2),
+                allowNull: false,
+              }, 
+              sobrante: {
+                type: DataTypes.FLOAT(10, 2),
+                allowNull: false,
+            },
             },
             {
                 sequelize,

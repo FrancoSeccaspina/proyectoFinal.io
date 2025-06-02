@@ -18,4 +18,6 @@ route.delete('/cuotas/:id', (res, req) => { cuotaApiController.delete(res, req) 
 
 route.post('/cuotas', cuotaApiController.crearCuota.bind(cuotaApiController));
 
+route.post('/calculoCuotas', (req, res) =>  { cuotaApiController.registrarCuota(req, res)});
+
 export default route;
