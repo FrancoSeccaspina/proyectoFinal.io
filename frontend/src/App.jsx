@@ -6,6 +6,7 @@ import Recetas from "./component/Recetas";
 import Sidebar from './component/Sidebar';
 import CuotaFormulario from './component/CuotaFormulario';
 import Proveedores from './component/Proveedores';
+import Reservas from './component/Reservas';
 
 import { BrowserRouter, Route, Routes } from 'react-router-dom';
 
@@ -32,7 +33,8 @@ function App() {
           <Route path="/Rutinas" element={<Rutinas />} />
           <Route path="/Recetas" element={<Recetas />} />
           <Route path="/Proveedores" element={<Proveedores />} />
-
+          <Route path="/Reservas" element={<Reservas />} />
+          
           {/* Ediciones */}
           <Route path="/productos/editar/:id" element={<EdicionProductos />} />
           <Route path="/recetas/editar/:id" element={<EdicionReceta />} />

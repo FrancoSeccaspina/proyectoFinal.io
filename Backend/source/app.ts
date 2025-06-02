@@ -33,6 +33,7 @@ import categoriesRecetaAPIController from './routes/api/categoriaReceta.api.rout
 import categoriesGrupoMuscularAPIController from './routes/api/categoriaGrupoMuscular.api.routes'
 import proveedorAPIController from './routes/api/proveedores.api.routes'
 import cuotaApiController from './routes/api/cuota.api.routes';
+import reservaApiRoutes from './routes/api/reservas.api.routes';
 
 // cron
 import './cron-task/devolver-stock-reservas-vencidas'
@@ -94,11 +95,22 @@ app.use('/categorias', categoriaRoutes);
 app.use('/images', express.static('public/images'));
 
 //APIS
-app.use('/api', productsApiRoutes, usuariosAPIController, ejercicioApiController, recetaApiController, categoriaApiController, categoriesRecetaAPIController, categoriesGrupoMuscularAPIController, proveedorAPIController, cuotaApiController);
+app.use('/api',
+    productsApiRoutes,
+    usuariosAPIController,
+    ejercicioApiController,
+    recetaApiController,
+    categoriaApiController,
+    categoriesRecetaAPIController,
+    categoriesGrupoMuscularAPIController,
+    proveedorAPIController,
+    cuotaApiController,
+    reservaApiRoutes
+);
 
 // verifica que las rutas no existan y redirige a la página de error 404
 app.use(rutaNoEncontrada);
-app.use('/public', express.static(path.join(__dirname, 'public'))); 
+app.use('/public', express.static(path.join(__dirname, 'public')));
 app.use('/uploads', express.static('uploads'));
 
 // Escuchar el servidor

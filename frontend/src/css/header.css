@@ -1,11 +1,12 @@
-.moverJuntos{
+.moverJuntos {
     display: flex;
     flex-direction: row;
     flex-wrap: wrap;
     justify-content: flex-start;
     align-items: center;
 }
-.category-filters{
+
+.category-filters {
     display: flex;
     flex-direction: row;
     flex-wrap: wrap;
