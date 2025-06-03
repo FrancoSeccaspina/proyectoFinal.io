@@ -1,19 +1,33 @@
 import { EstadosReserva } from "../constants/estadoReserva";
-import { useState, useEffect } from "react";
+import { useState } from "react";
 import axios from "axios";
 
 function ReservaCard({ reserva: reservaProp }) {
   const [reserva, setReserva] = useState(reservaProp);
+
   const onclickConfirm = async () => {
     try {
       const response = await axios.put(
         `http://localhost:3032/api/reservas/confirmar/${reserva.id_reserva}`
       );
-      console.log(response.data.message);
-      setReserva({ ...reserva, estado: EstadosReserva.CONFIRMADO });
+      console.log(response.data);
+      setReserva(...response.data.reserva);
     } catch (error) {
       console.error("Error al confirmar la reserva:", error);
       alert("Error al confirmar la reserva");
+    }
+  };
+
+  const onclickCancel = async () => {
+    try {
+      const response = await axios.put(
+        `http://localhost:3032/api/reservas/cancelar/${reserva.id_reserva}`
+      );
+      console.log(response.data.message);
+      setReserva(...response.data.reserva);
+    } catch (error) {
+      console.error("Error al cancelar la reserva:", error);
+      alert("Error al cancelar la reserva");
     }
   };
 
@@ -49,10 +63,17 @@ function ReservaCard({ reserva: reservaProp }) {
           <p>Subtotal: ${detalle.subtotal}</p>
         </div>
       ))}
-      {reserva.estado === EstadosReserva.PENDIENTE && (
+      {reserva.estado !== EstadosReserva.CONFIRMADO && (
         <div className="estado-pendiente">
           <button className="btn btn-danger" onClick={onclickConfirm}>
             Confirmar reserva
+          </button>
+        </div>
+      )}
+      {reserva.estado !== EstadosReserva.CANCELADO && (
+        <div className="estado-pendiente">
+          <button className="btn btn-danger" onClick={onclickCancel}>
+            Cancelar reserva
           </button>
         </div>
       )}

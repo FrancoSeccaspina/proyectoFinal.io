@@ -4,8 +4,9 @@ import reservaApiController from '../../controllers/api/reserva.api.Controller';
 const route = Router();
 
 route.get("/reservas/mostrar", (req: Request, res: Response) => {
-    reservaApiController.listaProductos(req, res)
+    reservaApiController.listaReservas(req, res)
 })
 route.put("/reservas/confirmar/:id", (req: Request, res: Response) => { reservaApiController.confirmarReserva(req, res) });
+route.put("/reservas/cancelar/:id", (req: Request, res: Response) => { reservaApiController.cancelarReserva(req, res) });
 
 export default route;

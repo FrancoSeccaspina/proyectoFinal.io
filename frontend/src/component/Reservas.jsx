@@ -20,6 +20,7 @@ function Reservas() {
       setLoading(false);
     }
   };
+
   useEffect(() => {
     getReservas();
   }, []);
