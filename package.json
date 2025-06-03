@@ -1,8 +1,9 @@
 {
    "scripts": {
-    "start": "concurrently \"npm run server\" \"npm run client\"",
+    "start": "npm install && npm run concurrently",
+    "concurrently": "concurrently \"npm run server\" \"npm run client\"",
     "server": "cd backend && npm run start:dev",
-    "client": "cd frontend && npm start"
+    "client": "cd frontend && npm install && npm start"
   },
 
   "dependencies": {

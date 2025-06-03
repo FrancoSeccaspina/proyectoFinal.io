@@ -34,7 +34,7 @@ interface ResultadoCarrito {
 
 class reservaController {
     /***
-     * Tiempo de vida de cada reserva .env TIEMPO_CONTROL_STOCK=30
+     * Tiempo de vida de cada reserva .env TIEMPO_CONTROL_STOCK_MINUTOS=30
      */
     public async reservarCompra(req: Request, res: Response) {
         const t = await sequelize.transaction();
@@ -55,7 +55,7 @@ class reservaController {
             if (!usuario) {
                 throw new Error("Usuario no encontrado");
             }
-            const tiempoControlStock = parseInt(process.env.TIEMPO_CONTROL_STOCK || "0", 10);
+            const tiempoControlStock = parseInt(process.env.TIEMPO_CONTROL_STOCK_MINUTOS || "0", 10);
             const id_usuario = usuario.id;
             const fechaActual = new Date();
             const total = productosEnCarrito.resultados.total;
