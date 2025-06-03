@@ -1,27 +1,26 @@
+import ReservaCard from "./ReservaCard";
 import { useEffect, useState } from "react";
+import axios from "axios";
 import "../css/header.css";
 import "../css/reservas.css";
-import ReservaCard from "./ReservaCard";
 
 function Reservas() {
   const [reservas, setReservas] = useState([]);
   const [loading, setLoading] = useState(true);
 
+  const getReservas = async () => {
+    try {
+      const response = await axios.get(
+        "http://localhost:3032/api/reservas/mostrar"
+      );
+      setReservas(response.data);
+    } catch (error) {
+      console.error("Error al obtener reservas:", error);
+    } finally {
+      setLoading(false);
+    }
+  };
   useEffect(() => {
-    const getReservas = async () => {
-      try {
-        const response = await fetch(
-          "http://localhost:3032/api/reservas/mostrar"
-        );
-        const data = await response.json();
-        setReservas(data);
-      } catch (error) {
-        console.error("Error al obtener reservas:", error);
-      } finally {
-        setLoading(false);
-      }
-    };
-
     getReservas();
   }, []);
 

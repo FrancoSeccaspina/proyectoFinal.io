@@ -3,7 +3,8 @@ import { Reserva } from '../../database/models/reserva';
 import { Producto } from '../../database/models/producto';
 import { Usuario } from '../../database/models/usuario';
 import { DetalleReserva } from '../../database/models/detalleReserva';
-
+import { Sequelize } from 'sequelize';
+import { EstadosReserva } from '../../constants/estadoReserva'
 export class reservaApiController {
     async listaProductos(req: Request, res: Response): Promise<void> {
         try {
@@ -25,11 +26,34 @@ export class reservaApiController {
                 order: [['fecha', 'DESC']],
             });
 
-            console.log("Resultado controlador : ", reservas)
+
             res.status(200).json(reservas);
         } catch (error) {
             console.error('Error al listar reservas:', error);
             res.status(500).json({ message: 'Error al listar reservas' });
+        }
+    }
+
+    public async confirmarReserva(req: Request, res: Response) {
+        try {
+            const idReserva = parseInt(req.params.id, 10);
+            if (isNaN(idReserva)) {
+                return res.status(400).json({ message: "ID de reserva inválido" });
+            }
+
+            const [updatedRows] = await Reserva.update(
+                { estado: EstadosReserva.CONFIRMADO },
+                { where: { id_reserva: idReserva } }
+            );
+
+            if (updatedRows === 0) {
+                return res.status(404).json({ message: "Reserva no encontrada" });
+            }
+
+            return res.status(200).json({ message: "Reserva confirmada correctamente" });
+        } catch (error) {
+            console.error("Error al confirmar reserva:", (error as Error).message);
+            return res.status(500).json({ message: "Error al confirmar reserva" });
         }
     }
     // async buscarProductosPorId(req: Request, res: Response): Promise<void> {

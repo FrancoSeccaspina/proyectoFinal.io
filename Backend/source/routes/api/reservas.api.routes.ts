@@ -6,5 +6,6 @@ const route = Router();
 route.get("/reservas/mostrar", (req: Request, res: Response) => {
     reservaApiController.listaProductos(req, res)
 })
+route.put("/reservas/confirmar/:id", (req: Request, res: Response) => { reservaApiController.confirmarReserva(req, res) });
 
 export default route;

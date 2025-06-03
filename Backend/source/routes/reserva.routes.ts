@@ -1,13 +1,13 @@
 import { Router, Request, Response } from "express";
-import reservaController from "../controllers/reservaController";
+import reservaController from '../controllers/reservaController'
 
-const router = Router();
+const route = Router();
 
 // Rutas del reservas
-router.get("/reserva/mostrar/ultimaReserva", (req: Request, res: Response) => {reservaController.mostrarUltimaReserva(req, res)});
-router.get("/reserva/mostrar/reserva/:id", (req: Request, res: Response) => {reservaController.mostrarReservaPorId(req, res)});
-router.get("/reserva/mostrar/reservas", (req: Request, res: Response) => {reservaController.mostrarReservas(req, res)});
-router.post("/reserva/agregar", (req: Request, res: Response) => {reservaController.reservarCompra(req, res);});
-router.patch("/reserva/eliminar/:id", (req: Request, res: Response) => {reservaController.cancelarReservaPorId(req, res)});
+route.get("/reserva/mostrar/ultimaReserva", (req: Request, res: Response) => { reservaController.mostrarUltimaReserva(req, res) });
+route.get("/reserva/mostrar/reserva/:id", (req: Request, res: Response) => { reservaController.mostrarReservaPorId(req, res) });
+route.get("/reserva/mostrar/reservas", (req: Request, res: Response) => { reservaController.mostrarReservas(req, res) });
+route.post("/reserva/agregar", (req: Request, res: Response) => { reservaController.reservarCompra(req, res); });
+route.patch("/reserva/eliminar/:id", (req: Request, res: Response) => { reservaController.cancelarReservaPorId(req, res) });
 
-export default router;
+export default route;

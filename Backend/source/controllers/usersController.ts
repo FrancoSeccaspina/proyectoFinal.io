@@ -120,14 +120,14 @@ export class UsuarioController {
       return res
 
     } catch (error) {
-      
+
       console.error("Error: ", (error as Error).message);
       res.status(500).render("error", {
-          title: "Error del servidor",
-          code: 500,
-          message: "Error del servidor",
-          description: "Ocurrió un error inesperado durante el registro.",
-          error: (error as Error).message
+        title: "Error del servidor",
+        code: 500,
+        message: "Error del servidor",
+        description: "Ocurrió un error inesperado durante el registro.",
+        error: (error as Error).message
       });
       return res;
     }
@@ -159,7 +159,7 @@ export class UsuarioController {
  */
   async login(req: Request, res: Response): Promise<Response | void> {
     try {
-      
+
       const { email, contrasenia } = req.body;
 
       const usuarioExistente = await Autenticacion.findOne({ where: { email } });
@@ -170,7 +170,7 @@ export class UsuarioController {
           },
           oldData: {
             email: req.body.email
-        }
+          }
         });
       }
 
@@ -182,7 +182,7 @@ export class UsuarioController {
           },
           oldData: {
             email: req.body.email
-        }
+          }
         });
       }
 
@@ -194,16 +194,16 @@ export class UsuarioController {
           },
           oldData: {
             email: req.body.email
-        }
+          }
         });
       }
 
       SessionService.guardarSessionUsuario(req, {
-        id: usuario.id, 
+        id: usuario.id,
         email: usuarioExistente.email,
         rol: usuario.rol
       });
-      
+
       if (usuario.rol === Roles.ADMIN) {
         return res.redirect("http://localhost:3000");
       }
@@ -213,11 +213,11 @@ export class UsuarioController {
 
       console.error("Error en login:", (error as Error).message);
       return res.status(500).render("error", {
-          title: "Error del servidor",
-          code: 500,
-          message: "Error del servidor",
-          description: "Ocurrió un error inesperado durante el inicio de sesión. Por favor, inténtelo de nuevo más tarde.",
-          error: (error as Error).message
+        title: "Error del servidor",
+        code: 500,
+        message: "Error del servidor",
+        description: "Ocurrió un error inesperado durante el inicio de sesión. Por favor, inténtelo de nuevo más tarde.",
+        error: (error as Error).message
       });
 
     }
@@ -262,7 +262,7 @@ export class UsuarioController {
   async update(req: Request, res: Response): Promise<Response> {
     try {
       const { id } = req.params;
-      const { apellido, nombre, rol, imagen, id_membresia, fecha_nacimiento, celular, aptoMedico, dni  } = req.body;
+      const { apellido, nombre, rol, imagen, id_membresia, fecha_nacimiento, celular, aptoMedico, dni } = req.body;
       const usuario = await Usuario.findOne({ where: { id } });
       if (!usuario) {
         return res.status(404).json({
@@ -280,7 +280,7 @@ export class UsuarioController {
         celular,
         aptoMedico,
         // dni
-        
+
       });
       return res.status(200).json({
         success: true,
