@@ -1,10 +1,49 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="es">
 <head>
   <%- include('./partials/head.ejs') %>
   <link rel="stylesheet" href="/css/register.css" />
   <link rel="stylesheet" href="/css/button-form.css" />
 </head>
+
+<style>
+  .inputs-contra {
+    background-color: #f9f9f9;
+    border: 1px solid #ddd;
+    border-left: 5px solid #007acc;
+    border-radius: 8px;
+    padding: 16px;
+    margin-bottom: 16px;
+    font-family: sans-serif;
+    width: 100%;
+  }
+
+  .inputs-contra p {
+    margin: 0 0 8px;
+    font-weight: bold;
+    color: #333;
+    font-size: 14px;
+  }
+
+  .inputs-contra ul {
+    list-style-type: disc;
+    padding-left: 20px;
+    margin: 0;
+    color: #555;
+    font-size: 13px;
+  }
+
+  .inputs-contra li {
+    margin-bottom: 6px;
+  }
+
+  .nota-requerida {
+    font-size: 0.9rem;
+    color: #555;
+    margin-bottom: 10px;
+  }
+
+</style>
 
 <body>
   <%- include('./partials/header.ejs') %>
@@ -13,76 +52,85 @@
     <h2 id="h2-register">Regístrate</h2>
     <form action="/users/save" method="POST" id="form-register" class="form-container">
 
+      <p class="nota-requerida">Por favor, asegúrese de completar los campos requeridos <span class="asterisco-requerido">(*)</span>.</p>
+
       <div class="flex-container-row">
         <!-- Nombre -->
-         <div class="div-flex-100" >
-            <input type="text" name="nombre" id="nombre" placeholder="Nombre" class="inputs-register"
-              value="<%= (typeof oldData !== 'undefined' && oldData.nombre) ? oldData.nombre : '' %>" required />
-            <% if (locals && locals.errors && errors.nombre) { %>
-              <p class="feedback"><%= errors.nombre.msg %></p>
-            <% } %>
-         </div>
-
+        <div class="div-flex-100 input-requerido">
+          <input type="text" name="nombre" id="nombre" placeholder="Nombre *" class="inputs-register"
+            value="<%= (typeof oldData !== 'undefined' && oldData.nombre) ? oldData.nombre : '' %>" required />
+          <% if (locals && locals.errors && errors.nombre) { %>
+            <p class="feedback"><%= errors.nombre.msg %></p>
+          <% } %>
+        </div>
 
         <!-- Apellido -->
-         <div class="div-flex-100" >
-          <input type="text" name="apellido" id="apellido" class="inputs-register" placeholder="Apellido"
+        <div class="div-flex-100">
+          <input type="text" name="apellido" id="apellido" class="inputs-register" placeholder="Apellido *"
             value="<%= (typeof oldData !== 'undefined' && oldData.apellido) ? oldData.apellido : '' %>" required />
           <% if (locals && locals.errors && errors.apellido) { %>
             <p class="feedback"><%= errors.apellido.msg %></p>
           <% } %>
-         </div>
+        </div>
       </div>
 
       <!-- Email -->
-      <input type="email" name="email" id="email" placeholder="Correo Electrónico" class="inputs-register"
+      <input type="email" name="email" id="email" placeholder="Correo Electrónico *" class="inputs-register"
         value="<%= (typeof oldData !== 'undefined' && oldData.email) ? oldData.email : '' %>" required />
       <% if (locals && locals.errors && errors.email) { %>
         <p class="feedback"><%= errors.email.msg %></p>
       <% } %>
 
+      <!-- Fecha de nacimiento -->
       <div class="flex-container-row">
-        <!-- Fecha de nacimiento -->
         <input type="date" name="fecha_nacimiento" id="fecha_nacimiento" class="inputs-register"
-          value="<%= (typeof oldData !== 'undefined' && oldData.fecha_nacimiento) ? oldData.fecha_nacimiento : '' %>" required />
+          value="<%= (typeof oldData !== 'undefined' && oldData.fecha_nacimiento) ? oldData.fecha_nacimiento : '' %>" />
         <% if (locals && locals.errors && errors.fecha_nacimiento) { %>
           <p class="feedback"><%= errors.fecha_nacimiento.msg %></p>
         <% } %>
 
         <!-- DNI -->
-         <div class="div-flex-100">
-           <input type="text" id="dni" name="dni" maxlength="8" pattern="\d{7,8}" required placeholder="DNI"
-           class="inputs-register" value="<%= (typeof oldData !== 'undefined' && oldData.dni) ? oldData.dni : '' %>" />
-           <% if (locals && locals.errors && errors.dni) { %>
+        <div class="div-flex-100">
+          <input type="text" id="dni" name="dni" maxlength="8" pattern="\d{7,8}" required placeholder="DNI"
+            class="inputs-register" value="<%= (typeof oldData !== 'undefined' && oldData.dni) ? oldData.dni : '' %>" />
+          <% if (locals && locals.errors && errors.dni) { %>
             <p class="feedback"><%= errors.dni.msg %></p>
-            <% } %>
+          <% } %>
         </div>
       </div>
 
-      <!-- Telefono -->
+      <!-- Teléfono -->
       <input type="tel" name="telefono" id="telefono" class="inputs-register"
         placeholder="Ej: 11 2345 6789"
         pattern="[0-9]{2,4}\s?[0-9]{3,4}\s?[0-9]{3,4}"
-        maxlength="15"
-         />
+        maxlength="15" />
       <% if (locals && locals.errors && errors.telefono) { %>
         <p class="feedback"><%= errors.telefono.msg %></p>
       <% } %>
 
-
       <!-- Contraseña -->
-      <input type="password" name="contrasenia" placeholder="Contraseña" id="contrasenia"
+      <input type="password" name="contrasenia" placeholder="Contraseña: Mín. 8 caracteres, 1 mayús., 1 número, 1 símbolo" id="contrasenia"
         class="inputs-register" required />
       <% if (locals && locals.errors && errors.contrasenia) { %>
         <p class="feedback"><%= errors.contrasenia.msg %></p>
       <% } %>
 
       <!-- Confirmar contraseña -->
-      <input type="password" name="confirmar_contrasenia" placeholder="Confirmar Contraseña"
+      <input type="password" name="confirmar_contrasenia" placeholder="Confirmar Contraseña *"
         id="confirmar-contraseña" class="inputs-register" required />
       <% if (locals && locals.errors && errors.confirmar_contrasenia) { %>
         <p class="feedback"><%= errors.confirmar_contrasenia.msg %></p>
       <% } %>
+
+      <div class="inputs-contra">
+        <p>La contraseña debe contener:</p>
+        <ul>
+          <li>Al menos 8 caracteres</li>
+          <li>Una letra mayúscula</li>
+          <li>Un número</li>
+          <li>Un carácter especial (por ejemplo: @, #, $)</li>
+        </ul>
+      </div>
 
       <!-- Botón de registro -->
       <button type="submit" class="button-form button-register btn-confirmar">
@@ -106,8 +154,6 @@
     modalMessage: 'registro ...'
 }) %>
   </div>
-
-
 
   <footer id="register-footer">
     <%- include('./partials/footer.ejs') %>

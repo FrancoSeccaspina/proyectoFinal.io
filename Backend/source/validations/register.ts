@@ -8,9 +8,12 @@ const validationRegister = [
         .isEmail().withMessage('Debe ingresar un email válido'),
 
     body('contrasenia')
-        .notEmpty().withMessage('Por favor, ingrese su contraseña')
-        .bail()
-        .isLength({ min: 6 }).withMessage('La contraseña debe tener al menos 6 caracteres'),
+    .notEmpty().withMessage('Por favor, ingrese su contraseña')
+    .bail()
+    .isLength({ min: 8 }).withMessage('La contraseña debe tener al menos 8 caracteres')
+    .matches(/[A-Z]/).withMessage('La contraseña debe contener al menos una letra mayúscula')
+    .matches(/[0-9]/).withMessage('La contraseña debe contener al menos un número')
+    .matches(/[^A-Za-z0-9]/).withMessage('La contraseña debe contener al menos un carácter especial'),
 
     body('confirmar_contrasenia')
         .notEmpty().withMessage('Debe confirmar su contraseña')

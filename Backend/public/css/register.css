@@ -84,11 +84,13 @@ footer{
     }
     #button-register{
         font-size: 18px;
-    }
+    } 
 
-.inputs-register placeholder{
-    font-size: 18px;
 }
+
+.inputs-register::placeholder{
+    font-size: 18px;
+    color: white !important;
 }
 
   .form-container {
