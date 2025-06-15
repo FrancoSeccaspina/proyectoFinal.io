@@ -294,5 +294,33 @@ export class UsuarioController {
       });
     }
   }
+  async changePassword(req: Request, res: Response): Promise<Response> {
+    try {
+      const { id } = req.params;
+      const { contrasenia } = req.body;
+
+      const usuario = await Autenticacion.findOne({ where: { id_usuario: id } });
+      if (!usuario) {
+        return res.status(404).json({
+          success: false,
+          message: "Usuario no encontrado",
+        });
+      }
+
+      const hashedPassword = bcrypt.hashSync(contrasenia, 10);
+      await usuario.update({ contrasenia: hashedPassword });
+
+      return res.status(200).json({
+        success: true,
+        message: "Contraseña actualizada correctamente",
+      });
+    } catch (error) {
+      console.error("Error al cambiar contraseña:", (error as Error).message);
+      return res.status(500).json({
+        success: false,
+        message: "Error al cambiar la contraseña",
+      });
+    }
+  }
 }
 export default new UsuarioController();

@@ -22,15 +22,19 @@ const upload = multer({ storage });
 route.get('/usuarios', usuariosAPIController.listaUsuarios.bind(usuariosAPIController));
 
 route.get('/usuarios/:id', (req, res) => {
-    usuariosAPIController.buscarUsuarioPorId(req, res);
+  usuariosAPIController.buscarUsuarioPorId(req, res);
 });
 
 // Ruta para editar producto con imagen
 route.put('/usuarioEditar/:id', upload.single('imagen'), (req, res) => {
-    usuariosAPIController.editarUsuario(req, res);
+  usuariosAPIController.editarUsuario(req, res);
 });
 
 route.delete('/usuarios/:id', (res, req) => { usuariosAPIController.delete(res, req) })
 
+route.post('/usuariosChangePassword', (req, res) => {
+  usuariosAPIController.changePassword(req, res);
+}
+);
 
 export default route;

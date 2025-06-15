@@ -13,8 +13,9 @@ route.get('/users/form', (req, res) => {
 route.get('/users/show/:id', (req, res) => { usersController.show(req, res) });
 route.delete('/users/:id', (req, res) => { usersController.softDelete(req, res) });
 route.put('/users/:id', (req, res) => { usersController.update(req, res) });
-route.post('/users/save', validationRegister, (req:Request, res:Response) => { usersController.registrar(req, res) });
-route.post('/users/login', validationLogin, (req:Request, res:Response) => { usersController.login(req, res) });
+route.post('/users/save', validationRegister, (req: Request, res: Response) => { usersController.registrar(req, res) });
+route.post('/users/login', validationLogin, (req: Request, res: Response) => { usersController.login(req, res) });
 route.get('/users/logout', (req, res) => { usersController.logout(req, res) });
+route.post('/users/change-password', (req: Request, res: Response) => { usersController.changePassword(req, res) });
 
 export default route;
