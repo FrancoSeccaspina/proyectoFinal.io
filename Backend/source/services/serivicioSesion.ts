@@ -53,8 +53,17 @@ export const SessionService = {
         req.session.carrito = [];
     },
 
-    guardarSessionUsuario(req: Request, usuario: { id: number, email: string, rol: string }) {
+    iniciarSessionUsuario(req: Request, usuario: { id: number, email: string, rol: string }) {
         req.session.usuario = usuario;
+    },
+
+    terminarSessionUsuario(req: Request) {
+        req.session.destroy(err => {
+            if (err) {
+                console.error("Error al cerrar sesión:", err);
+                console.log("Error al cerrar sesión:", err);
+            }
+        });
     },
 
     obtenerSessionUsuario(req: Request) {

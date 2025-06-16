@@ -41,7 +41,7 @@ const validationRegister = [
         .isLength({ min: 7, max: 8 }).withMessage('El DNI debe tener 7 u 8 dígitos')
         .isNumeric().withMessage('El DNI debe contener solo números'),
 
-    body('telefono')
+    body('celular')
         .notEmpty().withMessage('El número de teléfono no puede quedar vacío')
         .bail()
         .matches(/^[0-9\s\-+()]{7,15}$/)

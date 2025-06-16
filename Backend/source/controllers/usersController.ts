@@ -195,7 +195,7 @@ export class UsuarioController {
         });
       }
 
-      SessionService.guardarSessionUsuario(req, {
+      SessionService.iniciarSessionUsuario(req, {
         id: usuario.id,
         email: usuarioExistente.email,
         rol: usuario.rol
@@ -221,14 +221,8 @@ export class UsuarioController {
   }
 
   async logout(req: Request, res: Response): Promise<Response | void> {
-    req.session.destroy(err => {
-      if (err) {
-        console.error("Error al cerrar sesión:", err);
-        console.log("Error al cerrar sesión:", err);
-        return res.redirect("/");
-      }
-      res.redirect("/");
-    });
+    SessionService.terminarSessionUsuario(req);
+    res.redirect("/");
   }
 
   async softDelete(req: Request, res: Response): Promise<Response> {
@@ -291,6 +285,7 @@ export class UsuarioController {
       });
     }
   }
+  
   async changePassword(req: Request, res: Response): Promise<Response> {
     try {
       const { id } = req.params;
