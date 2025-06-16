@@ -83,6 +83,11 @@
         <p class="feedback"><%= errors.confirmar_contrasenia.msg %></p>
       <% } %>
 
+
+      <% if (locals && locals.errors) { %>
+        <p class="feedback"><%= errors %></p>
+      <% } %>
+
       <div class="inputs-contra">
         <p>La contraseña debe contener:</p>
         <ul>

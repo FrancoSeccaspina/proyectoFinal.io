@@ -71,18 +71,15 @@ export class UsuarioController {
 
       const usuarioExistente = await Autenticacion.findOne({ where: { email } });
       if (usuarioExistente) {
-        console.log('El email ya existe')
         res.render('register', {
-          errorEmail: { email: { msg: 'Email ya registrado' } },
           oldData: req.body,
-          errors: errores
+          errors: "Email ya registrado"
         })
         return res
       }
 
       if (!reultadosValidacion.isEmpty()) {
         res.render('register', {
-          errorEmail: { email: { msg: '' } },
           oldData: req.body,
           errors: errores
         })
@@ -120,7 +117,7 @@ export class UsuarioController {
       return res
 
     } catch (error) {
-
+      if (transaction) await transaction.rollback();
       console.error("Error: ", (error as Error).message);
       res.status(500).render("error", {
         title: "Error del servidor",
