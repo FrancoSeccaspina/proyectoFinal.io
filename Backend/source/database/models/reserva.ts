@@ -6,7 +6,7 @@ import {
   InferCreationAttributes,
   CreationOptional,
 } from 'sequelize';
-import { DetalleReserva } from './detalleReserva'; // Asegúrate de importar el modelo correcto
+import { DetalleReserva } from './detalleReserva';
 
 interface ReservaAttributes {
   id_reserva: number;

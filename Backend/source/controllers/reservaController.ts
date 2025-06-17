@@ -1,3 +1,5 @@
+import transaccionApiController from './api/transaccion.api.Controller';
+import { TipoTransaccion } from '../constants/tipoTransacciones'
 import { Request, Response } from "express";
 import { SessionService } from '../services/serivicioSesion';
 import { obtenerProductosEnCarrito } from '../services/servicioCarrito';
@@ -82,6 +84,14 @@ class reservaController {
                     subtotal: producto.subtotal
                 }, { transaction: t });
             }));
+
+            transaccionApiController.registrartransaccion(
+                TipoTransaccion.INGRESO,
+                reserva.total, 
+                "reserva",
+                reserva.id_reserva,
+                res
+            );
 
             await t.commit();
             SessionService.limpiarCarrito(req)
