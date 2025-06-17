@@ -2,10 +2,10 @@
 -- version 5.2.1
 -- https://www.phpmyadmin.net/
 --
--- Servidor: 127.0.0.1
--- Tiempo de generación: 05-06-2025 a las 23:23:09
--- Versión del servidor: 10.4.32-MariaDB
--- Versión de PHP: 8.2.12
+-- Host: localhost
+-- Generation Time: Jun 17, 2025 at 07:26 PM
+-- Server version: 8.0.38
+-- PHP Version: 8.2.12
 
 SET SQL_MODE = "NO_AUTO_VALUE_ON_ZERO";
 START TRANSACTION;
@@ -18,49 +18,49 @@ SET time_zone = "+00:00";
 /*!40101 SET NAMES utf8mb4 */;
 
 --
--- Base de datos: `gimnasio_activa`
+-- Database: `gimnasio_activa`
 --
 
 -- --------------------------------------------------------
 
 --
--- Estructura de tabla para la tabla `autenticacion`
+-- Table structure for table `autenticacion`
 --
 
 CREATE TABLE `autenticacion` (
-  `id` int(11) NOT NULL,
-  `email` varchar(100) NOT NULL,
-  `contrasenia` varchar(255) NOT NULL,
-  `id_usuario` int(11) DEFAULT NULL
+  `id` int NOT NULL,
+  `email` varchar(100) COLLATE utf8mb4_general_ci NOT NULL,
+  `contrasenia` varchar(255) COLLATE utf8mb4_general_ci NOT NULL,
+  `id_usuario` int DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
 --
--- Volcado de datos para la tabla `autenticacion`
+-- Dumping data for table `autenticacion`
 --
 
 INSERT INTO `autenticacion` (`id`, `email`, `contrasenia`, `id_usuario`) VALUES
 (1, 'admin@activafitness.com', '$2b$10$RCIHIHvb6asptQgSa.Yc.eTaj1N.VlCWFsNnsoPxuY.bELwO95QsG', 1),
-(14, 'gustavo.jimenez.crespo@gmail.com', '$2b$10$RgvEe5ipcZmhg9BPLRaLO.6402kiFiOywRX0Z2L12V31rX/x0UI/6', 23),
 (15, 'pepe@gmail.com', '$2b$10$V9LuPIN9nz7vDB8qVhJcO.NIuyPYss4e7WCy6RCWjW9MNETE49qKu', 24),
 (16, 'marina@gmail.com', '$2b$10$gg7TRVQpd4B1lVdZ0.PXaeF7lKKamoOWcBZWlmLtcAoBIVu5Ptdw6', 25),
-(17, 'lufrancolu@gmail.com', '$2b$10$Lbjcdk/WpLRHLqXueWp0I.EUXhd1RcPCs58VD3jWqc2JpFufEuXNi', 26);
+(17, 'lufrancolu@gmail.com', '$2b$10$Lbjcdk/WpLRHLqXueWp0I.EUXhd1RcPCs58VD3jWqc2JpFufEuXNi', 26),
+(18, 'gustavo.jimenez.crespo@gmail.com', '$2b$10$lpM7DCvhbY9QXSNhs85pouRAbN68lcUxmC8nAdTZB6xjIXTpkoKsW', 27);
 
 -- --------------------------------------------------------
 
 --
--- Estructura de tabla para la tabla `carrito`
+-- Table structure for table `carrito`
 --
 
 CREATE TABLE `carrito` (
-  `id` int(11) NOT NULL,
-  `id_usuario` int(11) NOT NULL,
-  `id_producto` int(11) NOT NULL,
-  `cantidad` int(11) DEFAULT 1,
-  `fecha_agregado` datetime DEFAULT current_timestamp()
+  `id` int NOT NULL,
+  `id_usuario` int NOT NULL,
+  `id_producto` int NOT NULL,
+  `cantidad` int DEFAULT '1',
+  `fecha_agregado` datetime DEFAULT CURRENT_TIMESTAMP
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
 --
--- Volcado de datos para la tabla `carrito`
+-- Dumping data for table `carrito`
 --
 
 INSERT INTO `carrito` (`id`, `id_usuario`, `id_producto`, `cantidad`, `fecha_agregado`) VALUES
@@ -69,16 +69,16 @@ INSERT INTO `carrito` (`id`, `id_usuario`, `id_producto`, `cantidad`, `fecha_agr
 -- --------------------------------------------------------
 
 --
--- Estructura de tabla para la tabla `categorias`
+-- Table structure for table `categorias`
 --
 
 CREATE TABLE `categorias` (
-  `id` int(11) NOT NULL,
-  `nombre` varchar(50) NOT NULL
+  `id` int NOT NULL,
+  `nombre` varchar(50) COLLATE utf8mb4_general_ci NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
 --
--- Volcado de datos para la tabla `categorias`
+-- Dumping data for table `categorias`
 --
 
 INSERT INTO `categorias` (`id`, `nombre`) VALUES
@@ -89,16 +89,16 @@ INSERT INTO `categorias` (`id`, `nombre`) VALUES
 -- --------------------------------------------------------
 
 --
--- Estructura de tabla para la tabla `categoria_recetas`
+-- Table structure for table `categoria_recetas`
 --
 
 CREATE TABLE `categoria_recetas` (
-  `id` int(11) NOT NULL,
-  `nombre` varchar(50) NOT NULL
+  `id` int NOT NULL,
+  `nombre` varchar(50) COLLATE utf8mb4_general_ci NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
 --
--- Volcado de datos para la tabla `categoria_recetas`
+-- Dumping data for table `categoria_recetas`
 --
 
 INSERT INTO `categoria_recetas` (`id`, `nombre`) VALUES
@@ -112,22 +112,22 @@ INSERT INTO `categoria_recetas` (`id`, `nombre`) VALUES
 -- --------------------------------------------------------
 
 --
--- Estructura de tabla para la tabla `cuota`
+-- Table structure for table `cuota`
 --
 
 CREATE TABLE `cuota` (
-  `id` int(11) NOT NULL,
+  `id` int NOT NULL,
   `fecha` date NOT NULL,
-  `descripcion` text NOT NULL,
+  `descripcion` text COLLATE utf8mb4_general_ci NOT NULL,
   `monto` double NOT NULL,
-  `estado` varchar(50) NOT NULL,
+  `estado` varchar(50) COLLATE utf8mb4_general_ci NOT NULL,
   `faltante` double NOT NULL,
   `sobrante` double NOT NULL,
-  `id_usuario` int(11) NOT NULL
+  `id_usuario` int NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
 --
--- Volcado de datos para la tabla `cuota`
+-- Dumping data for table `cuota`
 --
 
 INSERT INTO `cuota` (`id`, `fecha`, `descripcion`, `monto`, `estado`, `faltante`, `sobrante`, `id_usuario`) VALUES
@@ -141,42 +141,43 @@ INSERT INTO `cuota` (`id`, `fecha`, `descripcion`, `monto`, `estado`, `faltante`
 -- --------------------------------------------------------
 
 --
--- Estructura de tabla para la tabla `detalle_reservas`
+-- Table structure for table `detalle_reservas`
 --
 
 CREATE TABLE `detalle_reservas` (
-  `id_detalle_reserva` int(11) NOT NULL,
-  `id_producto` int(11) NOT NULL,
-  `cantidad` int(11) NOT NULL,
-  `id_reserva` int(11) DEFAULT NULL,
+  `id_detalle_reserva` int NOT NULL,
+  `id_producto` int NOT NULL,
+  `cantidad` int NOT NULL,
+  `id_reserva` int DEFAULT NULL,
   `subtotal` float NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
 --
--- Volcado de datos para la tabla `detalle_reservas`
+-- Dumping data for table `detalle_reservas`
 --
 
 INSERT INTO `detalle_reservas` (`id_detalle_reserva`, `id_producto`, `cantidad`, `id_reserva`, `subtotal`) VALUES
-(27, 8, 1, 31, 4);
+(27, 8, 1, 31, 4),
+(28, 9, 1, 32, 45000);
 
 -- --------------------------------------------------------
 
 --
--- Estructura de tabla para la tabla `ejercicios`
+-- Table structure for table `ejercicios`
 --
 
 CREATE TABLE `ejercicios` (
-  `id` int(11) NOT NULL,
-  `nombre` varchar(50) NOT NULL,
-  `descripcion` text DEFAULT NULL,
-  `grupo_muscular_id` int(11) DEFAULT NULL,
-  `video` varchar(255) DEFAULT NULL,
-  `titulo` varchar(255) DEFAULT NULL,
-  `imagen` varchar(255) DEFAULT NULL
+  `id` int NOT NULL,
+  `nombre` varchar(50) COLLATE utf8mb4_general_ci NOT NULL,
+  `descripcion` text COLLATE utf8mb4_general_ci,
+  `grupo_muscular_id` int DEFAULT NULL,
+  `video` varchar(255) COLLATE utf8mb4_general_ci DEFAULT NULL,
+  `titulo` varchar(255) COLLATE utf8mb4_general_ci DEFAULT NULL,
+  `imagen` varchar(255) COLLATE utf8mb4_general_ci DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
 --
--- Volcado de datos para la tabla `ejercicios`
+-- Dumping data for table `ejercicios`
 --
 
 INSERT INTO `ejercicios` (`id`, `nombre`, `descripcion`, `grupo_muscular_id`, `video`, `titulo`, `imagen`) VALUES
@@ -305,16 +306,16 @@ INSERT INTO `ejercicios` (`id`, `nombre`, `descripcion`, `grupo_muscular_id`, `v
 -- --------------------------------------------------------
 
 --
--- Estructura de tabla para la tabla `grupos_musculares`
+-- Table structure for table `grupos_musculares`
 --
 
 CREATE TABLE `grupos_musculares` (
-  `id` int(11) NOT NULL,
-  `nombre` varchar(50) NOT NULL
+  `id` int NOT NULL,
+  `nombre` varchar(50) COLLATE utf8mb4_general_ci NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
 --
--- Volcado de datos para la tabla `grupos_musculares`
+-- Dumping data for table `grupos_musculares`
 --
 
 INSERT INTO `grupos_musculares` (`id`, `nombre`) VALUES
@@ -331,26 +332,26 @@ INSERT INTO `grupos_musculares` (`id`, `nombre`) VALUES
 -- --------------------------------------------------------
 
 --
--- Estructura de tabla para la tabla `productos`
+-- Table structure for table `productos`
 --
 
 CREATE TABLE `productos` (
-  `id` int(11) NOT NULL,
-  `nombre` varchar(50) DEFAULT NULL,
-  `descripcion` varchar(500) DEFAULT NULL,
-  `precio` int(11) DEFAULT NULL,
-  `categoriaId` int(11) DEFAULT NULL,
-  `imagen` varchar(255) DEFAULT NULL,
-  `stock` int(11) DEFAULT NULL
+  `id` int NOT NULL,
+  `nombre` varchar(50) COLLATE utf8mb4_general_ci DEFAULT NULL,
+  `descripcion` varchar(500) COLLATE utf8mb4_general_ci DEFAULT NULL,
+  `precio` int DEFAULT NULL,
+  `categoriaId` int DEFAULT NULL,
+  `imagen` varchar(255) COLLATE utf8mb4_general_ci DEFAULT NULL,
+  `stock` int DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
 --
--- Volcado de datos para la tabla `productos`
+-- Dumping data for table `productos`
 --
 
 INSERT INTO `productos` (`id`, `nombre`, `descripcion`, `precio`, `categoriaId`, `imagen`, `stock`) VALUES
-(8, 'Proteina pepito', 'Post entrenamiento: Ideal para recuperación muscular. Consumir dentro de los 30-60 minutos después de entrenar.Desayuno o entre comidas: Si necesitás aumentar tu ingesta de proteínas diarias.Antes de dormir: En el caso de caseína (de absorción lenta), ayuda a evitar el catabolismo nocturno. Mezclar 1 scoop (medida del envase, aprox. 25-30g de proteína) en: 250-300 ml de agua, leche o bebida vegetal.Podés usar una licuadora o shaker. Si querés sumar calorías, podés agregar banana, avena, mantequi', 4, 2, 'proteinaTruemade.jpg', 0),
-(9, 'Proteina Platinum Frutilla', 'Post entrenamiento: Ideal para recuperación muscular. Consumir dentro de los 30-60 minutos después de entrenar.Desayuno o entre comidas: Si necesitás aumentar tu ingesta de proteínas diarias.Antes de dormir: En el caso de caseína (de absorción lenta), ayuda a evitar el catabolismo nocturno. Mezclar 1 scoop (medida del envase, aprox. 25-30g de proteína) en: 250-300 ml de agua, leche o bebida vegetal.Podés usar una licuadora o shaker. Si querés sumar calorías, podés agregar banana, avena, mantequi', 45000, 2, 'Wheyproteina_Frutilla.jpg', 110),
+(8, 'Proteina pepito', 'Post entrenamiento: Ideal para recuperación muscular. Consumir dentro de los 30-60 minutos después de entrenar.Desayuno o entre comidas: Si necesitás aumentar tu ingesta de proteínas diarias.Antes de dormir: En el caso de caseína (de absorción lenta), ayuda a evitar el catabolismo nocturno. Mezclar 1 scoop (medida del envase, aprox. 25-30g de proteína) en: 250-300 ml de agua, leche o bebida vegetal.Podés usar una licuadora o shaker. Si querés sumar calorías, podés agregar banana, avena, mantequi', 4, 2, 'proteinaTruemade.jpg', 1),
+(9, 'Proteina Platinum Frutilla', 'Post entrenamiento: Ideal para recuperación muscular. Consumir dentro de los 30-60 minutos después de entrenar.Desayuno o entre comidas: Si necesitás aumentar tu ingesta de proteínas diarias.Antes de dormir: En el caso de caseína (de absorción lenta), ayuda a evitar el catabolismo nocturno. Mezclar 1 scoop (medida del envase, aprox. 25-30g de proteína) en: 250-300 ml de agua, leche o bebida vegetal.Podés usar una licuadora o shaker. Si querés sumar calorías, podés agregar banana, avena, mantequi', 45000, 2, 'Wheyproteina_Frutilla.jpg', 109),
 (10, 'Creatina ENA', '5 gramos por día, todos los días, a la misma hora (preferiblemente con una comida o postentreno).No hace falta cargar(es decir, tomar grandes dosis al principio). Pero si querés acelerar la saturación muscular, podés ver más abajo la fase de carga. Cuándo tomarla Postentreno (después de entrenar) es ideal, ya que el cuerpo absorbe mejor nutrientes después del ejercicio. También podés tomarla en cualquier momento del día si no entrenás.Con qué tomarla con agua, jugo o un batido postentreno. Si la', 35000, 1, 'creatinaEna.jpg', 95),
 (11, 'Poteina Bar Banana Split', 'Comerlas Post entrenamiento si no podés tomar batido. Colación entre comidas, especialmente si estás lejos de casa. Antes de entrenar, si no comiste nada.\r\nRecomendaciones:\r\nFijate en la cantidad de proteína por barra (ideal 15g o más). Revisá los ingredientes: algunas tienen mucho azúcar o grasa saturada.No las uses como reemplazo total de comidas, sino como complemento.', 40000, 3, 'EnaProteinBar_banansplit.jpg', 85),
 (12, 'IronBar Frutilla', 'Comerlas Post entrenamiento si no podés tomar batido. Colación entre comidas, especialmente si estás lejos de casa. Antes de entrenar, si no comiste nada.\r\nRecomendaciones:\r\nFijate en la cantidad de proteína por barra (ideal 15g o más). Revisá los ingredientes: algunas tienen mucho azúcar o grasa saturada.No las uses como reemplazo total de comidas, sino como complemento.', 20000, 3, 'Ironbar_frutilla.jpg', 99),
@@ -359,18 +360,18 @@ INSERT INTO `productos` (`id`, `nombre`, `descripcion`, `precio`, `categoriaId`,
 -- --------------------------------------------------------
 
 --
--- Estructura de tabla para la tabla `proveedores`
+-- Table structure for table `proveedores`
 --
 
 CREATE TABLE `proveedores` (
-  `id` int(11) NOT NULL,
-  `nombre` varchar(100) NOT NULL,
-  `apellido` varchar(100) NOT NULL,
-  `celular` int(10) NOT NULL
+  `id` int NOT NULL,
+  `nombre` varchar(100) COLLATE utf8mb4_general_ci NOT NULL,
+  `apellido` varchar(100) COLLATE utf8mb4_general_ci NOT NULL,
+  `celular` int NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
 --
--- Volcado de datos para la tabla `proveedores`
+-- Dumping data for table `proveedores`
 --
 
 INSERT INTO `proveedores` (`id`, `nombre`, `apellido`, `celular`) VALUES
@@ -381,19 +382,19 @@ INSERT INTO `proveedores` (`id`, `nombre`, `apellido`, `celular`) VALUES
 -- --------------------------------------------------------
 
 --
--- Estructura de tabla para la tabla `recetas`
+-- Table structure for table `recetas`
 --
 
 CREATE TABLE `recetas` (
-  `id` int(11) NOT NULL,
-  `nombre` varchar(50) NOT NULL,
-  `descripcion` text DEFAULT NULL,
-  `categoria_id` int(11) DEFAULT NULL,
-  `imagen` varchar(500) DEFAULT NULL
+  `id` int NOT NULL,
+  `nombre` varchar(50) COLLATE utf8mb4_general_ci NOT NULL,
+  `descripcion` text COLLATE utf8mb4_general_ci,
+  `categoria_id` int DEFAULT NULL,
+  `imagen` varchar(500) COLLATE utf8mb4_general_ci DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
 --
--- Volcado de datos para la tabla `recetas`
+-- Dumping data for table `recetas`
 --
 
 INSERT INTO `recetas` (`id`, `nombre`, `descripcion`, `categoria_id`, `imagen`) VALUES
@@ -453,126 +454,149 @@ INSERT INTO `recetas` (`id`, `nombre`, `descripcion`, `categoria_id`, `imagen`) 
 -- --------------------------------------------------------
 
 --
--- Estructura de tabla para la tabla `reservas`
+-- Table structure for table `reservas`
 --
 
 CREATE TABLE `reservas` (
-  `id_reserva` int(11) NOT NULL,
-  `id_usuario` int(11) NOT NULL,
+  `id_reserva` int NOT NULL,
+  `id_usuario` int NOT NULL,
   `fecha` date NOT NULL,
   `total` float NOT NULL,
-  `estado` varchar(255) NOT NULL,
+  `estado` varchar(255) COLLATE utf8mb4_general_ci NOT NULL,
   `vencimiento` datetime NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
 --
--- Volcado de datos para la tabla `reservas`
+-- Dumping data for table `reservas`
 --
 
 INSERT INTO `reservas` (`id_reserva`, `id_usuario`, `fecha`, `total`, `estado`, `vencimiento`) VALUES
-(31, 26, '2025-06-03', 4, 'pendiente', '2025-06-03 05:57:23');
+(31, 26, '2025-06-03', 4, 'expirado', '2025-06-03 05:57:23'),
+(32, 27, '2025-06-17', 45000, 'pendiente', '2025-06-17 15:20:32');
 
 -- --------------------------------------------------------
 
 --
--- Estructura de tabla para la tabla `usuarios`
+-- Table structure for table `transacciones`
+--
+
+CREATE TABLE `transacciones` (
+  `id` int NOT NULL,
+  `tipo` varchar(255) NOT NULL,
+  `monto` decimal(10,0) NOT NULL,
+  `fecha` datetime NOT NULL,
+  `origen` varchar(255) NOT NULL,
+  `id_origen` int NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
+
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `usuarios`
 --
 
 CREATE TABLE `usuarios` (
-  `id` int(11) NOT NULL,
-  `apellido` varchar(50) NOT NULL,
-  `nombre` varchar(20) NOT NULL,
-  `rol` varchar(20) NOT NULL,
-  `imagen` varchar(500) DEFAULT NULL,
-  `id_membresia` int(11) DEFAULT NULL,
-  `id_autenticacion` int(11) DEFAULT NULL,
+  `id` int NOT NULL,
+  `apellido` varchar(50) COLLATE utf8mb4_general_ci NOT NULL,
+  `nombre` varchar(20) COLLATE utf8mb4_general_ci NOT NULL,
+  `rol` varchar(20) COLLATE utf8mb4_general_ci NOT NULL,
+  `imagen` varchar(500) COLLATE utf8mb4_general_ci DEFAULT NULL,
+  `id_membresia` int DEFAULT NULL,
+  `id_autenticacion` int DEFAULT NULL,
   `fecha_nacimiento` date DEFAULT NULL,
-  `celular` varchar(20) DEFAULT NULL,
-  `aptoMedico` varchar(500) DEFAULT NULL,
-  `dni` int(8) NOT NULL
+  `celular` varchar(20) COLLATE utf8mb4_general_ci DEFAULT NULL,
+  `aptoMedico` varchar(500) COLLATE utf8mb4_general_ci DEFAULT NULL,
+  `dni` int NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
 --
--- Volcado de datos para la tabla `usuarios`
+-- Dumping data for table `usuarios`
 --
 
 INSERT INTO `usuarios` (`id`, `apellido`, `nombre`, `rol`, `imagen`, `id_membresia`, `id_autenticacion`, `fecha_nacimiento`, `celular`, `aptoMedico`, `dni`) VALUES
 (1, 'admin', 'admin', 'admin', 'perfil.jpg', 1, 1, '2025-04-09', '1193868511', 'xd', 12345678),
 (23, 'aguirre', 'lucas', 'jefe', 'tutututmtutm', 1, NULL, '2019-05-01', '1193868511', 'no tiene', 43245002),
-(26, 'Aguirre', 'Lucas', 'cliente', NULL, 1, NULL, '2001-05-04', NULL, NULL, 43225600);
+(26, 'Aguirre', 'Lucas', 'cliente', NULL, 1, NULL, '2001-05-04', NULL, NULL, 43225600),
+(27, 'Jimenez', 'Gustavo', 'cliente', NULL, 1, NULL, '2025-06-17', '1123232323', NULL, 12345678);
 
 --
--- Índices para tablas volcadas
+-- Indexes for dumped tables
 --
 
 --
--- Indices de la tabla `autenticacion`
+-- Indexes for table `autenticacion`
 --
 ALTER TABLE `autenticacion`
   ADD PRIMARY KEY (`id`),
   ADD KEY `id_usuario` (`id_usuario`);
 
 --
--- Indices de la tabla `categorias`
+-- Indexes for table `categorias`
 --
 ALTER TABLE `categorias`
   ADD PRIMARY KEY (`id`);
 
 --
--- Indices de la tabla `categoria_recetas`
+-- Indexes for table `categoria_recetas`
 --
 ALTER TABLE `categoria_recetas`
   ADD PRIMARY KEY (`id`);
 
 --
--- Indices de la tabla `cuota`
+-- Indexes for table `cuota`
 --
 ALTER TABLE `cuota`
   ADD PRIMARY KEY (`id`);
 
 --
--- Indices de la tabla `detalle_reservas`
+-- Indexes for table `detalle_reservas`
 --
 ALTER TABLE `detalle_reservas`
   ADD PRIMARY KEY (`id_detalle_reserva`),
   ADD KEY `fk_reserva` (`id_reserva`);
 
 --
--- Indices de la tabla `ejercicios`
+-- Indexes for table `ejercicios`
 --
 ALTER TABLE `ejercicios`
   ADD PRIMARY KEY (`id`),
   ADD KEY `grupo_muscular_id` (`grupo_muscular_id`);
 
 --
--- Indices de la tabla `grupos_musculares`
+-- Indexes for table `grupos_musculares`
 --
 ALTER TABLE `grupos_musculares`
   ADD PRIMARY KEY (`id`);
 
 --
--- Indices de la tabla `productos`
+-- Indexes for table `productos`
 --
 ALTER TABLE `productos`
   ADD PRIMARY KEY (`id`),
   ADD KEY `categoriaId` (`categoriaId`) USING BTREE;
 
 --
--- Indices de la tabla `recetas`
+-- Indexes for table `recetas`
 --
 ALTER TABLE `recetas`
   ADD PRIMARY KEY (`id`),
   ADD KEY `categoria_id` (`categoria_id`);
 
 --
--- Indices de la tabla `reservas`
+-- Indexes for table `reservas`
 --
 ALTER TABLE `reservas`
   ADD PRIMARY KEY (`id_reserva`),
   ADD KEY `fk_usuario` (`id_usuario`);
 
 --
--- Indices de la tabla `usuarios`
+-- Indexes for table `transacciones`
+--
+ALTER TABLE `transacciones`
+  ADD PRIMARY KEY (`id`);
+
+--
+-- Indexes for table `usuarios`
 --
 ALTER TABLE `usuarios`
   ADD PRIMARY KEY (`id`),
@@ -580,99 +604,105 @@ ALTER TABLE `usuarios`
   ADD KEY `fk_autenticacion` (`id_autenticacion`);
 
 --
--- AUTO_INCREMENT de las tablas volcadas
+-- AUTO_INCREMENT for dumped tables
 --
 
 --
--- AUTO_INCREMENT de la tabla `autenticacion`
+-- AUTO_INCREMENT for table `autenticacion`
 --
 ALTER TABLE `autenticacion`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=18;
+  MODIFY `id` int NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=19;
 
 --
--- AUTO_INCREMENT de la tabla `categorias`
+-- AUTO_INCREMENT for table `categorias`
 --
 ALTER TABLE `categorias`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=6;
+  MODIFY `id` int NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=6;
 
 --
--- AUTO_INCREMENT de la tabla `categoria_recetas`
+-- AUTO_INCREMENT for table `categoria_recetas`
 --
 ALTER TABLE `categoria_recetas`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=7;
+  MODIFY `id` int NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=7;
 
 --
--- AUTO_INCREMENT de la tabla `cuota`
+-- AUTO_INCREMENT for table `cuota`
 --
 ALTER TABLE `cuota`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=12;
+  MODIFY `id` int NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=12;
 
 --
--- AUTO_INCREMENT de la tabla `detalle_reservas`
+-- AUTO_INCREMENT for table `detalle_reservas`
 --
 ALTER TABLE `detalle_reservas`
-  MODIFY `id_detalle_reserva` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=28;
+  MODIFY `id_detalle_reserva` int NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=29;
 
 --
--- AUTO_INCREMENT de la tabla `ejercicios`
+-- AUTO_INCREMENT for table `ejercicios`
 --
 ALTER TABLE `ejercicios`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=138;
+  MODIFY `id` int NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=138;
 
 --
--- AUTO_INCREMENT de la tabla `grupos_musculares`
+-- AUTO_INCREMENT for table `grupos_musculares`
 --
 ALTER TABLE `grupos_musculares`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=10;
+  MODIFY `id` int NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=10;
 
 --
--- AUTO_INCREMENT de la tabla `productos`
+-- AUTO_INCREMENT for table `productos`
 --
 ALTER TABLE `productos`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=18;
+  MODIFY `id` int NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=18;
 
 --
--- AUTO_INCREMENT de la tabla `recetas`
+-- AUTO_INCREMENT for table `recetas`
 --
 ALTER TABLE `recetas`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=56;
+  MODIFY `id` int NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=56;
 
 --
--- AUTO_INCREMENT de la tabla `reservas`
+-- AUTO_INCREMENT for table `reservas`
 --
 ALTER TABLE `reservas`
-  MODIFY `id_reserva` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=32;
+  MODIFY `id_reserva` int NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=33;
 
 --
--- AUTO_INCREMENT de la tabla `usuarios`
+-- AUTO_INCREMENT for table `transacciones`
+--
+ALTER TABLE `transacciones`
+  MODIFY `id` int NOT NULL AUTO_INCREMENT;
+
+--
+-- AUTO_INCREMENT for table `usuarios`
 --
 ALTER TABLE `usuarios`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=27;
+  MODIFY `id` int NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=28;
 
 --
--- Restricciones para tablas volcadas
+-- Constraints for dumped tables
 --
 
 --
--- Filtros para la tabla `detalle_reservas`
+-- Constraints for table `detalle_reservas`
 --
 ALTER TABLE `detalle_reservas`
   ADD CONSTRAINT `fk_detalle_reserva` FOREIGN KEY (`id_reserva`) REFERENCES `reservas` (`id_reserva`) ON DELETE CASCADE;
 
 --
--- Filtros para la tabla `ejercicios`
+-- Constraints for table `ejercicios`
 --
 ALTER TABLE `ejercicios`
   ADD CONSTRAINT `ejercicios_ibfk_1` FOREIGN KEY (`grupo_muscular_id`) REFERENCES `grupos_musculares` (`id`) ON DELETE SET NULL;
 
 --
--- Filtros para la tabla `productos`
+-- Constraints for table `productos`
 --
 ALTER TABLE `productos`
   ADD CONSTRAINT `productos_ibfk_1` FOREIGN KEY (`categoriaId`) REFERENCES `categorias` (`id`);
 
 --
--- Filtros para la tabla `recetas`
+-- Constraints for table `recetas`
 --
 ALTER TABLE `recetas`
   ADD CONSTRAINT `recetas_ibfk_1` FOREIGN KEY (`categoria_id`) REFERENCES `categoria_recetas` (`id`) ON DELETE CASCADE;
