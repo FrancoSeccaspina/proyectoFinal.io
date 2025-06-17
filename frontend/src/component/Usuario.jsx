@@ -48,7 +48,7 @@ const Usuarios = () => {
   return (
     <div className='mover_abajo'>
       <h2 className='box-title'>Lista de Usuarios</h2>
-      <Link to="/register" className="btn btn-primary">Agregar Nuevo</Link>
+      <Link to="http://localhost:3032/register" className="btn btn-primary">Agregar Nuevo</Link>
       <input
         value={search}
         onChange={searcher}

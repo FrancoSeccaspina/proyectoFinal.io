@@ -12,6 +12,7 @@ function Sidebar(){
                     <Link to="/">Home</Link> 
         
                     <Link to="/Usuarios">Usuarios</Link> 
+                    <Link to="/PrecioCuota">Precio Cuota</Link> 
 
                     <Link to="/Productos">Productos</Link> 
 

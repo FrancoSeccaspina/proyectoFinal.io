@@ -34,6 +34,7 @@ import categoriesGrupoMuscularAPIController from './routes/api/categoriaGrupoMus
 import proveedorAPIController from './routes/api/proveedores.api.routes'
 import cuotaApiController from './routes/api/cuota.api.routes';
 import reservaApiRoutes from './routes/api/reservas.api.routes';
+import precioCuotaApiController from './routes/api/precioCuota.api.routes';
 
 // cron
 import './cron-task/devolver-stock-reservas-vencidas'
@@ -105,7 +106,8 @@ app.use('/api',
     categoriesGrupoMuscularAPIController,
     proveedorAPIController,
     cuotaApiController,
-    reservaApiRoutes
+    reservaApiRoutes,
+    precioCuotaApiController
 );
 
 // verifica que las rutas no existan y redirige a la página de error 404

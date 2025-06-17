@@ -2,6 +2,7 @@ import { Request, Response } from 'express';
 import { Cuota } from '../../database/models/cuota';
 import { Usuario } from '../../database/models/usuario';
 import { error } from 'console';
+import { Op, fn, col, where } from 'sequelize';
 import { calcularMontoActual } from '../../utils/calcularMontoActual';
 export class cuotasApiController {
 
@@ -209,7 +210,49 @@ async crearCuota(req: Request, res: Response): Promise<void> {
     console.error(error);
     return res.status(500).json({ error: 'Error al crear la cuota' }); // <-- return aquí
   }
-};
+}
+async estadisticasCuotas(req: Request, res: Response): Promise<void> {
+  const { anio, mes, id_usuario } = req.query;
+
+  try {
+    const whereConditions: any = {
+      estado: 'PAGADA'
+    };
+
+    if (id_usuario) {
+      whereConditions.id_usuario = id_usuario;
+    }
+
+    // Filtros por año y mes usando funciones SQL
+    if (anio) {
+      whereConditions[Op.and] = whereConditions[Op.and] || [];
+      whereConditions[Op.and].push(where(fn('YEAR', col('fecha')), anio));
+    }
+
+    if (mes) {
+      whereConditions[Op.and] = whereConditions[Op.and] || [];
+      whereConditions[Op.and].push(where(fn('MONTH', col('fecha')), mes));
+    }
+
+    const resultados = await Cuota.findAll({
+      attributes: [
+        [fn('YEAR', col('fecha')), 'anio'],
+        [fn('MONTH', col('fecha')), 'mes'],
+        [fn('SUM', col('monto')), 'monto'],
+        [fn('COUNT', col('id')), 'cantidad']
+      ],
+      where: whereConditions,
+      group: ['anio', 'mes'],
+      order: [['anio', 'ASC'], ['mes', 'ASC']]
+    });
+
+    res.json(resultados);
+  } catch (error) {
+    console.error('Error al obtener estadísticas de cuotas:', error);
+    res.status(500).json({ error: 'Error al obtener estadísticas' });
+  }
+}
+
 }
 
 

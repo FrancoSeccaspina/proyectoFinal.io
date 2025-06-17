@@ -1,18 +1,18 @@
-import { useParams } from 'react-router-dom';
-import { Link } from 'react-router-dom';
+
+import { useParams, Link } from 'react-router-dom';
 import { useState, useEffect } from 'react';
 import axios from 'axios';
+import {
+  BarChart, Bar, XAxis, YAxis, CartesianGrid, Tooltip, ResponsiveContainer
+} from 'recharts';
 
 const CuotaFormulario = () => {
   const { id } = useParams();
   const [usuario, setUsuario] = useState(null);
   const [cuotas, setCuotas] = useState([]);
-  const [nuevaCuota, setNuevaCuota] = useState({
-    fecha: '',
-    descripcion: '',
-    monto: '',
-    estado: 'PENDIENTE',
-  });
+  const [graficoData, setGraficoData] = useState([]);
+  const [filtroAnio, setFiltroAnio] = useState('');
+  const [filtroMes, setFiltroMes] = useState('');
 
   useEffect(() => {
     const fetchData = async () => {
@@ -31,29 +31,32 @@ const CuotaFormulario = () => {
     fetchData();
   }, [id]);
 
-  const handleInputChange = (e) => {
-    setNuevaCuota({ ...nuevaCuota, [e.target.name]: e.target.value });
-  };
+  useEffect(() => {
+    const fetchGrafico = async () => {
+      try {
+        const params = {};
+        if (filtroAnio) params.anio = filtroAnio;
+        if (filtroMes) params.mes = filtroMes;
+        if (id) params.id_usuario = id;
 
-  const handleAgregarCuota = async (e) => {
-    e.preventDefault();
-    try {
-      const res = await axios.post('http://localhost:3032/api/cuotas', {
-        ...nuevaCuota,
-        id_usuario: parseInt(id)
-      });
-      setCuotas([...cuotas, res.data]);
-      setNuevaCuota({ fecha: '', descripcion: '', monto: '', estado: 'PENDIENTE' });
-    } catch (err) {
-      console.error(err);
-      alert('Error al registrar cuota');
-    }
-  };
-  const handleDelete = async (id) => {
+        const res = await axios.get('http://localhost:3032/api/abonadas-por-mes', { params });
+        const formateado = res.data.map(item => ({
+          mesAnio: `${item.mes.toString().padStart(2, '0')}/${item.anio}`,
+          cantidad: Number(item.cantidad)
+        }));
+        setGraficoData(formateado);
+      } catch (err) {
+        console.error('Error al cargar gráfico:', err);
+      }
+    };
+    fetchGrafico();
+  }, [filtroAnio, filtroMes, id]);
+
+  const handleDelete = async (idCuota) => {
     if (window.confirm("¿Estás seguro de que querés eliminar esta Cuota?")) {
       try {
-        await axios.delete(`http://localhost:3032/api/cuotas/${id}`);
-        setCuotas(prevCuotas => prevCuotas.filter(c => c.id !== id));
+        await axios.delete(`http://localhost:3032/api/cuotas/${idCuota}`);
+        setCuotas(prevCuotas => prevCuotas.filter(c => c.id !== idCuota));
       } catch (error) {
         console.error('Error al eliminar cuota:', error);
         alert(`Error: ${error.response?.data?.message || error.message}`);
@@ -74,7 +77,7 @@ const CuotaFormulario = () => {
             <th>Monto</th>
             <th>Estado</th>
             <th>Deuda</th>
-            <th>Ganacia</th>
+            <th>Ganancia</th>
             <th>Acciones</th>
           </tr>
         </thead>
@@ -89,31 +92,44 @@ const CuotaFormulario = () => {
               <td>${cuota.faltante}</td>
               <td>${cuota.sobrante}</td>
               <td>
-                <Link to={`/cuota/editar/${cuota.id}`} className="btn btn-success">
-                                          Editar
-                                        </Link>
-                                        <button class="btn btn-danger" onClick={() => handleDelete(cuota.id)}>Eliminar</button>
+                <Link to={`/cuota/editar/${cuota.id}`} className="btn btn-success">Editar</Link>
+                <button className="btn btn-danger" onClick={() => handleDelete(cuota.id)}>Eliminar</button>
               </td>
             </tr>
           ))}
         </tbody>
       </table>
+
+      <h3 style={{ marginTop: '2rem' }}>Estadísticas de cuotas abonadas</h3>
+      <div style={{ marginBottom: '1rem' }}>
+        <label>Año:&nbsp;
+          <select value={filtroAnio} onChange={(e) => setFiltroAnio(e.target.value)}>
+            <option value="">Todos</option>
+            {[2023, 2024, 2025].map((a) => <option key={a} value={a}>{a}</option>)}
+          </select>
+        </label>
+        &nbsp;&nbsp;
+        <label>Mes:&nbsp;
+          <select value={filtroMes} onChange={(e) => setFiltroMes(e.target.value)}>
+            <option value="">Todos</option>
+            {Array.from({ length: 12 }, (_, i) => i + 1).map((m) => (
+              <option key={m} value={m}>{m.toString().padStart(2, '0')}</option>
+            ))}
+          </select>
+        </label>
+      </div>
+
+      <ResponsiveContainer width="100%" height={300}>
+        <BarChart data={graficoData} margin={{ top: 20, right: 30, left: 20, bottom: 5 }}>
+          <CartesianGrid strokeDasharray="3 3" />
+          <XAxis dataKey="mesAnio" />
+          <YAxis allowDecimals={false} />
+          <Tooltip />
+          <Bar dataKey="cantidad" fill="#8884d8" />
+        </BarChart>
+      </ResponsiveContainer>
     </div>
   );
 };
 
 export default CuotaFormulario;
-
-/*
-      <form onSubmit={handleAgregarCuota} style={{ marginBottom: '2rem' }}>
-        <label>Fecha: <input type="date" name="fecha" value={nuevaCuota.fecha} onChange={handleInputChange} required /></label>
-        <label>Descripción: <input name="descripcion" value={nuevaCuota.descripcion} onChange={handleInputChange} required /></label>
-        <label>Monto: <input type="number" name="monto" value={nuevaCuota.monto} onChange={handleInputChange} required /></label>
-        <button type="submit">Agregar</button>
-      </form>
-      <form onSubmit={handleAgregarCuota} style={{ marginBottom: '2rem' }}>
-        <label>Fecha: <input type="date" name="fecha" value={nuevaCuota.fecha} onChange={handleInputChange} required /></label>
-        <label>Descripción: <input name="descripcion" value={nuevaCuota.descripcion} onChange={handleInputChange} required /></label>
-        <label>Monto: <input type="number" name="monto" value={nuevaCuota.monto} onChange={handleInputChange} required /></label>
-        <button type="submit">Agregar</button>
-      </form>*/ 

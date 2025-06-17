@@ -1,14 +1,13 @@
 import React from "react";
-
-
+import CuadroCuotaAbonada from '../charts/CuadroCuotaAbonada'
+import CuadroIngresoCobro from '../charts/ManualChartProveedor'
 function Home() {
 
     return(
 
         <div>
-            
-            <h1>Este es el home</h1>
-            <h2>Faltan los Cuadros </h2>
+            <CuadroCuotaAbonada />
+            <CuadroIngresoCobro />
             
         </div>
         )

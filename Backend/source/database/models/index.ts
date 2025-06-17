@@ -13,6 +13,7 @@ import { initReservaModel, Reserva } from './reserva'
 import { initDetalleReservaModel, DetalleReserva } from './detalleReserva'
 import { initCuotaModel, Cuota } from './cuota';
 import { initMembresiaModel, Membresia } from './membresia';
+import { initPrecio_CuotaModel, Precio_Cuota } from './precio_cuota';
 
 const inicializarDB = async (models: Record<string, any>) => {
   try {
@@ -33,6 +34,7 @@ const inicializarDB = async (models: Record<string, any>) => {
     initDetalleReservaModel(sequelize);
     initCuotaModel(sequelize);
     initMembresiaModel(sequelize);
+    initPrecio_CuotaModel(sequelize);
 
     console.log('Modelos inicializados')
     // Producto.associate({ DetalleReserva });
@@ -64,7 +66,8 @@ export const models = {
   Reserva,
   DetalleReserva,
   Cuota,
-  Membresia
+  Membresia,
+  Precio_Cuota,
 };
 
 inicializarDB(models)

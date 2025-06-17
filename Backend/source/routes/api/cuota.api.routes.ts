@@ -20,4 +20,6 @@ route.post('/cuotas', cuotaApiController.crearCuota.bind(cuotaApiController));
 
 route.post('/calculoCuotas', (req, res) =>  { cuotaApiController.registrarCuota(req, res)});
 
+route.get('/estadisticas', cuotaApiController.estadisticasCuotas);
+
 export default route;
