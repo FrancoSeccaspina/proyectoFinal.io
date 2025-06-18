@@ -85,13 +85,13 @@ class reservaController {
                 }, { transaction: t });
             }));
 
-            transaccionApiController.registrartransaccion(
-                TipoTransaccion.INGRESO,
-                reserva.total, 
-                "reserva",
-                reserva.id_reserva,
-                res
-            );
+            // // // transaccionApiController.registrartransaccion(
+            // // //     TipoTransaccion.INGRESO,
+            // // //     reserva.total, 
+            // // //     "reserva",
+            // // //     reserva.id_reserva,
+            // // //     res
+            // // // );
 
             await t.commit();
             SessionService.limpiarCarrito(req)

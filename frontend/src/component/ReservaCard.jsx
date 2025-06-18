@@ -13,8 +13,8 @@ function ReservaCard({ reserva: reservaProp }) {
       console.log(response.data);
       setReserva(...response.data.reserva);
     } catch (error) {
-      console.error("Error al confirmar la reserva:", error);
-      alert("Error al confirmar la reserva");
+        console.error("Error al confirmar la reserva:", error);
+        alert("Error al confirmar la reserva");
     }
   };
 
@@ -70,7 +70,7 @@ function ReservaCard({ reserva: reservaProp }) {
           </button>
         </div>
       )}
-      {reserva.estado !== EstadosReserva.CANCELADO && (
+      {reserva.estado !== EstadosReserva.CANCELADO && reserva.estado !== EstadosReserva.EXPIRADO && (
         <div className="estado-pendiente">
           <button className="btn btn-danger" onClick={onclickCancel}>
             Cancelar reserva

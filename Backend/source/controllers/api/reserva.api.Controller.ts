@@ -26,7 +26,6 @@ export class reservaApiController {
                 order: [['fecha', 'DESC']],
             });
 
-
             res.status(200).json(reservas);
         } catch (error) {
             console.error('Error al listar reservas:', error);
@@ -37,18 +36,30 @@ export class reservaApiController {
     public async confirmarReserva(req: Request, res: Response) {
         try {
             const idReserva = parseInt(req.params.id, 10);
+
             if (isNaN(idReserva)) {
                 return res.status(400).json({ message: "ID de reserva inválido" });
             }
 
-            const [updatedRows] = await Reserva.update(
-                { estado: EstadosReserva.CONFIRMADO },
-                { where: { id_reserva: idReserva } }
-            );
+            const reserva = await Reserva.findByPk(idReserva, {
+                include: [{ model: DetalleReserva }]
+            });
 
-            if (updatedRows === 0) {
+            if (!reserva) {
                 return res.status(404).json({ message: "Reserva no encontrada" });
             }
+            
+            if (reserva.estado !== EstadosReserva.PENDIENTE) {
+                const detalles = reserva.DetalleReservas || [];
+                await Promise.all(detalles.map(detalle =>
+                    Producto.decrement(
+                        { stock: detalle.cantidad },
+                        { where: { id: detalle.id_producto } }
+                    )
+                ));
+            }
+
+            await reserva.update({ estado: EstadosReserva.CONFIRMADO });
 
             const reservas = await Reserva.findAll({
                 include: [
@@ -68,46 +79,64 @@ export class reservaApiController {
                 order: [['fecha', 'DESC']],
             });
 
-            return res.status(200).json({ message: "Reserva confirmada correctamente", reserva: reservas });
+            return res.status(200).json({
+                message: "Reserva confirmada correctamente",
+                reserva: reservas
+            });
+
         } catch (error) {
             console.error("Error al confirmar reserva:", (error as Error).message);
             return res.status(500).json({ message: "Error al confirmar reserva" });
         }
     }
 
+
     public async cancelarReserva(req: Request, res: Response) {
         try {
             const idReserva = parseInt(req.params.id, 10);
+
             if (isNaN(idReserva)) {
                 return res.status(400).json({ message: "ID de reserva inválido" });
             }
 
-            const [updatedRows] = await Reserva.update(
-                { estado: EstadosReserva.CANCELADO },
-                { where: { id_reserva: idReserva } }
-            );
+            const reserva = await Reserva.findByPk(idReserva, {
+                include: [{ model: DetalleReserva }]
+            });
 
-            if (updatedRows === 0) {
+            if (!reserva) {
                 return res.status(404).json({ message: "Reserva no encontrada" });
             }
-            const reservas = await Reserva.findAll({
+
+            if (reserva.estado !== EstadosReserva.CANCELADO) {
+                await reserva.update({ estado: EstadosReserva.CANCELADO });
+            }
+
+            const detalles = reserva.DetalleReservas || [];
+            await Promise.all(detalles.map(detalle =>
+                Producto.increment(
+                    { stock: detalle.cantidad },
+                    { where: { id: detalle.id_producto } }
+                )
+            ));
+
+            const reservaActualizada = await Reserva.findByPk(idReserva, {
                 include: [
                     {
                         model: DetalleReserva,
-                        include: [
-                            {
-                                model: Producto
-                            }
-                        ]
+                        include: [{ model: Producto }]
                     },
                     {
                         model: Usuario,
                         attributes: ['id', 'nombre', 'apellido']
                     }
-                ],
-                order: [['fecha', 'DESC']],
+                ]
             });
-            return res.status(200).json({ message: "Reserva Cancelada correctamente", reserva: reservas });
+
+            return res.status(200).json({
+                message: "Reserva cancelada correctamente",
+                reserva: reservaActualizada
+            });
+
         } catch (error) {
             console.error("Error al cancelar reserva:", (error as Error).message);
             return res.status(500).json({ message: "Error al cancelar reserva" });
