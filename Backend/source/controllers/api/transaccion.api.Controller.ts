@@ -24,20 +24,18 @@ export class TransaccionApiController {
      * @param id_origen ID del origen de la transacción (por ejemplo, ID de reserva o producto).
      * @returns Respuesta HTTP con el estado de la operación.
      */
-    public async registrartransaccion(tipo: string, monto: number, origen: string, id_origen: number, res: Response) {
+    public async registrartransaccion(tipo: string, monto: number, origen: string, id_origen: number): Promise<void> {
         try {
-            Transaccion.create({
+            await Transaccion.create({
                 tipo,
                 monto,
                 fecha: new Date(),
                 origen,
                 id_origen
-            })
-            return res.status(201).json({ message: 'Transacción registrada exitosamente' });
-
+            });
         } catch (error) {
             console.error('Error al registrar transacción:', error);
-            return res.status(500).json({ message: 'Error al registrar transacción' });
+            throw error;
         }
     }
 }

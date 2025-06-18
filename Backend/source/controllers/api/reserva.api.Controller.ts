@@ -1,9 +1,10 @@
+import transaccionApiController from './transaccion.api.Controller';
+import { TipoTransaccion, OrigenTransaccion } from '../../constants/tipoTransacciones'
 import { Request, Response } from 'express';
 import { Reserva } from '../../database/models/reserva';
 import { Producto } from '../../database/models/producto';
 import { Usuario } from '../../database/models/usuario';
 import { DetalleReserva } from '../../database/models/detalleReserva';
-import { Sequelize } from 'sequelize';
 import { EstadosReserva } from '../../constants/estadoReserva'
 export class reservaApiController {
     public async listaReservas(req: Request, res: Response): Promise<void> {
@@ -48,7 +49,7 @@ export class reservaApiController {
             if (!reserva) {
                 return res.status(404).json({ message: "Reserva no encontrada" });
             }
-            
+
             if (reserva.estado !== EstadosReserva.PENDIENTE) {
                 const detalles = reserva.DetalleReservas || [];
                 await Promise.all(detalles.map(detalle =>
@@ -60,6 +61,14 @@ export class reservaApiController {
             }
 
             await reserva.update({ estado: EstadosReserva.CONFIRMADO });
+
+
+            transaccionApiController.registrartransaccion(
+                TipoTransaccion.INGRESO, /* tipo */
+                reserva.total, /* monto */
+                OrigenTransaccion.CARRITO, /* origen */
+                reserva.id_reserva, /* id_origen */
+            );
 
             const reservas = await Reserva.findAll({
                 include: [
@@ -89,7 +98,6 @@ export class reservaApiController {
             return res.status(500).json({ message: "Error al confirmar reserva" });
         }
     }
-
 
     public async cancelarReserva(req: Request, res: Response) {
         try {
