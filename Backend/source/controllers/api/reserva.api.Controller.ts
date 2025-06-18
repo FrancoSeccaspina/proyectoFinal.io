@@ -119,7 +119,7 @@ export class reservaApiController {
                 )
             ));
 
-            const reservaActualizada = await Reserva.findByPk(idReserva, {
+            const reservasActualizadas = await Reserva.findAll({
                 include: [
                     {
                         model: DetalleReserva,
@@ -134,7 +134,7 @@ export class reservaApiController {
 
             return res.status(200).json({
                 message: "Reserva cancelada correctamente",
-                reserva: reservaActualizada
+                reserva: reservasActualizadas
             });
 
         } catch (error) {
