@@ -42,11 +42,11 @@ const inicializarDB = async (models: Record<string, any>) => {
     // Producto.associate({ DetalleReserva });
     // DetalleReserva.associate({ Producto, Reserva });
 
-    Object.values(models).forEach(model => {
+    /*Object.values(models).forEach(model => {
       if (model.associate) {
         model.associate(models);
       }
-    });
+    });*/
 
     console.log('Asociaciones de modelos establecidas');
   } catch (error) {

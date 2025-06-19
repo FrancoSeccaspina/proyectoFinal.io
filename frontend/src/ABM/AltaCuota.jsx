@@ -2,22 +2,6 @@ import React, { useState, useEffect } from 'react';
 import { useNavigate, useParams } from 'react-router-dom';
 import axios from 'axios';
 import '../css/edicion.css'; 
-
-// Repite esta función aquí o importala si tienes utils compartidos frontend
-/*const calcularMontoActual = (fechaInicio) => {
-  const baseMonto = 20000;
-  const fechaBase = new Date(fechaInicio);
-  const hoy = new Date();
-
-  const mesesPasados =
-    (hoy.getFullYear() - fechaBase.getFullYear()) * 12 +
-    (hoy.getMonth() - fechaBase.getMonth());
-
-  const aumentos = Math.floor(mesesPasados / 3);
-
-  return baseMonto + aumentos * 2000;
-};*/
-
 const AltaCuota = () => {
   const { idUsuario } = useParams(); 
   const navigate = useNavigate();
@@ -54,11 +38,13 @@ const AltaCuota = () => {
 
       let faltante = 0;
       let sobrante = 0;
+      let estado = 'PENDIENTE';
 
       if (pagadoNum < montoCalculado) {
         faltante = montoCalculado - pagadoNum;
       } else if (pagadoNum > montoCalculado) {
         sobrante = pagadoNum - montoCalculado;
+        estado = 'PAGADA';
       } 
 
       setCuota(prev => ({
@@ -66,6 +52,7 @@ const AltaCuota = () => {
         monto: montoCalculado,
         faltante,
         sobrante,
+        estado
       }));
     }
   }, [cuota.fecha, cuota.pagado]);

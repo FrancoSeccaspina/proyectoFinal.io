@@ -75,8 +75,9 @@ async crearCuota(req: Request, res: Response): Promise<void> {
             const cuotas = await Cuota.findAll({
                 where: { id_usuario: Number(id_usuario) },
                 order: [['fecha', 'DESC']],
+                
             });
-    
+            console.log(cuotas)
             if (cuotas.length > 0) {
                 res.json(cuotas);
             } else {

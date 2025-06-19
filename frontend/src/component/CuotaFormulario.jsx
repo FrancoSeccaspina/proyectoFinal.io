@@ -99,35 +99,6 @@ const CuotaFormulario = () => {
           ))}
         </tbody>
       </table>
-
-      <h3 style={{ marginTop: '2rem' }}>Estadísticas de cuotas abonadas</h3>
-      <div style={{ marginBottom: '1rem' }}>
-        <label>Año:&nbsp;
-          <select value={filtroAnio} onChange={(e) => setFiltroAnio(e.target.value)}>
-            <option value="">Todos</option>
-            {[2023, 2024, 2025].map((a) => <option key={a} value={a}>{a}</option>)}
-          </select>
-        </label>
-        &nbsp;&nbsp;
-        <label>Mes:&nbsp;
-          <select value={filtroMes} onChange={(e) => setFiltroMes(e.target.value)}>
-            <option value="">Todos</option>
-            {Array.from({ length: 12 }, (_, i) => i + 1).map((m) => (
-              <option key={m} value={m}>{m.toString().padStart(2, '0')}</option>
-            ))}
-          </select>
-        </label>
-      </div>
-
-      <ResponsiveContainer width="100%" height={300}>
-        <BarChart data={graficoData} margin={{ top: 20, right: 30, left: 20, bottom: 5 }}>
-          <CartesianGrid strokeDasharray="3 3" />
-          <XAxis dataKey="mesAnio" />
-          <YAxis allowDecimals={false} />
-          <Tooltip />
-          <Bar dataKey="cantidad" fill="#8884d8" />
-        </BarChart>
-      </ResponsiveContainer>
     </div>
   );
 };
