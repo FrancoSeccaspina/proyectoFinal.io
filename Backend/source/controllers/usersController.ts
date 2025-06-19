@@ -101,7 +101,8 @@ export class UsuarioController {
         { transaction }
       );
 
-      const hashedPassword = bcrypt.hashSync(contrasenia, 10);
+      const hashedPassword = bcrypt.hashSync(contrasenia, 8);
+      console.log(nuevoUsuario)
       await Autenticacion.create(
         {
           email: email,
