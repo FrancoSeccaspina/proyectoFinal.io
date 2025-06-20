@@ -5,9 +5,10 @@ import { Reserva } from '../../database/models/reserva';
 import { Producto } from '../../database/models/producto';
 import { Usuario } from '../../database/models/usuario';
 import { DetalleReserva } from '../../database/models/detalleReserva';
-import { EstadosReserva } from '../../constants/estadoReserva'
+import { EstadosReserva } from '../../constants/estadoReserva';
+import { Sequelize, Op, fn, col, where } from 'sequelize';
 export class reservaApiController {
-    public async listaReservas(req: Request, res: Response): Promise<void> {
+     async listaReservas(req: Request, res: Response): Promise<void> {
         try {
             const reservas = await Reserva.findAll({
                 include: [
@@ -30,11 +31,11 @@ export class reservaApiController {
             res.status(200).json(reservas);
         } catch (error) {
             console.error('Error al listar reservas:', error);
-            res.status(500).json({ message: 'Error al listar reservas' });
+            res.status(500).json({ message: 'Error al listar reservas, error 500' });
         }
     }
 
-    public async confirmarReserva(req: Request, res: Response) {
+     async confirmarReserva(req: Request, res: Response) {
         try {
             const idReserva = parseInt(req.params.id, 10);
 
@@ -99,7 +100,7 @@ export class reservaApiController {
         }
     }
 
-    public async cancelarReserva(req: Request, res: Response) {
+     async cancelarReserva(req: Request, res: Response) {
         try {
             const idReserva = parseInt(req.params.id, 10);
 
@@ -150,6 +151,43 @@ export class reservaApiController {
             return res.status(500).json({ message: "Error al cancelar reserva" });
         }
     }
+
+    async estadisticasPorProducto(req: Request, res: Response): Promise<void> {
+        try {
+            const { mes, anio } = req.query;
+    
+            // Filtro por fecha si se pasa mes y año
+            let whereReserva: any = {};
+            if (mes && anio) {
+                whereReserva = {
+                    [Op.and]: [
+                        where(fn('MONTH', col('Reserva.fecha')), Number(mes)),
+                        where(fn('YEAR', col('Reserva.fecha')), Number(anio))
+                    ]
+                };
+            }
+    
+            const reservas = await DetalleReserva.findAll({
+                attributes: ['id_producto', 'cantidad', 'subtotal'],
+                include: [
+                    {
+                        model: Reserva,
+                        attributes: ['fecha'],
+                        where: whereReserva
+                    }
+                ],
+                order: [[Reserva, 'fecha', 'DESC']]
+            });
+    
+            res.status(200).json(reservas);
+        } catch (error) {
+            console.error('Error al obtener estadísticas por producto:', error);
+            res.status(500).json({
+                message: 'Error al obtener estadísticas por producto',
+                error: error instanceof Error ? error.message : String(error)
+            });
+        }
+    }   
 }
 
 export default new reservaApiController();

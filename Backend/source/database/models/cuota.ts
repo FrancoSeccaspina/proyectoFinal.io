@@ -29,9 +29,6 @@ import {
 
     static associate(models: any) {
 
-        Cuota.belongsTo(models.Membresia, {
-            foreignKey: 'id_membresia',
-          });
     }
 }
 const initCuotaModel = (sequelize: Sequelize) => {

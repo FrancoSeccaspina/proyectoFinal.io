@@ -1,6 +1,7 @@
 import React from "react";
 import CuadroCuotaAbonada from '../charts/CuadroCuotaAbonada'
 import CuadroIngresoCobro from '../charts/ManualChartProveedor'
+import CuadroTotalVendido from "../charts/CuadroTotalVendido";
 function Home() {
 
     return(
@@ -8,6 +9,7 @@ function Home() {
         <div>
             <CuadroCuotaAbonada />
             <CuadroIngresoCobro />
+            <CuadroTotalVendido/>
             
         </div>
         )

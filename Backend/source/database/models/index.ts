@@ -39,14 +39,13 @@ const inicializarDB = async (models: Record<string, any>) => {
     initTransaccionModel(sequelize);
 
     console.log('Modelos inicializados')
-    // Producto.associate({ DetalleReserva });
-    // DetalleReserva.associate({ Producto, Reserva });
-
-    /*Object.values(models).forEach(model => {
+    //Producto.associate({ DetalleReserva });
+    //DetalleReserva.associate({ Producto, Reserva });
+    Object.values(models).forEach(model => {
       if (model.associate) {
         model.associate(models);
       }
-    });*/
+    });
 
     console.log('Asociaciones de modelos establecidas');
   } catch (error) {
