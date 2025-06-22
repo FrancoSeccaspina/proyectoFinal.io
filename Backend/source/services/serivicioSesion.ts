@@ -1,4 +1,4 @@
-import { Request } from "express";
+/*import { Request } from "express";
 
 declare module "express-session" {
     interface SessionData {
@@ -73,4 +73,102 @@ export const SessionService = {
     usuarioLogeado(req: Request): boolean {
         return !!req.session.usuario;
     }
+};*/
+import { Request } from "express";
+
+declare module "express-session" {
+  interface SessionData {
+    carrito?: Array<{ id_producto: number; cantidad: number }>;
+    usuario?: {
+      id: number;
+      email: string;
+      rol: string;
+    };
+    usuarioLogueado?: {
+      id: number;
+      email: string;
+      rol: string;
+      nombre?: string;
+      apellido?: string;
+      celular?: string;
+      fecha_nacimiento?: string;
+      imagen?: string;
+    };
+  }
+}
+
+export const SessionService = {
+  obtenerCarrito(req: Request) {
+    if (!req.session.carrito) {
+      req.session.carrito = [];
+    }
+    return req.session.carrito;
+  },
+
+  agregarProductoAlCarrito(req: Request, id_producto: number, cantidad: number) {
+    const carrito = this.obtenerCarrito(req);
+    const productoExistente = carrito.find(producto => producto.id_producto === id_producto);
+
+    if (productoExistente) {
+      const cantidadActual = parseInt(productoExistente.cantidad.toString(), 10);
+      const cantidadNueva = parseInt(cantidad.toString(), 10);
+      productoExistente.cantidad = cantidadActual + cantidadNueva;
+    } else {
+      carrito.push({ id_producto, cantidad });
+    }
+    req.session.carrito = carrito;
+  },
+
+  borrarProductoDelCarrito(req: Request, id_producto: number) {
+    const carrito = this.obtenerCarrito(req);
+    req.session.carrito = carrito.filter(producto => producto.id_producto != id_producto);
+  },
+
+  limpiarCarrito(req: Request) {
+    req.session.carrito = [];
+  },
+
+  iniciarSessionUsuario(req: Request, usuario: {
+    id: number;
+    email: string;
+    rol: string;
+    nombre?: string;
+    apellido?: string;
+    celular?: string;
+    fecha_nacimiento?: string;
+    imagen?: string;
+  }) {
+    req.session.usuario = {
+      id: usuario.id,
+      email: usuario.email,
+      rol: usuario.rol
+    };
+
+    req.session.usuarioLogueado = {
+      id: usuario.id,
+      email: usuario.email,
+      rol: usuario.rol,
+      nombre: usuario.nombre,
+      apellido: usuario.apellido,
+      celular: usuario.celular,
+      fecha_nacimiento: usuario.fecha_nacimiento,
+      imagen: usuario.imagen || "default.png"
+    };
+  },
+
+  terminarSessionUsuario(req: Request) {
+    req.session.destroy(err => {
+      if (err) {
+        console.error("Error al cerrar sesión:", err);
+      }
+    });
+  },
+
+  obtenerSessionUsuario(req: Request) {
+    return req.session.usuario;
+  },
+
+  usuarioLogeado(req: Request): boolean {
+    return !!req.session.usuario;
+  }
 };

@@ -155,7 +155,7 @@ export class UsuarioController {
  *   "oldData": { "email": "usuario@example.com" }
  * }
  */
-  async login(req: Request, res: Response): Promise<Response | void> {
+  /*async login(req: Request, res: Response): Promise<Response | void> {
     try {
 
       const { email, contrasenia } = req.body;
@@ -219,7 +219,63 @@ export class UsuarioController {
       });
 
     }
+  } VER QUE ES LO QUE SE CAMBIO*/
+   async login(req: Request, res: Response): Promise<Response | void> {
+  try {
+    const { email, contrasenia } = req.body;
+
+    const usuarioExistente = await Autenticacion.findOne({ where: { email } });
+    if (!usuarioExistente) {
+      return res.status(401).render("login", {
+        errors: { email: { msg: "Email no registrado" } },
+        oldData: { email }
+      });
+    }
+
+    const contraseniaOk = bcrypt.compareSync(contrasenia, usuarioExistente.contrasenia);
+    if (!contraseniaOk) {
+      return res.status(401).render("login", {
+        errors: { contrasenia: { msg: "Contraseña incorrecta" } },
+        oldData: { email }
+      });
+    }
+
+    const usuario = await Usuario.findOne({ where: { id: usuarioExistente.id_usuario } });
+    if (!usuario) {
+      return res.status(401).render("login", {
+        errors: { email: { msg: "Usuario no encontrado" } },
+        oldData: { email }
+      });
+    }
+
+    SessionService.iniciarSessionUsuario(req, {
+      id: usuario.id,
+      email: usuarioExistente.email,
+      rol: usuario.rol,
+      nombre: usuario.nombre,
+      apellido: usuario.apellido,
+      celular: usuario.celular?.toString(),
+      fecha_nacimiento: usuario.fecha_nacimiento?.toString(),
+      imagen: usuario.imagen
+    });
+
+    if (usuario.rol === Roles.ADMIN) {
+      return res.redirect("http://localhost:3000");
+    }
+    return res.redirect("/perfil");
+
+  } catch (error) {
+    console.error("Error en login:", (error as Error).message);
+    return res.status(500).render("error", {
+      title: "Error del servidor",
+      code: 500,
+      message: "Error del servidor",
+      description: "Ocurrió un error inesperado durante el inicio de sesión. Por favor, inténtelo de nuevo más tarde.",
+      error: (error as Error).message
+    });
   }
+}
+
 
   async logout(req: Request, res: Response): Promise<Response | void> {
     SessionService.terminarSessionUsuario(req);

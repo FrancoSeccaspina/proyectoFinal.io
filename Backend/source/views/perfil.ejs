@@ -1,0 +1,30 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <%- include('./partials/head.ejs') %>
+    <link rel="stylesheet" href="/css/perfil.css" />
+  </head>
+  <body>
+    <%- include('./partials/header.ejs') %>
+
+    <main class="main-profile">
+      <h2>Mi perfil</h2>
+
+  <% if (usuarioLogueado) { %>
+  <img src="/images/avatars/<%= usuarioLogueado.imagen %>" alt="fotoDePerfil" />
+  <p>Nombre: <%= usuarioLogueado.nombre %> <%= usuarioLogueado.apellido %></p>
+  <p>Celular: <%= usuarioLogueado.celular %></p>
+  <p>Fecha de nacimiento: <%= usuarioLogueado.fecha_nacimiento %></p>
+<% } else { %>
+  <p>No has iniciado sesión</p>
+<% } %>
+
+
+      <ul class="botones">
+        <a href="/" class="crear-editar">VOLVER</a>
+      </ul>
+    </main>
+
+    <%- include('./partials/footer.ejs') %>
+  </body>
+</html>

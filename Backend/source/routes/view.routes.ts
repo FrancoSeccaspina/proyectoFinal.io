@@ -2,7 +2,7 @@ import express from 'express';
 import path from 'path';
 import fs from 'fs';
 import usersController from '../controllers/usersController';
-
+import middleware from '../middlewares/isAuthenticated';
 // import registerValidator from '../validations/register';
 // import loginValidator from '../validations/login';
 // import isLogged from '../middlewares/isLogged';
@@ -40,6 +40,10 @@ route.get("/mPago", function (req, res) {
 route.get("/transferencia", function (req, res) {
     res.render("transferencia");
 });
+route.get('/perfil', middleware.setUsuarioLogueado, (req, res) => {
+  res.render('perfil'); // los datos están en res.locals.usuarioLogueado
+});
+
 route.get("/finalizarCompra", function (req, res) {
     res.render("finalizarCompra");
 });
