@@ -256,7 +256,8 @@ export class UsuarioController {
       apellido: usuario.apellido,
       celular: usuario.celular?.toString(),
       fecha_nacimiento: usuario.fecha_nacimiento?.toString(),
-      imagen: usuario.imagen
+      imagen: usuario.imagen,
+      aptoMedico: usuario.aptoMedico,
     });
 
     if (usuario.rol === Roles.ADMIN) {
@@ -307,41 +308,58 @@ export class UsuarioController {
     }
   }
 
-  async update(req: Request, res: Response): Promise<Response> {
+  async update(req: Request, res: Response): Promise<Response | void> {
     try {
       const { id } = req.params;
-      const { apellido, nombre, rol, imagen, id_membresia, fecha_nacimiento, celular, aptoMedico, dni } = req.body;
+      const { apellido, nombre, rol, id_membresia, fecha_nacimiento, celular, dni, email } = req.body;
+  
       const usuario = await Usuario.findOne({ where: { id } });
       if (!usuario) {
-        return res.status(404).json({
-          success: false,
-          message: "Usuario no encontrado",
-        });
+        return res.status(404).json({ success: false, message: "Usuario no encontrado" });
       }
+  
+      const files = req.files as {
+        [fieldname: string]: Express.Multer.File[];
+      };
+  
+      const imagen = files?.imagen?.[0]?.filename;
+      const aptoMedico = files?.aptomedico?.[0]?.filename;
+  
       await usuario.update({
         apellido,
         nombre,
         rol,
-        imagen,
         id_membresia,
         fecha_nacimiento,
         celular,
-        aptoMedico,
-        // dni
-
+        dni,
+        ...(imagen && { imagen }),
+        ...(aptoMedico && { aptoMedico }),
       });
-      return res.status(200).json({
-        success: true,
-        message: "Usuario actualizado correctamente",
-      });
+  
+      // Actualizar sesión si corresponde
+      if (req.session.usuarioLogueado) {
+        Object.assign(req.session.usuarioLogueado, {
+          apellido,
+          nombre,
+          celular,
+          email,
+          fecha_nacimiento,
+          ...(imagen && { imagen }),
+          ...(aptoMedico && { aptomedico: aptoMedico }),
+        });
+      }
+  
+      // 🔁 Redireccionar al perfil
+      return res.redirect('/perfil');
+  
     } catch (error) {
       console.error("Error al actualizar usuario:", (error as Error).message);
-      return res.status(500).json({
-        success: false,
-        message: "Error",
-      });
+      return res.status(500).json({ success: false, message: "Error al actualizar usuario" });
     }
   }
+  
+  
   
   async changePassword(req: Request, res: Response): Promise<Response> {
     try {

@@ -43,6 +43,9 @@ route.get("/transferencia", function (req, res) {
 route.get('/perfil', middleware.setUsuarioLogueado, (req, res) => {
   res.render('perfil'); // los datos están en res.locals.usuarioLogueado
 });
+route.get('/perfil/editar', middleware.setUsuarioLogueado, (req, res) => {
+    res.render('perfilEditar'); // los datos están en res.locals.usuarioLogueado
+  });
 
 route.get("/finalizarCompra", function (req, res) {
     res.render("finalizarCompra");

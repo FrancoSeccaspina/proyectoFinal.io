@@ -13,6 +13,7 @@ declare module "express-session" {
       celular?: string;
       fecha_nacimiento?: string;
       imagen?: string;
+      aptoMedico?: string; // Este es el campo nuevo
     };
   }
 }
@@ -27,6 +28,7 @@ function isAuthenticated(req: Request, res: Response, next: NextFunction): void 
 
 function setUsuarioLogueado(req: Request, res: Response, next: NextFunction): void {
   res.locals.usuarioLogueado = req.session.usuarioLogueado || null;
+  console.log('Usuario logueado:', res.locals.usuarioLogueado);
   next();
 }
 

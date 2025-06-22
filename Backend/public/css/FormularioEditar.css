@@ -1,0 +1,79 @@
+.FormularioEditar {
+    max-width: 400px;
+    margin: 20px auto;
+    font-family: Arial, sans-serif;
+    color: #fff;
+    padding: 15px;
+    border: 1px solid #000;
+    box-sizing: border-box;
+  }
+  
+  .container-user {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+  }
+  
+  .container-user picture {
+    margin-bottom: 20px;
+    text-align: center;
+  }
+  
+  
+  .container-user input[type="file"] {
+    display: block;
+    margin: 0 auto 20px;
+  }
+  
+  .datos-usuario {
+    width: 100%;
+    display: flex;
+    flex-direction: column;
+  }
+  
+  .datos-usuario label {
+    margin-top: 10px;
+    margin-bottom: 5px;
+    font-weight: bold;
+  }
+  
+  .datos-usuario input[type="text"],
+  .datos-usuario input[type="email"],
+  .datos-usuario input[type="date"],
+  .datos-usuario input[type="file"] {
+    padding: 8px;
+    border: 1px solid #000;
+    border-radius: 0;
+    background: none;
+    color: #fff;
+    filter: grayscale(100%);
+  }
+  
+  .btn-guardar {
+    margin-top: 20px;
+    padding: 10px;
+    color: #000;
+    border: 1px solid #000;
+    cursor: pointer;
+    font-weight: bold;
+    transition: background-color 0.3s ease;
+  }
+  
+  .btn-guardar:hover {
+    background-color: #000;
+    color: #fff;
+  }
+  
+  /* Responsive */
+  @media (max-width: 480px) {
+    .FormularioEditar {
+      max-width: 90%;
+      padding: 10px;
+    }
+  
+    .img-user {
+      width: 120px;
+      height: 120px;
+    }
+  }
+  

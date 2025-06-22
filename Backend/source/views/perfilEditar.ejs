@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <%- include('./partials/head.ejs') %>
+        <link rel="stylesheet" href="/css/perfil.css" />
+        <link rel="stylesheet" href="/css/FormularioEditar.css" />
+      </head>
+<body>
+    <%- include('./partials/header.ejs') %>
+    <main class="main-profile">
+        <form action="/users/<%= usuarioLogueado.id %>" method="POST" enctype="multipart/form-data" class="FormularioEditar">
+            <article class="container-user">
+              <picture>
+                <img src="/images/avatars/<%= usuarioLogueado.imagen %>" alt="fotoDePerfil" id="fotoDePerfil" class="img-user" />
+                <input type="file" name="imagen" accept="image/*" />
+              </picture>
+          
+              <div class="datos-usuario">
+                <label for="nombre">Nombre:</label>
+                <input type="text" id="nombre" name="nombre" value="<%= usuarioLogueado.nombre %>" required />
+          
+                <label for="apellido">Apellido:</label>
+                <input type="text" id="apellido" name="apellido" value="<%= usuarioLogueado.apellido %>" required />
+          
+                <label for="celular">Celular:</label>
+                <input type="text" id="celular" name="celular" value="<%= usuarioLogueado.celular %>" required />
+          
+                <label for="aptomedico">Apto Médico (PDF/JPG/PNG):</label>
+                <input type="file" name="aptomedico" accept=".jpg,.jpeg,.png,.pdf" />
+          
+                <label for="fecha_nacimiento">Fecha de nacimiento:</label>
+                <input type="date" id="fecha_nacimiento" name="fecha_nacimiento" value="<%= usuarioLogueado.fecha_nacimiento %>" required />
+          
+                <label for="email">Email:</label>
+                <input type="email" id="email" name="email" value="<%= usuarioLogueado.email %>" required />
+          
+                <button type="submit" class="btn-guardar">Guardar cambios</button>
+              </div>
+            </article>
+          </form>
+    </main>
+    
+      
+      <%- include('./partials/footer.ejs') %>
+</body>
+</html>

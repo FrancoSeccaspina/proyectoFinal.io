@@ -11,16 +11,33 @@
       <h2>Mi perfil</h2>
 
   <% if (usuarioLogueado) { %>
-  <img src="/images/avatars/<%= usuarioLogueado.imagen %>" alt="fotoDePerfil" />
+  <img src="/images/avatars/<%= usuarioLogueado.imagen %>" alt="fotoDePerfil" style="max-width: 200px; cursor: pointer;" />
   <p>Nombre: <%= usuarioLogueado.nombre %> <%= usuarioLogueado.apellido %></p>
   <p>Celular: <%= usuarioLogueado.celular %></p>
   <p>Fecha de nacimiento: <%= usuarioLogueado.fecha_nacimiento %></p>
+  <% if (usuarioLogueado.aptoMedico) { %>
+    <p>Apto Médico cargado:</p>
+  
+    <% if (usuarioLogueado.aptoMedico.endsWith('.pdf')) { %>
+      <a href="/uploads/aptoMedico/<%= usuarioLogueado.aptoMedico %>" target="_blank">📄 Ver Apto Médico (PDF)</a>
+    <% } else { %>
+      <a href="/uploads/aptoMedico/<%= usuarioLogueado.aptoMedico %>" target="_blank">
+        <img src="/uploads/aptoMedico/<%= usuarioLogueado.aptoMedico %>" alt="Apto Médico" style="max-width: 200px; cursor: pointer;" />
+      </a>
+    <% } %>
+  <% } else { %>
+    <p>No hay apto médico cargado.</p>
+  <% } %>
+  
+  
 <% } else { %>
   <p>No has iniciado sesión</p>
 <% } %>
 
 
+
       <ul class="botones">
+        <a href="/perfil/editar" class="crear-editar">Editar</a>
         <a href="/" class="crear-editar">VOLVER</a>
       </ul>
     </main>

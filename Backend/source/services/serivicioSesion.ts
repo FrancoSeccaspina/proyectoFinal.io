@@ -93,6 +93,7 @@ declare module "express-session" {
       celular?: string;
       fecha_nacimiento?: string;
       imagen?: string;
+      aptoMedico?: string; // Este es el campo nuevo
     };
   }
 }
@@ -137,6 +138,7 @@ export const SessionService = {
     celular?: string;
     fecha_nacimiento?: string;
     imagen?: string;
+    aptoMedico?: string;
   }) {
     req.session.usuario = {
       id: usuario.id,
@@ -152,7 +154,8 @@ export const SessionService = {
       apellido: usuario.apellido,
       celular: usuario.celular,
       fecha_nacimiento: usuario.fecha_nacimiento,
-      imagen: usuario.imagen || "default.png"
+      imagen: usuario.imagen || "default.png",
+      aptoMedico: usuario.aptoMedico, // <-- corregido
     };
   },
 

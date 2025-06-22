@@ -68,6 +68,7 @@ const initUsuarioModel = (sequelize: Sequelize) => {
       imagen: {
         type: DataTypes.STRING(255),
         allowNull: true,
+        defaultValue: 'perfil.jpg'  // <-- valor por defecto
       },
       id_membresia: {
         type: DataTypes.INTEGER,

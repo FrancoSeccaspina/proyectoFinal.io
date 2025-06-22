@@ -111,6 +111,7 @@ app.use('/api',
     precioCuotaApiController,
     transaccionesApiController
 );
+app.use('/uploads/aptoMedico', express.static(path.join(__dirname, '..', 'uploads', 'aptoMedico')));
 
 // verifica que las rutas no existan y redirige a la página de error 404
 app.use(rutaNoEncontrada);
