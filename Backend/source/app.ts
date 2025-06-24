@@ -1,8 +1,9 @@
-// import cookieParser from 'cookie-parser';
 // Middlewares y rutas
 // import userMiddleware from './middlewares/user';
-import dotenv from 'dotenv';
 import express from 'express';
+import cookieParser from 'cookie-parser';
+import { validarVariablesDeEntorno } from './configEnv';
+import { SESSION_PASSWORD } from './configEnv';
 import path, { join } from 'path';
 import { port, start } from './modules/server';
 import staticHandler from './modules/static';
@@ -41,7 +42,7 @@ import transaccionesApiController from './routes/api/transacciones.api.routes';
 import './cron-task/devolver-stock-reservas-vencidas'
 
 // carga las variables de entorno en este caso del archivo .env
-dotenv.config();
+validarVariablesDeEntorno();
 
 const app = express();
 // Habilitar CORS
@@ -61,13 +62,13 @@ app.set('view engine', 'ejs');
 app.use(express.urlencoded({ extended: true }));
 app.use(express.json());
 
-if (!process.env.SESSION_PASSWORD) {
+if ( !SESSION_PASSWORD ) {
     throw new Error('La variable de entorno SESSION_PASSWORD no está definida');
 }
 
 // Sessions
 app.use(session({
-    secret: process.env.SESSION_PASSWORD,
+    secret: SESSION_PASSWORD,
     resave: true,
     saveUninitialized: false,
     cookie: { secure: false } // Cambiar a true en producción
@@ -75,8 +76,9 @@ app.use(session({
 
 // Verifica si hay un usuario en la sesión
 app.use(isAuthenticated.setUsuarioLogueado);
+
 // Cookies
-// app.use(cookieParser());
+app.use(cookieParser());
 
 // Method Override para PUT, PATCH y DELETE
 app.use(methodOverride('_method'));
@@ -115,6 +117,7 @@ app.use('/uploads/aptoMedico', express.static(path.join(__dirname, '..', 'upload
 
 // verifica que las rutas no existan y redirige a la página de error 404
 app.use(rutaNoEncontrada);
+
 app.use('/public', express.static(path.join(__dirname, 'public')));
 app.use('/uploads', express.static('uploads'));
 

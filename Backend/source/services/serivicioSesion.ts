@@ -79,11 +79,12 @@ import { Request } from "express";
 declare module "express-session" {
   interface SessionData {
     carrito?: Array<{ id_producto: number; cantidad: number }>;
-    usuario?: {
+     usuario?: {
       id: number;
-      email: string;
+      nombre: string;
       rol: string;
-    };
+    } | null;
+
     usuarioLogueado?: {
       id: number;
       email: string;
@@ -133,7 +134,7 @@ export const SessionService = {
     id: number;
     email: string;
     rol: string;
-    nombre?: string;
+    nombre: string;
     apellido?: string;
     celular?: string;
     fecha_nacimiento?: string;
@@ -142,7 +143,7 @@ export const SessionService = {
   }) {
     req.session.usuario = {
       id: usuario.id,
-      email: usuario.email,
+      nombre: usuario.nombre,
       rol: usuario.rol
     };
 

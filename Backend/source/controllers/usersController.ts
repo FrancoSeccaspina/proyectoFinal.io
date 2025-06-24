@@ -2,10 +2,10 @@ import { validationResult } from "express-validator";
 import { Request, Response } from "express";
 import { Autenticacion } from '../database/models/autenticacion';
 import { Usuario } from '../database/models/usuario';
-import bcrypt from 'bcryptjs';
 import { Roles } from "../constants/roles";
-import { error } from "console";
 import { SessionService } from '../services/serivicioSesion'
+import { firmarToken } from '../utils/generadorToken'
+import bcrypt from 'bcryptjs';
 
 export class UsuarioController {
 
@@ -101,8 +101,8 @@ export class UsuarioController {
         { transaction }
       );
 
-      const hashedPassword = bcrypt.hashSync(contrasenia, 8);
-      console.log(nuevoUsuario)
+      const hashedPassword = bcrypt.hashSync(contrasenia, 8); // TODO: convertir a async 
+
       await Autenticacion.create(
         {
           email: email,
@@ -220,62 +220,72 @@ export class UsuarioController {
 
     }
   } VER QUE ES LO QUE SE CAMBIO*/
-   async login(req: Request, res: Response): Promise<Response | void> {
-  try {
-    const { email, contrasenia } = req.body;
+  async login(req: Request, res: Response): Promise<Response | void> {
+    try {
+      const { email, contrasenia } = req.body;
 
-    const usuarioExistente = await Autenticacion.findOne({ where: { email } });
-    if (!usuarioExistente) {
-      return res.status(401).render("login", {
-        errors: { email: { msg: "Email no registrado" } },
-        oldData: { email }
+      const usuarioExistente = await Autenticacion.findOne({ where: { email } });
+      if (!usuarioExistente) {
+        return res.status(401).render("login", {
+          errors: { email: { msg: "Email no registrado" } },
+          oldData: { email }
+        });
+      }
+
+      const contraseniaOk = bcrypt.compareSync(contrasenia, usuarioExistente.contrasenia);
+      if (!contraseniaOk) {
+        return res.status(401).render("login", {
+          errors: { contrasenia: { msg: "Contraseña incorrecta" } },
+          oldData: { email }
+        });
+      }
+
+      const usuario = await Usuario.findOne({ where: { id: usuarioExistente.id_usuario } });
+      if (!usuario) {
+        return res.status(401).render("login", {
+          errors: { email: { msg: "Usuario no encontrado" } },
+          oldData: { email }
+        });
+      }
+
+      SessionService.iniciarSessionUsuario(req, {
+        id: usuario.id,
+        email: usuarioExistente.email,
+        rol: usuario.rol,
+        nombre: usuario.nombre,
+        apellido: usuario.apellido,
+        celular: usuario.celular?.toString(), 
+        fecha_nacimiento: usuario.fecha_nacimiento?.toString(),
+        imagen: usuario.imagen,
+        aptoMedico: usuario.aptoMedico,
+      });
+
+      // Token JWT
+      // https://www.npmjs.com/package/cookie
+      const token = firmarToken({ id: usuario.id, nombre: usuario.nombre, rol: usuario.rol });
+      console.log("TOKEN 266:", token);
+      res.cookie('token', token, {
+        httpOnly: true,
+        sameSite: 'strict',
+        maxAge: 1 * 60 * 60 * 1000 // 1 horas
+      });
+
+      if(usuario.rol === Roles.ADMIN) {
+        return res.redirect("http://localhost:3000");
+      }
+      return res.redirect("/perfil");
+
+    } catch (error) {
+      console.error("Error en login:", (error as Error).message);
+      return res.status(500).render("error", {
+        title: "Error del servidor",
+        code: 500,
+        message: "Error del servidor",
+        description: "Ocurrió un error inesperado durante el inicio de sesión. Por favor, inténtelo de nuevo más tarde.",
+        error: (error as Error).message
       });
     }
-
-    const contraseniaOk = bcrypt.compareSync(contrasenia, usuarioExistente.contrasenia);
-    if (!contraseniaOk) {
-      return res.status(401).render("login", {
-        errors: { contrasenia: { msg: "Contraseña incorrecta" } },
-        oldData: { email }
-      });
-    }
-
-    const usuario = await Usuario.findOne({ where: { id: usuarioExistente.id_usuario } });
-    if (!usuario) {
-      return res.status(401).render("login", {
-        errors: { email: { msg: "Usuario no encontrado" } },
-        oldData: { email }
-      });
-    }
-
-    SessionService.iniciarSessionUsuario(req, {
-      id: usuario.id,
-      email: usuarioExistente.email,
-      rol: usuario.rol,
-      nombre: usuario.nombre,
-      apellido: usuario.apellido,
-      celular: usuario.celular?.toString(),
-      fecha_nacimiento: usuario.fecha_nacimiento?.toString(),
-      imagen: usuario.imagen,
-      aptoMedico: usuario.aptoMedico,
-    });
-
-    if (usuario.rol === Roles.ADMIN) {
-      return res.redirect("http://localhost:3000");
-    }
-    return res.redirect("/perfil");
-
-  } catch (error) {
-    console.error("Error en login:", (error as Error).message);
-    return res.status(500).render("error", {
-      title: "Error del servidor",
-      code: 500,
-      message: "Error del servidor",
-      description: "Ocurrió un error inesperado durante el inicio de sesión. Por favor, inténtelo de nuevo más tarde.",
-      error: (error as Error).message
-    });
   }
-}
 
 
   async logout(req: Request, res: Response): Promise<Response | void> {
@@ -312,19 +322,19 @@ export class UsuarioController {
     try {
       const { id } = req.params;
       const { apellido, nombre, rol, id_membresia, fecha_nacimiento, celular, dni, email } = req.body;
-  
+
       const usuario = await Usuario.findOne({ where: { id } });
       if (!usuario) {
         return res.status(404).json({ success: false, message: "Usuario no encontrado" });
       }
-  
+
       const files = req.files as {
         [fieldname: string]: Express.Multer.File[];
       };
-  
+
       const imagen = files?.imagen?.[0]?.filename;
       const aptoMedico = files?.aptomedico?.[0]?.filename;
-  
+
       await usuario.update({
         apellido,
         nombre,
@@ -336,7 +346,7 @@ export class UsuarioController {
         ...(imagen && { imagen }),
         ...(aptoMedico && { aptoMedico }),
       });
-  
+
       // Actualizar sesión si corresponde
       if (req.session.usuarioLogueado) {
         Object.assign(req.session.usuarioLogueado, {
@@ -349,18 +359,18 @@ export class UsuarioController {
           ...(aptoMedico && { aptomedico: aptoMedico }),
         });
       }
-  
+
       // 🔁 Redireccionar al perfil
       return res.redirect('/perfil');
-  
+
     } catch (error) {
       console.error("Error al actualizar usuario:", (error as Error).message);
       return res.status(500).json({ success: false, message: "Error al actualizar usuario" });
     }
   }
-  
-  
-  
+
+
+
   async changePassword(req: Request, res: Response): Promise<Response> {
     try {
       const { id } = req.params;

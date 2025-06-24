@@ -1,3 +1,4 @@
+import { TIEMPO_CONTROL_STOCK_MINUTOS } from '../configEnv';
 import { Request, Response } from "express";
 import { SessionService } from '../services/serivicioSesion';
 import { obtenerProductosEnCarrito } from '../services/servicioCarrito';
@@ -55,7 +56,7 @@ class reservaController {
             if (!usuario) {
                 throw new Error("Usuario no encontrado");
             }
-            const tiempoControlStock = parseInt(process.env.TIEMPO_CONTROL_STOCK_MINUTOS || "0", 10);
+            const tiempoControlStock = parseInt(TIEMPO_CONTROL_STOCK_MINUTOS || "0", 10);
             const id_usuario = usuario.id;
             const fechaActual = new Date();
             const total = productosEnCarrito.resultados.total;

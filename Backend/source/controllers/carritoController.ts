@@ -81,7 +81,7 @@ class carritoController {
         }
     }
 
-    public async mostrarCarrito(req: Request, res: Response) {
+    public async mostrarCarrito(req: Request, res: Response): Promise<void>{
         try {
             const productosCarrito = await obtenerProductosEnCarrito(req);
             const usuarioLogueado = SessionService.usuarioLogeado(req);
@@ -93,7 +93,7 @@ class carritoController {
 
         } catch (error) {
             console.error("Error al ver carrito:", (error as Error).message);
-            return res.status(500).render("error", {
+            res.status(500).render("error", {
                 title: "Error del servidor",
                 code: 500,
                 message: "Error del servidor",
