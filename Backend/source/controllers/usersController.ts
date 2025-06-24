@@ -300,9 +300,13 @@ export class UsuarioController {
 
   async logout(req: Request, res: Response): Promise<Response | void> {
     SessionService.terminarSessionUsuario(req);
+    res.clearCookie('token', {
+      httpOnly: true,
+      sameSite: 'strict'
+    });
     res.redirect("/");
   }
-
+  
   async softDelete(req: Request, res: Response): Promise<Response> {
     try {
       const { id } = req.params;
