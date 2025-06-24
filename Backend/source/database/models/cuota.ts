@@ -16,6 +16,8 @@ import {
     id_usuario: number;
     faltante: Number;
     sobrante: Number
+    fecha_fin: Date | null;
+    estado_membresia: string;
   }
   class Cuota extends Model<InferAttributes<Cuota>, InferCreationAttributes<Cuota>> implements CuotaAttributes {
     declare id: CreationOptional<number>;
@@ -26,6 +28,9 @@ import {
     declare id_usuario: number;
     declare faltante: Number;
     declare sobrante: Number;
+    declare fecha_fin: CreationOptional<Date | null>;
+
+    declare estado_membresia: string;
 
     static associate(models: any) {
 
@@ -74,6 +79,14 @@ const initCuotaModel = (sequelize: Sequelize) => {
                 type: DataTypes.FLOAT(10, 2),
                 allowNull: false,
             },
+            fecha_fin: {
+              type: DataTypes.DATEONLY,
+              allowNull: true,
+            },
+            estado_membresia: {
+              type: DataTypes.STRING(100),
+              allowNull: false,
+          },
             },
             {
                 sequelize,

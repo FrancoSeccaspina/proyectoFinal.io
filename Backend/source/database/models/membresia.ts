@@ -9,25 +9,25 @@ import {
 
 interface MembresiaAttributes {
     id: number;
-    tipo: string;
+    usuario_id: number;
     fecha_inicio: Date;
-    fecha_vencimiento: Date;
+    fecha_fin: Date;
+    estado: string;
 
 }
 
 class Membresia extends Model<InferAttributes<Membresia>, InferCreationAttributes<Membresia>> implements MembresiaAttributes {
     declare id: CreationOptional<number>;
-    declare tipo: string;
+    declare usuario_id: number;
     declare fecha_inicio: Date;
-    declare fecha_vencimiento: Date;
-
-
+    declare fecha_fin: Date;
+    declare estado: string;
     static associate(models: any) {
-        Membresia.hasOne(models.Usuario, {
-            foreignKey: 'id_membresia',
+        Membresia.belongsTo(models.Usuario, {
+          foreignKey: 'usuario_id',
         });
+      }
     }
-}
 
 const initMembresiaModel = (sequelize: Sequelize) => {
     Membresia.init(
@@ -38,23 +38,34 @@ const initMembresiaModel = (sequelize: Sequelize) => {
                 autoIncrement: true,
                 allowNull: false,
             },
-            tipo: {
-                type: DataTypes.STRING(20),
+            usuario_id: {
+                type: DataTypes.INTEGER,
                 allowNull: false,
-            },
+                references: {
+                  model: 'usuarios',
+                  key: 'id',
+                },
+                onUpdate: 'CASCADE',
+                onDelete: 'CASCADE',
+              },
             fecha_inicio: {
                 type: DataTypes.DATE,
                 allowNull: false,
             },
-            fecha_vencimiento: {
+            fecha_fin: {
                 type: DataTypes.DATE,
                 allowNull: false,
             },
+            estado: {
+                type: DataTypes.STRING(255),
+                allowNull: false,
+              },
         },
         {
             sequelize,
             modelName: 'Membresia',
-            tableName: 'membresias',
+            tableName: 'membresia',
+            timestamps: false,
         }
     );
 }

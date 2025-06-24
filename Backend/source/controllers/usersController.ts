@@ -6,6 +6,7 @@ import { Roles } from "../constants/roles";
 import { SessionService } from '../services/serivicioSesion'
 import { firmarToken } from '../utils/generadorToken'
 import bcrypt from 'bcryptjs';
+import { Cuota } from "../database/models/cuota";
 
 export class UsuarioController {
 
@@ -247,6 +248,13 @@ export class UsuarioController {
           oldData: { email }
         });
       }
+      const ultimaCuota = await Cuota.findOne({
+        where: {
+          id_usuario: usuario.id,
+          estado: 'PAGADA'
+        },
+        order: [['fecha', 'DESC']]
+      });
 
       SessionService.iniciarSessionUsuario(req, {
         id: usuario.id,
@@ -254,10 +262,12 @@ export class UsuarioController {
         rol: usuario.rol,
         nombre: usuario.nombre,
         apellido: usuario.apellido,
-        celular: usuario.celular?.toString(), 
+        celular: usuario.celular?.toString(),
         fecha_nacimiento: usuario.fecha_nacimiento?.toString(),
         imagen: usuario.imagen,
         aptoMedico: usuario.aptoMedico,
+        fecha_fin_cuota: ultimaCuota?.fecha_fin?.toISOString().split("T")[0] || undefined,
+        estado_membresia: ultimaCuota?.estado_membresia
       });
 
       // Token JWT
@@ -267,10 +277,10 @@ export class UsuarioController {
       res.cookie('token', token, {
         httpOnly: true,
         sameSite: 'strict',
-        maxAge: 1 * 60 * 60 * 1000 // 1 horas
+        maxAge: 1 * 60 * 60 * 1000 // 1 hora
       });
 
-      if(usuario.rol === Roles.ADMIN) {
+      if (usuario.rol === Roles.ADMIN) {
         return res.redirect("http://localhost:3000");
       }
       return res.redirect("/perfil");
@@ -285,8 +295,8 @@ export class UsuarioController {
         error: (error as Error).message
       });
     }
-  }
 
+  }
 
   async logout(req: Request, res: Response): Promise<Response | void> {
     SessionService.terminarSessionUsuario(req);

@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Servidor: 127.0.0.1
--- Tiempo de generación: 19-06-2025 a las 04:31:25
+-- Tiempo de generación: 24-06-2025 a las 07:35:12
 -- Versión del servidor: 10.4.32-MariaDB
 -- Versión de PHP: 8.2.12
 
@@ -42,9 +42,9 @@ INSERT INTO `autenticacion` (`id`, `email`, `contrasenia`, `id_usuario`) VALUES
 (1, 'admin@activafitness.com', '$2b$10$RCIHIHvb6asptQgSa.Yc.eTaj1N.VlCWFsNnsoPxuY.bELwO95QsG', 1),
 (15, 'pepe@gmail.com', '$2b$10$V9LuPIN9nz7vDB8qVhJcO.NIuyPYss4e7WCy6RCWjW9MNETE49qKu', 24),
 (16, 'marina@gmail.com', '$2b$10$gg7TRVQpd4B1lVdZ0.PXaeF7lKKamoOWcBZWlmLtcAoBIVu5Ptdw6', 25),
-(17, 'lufrancolu@gmail.com', '$2b$10$Lbjcdk/WpLRHLqXueWp0I.EUXhd1RcPCs58VD3jWqc2JpFufEuXNi', 26),
 (18, 'gustavo.jimenez.crespo@gmail.com', '$2b$10$lpM7DCvhbY9QXSNhs85pouRAbN68lcUxmC8nAdTZB6xjIXTpkoKsW', 27),
-(19, 'francolector@gmail.com', '$2b$08$77S9p1bhG/zNyBc71teU6eFnTVRrk3ysEb6mj8eSqBDKDFV3qijca', 28);
+(19, 'francolector@gmail.com', '$2b$08$77S9p1bhG/zNyBc71teU6eFnTVRrk3ysEb6mj8eSqBDKDFV3qijca', 28),
+(20, 'lufrancolu@gmail.com', '$2b$08$59.4M2LJQWTz6lEzFq4jHezyLnHumzitUXhTGg5ei31A9qWVLgSv6', 29);
 
 -- --------------------------------------------------------
 
@@ -124,20 +124,22 @@ CREATE TABLE `cuota` (
   `estado` varchar(50) NOT NULL,
   `faltante` double NOT NULL,
   `sobrante` double NOT NULL,
-  `id_usuario` int(11) NOT NULL
+  `id_usuario` int(11) NOT NULL,
+  `fecha_fin` date DEFAULT NULL,
+  `estado_membresia` varchar(255) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
 --
 -- Volcado de datos para la tabla `cuota`
 --
 
-INSERT INTO `cuota` (`id`, `fecha`, `descripcion`, `monto`, `estado`, `faltante`, `sobrante`, `id_usuario`) VALUES
-(2, '2025-05-04', 'cuatro del 5', 1.111111111111111e15, 'erere', 2, 3, 23),
-(6, '2025-05-30', '12312312312312312', 23, 'pagado', 0, 0, 23),
-(8, '2025-06-03', 'putito el de ds', 2e37, 'paga2', 0, 9090900, 1),
-(9, '2026-11-02', 'ta re seco el wacho', 8000, 'pendiente', 4000, 0, 1),
-(10, '2025-06-03', 'faltan 2 luka', 20000, '', 2000, 0, 1),
-(11, '2025-06-04', 'taba pegado el wash', 20000, 'Pagado', 0, 0, 23);
+INSERT INTO `cuota` (`id`, `fecha`, `descripcion`, `monto`, `estado`, `faltante`, `sobrante`, `id_usuario`, `fecha_fin`, `estado_membresia`) VALUES
+(12, '2025-06-19', 'wqeeqwe', 10000, 'PAGADA', 0, 4999, 28, NULL, ''),
+(13, '2025-06-19', 'QWEQWE', 10000, 'PAGADA', 0, 4999, 28, NULL, ''),
+(14, '2025-06-19', 'QWE', 10000, 'PAGADA', 0, 4000, 28, NULL, ''),
+(15, '2025-06-24', 'dasdas', 50000, 'PAGADA', 0, 19999, 29, NULL, ''),
+(16, '2025-06-25', 'qweqwe', 40000, 'PAGADA', 0, 160000, 29, NULL, ''),
+(17, '2025-06-24', '5k', 40000, 'PAGADA', 0, 5000, 29, '2025-07-23', 'ACTIVO');
 
 -- --------------------------------------------------------
 
@@ -333,6 +335,54 @@ INSERT INTO `grupos_musculares` (`id`, `nombre`) VALUES
 -- --------------------------------------------------------
 
 --
+-- Estructura de tabla para la tabla `membresia`
+--
+
+CREATE TABLE `membresia` (
+  `id` int(11) NOT NULL,
+  `usuario_id` int(11) NOT NULL,
+  `fecha_inicio` date NOT NULL,
+  `fecha_fin` date NOT NULL,
+  `estado` varchar(255) NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
+
+--
+-- Volcado de datos para la tabla `membresia`
+--
+
+INSERT INTO `membresia` (`id`, `usuario_id`, `fecha_inicio`, `fecha_fin`, `estado`) VALUES
+(1, 29, '2025-06-24', '2025-07-24', 'ACTIVO');
+
+-- --------------------------------------------------------
+
+--
+-- Estructura de tabla para la tabla `precio_cuota`
+--
+
+CREATE TABLE `precio_cuota` (
+  `id` int(11) NOT NULL,
+  `precio` float NOT NULL,
+  `fecha` date NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
+
+--
+-- Volcado de datos para la tabla `precio_cuota`
+--
+
+INSERT INTO `precio_cuota` (`id`, `precio`, `fecha`) VALUES
+(1, 20000, '2025-06-05'),
+(2, 15000, '2025-02-05'),
+(3, 50000, '2025-06-06'),
+(4, 60000, '2025-06-07'),
+(5, 45, '2025-06-06'),
+(6, 2, '2025-06-04'),
+(7, 10000, '2025-06-19'),
+(8, 50000, '2025-06-24'),
+(9, 40000, '2025-06-24');
+
+-- --------------------------------------------------------
+
+--
 -- Estructura de tabla para la tabla `productos`
 --
 
@@ -351,7 +401,7 @@ CREATE TABLE `productos` (
 --
 
 INSERT INTO `productos` (`id`, `nombre`, `descripcion`, `precio`, `categoriaId`, `imagen`, `stock`) VALUES
-(8, 'Proteina pepito', 'Post entrenamiento: Ideal para recuperación muscular. Consumir dentro de los 30-60 minutos después de entrenar.Desayuno o entre comidas: Si necesitás aumentar tu ingesta de proteínas diarias.Antes de dormir: En el caso de caseína (de absorción lenta), ayuda a evitar el catabolismo nocturno. Mezclar 1 scoop (medida del envase, aprox. 25-30g de proteína) en: 250-300 ml de agua, leche o bebida vegetal.Podés usar una licuadora o shaker. Si querés sumar calorías, podés agregar banana, avena, mantequi', 4, 2, 'proteinaTruemade.jpg', 1),
+(8, 'Proteina whey', 'Post entrenamiento: Ideal para recuperación muscular. Consumir dentro de los 30-60 minutos después de entrenar.Desayuno o entre comidas: Si necesitás aumentar tu ingesta de proteínas diarias.Antes de dormir: En el caso de caseína (de absorción lenta), ayuda a evitar el catabolismo nocturno. Mezclar 1 scoop (medida del envase, aprox. 25-30g de proteína) en: 250-300 ml de agua, leche o bebida vegetal.Podés usar una licuadora o shaker. Si querés sumar calorías, podés agregar banana, avena, mantequi', 4, 2, 'proteinaTruemade.jpg', 1),
 (9, 'Proteina Platinum Frutilla', 'Post entrenamiento: Ideal para recuperación muscular. Consumir dentro de los 30-60 minutos después de entrenar.Desayuno o entre comidas: Si necesitás aumentar tu ingesta de proteínas diarias.Antes de dormir: En el caso de caseína (de absorción lenta), ayuda a evitar el catabolismo nocturno. Mezclar 1 scoop (medida del envase, aprox. 25-30g de proteína) en: 250-300 ml de agua, leche o bebida vegetal.Podés usar una licuadora o shaker. Si querés sumar calorías, podés agregar banana, avena, mantequi', 45000, 2, 'Wheyproteina_Frutilla.jpg', 110),
 (10, 'Creatina ENA', '5 gramos por día, todos los días, a la misma hora (preferiblemente con una comida o postentreno).No hace falta cargar(es decir, tomar grandes dosis al principio). Pero si querés acelerar la saturación muscular, podés ver más abajo la fase de carga. Cuándo tomarla Postentreno (después de entrenar) es ideal, ya que el cuerpo absorbe mejor nutrientes después del ejercicio. También podés tomarla en cualquier momento del día si no entrenás.Con qué tomarla con agua, jugo o un batido postentreno. Si la', 35000, 1, 'creatinaEna.jpg', 95),
 (11, 'Poteina Bar Banana Split', 'Comerlas Post entrenamiento si no podés tomar batido. Colación entre comidas, especialmente si estás lejos de casa. Antes de entrenar, si no comiste nada.\r\nRecomendaciones:\r\nFijate en la cantidad de proteína por barra (ideal 15g o más). Revisá los ingredientes: algunas tienen mucho azúcar o grasa saturada.No las uses como reemplazo total de comidas, sino como complemento.', 40000, 3, 'EnaProteinBar_banansplit.jpg', 85),
@@ -516,10 +566,8 @@ CREATE TABLE `usuarios` (
 
 INSERT INTO `usuarios` (`id`, `apellido`, `nombre`, `rol`, `imagen`, `id_membresia`, `id_autenticacion`, `fecha_nacimiento`, `celular`, `aptoMedico`, `dni`) VALUES
 (1, 'admin', 'admin', 'admin', 'perfil.jpg', 1, 1, '2025-04-09', '1193868511', 'xd', 12345678),
-(23, 'aguirre', 'lucas', 'jefe', 'tutututmtutm', 1, NULL, '2019-05-01', '1193868511', 'no tiene', 43245002),
-(26, 'Aguirre', 'Lucas', 'cliente', NULL, 1, NULL, '2001-05-04', NULL, NULL, 43225600),
-(27, 'Jimenez', 'Gustavo', 'cliente', NULL, 1, NULL, '2025-06-17', '1123232323', NULL, 12345678),
-(28, 'Buster', 'Frank', 'cliente', NULL, 1, NULL, '2001-05-04', '1165830511', NULL, 44323448);
+(28, 'Buster', 'Frank', 'cliente', NULL, 1, NULL, '2001-05-04', '1165830511', 'null', 44323448),
+(29, 'Aguirre', 'Lucas', 'cliente', 'imagen_usuario_29.jpg', 1, NULL, '2001-05-04', '1165830511', 'aptomedico_usuario_29.pdf', 43245002);
 
 --
 -- Índices para tablas volcadas
@@ -531,6 +579,12 @@ INSERT INTO `usuarios` (`id`, `apellido`, `nombre`, `rol`, `imagen`, `id_membres
 ALTER TABLE `autenticacion`
   ADD PRIMARY KEY (`id`),
   ADD KEY `id_usuario` (`id_usuario`);
+
+--
+-- Indices de la tabla `carrito`
+--
+ALTER TABLE `carrito`
+  ADD PRIMARY KEY (`id`);
 
 --
 -- Indices de la tabla `categorias`
@@ -571,11 +625,29 @@ ALTER TABLE `grupos_musculares`
   ADD PRIMARY KEY (`id`);
 
 --
+-- Indices de la tabla `membresia`
+--
+ALTER TABLE `membresia`
+  ADD PRIMARY KEY (`id`);
+
+--
+-- Indices de la tabla `precio_cuota`
+--
+ALTER TABLE `precio_cuota`
+  ADD PRIMARY KEY (`id`);
+
+--
 -- Indices de la tabla `productos`
 --
 ALTER TABLE `productos`
   ADD PRIMARY KEY (`id`),
   ADD KEY `categoriaId` (`categoriaId`) USING BTREE;
+
+--
+-- Indices de la tabla `proveedores`
+--
+ALTER TABLE `proveedores`
+  ADD PRIMARY KEY (`id`);
 
 --
 -- Indices de la tabla `recetas`
@@ -613,7 +685,13 @@ ALTER TABLE `usuarios`
 -- AUTO_INCREMENT de la tabla `autenticacion`
 --
 ALTER TABLE `autenticacion`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=20;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=21;
+
+--
+-- AUTO_INCREMENT de la tabla `carrito`
+--
+ALTER TABLE `carrito`
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2;
 
 --
 -- AUTO_INCREMENT de la tabla `categorias`
@@ -628,6 +706,66 @@ ALTER TABLE `categoria_recetas`
   MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=7;
 
 --
+-- AUTO_INCREMENT de la tabla `cuota`
+--
+ALTER TABLE `cuota`
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=18;
+
+--
+-- AUTO_INCREMENT de la tabla `detalle_reservas`
+--
+ALTER TABLE `detalle_reservas`
+  MODIFY `id_detalle_reserva` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=29;
+
+--
+-- AUTO_INCREMENT de la tabla `ejercicios`
+--
+ALTER TABLE `ejercicios`
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=138;
+
+--
+-- AUTO_INCREMENT de la tabla `grupos_musculares`
+--
+ALTER TABLE `grupos_musculares`
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=10;
+
+--
+-- AUTO_INCREMENT de la tabla `membresia`
+--
+ALTER TABLE `membresia`
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2;
+
+--
+-- AUTO_INCREMENT de la tabla `precio_cuota`
+--
+ALTER TABLE `precio_cuota`
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=10;
+
+--
+-- AUTO_INCREMENT de la tabla `productos`
+--
+ALTER TABLE `productos`
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=16;
+
+--
+-- AUTO_INCREMENT de la tabla `proveedores`
+--
+ALTER TABLE `proveedores`
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=4;
+
+--
+-- AUTO_INCREMENT de la tabla `recetas`
+--
+ALTER TABLE `recetas`
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=53;
+
+--
+-- AUTO_INCREMENT de la tabla `reservas`
+--
+ALTER TABLE `reservas`
+  MODIFY `id_reserva` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=33;
+
+--
 -- AUTO_INCREMENT de la tabla `transacciones`
 --
 ALTER TABLE `transacciones`
@@ -637,7 +775,7 @@ ALTER TABLE `transacciones`
 -- AUTO_INCREMENT de la tabla `usuarios`
 --
 ALTER TABLE `usuarios`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=29;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=30;
 COMMIT;
 
 /*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;
