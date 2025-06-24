@@ -14,6 +14,8 @@ declare module "express-session" {
       fecha_nacimiento?: string;
       imagen?: string;
       aptoMedico?: string; // Este es el campo nuevo
+      fecha_fin_cuota?: string;         // ✅ Nuevo campo
+      estado_membresia?: string;        // ✅ Nuevo campo
     };
   }
 }

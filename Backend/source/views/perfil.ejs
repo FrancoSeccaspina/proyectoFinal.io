@@ -28,7 +28,14 @@
   <% } else { %>
     <p>No hay apto médico cargado.</p>
   <% } %>
-  
+  <p>Estado de membresía: <%= usuarioLogueado.estado_membresia %></p>
+
+<% if (usuarioLogueado.fecha_fin_cuota) { %>
+  <p>Vigente hasta: <%= usuarioLogueado.fecha_fin_cuota %></p>
+<% } else { %>
+  <p>Sin fecha de vencimiento registrada.</p>
+<% } %>
+
   
 <% } else { %>
   <p>No has iniciado sesión</p>

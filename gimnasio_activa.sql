@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Servidor: 127.0.0.1
--- Tiempo de generación: 24-06-2025 a las 05:16:52
+-- Tiempo de generación: 24-06-2025 a las 07:35:12
 -- Versión del servidor: 10.4.32-MariaDB
 -- Versión de PHP: 8.2.12
 
@@ -124,17 +124,22 @@ CREATE TABLE `cuota` (
   `estado` varchar(50) NOT NULL,
   `faltante` double NOT NULL,
   `sobrante` double NOT NULL,
-  `id_usuario` int(11) NOT NULL
+  `id_usuario` int(11) NOT NULL,
+  `fecha_fin` date DEFAULT NULL,
+  `estado_membresia` varchar(255) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
 --
 -- Volcado de datos para la tabla `cuota`
 --
 
-INSERT INTO `cuota` (`id`, `fecha`, `descripcion`, `monto`, `estado`, `faltante`, `sobrante`, `id_usuario`) VALUES
-(12, '2025-06-19', 'wqeeqwe', 10000, 'PAGADA', 0, 4999, 28),
-(13, '2025-06-19', 'QWEQWE', 10000, 'PAGADA', 0, 4999, 28),
-(14, '2025-06-19', 'QWE', 10000, 'PAGADA', 0, 4000, 28);
+INSERT INTO `cuota` (`id`, `fecha`, `descripcion`, `monto`, `estado`, `faltante`, `sobrante`, `id_usuario`, `fecha_fin`, `estado_membresia`) VALUES
+(12, '2025-06-19', 'wqeeqwe', 10000, 'PAGADA', 0, 4999, 28, NULL, ''),
+(13, '2025-06-19', 'QWEQWE', 10000, 'PAGADA', 0, 4999, 28, NULL, ''),
+(14, '2025-06-19', 'QWE', 10000, 'PAGADA', 0, 4000, 28, NULL, ''),
+(15, '2025-06-24', 'dasdas', 50000, 'PAGADA', 0, 19999, 29, NULL, ''),
+(16, '2025-06-25', 'qweqwe', 40000, 'PAGADA', 0, 160000, 29, NULL, ''),
+(17, '2025-06-24', '5k', 40000, 'PAGADA', 0, 5000, 29, '2025-07-23', 'ACTIVO');
 
 -- --------------------------------------------------------
 
@@ -330,6 +335,27 @@ INSERT INTO `grupos_musculares` (`id`, `nombre`) VALUES
 -- --------------------------------------------------------
 
 --
+-- Estructura de tabla para la tabla `membresia`
+--
+
+CREATE TABLE `membresia` (
+  `id` int(11) NOT NULL,
+  `usuario_id` int(11) NOT NULL,
+  `fecha_inicio` date NOT NULL,
+  `fecha_fin` date NOT NULL,
+  `estado` varchar(255) NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
+
+--
+-- Volcado de datos para la tabla `membresia`
+--
+
+INSERT INTO `membresia` (`id`, `usuario_id`, `fecha_inicio`, `fecha_fin`, `estado`) VALUES
+(1, 29, '2025-06-24', '2025-07-24', 'ACTIVO');
+
+-- --------------------------------------------------------
+
+--
 -- Estructura de tabla para la tabla `precio_cuota`
 --
 
@@ -350,7 +376,9 @@ INSERT INTO `precio_cuota` (`id`, `precio`, `fecha`) VALUES
 (4, 60000, '2025-06-07'),
 (5, 45, '2025-06-06'),
 (6, 2, '2025-06-04'),
-(7, 10000, '2025-06-19');
+(7, 10000, '2025-06-19'),
+(8, 50000, '2025-06-24'),
+(9, 40000, '2025-06-24');
 
 -- --------------------------------------------------------
 
@@ -597,6 +625,12 @@ ALTER TABLE `grupos_musculares`
   ADD PRIMARY KEY (`id`);
 
 --
+-- Indices de la tabla `membresia`
+--
+ALTER TABLE `membresia`
+  ADD PRIMARY KEY (`id`);
+
+--
 -- Indices de la tabla `precio_cuota`
 --
 ALTER TABLE `precio_cuota`
@@ -675,7 +709,7 @@ ALTER TABLE `categoria_recetas`
 -- AUTO_INCREMENT de la tabla `cuota`
 --
 ALTER TABLE `cuota`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=15;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=18;
 
 --
 -- AUTO_INCREMENT de la tabla `detalle_reservas`
@@ -696,10 +730,16 @@ ALTER TABLE `grupos_musculares`
   MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=10;
 
 --
+-- AUTO_INCREMENT de la tabla `membresia`
+--
+ALTER TABLE `membresia`
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2;
+
+--
 -- AUTO_INCREMENT de la tabla `precio_cuota`
 --
 ALTER TABLE `precio_cuota`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=8;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=10;
 
 --
 -- AUTO_INCREMENT de la tabla `productos`

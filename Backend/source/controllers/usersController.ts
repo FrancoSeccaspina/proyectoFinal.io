@@ -6,6 +6,7 @@ import bcrypt from 'bcryptjs';
 import { Roles } from "../constants/roles";
 import { error } from "console";
 import { SessionService } from '../services/serivicioSesion'
+import { Cuota } from "../database/models/cuota";
 
 export class UsuarioController {
 
@@ -247,6 +248,13 @@ export class UsuarioController {
         oldData: { email }
       });
     }
+    const ultimaCuota = await Cuota.findOne({
+      where: {
+        id_usuario: usuario.id,
+        estado: 'PAGADA'
+      },
+      order: [['fecha', 'DESC']]
+    });
 
     SessionService.iniciarSessionUsuario(req, {
       id: usuario.id,
@@ -258,6 +266,8 @@ export class UsuarioController {
       fecha_nacimiento: usuario.fecha_nacimiento?.toString(),
       imagen: usuario.imagen,
       aptoMedico: usuario.aptoMedico,
+      fecha_fin_cuota: ultimaCuota?.fecha_fin?.toISOString().split("T")[0] || undefined,
+      estado_membresia: ultimaCuota?.estado_membresia
     });
 
     if (usuario.rol === Roles.ADMIN) {
