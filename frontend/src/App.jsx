@@ -31,7 +31,7 @@ function App() {
       <BrowserRouter>
         <Sidebar />
         <Routes>
-          <Route path="/" element={<Home />} />
+          <Route path="/" element={<Home/>} />
           <Route path="/Productos" element={<Productos />} />
           <Route path="/Usuarios" element={<Usuario />} />
           <Route path="/Rutinas" element={<Rutinas />} />

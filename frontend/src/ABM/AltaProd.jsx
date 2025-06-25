@@ -49,7 +49,8 @@ const AltaProd = () => {
           await axios.post('http://localhost:3032/api/productos', formData, {
             headers: {
               'Content-Type': 'multipart/form-data'
-            }
+            },
+            withCredentials: true
           });
           navigate('/Productos');
         } catch (error) {

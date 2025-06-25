@@ -32,7 +32,9 @@ const EdicionProveedor = () => {
   };
   const handleSubmit = async (e) => {
     e.preventDefault();
-    axios.put(`http://localhost:3032/api/proveedorEditar/${id}`, proveedor)
+    axios.put(`http://localhost:3032/api/proveedorEditar/${id}`, proveedor,{
+    withCredentials: true
+      })
           .then(() => {
             console.log("proveedor actualizadp");
             navigate('/Proveedores');

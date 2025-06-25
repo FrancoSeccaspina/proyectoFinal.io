@@ -60,7 +60,8 @@ const EdicionReceta = () => {
 
     try {
       await axios.put(`http://localhost:3032/api/recetaEditar/${id}`, formData, {
-        headers: { 'Content-Type': 'multipart/form-data' }
+        headers: { 'Content-Type': 'multipart/form-data' },
+        withCredentials: true
       });
       navigate('/recetas');
     } catch (err) {

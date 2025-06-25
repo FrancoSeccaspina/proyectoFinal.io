@@ -11,7 +11,8 @@ function Reservas() {
   const getReservas = async () => {
     try {
       const response = await axios.get(
-        "http://localhost:3032/api/reservas/mostrar"
+        "http://localhost:3032/api/reservas/mostrar",
+        { withCredentials: true }
       );
       setReservas(response.data);
     } catch (error) {

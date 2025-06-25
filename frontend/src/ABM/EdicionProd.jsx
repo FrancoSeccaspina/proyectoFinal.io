@@ -15,7 +15,7 @@ const EdicionProductos = () => {
   });
   // Cargar datos del producto
   useEffect(() => {
-    axios.get(`http://localhost:3032/api/productos/${id}`)
+    axios.get(`http://localhost:3032/api/productos/${id}`, { withCredentials: true })
       .then(res => setProducto(res.data))
       .catch(err => console.error('Error al cargar producto:', err));
   }, [id]);
@@ -55,7 +55,8 @@ const EdicionProductos = () => {
     axios.put(`http://localhost:3032/api/productoEditar/${id}`, formData, {
       headers: {
         'Content-Type': 'multipart/form-data'
-      }
+      },
+      withCredentials: true
     })
       .then(() => navigate('/productos'))
       .catch(err => console.error('Error al editar:', err));

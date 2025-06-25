@@ -46,7 +46,11 @@ const AltaRuti = () => {
         grupo_muscular_id: parseInt(rutina.grupo_muscular_id),
         video: rutina.video,
         titulo: rutina.titulo,
-      });
+      }, 
+      {
+        withCredentials: true
+      }
+    );
 
       navigate('/Rutinas');
     } catch (error) {

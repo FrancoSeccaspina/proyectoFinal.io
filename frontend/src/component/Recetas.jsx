@@ -37,7 +37,7 @@ function Recetas() {
   const handleDelete = async (id) => {
     if (window.confirm("¿Estás seguro de que querés eliminar esta rutina?")) {
       try {
-        await axios.delete(`http://localhost:3032/api/recetas/${id}`);
+        await axios.delete(`http://localhost:3032/api/recetas/${id}`, { withCredentials: true });
         setRecetas(prevRecetas => prevRecetas.filter(r => r.id !== id));
       } catch (error) {
         console.error('Error al eliminar recetas:', error);

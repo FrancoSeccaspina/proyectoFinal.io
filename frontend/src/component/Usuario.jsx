@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from 'react';
-import { Link } from 'react-router-dom';
+import { Link, resolvePath } from 'react-router-dom';
 import axios from 'axios';
 
 const Usuarios = () => {
@@ -8,7 +8,8 @@ const Usuarios = () => {
 
   const showData = async () => {
     try {
-      const response = await fetch("http://localhost:3032/api/usuarios");
+      const response = await fetch("http://localhost:3032/api/usuarios", { credentials: 'include' });
+      console.log('DATA RECIBIDA:', response);
       const data = await response.json();
       console.log('DATA RECIBIDA:', data);
       setUsuarios(data);
@@ -36,7 +37,7 @@ const Usuarios = () => {
   const handleDelete = async (id) => {
     if (window.confirm("¿Estás seguro de que querés eliminar este usuario?")) {
       try {
-        await axios.delete(`http://localhost:3032/api/usuarios/${id}`);
+        await axios.delete(`http://localhost:3032/api/usuarios/${id}`, { withCredentials: true });
         setUsuarios(prevUsuarios => prevUsuarios.filter(u => u.id !== id));
       } catch (error) {
         console.error('Error al eliminar usuario:', error);

@@ -21,7 +21,9 @@ const AltaCuota = () => {
   useEffect(() => {
     const fetchUltimoPrecio = async () => {
       try {
-        const res = await axios.get('http://localhost:3032/api/precioCuota/ultima');
+        const res = await axios.get('http://localhost:3032/api/precioCuota/ultima', {
+          withCredentials: true
+        });
         setUltimoPrecio(res.data.precio);
       } catch (error) {
         console.error('Error al obtener el último precio de cuota:', error);

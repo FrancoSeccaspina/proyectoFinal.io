@@ -8,9 +8,8 @@ function ReservaCard({ reserva: reservaProp }) {
   const onclickConfirm = async () => {
     try {
       const response = await axios.put(
-        `http://localhost:3032/api/reservas/confirmar/${reserva.id_reserva}`
+        `http://localhost:3032/api/reservas/confirmar/${reserva.id_reserva}`, {}, { withCredentials: true }
       );
-      console.log(response.data);
       setReserva(...response.data.reserva);
     } catch (error) {
         console.error("Error al confirmar la reserva:", error);
@@ -21,9 +20,9 @@ function ReservaCard({ reserva: reservaProp }) {
   const onclickCancel = async () => {
     try {
       const response = await axios.put(
-        `http://localhost:3032/api/reservas/cancelar/${reserva.id_reserva}`
+        `http://localhost:3032/api/reservas/cancelar/${reserva.id_reserva}`, {},
+        { withCredentials: true }
       );
-      console.log(response.data.message);
       setReserva(...response.data.reserva);
     } catch (error) {
       console.error("Error al cancelar la reserva:", error);

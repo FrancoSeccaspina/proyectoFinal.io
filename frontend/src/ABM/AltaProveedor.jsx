@@ -23,7 +23,9 @@ const AltaProveedor = () => {
   const handleSubmit = async (e) => {
     e.preventDefault();
     try {
-        await axios.post('http://localhost:3032/api/proveedores', proveedor);
+        await axios.post('http://localhost:3032/api/proveedores', proveedor, {
+    withCredentials: true
+    });
         console.log("Proveedor creado exitosamente");
         navigate('/Proveedores');
       } catch (error) {

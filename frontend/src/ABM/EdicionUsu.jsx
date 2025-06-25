@@ -15,7 +15,7 @@ const EdicionUsuario = () => {
   });
   // Cargar datos del usuario
   useEffect(() => {
-    axios.get(`http://localhost:3032/api/usuarios/${id}`)
+    axios.get(`http://localhost:3032/api/usuarios/${id}`, { withCredentials: true })
     .then(res => setUsuario(res.data))
     .catch(err => console.error('Error al cargar producto:', err));
     }, [id]);
@@ -54,7 +54,8 @@ const EdicionUsuario = () => {
       axios.put(`http://localhost:3032/api/usuarioEditar/${id}`, formData, {
         headers: {
           'Content-Type': 'multipart/form-data'
-        }
+        },
+        withCredentials: true 
       })
         .then(() => navigate('/Usuarios'))
         .catch(err => console.error('Error al editar:', err));

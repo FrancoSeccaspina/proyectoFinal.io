@@ -33,7 +33,7 @@ const Proveedores = () => {
       const handleDelete = async (id) => {
         if (window.confirm("¿Estás seguro de que querés eliminar este proveedor?")) {
           try {
-            await axios.delete(`http://localhost:3032/api/proveedores/${id}`);
+            await axios.delete(`http://localhost:3032/api/proveedores/${id}`, { withCredentials: true });
             setProvedores(prevProveedores => prevProveedores.filter(r => r.id !== id));
           } catch (error) {
             console.error('Error al eliminar proveedor:', error);

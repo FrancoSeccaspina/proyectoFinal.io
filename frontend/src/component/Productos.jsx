@@ -19,7 +19,7 @@ function Productos() {
     setCategoria(data);
   }
   const getProducts = async ()=> {
-    const response = await fetch("http://localhost:3032/api/productos");
+    const response = await fetch("http://localhost:3032/api/productos", { credentials: 'include' });
     const data = await response.json();
     console.log('DATA RECIBIDA:', data);
     setProducts(data);
@@ -37,7 +37,7 @@ function Productos() {
   const handleDelete = async (id) => {
     if (window.confirm("¿Estás seguro de que querés eliminar esta producto?")) {
       try {
-        await axios.delete(`http://localhost:3032/api/productos/${id}`);
+        await axios.delete(`http://localhost:3032/api/productos/${id}`, { withCredentials: true } );
         setProducts(prevProductos => prevProductos.filter(r => r.id !== id));
       } catch (error) {
         console.error('Error al eliminar producto:', error);

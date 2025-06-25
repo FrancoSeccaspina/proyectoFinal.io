@@ -47,7 +47,8 @@ const EdicionRutina = () => {
     axios.put(`http://localhost:3032/api/ejercicioEditar/${id}`, formData, {
         headers: {
           'Content-Type': 'multipart/form-data'
-        }
+        },
+        withCredentials: true
       })
         .then(() => navigate('/Rutinas'))
         .catch(err => console.error('Error al editar:', err));

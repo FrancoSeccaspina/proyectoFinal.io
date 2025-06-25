@@ -47,7 +47,8 @@ const AltaReceta = () => {
       await axios.post('http://localhost:3032/api/recetas', formData,{
         headers: {
           'Content-Type': 'multipart/form-data'
-        }
+        },
+        withCredentials: true
       });
       navigate('/Recetas');
     } catch (error) {
