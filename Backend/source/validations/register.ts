@@ -8,12 +8,12 @@ const validationRegister = [
         .isEmail().withMessage('Debe ingresar un email válido'),
 
     body('contrasenia')
-    .notEmpty().withMessage('Por favor, ingrese su contraseña')
-    .bail()
-    .isLength({ min: 8 }).withMessage('La contraseña debe tener al menos 8 caracteres')
-    .matches(/[A-Z]/).withMessage('La contraseña debe contener al menos una letra mayúscula')
-    .matches(/[0-9]/).withMessage('La contraseña debe contener al menos un número')
-    .matches(/[^A-Za-z0-9]/).withMessage('La contraseña debe contener al menos un carácter especial'),
+        .notEmpty().withMessage('Por favor, ingrese su contraseña')
+        .bail()
+        .isLength({ min: 8 }).withMessage('La contraseña debe tener al menos 8 caracteres')
+        .matches(/[A-Z]/).withMessage('La contraseña debe contener al menos una letra mayúscula')
+        .matches(/[0-9]/).withMessage('La contraseña debe contener al menos un número')
+        .matches(/[^A-Za-z0-9]/).withMessage('La contraseña debe contener al menos un carácter especial'),
 
     body('confirmar_contrasenia')
         .notEmpty().withMessage('Debe confirmar su contraseña')
@@ -28,12 +28,14 @@ const validationRegister = [
     body('nombre')
         .notEmpty().withMessage('El nombre de usuario no puede quedar vacío')
         .bail()
-        .isLength({ min: 3, max: 20 }).withMessage('El nombre debe tener entre 3 y 20 caracteres'),
+        .isLength({ min: 3, max: 20 }).withMessage('El nombre debe tener entre 3 y 20 caracteres')
+        .matches(/^[A-Za-zÁÉÍÓÚáéíóúÑñ\s]+$/).withMessage('El nombre no debe contener números ni caracteres especiales'),
 
     body('apellido')
         .notEmpty().withMessage('El apellido de usuario no puede quedar vacío')
         .bail()
-        .isLength({ min: 4 }).withMessage('El apellido debe tener al menos 4 caracteres'),
+        .isLength({ min: 4 }).withMessage('El apellido debe tener al menos 4 caracteres')
+        .matches(/^[A-Za-zÁÉÍÓÚáéíóúÑñ\s]+$/).withMessage('El apellido no debe contener números ni caracteres especiales'),
 
     body('dni')
         .notEmpty().withMessage('El DNI no puede quedar vacío')
