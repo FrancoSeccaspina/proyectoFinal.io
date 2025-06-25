@@ -1,14 +1,7 @@
-import { autenticarToken } from '../middlewares/verificarToken';
+import { verificarTokenPorRol } from '../middlewares/verificarToken';
+import { Roles } from '../constants/roles';
 import express from 'express';
-import path from 'path';
-import fs from 'fs';
-import usersController from '../controllers/usersController';
 import middleware from '../middlewares/isAuthenticated';
-
-// import registerValidator from '../validations/register';
-// import loginValidator from '../validations/login';
-// import isLogged from '../middlewares/isLogged';
-// import isAdmin from '../middlewares/isAdmin';
 
 const route = express.Router();
 
@@ -42,13 +35,12 @@ route.get("/mPago", function (req, res) {
 route.get("/transferencia", function (req, res) {
     res.render("transferencia");
 });
-route.get('/perfil', autenticarToken, middleware.setUsuarioLogueado, (req, res) => {
-  res.render('perfil'); // los datos están en res.locals.usuarioLogueado
+route.get('/perfil', verificarTokenPorRol([Roles.CLIENTE]), middleware.setUsuarioLogueado, (req, res) => {
+    res.render('perfil'); // los datos están en res.locals.usuarioLogueado
 });
-route.get('/perfil/editar',  autenticarToken, middleware.setUsuarioLogueado, (req, res) => {
+route.get('/perfil/editar', verificarTokenPorRol([Roles.CLIENTE]), middleware.setUsuarioLogueado, (req, res) => {
     res.render('perfilEditar'); // los datos están en res.locals.usuarioLogueado
-  });
-
+});
 route.get("/finalizarCompra", function (req, res) {
     res.render("finalizarCompra");
 });
@@ -57,7 +49,7 @@ route.get("/error", function (req, res) {
         code: 404,
         message: 'Página no encontrada',
         description: 'La página solicitada no existe.'
-      });
+    });
 });
 
 export default route;

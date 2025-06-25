@@ -11,10 +11,12 @@ export class usuariosAPIController {
       res.json(usuarios);
 
     } catch (error) {
+      
       console.error('Error al listar usuarios:', error);
       res.status(500).json({ message: 'Error al obtener los usuarios' });
     }
   }
+
   async buscarUsuarioPorId(req: Request, res: Response): Promise<void> {
     try {
       const { id } = req.params;

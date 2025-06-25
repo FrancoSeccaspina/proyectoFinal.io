@@ -46,8 +46,11 @@ import './cron-task/devolver-stock-reservas-vencidas'
 validarVariablesDeEntorno();
 
 const app = express();
+
 // Habilitar CORS
-app.use(cors());
+app.use(cors({
+  origin: 'http://localhost:3032',
+}));
 
 // Habilitar CORS
 app.use(cors());
@@ -63,13 +66,9 @@ app.set('view engine', 'ejs');
 app.use(express.urlencoded({ extended: true }));
 app.use(express.json());
 
-if ( !SESSION_PASSWORD ) {
-    throw new Error('La variable de entorno SESSION_PASSWORD no está definida');
-}
-
 // Sessions
 app.use(session({
-    secret: SESSION_PASSWORD,
+    secret: SESSION_PASSWORD || '',
     resave: true,
     saveUninitialized: false,
     cookie: { secure: false } // Cambiar a true en producción
@@ -115,6 +114,7 @@ app.use('/api',
     transaccionesApiController,
     membresiaApiController
 );
+
 app.use('/uploads/aptoMedico', express.static(path.join(__dirname, '..', 'uploads', 'aptoMedico')));
 
 // verifica que las rutas no existan y redirige a la página de error 404

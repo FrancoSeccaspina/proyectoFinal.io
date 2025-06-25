@@ -3,6 +3,8 @@ import productoAPIController from '../../controllers/api/producto.api.Controller
 import multer from 'multer';
 import path from 'path';
 import { error } from 'console';
+import { Roles } from '../../constants/roles';
+import { verificarTokenPorRol } from '../../middlewares/verificarToken';
 
 const route = Router();
 
@@ -19,22 +21,15 @@ const storage = multer.diskStorage({
 
 const upload = multer({ storage });
 
-
 // Rutas API
 route.get('/productos', productoAPIController.listaProductos.bind(productoAPIController));
+route.get('/productos/:id', (req, res) => { productoAPIController.buscarProductosPorId(req, res); });
 
-route.get('/productos/:id', (req, res) => {
-  productoAPIController.buscarProductosPorId(req, res);
-});
 //ruta para crear un producto
+route.use(verificarTokenPorRol([Roles.ADMIN]));
 route.post('/productos', upload.single('imagen'), (req, res) => { productoAPIController.crearProducto(req, res) });
-
-
 // Ruta para editar producto con imagen
-route.put('/productoEditar/:id', upload.single('imagen'), (req, res) => {
-  productoAPIController.editarProducto(req, res);
-});
-
+route.put('/productoEditar/:id', upload.single('imagen'), (req, res) => {productoAPIController.editarProducto(req, res);});
 route.delete('/productos/:id', (res, req) => { productoAPIController.delete(res, req) })
 
 export default route;

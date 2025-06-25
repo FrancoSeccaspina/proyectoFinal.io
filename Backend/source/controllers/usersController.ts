@@ -273,7 +273,6 @@ export class UsuarioController {
       // Token JWT
       // https://www.npmjs.com/package/cookie
       const token = firmarToken({ id: usuario.id, nombre: usuario.nombre, rol: usuario.rol });
-      console.log("TOKEN 266:", token);
       res.cookie('token', token, {
         httpOnly: true,
         sameSite: 'strict',
@@ -306,7 +305,7 @@ export class UsuarioController {
     });
     res.redirect("/");
   }
-  
+
   async softDelete(req: Request, res: Response): Promise<Response> {
     try {
       const { id } = req.params;
