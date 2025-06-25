@@ -7,7 +7,6 @@ export class usuariosAPIController {
   async listaUsuarios(req: Request, res: Response): Promise<void> {
     try {
       const usuarios = await Usuario.findAll();
-      console.log(usuarios)
       res.json(usuarios);
 
     } catch (error) {

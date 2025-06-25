@@ -13,6 +13,7 @@ export const verificarTokenPorRol = (rolesPermitidos: string[]) => {
     }
 
     const payload = obtenerPayload(token);
+    console.log(`Verificando token para la ruta: ${req.originalUrl}. Payload:`, payload);
 
     if (!payload) {
       console.error(`Token inválido recibido. Ruta: ${req.originalUrl}s`);

@@ -22,6 +22,7 @@ const upload = multer({ storage });
 
 route.get("/ejercicios", ejerciciosApiController.listaEjercicios.bind(ejerciciosApiController));
 route.get('/ejercicios/:id', (req, res) => { ejerciciosApiController.buscarEjercicioPorId(req, res); });
+
 route.post('/ejercicios', verificarTokenPorRol([Roles.ADMIN]), (res, req) => { ejerciciosApiController.crearEjercicio(res, req) })
 route.delete('/ejercicios/:id', verificarTokenPorRol([Roles.ADMIN]), (res, req) => { ejerciciosApiController.delete(res, req) })
 // Ruta para editar producto con imagen

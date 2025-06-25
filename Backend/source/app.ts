@@ -49,11 +49,10 @@ const app = express();
 
 // Habilitar CORS
 app.use(cors({
-  origin: 'http://localhost:3032',
+  origin: 'http://localhost:3000',
+  credentials: true  
 }));
 
-// Habilitar CORS
-app.use(cors());
 // Ruta pública
 const publicPath = path.resolve(__dirname, '../public/');
 app.use(staticHandler(publicPath));

@@ -23,9 +23,8 @@ const upload = multer({ storage });
 route.get('/recetas', recetaAPIController.listarRecetas.bind(recetaAPIController));
 route.get('/recetas/:id', (req, res) => { recetaAPIController.buscarRecetasPorId(req, res); });
 
-route.use(verificarTokenPorRol([Roles.ADMIN]));
-route.put('/recetaEditar/:id', upload.single('imagen'), (req, res) => { recetaAPIController.editarReceta(req, res); });
-route.post('/recetas',upload.single('imagen'), (res, req) => { recetaAPIController.crearReceta(res, req) })
-route.delete('/recetas/:id', (res, req) => { recetaAPIController.delete(res, req) })
+route.put('/recetaEditar/:id', verificarTokenPorRol([Roles.ADMIN]), upload.single('imagen'), (req, res) => { recetaAPIController.editarReceta(req, res); });
+route.post('/recetas', verificarTokenPorRol([Roles.ADMIN]),upload.single('imagen'), (res, req) => { recetaAPIController.crearReceta(res, req) })
+route.delete('/recetas/:id', verificarTokenPorRol([Roles.ADMIN]), (res, req) => { recetaAPIController.delete(res, req) })
 
 export default route;

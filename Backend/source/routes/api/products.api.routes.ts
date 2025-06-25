@@ -26,10 +26,9 @@ route.get('/productos', productoAPIController.listaProductos.bind(productoAPICon
 route.get('/productos/:id', (req, res) => { productoAPIController.buscarProductosPorId(req, res); });
 
 //ruta para crear un producto
-route.use(verificarTokenPorRol([Roles.ADMIN]));
-route.post('/productos', upload.single('imagen'), (req, res) => { productoAPIController.crearProducto(req, res) });
+route.post('/productos', verificarTokenPorRol([Roles.ADMIN]), upload.single('imagen'), (req, res) => { productoAPIController.crearProducto(req, res) });
 // Ruta para editar producto con imagen
-route.put('/productoEditar/:id', upload.single('imagen'), (req, res) => {productoAPIController.editarProducto(req, res);});
-route.delete('/productos/:id', (res, req) => { productoAPIController.delete(res, req) })
+route.put('/productoEditar/:id', verificarTokenPorRol([Roles.ADMIN]), upload.single('imagen'), (req, res) => {productoAPIController.editarProducto(req, res);});
+route.delete('/productos/:id', verificarTokenPorRol([Roles.ADMIN]), (res, req) => { productoAPIController.delete(res, req) })
 
 export default route;
