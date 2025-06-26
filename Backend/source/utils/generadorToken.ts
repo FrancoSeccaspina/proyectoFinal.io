@@ -1,17 +1,16 @@
 import { JWT_SECRET } from '../configEnv';
 const jwt = require('jsonwebtoken')
 
-interface UserToken {
+interface UsuarioToken {
     id: number;
     nombre: string;
     rol: string;
 }
 
-export function firmarToken (user: UserToken) {
-    const token = jwt.sign(user, JWT_SECRET, { expiresIn: "2h" });
+export function firmarToken (usuario: UsuarioToken) {
+    const token = jwt.sign(usuario, JWT_SECRET, { expiresIn: "2h" });
     return token;
 }
-
 
 export function obtenerPayload(token: string) {
   try {
