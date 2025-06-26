@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Servidor: 127.0.0.1
--- Tiempo de generación: 24-06-2025 a las 07:35:12
+-- Tiempo de generación: 26-06-2025 a las 08:09:04
 -- Versión del servidor: 10.4.32-MariaDB
 -- Versión de PHP: 8.2.12
 
@@ -309,6 +309,28 @@ INSERT INTO `ejercicios` (`id`, `nombre`, `descripcion`, `grupo_muscular_id`, `v
 -- --------------------------------------------------------
 
 --
+-- Estructura de tabla para la tabla `empleados`
+--
+
+CREATE TABLE `empleados` (
+  `id` int(11) NOT NULL,
+  `nombre` varchar(50) NOT NULL,
+  `apellido` varchar(50) NOT NULL,
+  `celular` int(10) NOT NULL,
+  `actividad` varchar(50) NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
+
+--
+-- Volcado de datos para la tabla `empleados`
+--
+
+INSERT INTO `empleados` (`id`, `nombre`, `apellido`, `celular`, `actividad`) VALUES
+(1, 'Frank', 'Buster', 1193868511, 'Kick Boxing'),
+(2, 'Keko', 'Landia', 1109730681, 'Funcional');
+
+-- --------------------------------------------------------
+
+--
 -- Estructura de tabla para la tabla `grupos_musculares`
 --
 
@@ -566,8 +588,8 @@ CREATE TABLE `usuarios` (
 
 INSERT INTO `usuarios` (`id`, `apellido`, `nombre`, `rol`, `imagen`, `id_membresia`, `id_autenticacion`, `fecha_nacimiento`, `celular`, `aptoMedico`, `dni`) VALUES
 (1, 'admin', 'admin', 'admin', 'perfil.jpg', 1, 1, '2025-04-09', '1193868511', 'xd', 12345678),
-(28, 'Buster', 'Frank', 'cliente', NULL, 1, NULL, '2001-05-04', '1165830511', 'null', 44323448),
-(29, 'Aguirre', 'Lucas', 'cliente', 'imagen_usuario_29.jpg', 1, NULL, '2001-05-04', '1165830511', 'aptomedico_usuario_29.pdf', 43245002);
+(28, 'Buster', 'Frank', 'jubilado', NULL, 1, NULL, '2001-05-03', '1165830511', 'asdasd', 44323448),
+(29, 'Aguirree', 'Lucass', 'socio', 'imagen_usuario_29.jpg', 1, NULL, '2001-05-04', '1165830512', 'aptomedico_usuario_29.pdf', 43245022);
 
 --
 -- Índices para tablas volcadas
@@ -617,6 +639,12 @@ ALTER TABLE `detalle_reservas`
 ALTER TABLE `ejercicios`
   ADD PRIMARY KEY (`id`),
   ADD KEY `grupo_muscular_id` (`grupo_muscular_id`);
+
+--
+-- Indices de la tabla `empleados`
+--
+ALTER TABLE `empleados`
+  ADD PRIMARY KEY (`id`);
 
 --
 -- Indices de la tabla `grupos_musculares`
@@ -722,6 +750,12 @@ ALTER TABLE `detalle_reservas`
 --
 ALTER TABLE `ejercicios`
   MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=138;
+
+--
+-- AUTO_INCREMENT de la tabla `empleados`
+--
+ALTER TABLE `empleados`
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=4;
 
 --
 -- AUTO_INCREMENT de la tabla `grupos_musculares`
