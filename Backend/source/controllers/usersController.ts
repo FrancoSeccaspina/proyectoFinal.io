@@ -275,7 +275,6 @@ export class UsuarioController {
       const token = firmarToken({ id: usuario.id, nombre: usuario.nombre, rol: usuario.rol });
       res.cookie('token', token, {
         httpOnly: true,
-        sameSite: 'strict',
         maxAge: 1 * 60 * 60 * 1000 // 1 hora
       });
 

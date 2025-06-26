@@ -8,7 +8,7 @@ import { DetalleReserva } from '../../database/models/detalleReserva';
 import { EstadosReserva } from '../../constants/estadoReserva';
 import { Sequelize, Op, fn, col, where } from 'sequelize';
 export class reservaApiController {
-     async listaReservas(req: Request, res: Response): Promise<void> {
+    async listaReservas(req: Request, res: Response): Promise<void> {
         try {
             const reservas = await Reserva.findAll({
                 include: [
@@ -35,7 +35,7 @@ export class reservaApiController {
         }
     }
 
-     async confirmarReserva(req: Request, res: Response) {
+    async confirmarReserva(req: Request, res: Response) {
         try {
             const idReserva = parseInt(req.params.id, 10);
 
@@ -100,7 +100,7 @@ export class reservaApiController {
         }
     }
 
-     async cancelarReserva(req: Request, res: Response) {
+    async cancelarReserva(req: Request, res: Response) {
         try {
             const idReserva = parseInt(req.params.id, 10);
 
@@ -155,7 +155,7 @@ export class reservaApiController {
     async estadisticasPorProducto(req: Request, res: Response): Promise<void> {
         try {
             const { mes, anio } = req.query;
-    
+
             // Filtro por fecha si se pasa mes y año
             let whereReserva: any = {};
             if (mes && anio) {
@@ -166,7 +166,7 @@ export class reservaApiController {
                     ]
                 };
             }
-    
+
             const reservas = await DetalleReserva.findAll({
                 attributes: ['id_producto', 'cantidad', 'subtotal'],
                 include: [
@@ -178,7 +178,7 @@ export class reservaApiController {
                 ],
                 order: [[Reserva, 'fecha', 'DESC']]
             });
-    
+
             res.status(200).json(reservas);
         } catch (error) {
             console.error('Error al obtener estadísticas por producto:', error);
@@ -187,7 +187,65 @@ export class reservaApiController {
                 error: error instanceof Error ? error.message : String(error)
             });
         }
-    }   
+    }
+    async filtrarPorFecha(req: Request, res: Response): Promise<void> {
+        try {
+            const { fecha } = req.query;
+            if (!fecha || typeof fecha !== 'string') {
+                res.status(400).json({ message: 'Fecha inválida' });
+                return;
+            }
+
+            const whereFecha = { fecha: { [Op.eq]: fecha } };
+
+            const reservas = await Reserva.findAll({
+                where: whereFecha,
+                include: [
+                    {
+                        model: DetalleReserva,
+                        include: [{ model: Producto }]
+                    },
+                    {
+                        model: Usuario,
+                        attributes: ['id', 'nombre', 'apellido']
+                    }
+                ],
+                order: [['fecha', 'DESC']],
+            });
+
+            res.status(200).json(reservas);
+        } catch (error) {
+            console.error('Error al filtrar:', error);
+            res.status(500).json({ message: 'Error al filtrar' });
+        }
+    }
+
+    async filtrarPorEstado(req: Request, res: Response): Promise<void> {
+        try {
+            const { estado } = req.query;
+            const whereEstado = { estado: { [Op.eq]: estado } };
+
+            const reservas = await Reserva.findAll({
+                where: whereEstado,
+                include: [
+                    {
+                        model: DetalleReserva,
+                        include: [{ model: Producto }]
+                    },
+                    {
+                        model: Usuario,
+                        attributes: ['id', 'nombre', 'apellido']
+                    }
+                ],
+                order: [['fecha', 'DESC']],
+            });
+
+            res.status(200).json(reservas);
+        } catch (error) {
+            console.error('Error al filtrar:', error);
+            res.status(500).json({ message: 'Error al filtrar' });
+        }
+    }
 }
 
 export default new reservaApiController();

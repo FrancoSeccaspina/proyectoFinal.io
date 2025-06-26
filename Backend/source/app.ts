@@ -38,6 +38,7 @@ import reservaApiRoutes from './routes/api/reservas.api.routes';
 import precioCuotaApiController from './routes/api/precioCuota.api.routes';
 import transaccionesApiController from './routes/api/transacciones.api.routes';
 import membresiaApiController from './routes/api/membresia.api.routes';
+import empleadosApiController from './routes/api/empleados.api.routes';
 
 // cron
 import './cron-task/devolver-stock-reservas-vencidas'
@@ -111,7 +112,8 @@ app.use('/api',
     reservaApiRoutes,
     precioCuotaApiController,
     transaccionesApiController,
-    membresiaApiController
+    membresiaApiController,
+    empleadosApiController
 );
 
 app.use('/uploads/aptoMedico', express.static(path.join(__dirname, '..', 'uploads', 'aptoMedico')));
