@@ -15,5 +15,7 @@ export enum Roles {
     ADMIN = 'admin',
     CLIENTE = 'cliente',
     INVITADO = 'invitado',
+    JUBILADO = 'jubilado',
+    SOCIO = 'socio',
   }
   

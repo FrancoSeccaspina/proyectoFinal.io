@@ -2,29 +2,30 @@ import React, { useEffect, useState } from 'react';
 import { useParams, useNavigate } from 'react-router-dom';
 import axios from 'axios';
 import '../css/edicion.css';
-const EdicionProveedor = () => {
+const EdicionEmpleado = () => {
   const { id } = useParams();
   const navigate = useNavigate();
-  const [proveedor, setProveedor] = useState({
+  const [empleado, setEmpleado] = useState({
     nombre: '',
     apellido: '',
     celular: '',
+    actividad: '',
   });
 
   useEffect(() => {
-    axios.get(`http://localhost:3032/api/proveedores/${id}`)
-      .then(res => setProveedor(res.data))
-      .catch(err => console.error('Error al cargar proveedores:', err));
+    axios.get(`http://localhost:3032/api/empleados/${id}`)
+      .then(res => setEmpleado(res.data))
+      .catch(err => console.error('Error al cargar empleados:', err));
   }, [id]);
   const handleChange = (e) => {
     const { name, value, files } = e.target;
     if (name === "video") {
-        setProveedor(prev => ({
+        setEmpleado(prev => ({
         ...prev,
         video: files[0]
       }));
     } else {
-        setProveedor(prev => ({
+        setEmpleado(prev => ({
         ...prev,
         [name]: value
       }));
@@ -32,23 +33,23 @@ const EdicionProveedor = () => {
   };
   const handleSubmit = async (e) => {
     e.preventDefault();
-    axios.put(`http://localhost:3032/api/proveedorEditar/${id}`, proveedor)
+    axios.put(`http://localhost:3032/api/empleadoEditar/${id}`, empleado)
           .then(() => {
-            console.log("proveedor actualizadp");
-            navigate('/Proveedores');
+            console.log("empleado actualizadp");
+            navigate('/Empleados');
           })
           .catch(err => console.error('Error al editar:', err));
       };
 
     return (
         <div className='contenedor'>
-          <h2>Editar Proveedor</h2>
+          <h2>Editar Empleado</h2>
           <form onSubmit={handleSubmit} className='formulario' encType="multipart/form-data">
             <label>Nombre</label>
             <input
               type="text"
               name="nombre"
-              value={proveedor.nombre}
+              value={empleado.nombre}
               onChange={handleChange}
               required
             />
@@ -56,7 +57,7 @@ const EdicionProveedor = () => {
             <input
               type="text"
               name="apellido"
-              value={proveedor.apellido}
+              value={empleado.apellido}
               onChange={handleChange}
               required
             />
@@ -64,7 +65,15 @@ const EdicionProveedor = () => {
             <input
               type="number"
               name="celular"
-              value={proveedor.celular}
+              value={empleado.celular}
+              onChange={handleChange}
+              required
+            />
+            <label>Actividad</label>
+            <input
+              type="text"
+              name="actividad"
+              value={empleado.actividad}
               onChange={handleChange}
               required
             />
@@ -77,4 +86,4 @@ const EdicionProveedor = () => {
       );
     };
     
-    export default EdicionProveedor;
+    export default EdicionEmpleado;

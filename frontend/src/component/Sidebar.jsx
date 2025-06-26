@@ -20,6 +20,7 @@ function Sidebar(){
 
                     <Link to="/Rutinas">Rutinas</Link> 
                     <Link to="/Proveedores">Proveedores</Link> 
+                    <Link to="/Empleados">Empleados</Link>
                     <Link to="/Reservas">Reservas</Link> 
 
                     <a href="http://localhost:3032/">Volver</a>

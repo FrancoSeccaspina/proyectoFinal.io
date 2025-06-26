@@ -8,6 +8,7 @@ import CuotaFormulario from './component/CuotaFormulario';
 import Proveedores from './component/Proveedores';
 import Reservas from './component/Reservas';
 import PrecioCuota from './component/PrecioCuota';
+import Empleados from './component/Empleados';
 import axios from 'axios';
 import { BrowserRouter, Route, Routes } from 'react-router-dom';
 
@@ -16,6 +17,7 @@ import EdicionRutina from './ABM/EdicionRuti';
 import EdicionUsuario from './ABM/EdicionUsu';
 import EdicionProductos from './ABM/EdicionProd';
 import EdicionProveedor from './ABM/EdicionProveedor';
+import EdicionEmpleado from './ABM/EdicionEmpleado';
 
 import AltaProd from './ABM/AltaProd';
 import AltaRuti from './ABM/AltaRuti';
@@ -24,6 +26,7 @@ import EdicionCuota from './ABM/EdicionCuota';
 import AltaCuota from './ABM/AltaCuota';
 import AltaProveedor from './ABM/AltaProveedor';
 import AltaPrecioCuota from './ABM/AltaPrecioCuota';
+import AltaEmpleado from './ABM/AltaEmpleado';
 
 function App() {
   return (
@@ -39,6 +42,7 @@ function App() {
           <Route path="/Proveedores" element={<Proveedores />} />
           <Route path="/Reservas" element={<Reservas />} />
           <Route path="/PrecioCuota" element={<PrecioCuota />} />
+          <Route path="/Empleados" element={<Empleados />} />
           
           {/* Ediciones */}
           <Route path="/productos/editar/:id" element={<EdicionProductos />} />
@@ -47,6 +51,7 @@ function App() {
           <Route path="/usuarios/editar/:id" element={<EdicionUsuario />} />
           <Route path="/cuota/editar/:id" element={<EdicionCuota />} />
           <Route path="/provedores/editar/:id" element={<EdicionProveedor />} />
+          <Route path="/empleados/editar/:id" element={<EdicionEmpleado />} />
 
           {/* Altas */}
           <Route path="/productoNuevo" element={<AltaProd />} />
@@ -54,6 +59,7 @@ function App() {
           <Route path="/recetaNueva" element={<AltaRece />} />
           <Route path="/cuotaNueva/:idUsuario" element={<AltaCuota />} />
           <Route path="/proveedorNuevo" element={<AltaProveedor />} />
+          <Route path="/empleadoNuevo" element={<AltaEmpleado />} />
           <Route path="/nuevoPrecioCuota" element={<AltaPrecioCuota />} />
 
           {/* Otros */}

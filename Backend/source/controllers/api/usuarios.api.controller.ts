@@ -37,13 +37,67 @@ export class usuariosAPIController {
       const usuario = await Usuario.findByPk(id);
       if (usuario) {
         await usuario.update({ nombre, apellido, celular, aptoMedico, dni });
-        res.status(200).json({ message: 'Producto actualizado exitosamente', usuario });
+        res.status(200).json({ message: 'Usuario actualizado exitosamente', usuario });
       } else {
-        res.status(404).json({ message: 'Producto no encontrado' });
+        res.status(404).json({ message: 'Usuario no encontrado' });
       }
     } catch (error) {
-      console.error('Error al editar el producto:', error);
-      res.status(500).json({ message: 'Error al editar el producto' });
+      console.error('Error al editar el Usuario:', error);
+      res.status(500).json({ message: 'Error al editar el Usuario' });
+    }
+  }
+  async update(req: Request, res: Response): Promise<Response | void> {
+    try {
+      const { id } = req.params;
+      const { apellido, nombre, rol, id_membresia, fecha_nacimiento, celular, dni, email } = req.body;
+  
+      const usuario = await Usuario.findOne({ where: { id } });
+      if (!usuario) {
+        return res.status(404).json({ success: false, message: "Usuario no encontrado" });
+      }
+  
+      const files = req.files as {
+        [fieldname: string]: Express.Multer.File[];
+      };
+  
+      const imagen = files?.imagen?.[0]?.filename;
+      const aptoMedico = files?.aptomedico?.[0]?.filename;
+      console.log("Body:", req.body);
+      console.log("Files:", req.files);
+
+  
+      await usuario.update({
+        apellido,
+        nombre,
+        rol,
+        id_membresia,
+        fecha_nacimiento,
+        celular,
+        dni,
+        ...(imagen && { imagen }),
+        ...(aptoMedico && { aptoMedico }),
+      });
+  
+      // Actualizar sesión si corresponde
+      if (req.session.usuarioLogueado) {
+        Object.assign(req.session.usuarioLogueado, {
+          apellido,
+          nombre,
+          celular,
+          email,
+          fecha_nacimiento,
+          ...(imagen && { imagen }),
+          ...(aptoMedico && { aptomedico: aptoMedico }),
+        });
+      }
+  
+      // 🔁 Redireccionar al perfil
+      return res.status(200).json({ message: 'Usuario actualizado exitosamente', usuario });
+      
+  
+    } catch (error) {
+      console.error("Error al actualizar usuario:", (error as Error).message);
+      return res.status(500).json({ success: false, message: "Error al actualizar usuario" });
     }
   }
   async delete(req: Request, res: Response): Promise<Response> {
