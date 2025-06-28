@@ -281,7 +281,8 @@ export class UsuarioController {
       if (usuario.rol === Roles.ADMIN) {
         return res.redirect("http://localhost:3000");
       }
-      return res.redirect("/perfil");
+      
+      return res.redirect("/");
 
     } catch (error) {
       console.error("Error en login:", (error as Error).message);
