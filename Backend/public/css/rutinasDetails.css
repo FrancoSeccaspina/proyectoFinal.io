@@ -22,8 +22,9 @@ p{
     color: black;
     font-weight: 500;
 }
-.accordion-toggle {
+.accordion-toggle[aria-expanded="true"] .arrow  {
     background-color: #5d5d5d;
+    transform: rotate(180deg);
     color: white;
     padding: 15px;
     width: 100%;
@@ -139,3 +140,16 @@ p{
         font-weight: bolder;
     }
 }
+
+    .visually-hidden {
+    position: absolute;
+    width: 1px;
+    height: 1px;
+    margin: -1px;
+    padding: 0;
+    overflow: hidden;
+    clip: rect(0, 0, 0, 0);
+    border: 0;
+    }
+
+

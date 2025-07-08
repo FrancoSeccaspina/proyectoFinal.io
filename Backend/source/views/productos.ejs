@@ -1,45 +1,52 @@
 <!DOCTYPE html>
-<html lang="en">
-
+<html lang="es">
 <head>
     <%- include('./partials/head.ejs') %>
-        <link rel="stylesheet" href="/css/productos.css">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Nuestros Productos - [Nombre de tu Tienda]</title>
+    <link rel="stylesheet" href="/css/productos.css">
+
 </head>
 
 <body>
-    <%- include('./partials/header.ejs') %>
-        <main class="main-content">
-            <div class="container-allMain">
-                <% productos.forEach(producto=> { %>
-                    <li class="titulo">
-                        <a href="/productos/listaProductos/<%= producto.id %>"></a>
-                    </li>
-                    <div class="productos list-group-item p-3">
-                        <a href="/productos/<%= producto.id %>">
-                            <picture>
-                                <img src="../../images/<%= producto.imagen %>" alt="<%= producto.nombre %>" class="img-juego" />
-                            </picture>
-                        </a>
-                        
-                        <div class="informacion">
+<%- include('./partials/header.ejs') %>
 
-                            <span class="tipo-envio">En stock</span>
-                            <div class="container-prices">
-                                <span class="precio-ahora">$<%=(producto.precio - (producto.precio * 0.1)) %></span>
-                            </div>
-                            <span class="tipo-entrega">Entrega inmediata</span>
-                            <span class="name-product">
-                                <%= producto.nombre %>
-                            </span>
-                            <input type="text" name="categoriaId" id="categoriaId" hidden
-                                value="<%=producto.categoriaId%>">
-                        </div>
-                    </div>
-                    </a>
-                    <% }); %>
+<main class="main-content" aria-labelledby="products-main-heading">
+    <h1 id="products-main-heading" class="visually-hidden">Listado de Nuestros Productos</h1>
+    <div class="container-allMain">
+    <ul role="list" aria-label="Lista de productos disponibles">
+        <% productos.forEach(producto=> { %>
+        <li class="product-item list-group-item p-3">
+        <article aria-labelledby="product-name-<%= producto.id %>">
+            <a href="/productos/<%= producto.id %>" aria-label="Ver detalles del producto <%= producto.nombre %>">
+            <picture>
+                <img src="../../images/<%= producto.imagen %>" alt="Imagen del producto <%= producto.nombre %>"
+                class="img-juego" />
+                </picture>
+            <h2 id="product-name-<%= producto.id %>" class="visually-hidden"><%= producto.nombre %></h2>
+            </a>
+
+            <div class="informacion">
+            <span class="tipo-envio" aria-label="Estado de stock: En stock">En stock</span>
+            <div class="container-prices">
+                <span class="precio-ahora" aria-label="Precio: $<%= (producto.precio - (producto.precio * 0.1)).toFixed(2) %>">
+                  $<%=(producto.precio - (producto.precio * 0.1)).toFixed(2) %>
+                </span>
+                </div>
+            <span class="tipo-entrega" aria-label="Tipo de entrega: Inmediata">Entrega inmediata</span>
+            <h3 class="name-product" aria-hidden="true">
+                <%= producto.nombre %>
+            </h3>
+            <input type="hidden" name="categoriaId" id="categoriaId" value="<%=producto.categoriaId%>">
             </div>
-        </main>
+        </article>
+        </li>
+        <% }); %>
+    </ul>
+    </div>
+</main>
 </body>
+
 <%- include('./partials/footer.ejs') %>
 
 <script src="./js/filtroLupa.js"></script>

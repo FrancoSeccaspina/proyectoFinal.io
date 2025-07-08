@@ -1,0 +1,48 @@
+
+    .contenedor-compras {
+        max-width: 500px;
+        margin: 50px auto;
+        padding: 20px;
+        background-color: #f8fafc;
+        border: 1px solid #e2e8f0;
+        border-radius: 12px;
+        box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
+        font-family: Arial, sans-serif;
+    }
+
+    .contenedor-compras h2 {
+        text-align: center;
+        margin-bottom: 20px;
+        color: #2d3748;
+    }
+
+    .compra {
+        background-color: #edf2f7;
+        padding: 15px;
+        margin-bottom: 15px;
+        border-radius: 8px;
+    }
+
+    .compra p {
+        margin: 5px 0;
+        color: #4a5568;
+    }
+
+    .compra-total {
+        background: #e2e8f0;
+        padding: 10px;
+        border-radius: 8px;
+        margin-bottom: 25px;
+        font-weight: bold;
+    }
+
+    .visually-hidden {
+    position: absolute;
+    width: 1px;
+    height: 1px;
+    margin: -1px;
+    padding: 0;
+    overflow: hidden;
+    clip: rect(0, 0, 0, 0);
+    border: 0;
+    }

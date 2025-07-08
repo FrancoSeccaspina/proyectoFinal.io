@@ -1,78 +1,108 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="es">
 <head>
-    <%- include('./partials/head.ejs') %>
-    <link rel="stylesheet" href="/css/recetas.css">
+<%- include('./partials/head.ejs') %>
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Categorías de Recetas Saludables - [Nombre de tu Tienda]</title>
+<link rel="stylesheet" href="/css/recetas.css">
+
 </head>
 
 <body>
-    <!-- HEADER -->
-    <%- include('./partials/header.ejs') %>
+<%- include('./partials/header.ejs') %>
 
-    <!-- MAIN CON FONDO -->
-    <main class="mainRecetas">
+<main class="mainRecetas" aria-labelledby="main-heading-recetas">
+    <h1 id="main-heading-recetas" class="visually-hidden">Explorar Nuestras Categorías de Recetas Saludables</h1>
+    <section id="recetas" aria-labelledby="recetas-title">
+    <h2 id="recetas-title">Recetas</h2>
+    </section>
 
-        <section id="recetas">
-            <h2>Recetas</h2>
-        </section>
+    <section class="recetas_subidas" aria-labelledby="ideas-title">
+    <div class="titulo">
+        <h3 id="ideas-title">Ideas para cocinar</h3>
+        <p>Te brindamos algunas recetas útiles para tu alimentación.</p>
+    </div>
 
-        <section class="recetas_subidas">
-            <div class="titulo">
-                <h4>Ideas para cocinar</h4>
-                <p>Te brindamos algunas recetas útiles para tu alimentacion</p>
+    <div class="moverlo">
+        <ul role="list" aria-label="Categorías de recetas">
+        <li class="card">
+            <article aria-labelledby="ganancia-masa-title">
+            <h4 class="card-title" id="ganancia-masa-title">Ganancia de Masa</h4>
+            <div class="card-body">
+                <a href="/recetas/categoria/1" aria-label="Ver recetas para Ganancia de Masa Muscular">
+                <img src="/images/masaMusculas.jpg" class="card-img-top" alt="Imagen representativa de recetas para ganancia de masa muscular.">
+                </a>
+                <a href="/recetas/categoria/1" class="btn-primary">Ver Recetas</a>
+                </div>
+            </article>
+        </li>
+        <li class="card">
+            <article aria-labelledby="veganas-title">
+            <h4 class="card-title" id="veganas-title">Veganas</h4>
+            <div class="card-body">
+                <a href="/recetas/categoria/2" aria-label="Ver recetas Veganas">
+                <img src="/images/veganos.jpg" class="card-img-top" alt="Imagen representativa de recetas veganas.">
+                </a>
+                <a href="/recetas/categoria/2" class="btn-primary">Ver Recetas</a>
             </div>
-            <section class="moverlo">
-                <div class="card">
-                    <h5 class="card-title">Ganancia de Masa</h5>
-                    <div class="card-body">
-                        <img src="/images/masaMusculas.jpg" class="card-img-top" alt="Masa">
-                        <a href="/recetas/categoria/1" class="btn-primary">Ver</a>
-                    </div>
-                </div>
-                <div class="card">
-                    <h5 class="card-title">Veganas</h5>
-                    <div class="card-body">
-                        <img src="/images/veganos.jpg" class="card-img-top" alt="Veganas">
-                        <a href="/recetas/categoria/2" class="btn-primary">Ver</a>
-                    </div>
-                </div>
-                <div class="card">
-                    <h5 class="card-title">Perdida de Peso</h5>
-                    <div class="card-body">
-                        <img src="/images/perdidaPeso.jpg" class="card-img-top" alt="Peso">
-                        <a href="/recetas/categoria/3" class="btn-primary">Ver</a>
-                    </div>
-                </div>
-                <div class="card">
-                    <h5 class="card-title">Definicion</h5>
-                    <div class="card-body">
-                        <img src="/images/definicion.jpg" class="card-img-top" alt="Definicion">
-                        <a href="/recetas/categoria/4" class="btn-primary">Ver</a>
-                    </div>
-                </div>
-                <div class="card">
-                    <h5 class="card-title">Sin Gluten</h5>
-                    <div class="card-body">
-                        <img src="/images/sinGluten.jpg" class="card-img-top" alt="Sin Gluten">
-                        <a href="/recetas/categoria/5" class="btn-primary">Ver</a>
-                    </div>
-                </div>
-                <div class="card">
-                    <h5 class="card-title">Rapidas y Faciles</h5>
-                    <div class="card-body">
-                        <img src="/images/comidaRapida.jpg" class="card-img-top" alt="Rapidas">
-                        <a href="/recetas/categoria/6" class="btn-primary">Ver</a>
-                    </div>
-                </div>
-            </section>
-
-            <div class="consultar">
-                <a href="https://api.whatsapp.com/send?phone=5491166601356">Consulta a tu asesor</a>
+            </article>
+        </li>
+        <li class="card">
+            <article aria-labelledby="perdida-peso-title">
+            <h4 class="card-title" id="perdida-peso-title">Pérdida de Peso</h4>
+            <div class="card-body">
+                <a href="/recetas/categoria/3" aria-label="Ver recetas para Pérdida de Peso">
+                <img src="/images/perdidaPeso.jpg" class="card-img-top" alt="Imagen representativa de recetas para pérdida de peso.">
+                </a>
+                <a href="/recetas/categoria/3" class="btn-primary">Ver Recetas</a>
             </div>
-        </section>
-    </main>
+            </article>
+        </li>
+        <li class="card">
+            <article aria-labelledby="definicion-title">
+            <h4 class="card-title" id="definicion-title">Definición</h4>
+            <div class="card-body">
+                <a href="/recetas/categoria/4" aria-label="Ver recetas para Definición">
+                <img src="/images/definicion.jpg" class="card-img-top" alt="Imagen representativa de recetas para definición muscular.">
+                </a>
+                <a href="/recetas/categoria/4" class="btn-primary">Ver Recetas</a>
+            </div>
+            </article>
+        </li>
+        <li class="card">
+            <article aria-labelledby="sin-gluten-title">
+            <h4 class="card-title" id="sin-gluten-title">Sin Gluten</h4>
+            <div class="card-body">
+                <a href="/recetas/categoria/5" aria-label="Ver recetas Sin Gluten">
+                <img src="/images/sinGluten.jpg" class="card-img-top" alt="Imagen representativa de recetas sin gluten.">
+                </a>
+                <a href="/recetas/categoria/5" class="btn-primary">Ver Recetas</a>
+            </div>
+            </article>
+        </li>
+        <li class="card">
+            <article aria-labelledby="rapidas-faciles-title">
+            <h4 class="card-title" id="rapidas-faciles-title">Rápidas y Fáciles</h4>
+            <div class="card-body">
+                <a href="/recetas/categoria/6" aria-label="Ver recetas Rápidas y Fáciles">
+                <img src="/images/comidaRapida.jpg" class="card-img-top" alt="Imagen representativa de recetas rápidas y fáciles.">
+                </a>
+                <a href="/recetas/categoria/6" class="btn-primary">Ver Recetas</a>
+            </div>
+            </article>
+        </li>
+        </ul>
+    </div>
 
-    <!-- FOOTER -->
-    <%- include('./partials/footer.ejs') %>
+    <div class="consultar">
+        <a href="https://api.whatsapp.com/send?phone=5491166601356" target="_blank" rel="noopener noreferrer">
+        Consulta a tu asesor por WhatsApp
+        </a>
+    </div>
+    </section>
+</main>
+
+<%- include('./partials/footer.ejs') %>
 </body>
+
 </html>

@@ -1,23 +1,31 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="es">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Resumen de Compra - Activa Fitness</title>
+<link rel="stylesheet" href="/css/finalizarCompra.css">
 
-    <head>
-        <%- include('./partials/head.ejs') %>
-        <link rel="stylesheet" href="/css/finalizarCompra.css">
-    </head>
+</head>
 
-    <body>
-        <%- include('./partials/header.ejs') %>
+<body>
+<%- include('./partials/header.ejs') %>
 
-        <section class="compra-container"><!--HACER JS PARA TRAER LO QUE SE ENCUENTRA EN EL CARRITO, TIENE QUE PERMITIR EDITA/ELIMINAR/ACTUALIZAR PRECIO Y PRODUCTOS-->
-            <h2>Resumen de tu compra</h2>
-            <div id="carrito-detalle"></div>
-        
-            <h3 id="total-carrito">Total: $0</h3>
-        
-            <a href="/carrito" class="volver-link">Volver al carrito</a>
-          </section>
+<main>
+    <section class="compra-container" aria-labelledby="resumen-compra-title">
+    <h2 id="resumen-compra-title">Resumen de tu compra</h2>
+    <div id="carrito-detalle" role="region" aria-live="polite" aria-label="Detalle de productos en el carrito">
+        <p class="visually-hidden">Aquí se cargarán los productos de tu carrito.</p>
+        </div>
 
-        <%- include('./partials/footer.ejs') %>
-    </body>
+    <h3 id="total-carrito">Total: <span aria-live="polite">$0</span></h3>
+    <nav aria-label="Navegación de compra">
+        <a href="/carrito" class="volver-link">Volver al carrito</a>
+    </nav>
+    </section>
+</main>
+
+<%- include('./partials/footer.ejs') %>
+</body>
+
 </html>

@@ -1,7 +1,9 @@
 <!DOCTYPE html>
 <html lang="es">
-<head>
+  <head>
   <%- include('./partials/head.ejs') %>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Regístrate - Crea tu Cuenta - [Nombre de tu Tienda]</title>
   <link rel="stylesheet" href="/css/register.css" />
   <link rel="stylesheet" href="/css/button-form.css" />
 </head>
@@ -9,83 +11,100 @@
 <body>
   <%- include('./partials/header.ejs') %>
 
-  <main class="mainRegister">
+  <main class="mainRegister" aria-labelledby="h1-register-title">
+    <h1 id="h1-register-title" class="visually-hidden">Crear Nueva Cuenta de Usuario</h1>
     <h2 id="h2-register">Regístrate</h2>
-    <form action="/users/save" method="POST" id="form-register" class="form-container">
-
-      <p class="nota-requerida">Por favor, asegúrese de completar los campos requeridos <span class="asterisco-requerido">(*)</span>.</p>
-
+    <form action="/users/save" method="POST" id="form-register" class="form-container"
+      aria-describedby="required-fields-note">
+      <p id="required-fields-note" class="nota-requerida">
+        Por favor, asegúrese de completar los campos requeridos marcados con un asterisco
+        <span class="asterisco-requerido" aria-hidden="true">(*)</span>.
+      </p>
       <div class="flex-container-row">
-        <!-- Nombre -->
         <div class="div-flex-100 input-requerido">
+          <label for="nombre" class="visually-hidden">Nombre</label>
           <input type="text" name="nombre" id="nombre" placeholder="Nombre *" class="inputs-register"
-            value="<%= (typeof oldData !== 'undefined' && oldData.nombre) ? oldData.nombre : '' %>" required />
+            value="<%= (typeof oldData !== 'undefined' && oldData.nombre) ? oldData.nombre : '' %>" required
+            autocomplete="given-name" aria-describedby="error-nombre"
+            aria-invalid="<%= (locals && locals.errors && errors.nombre) ? 'true' : 'false' %>" />
           <% if (locals && locals.errors && errors.nombre) { %>
-            <p class="feedback"><%= errors.nombre.msg %></p>
+          <p id="error-nombre" class="feedback" role="alert"><%= errors.nombre.msg %></p>
           <% } %>
         </div>
 
-        <!-- Apellido -->
         <div class="div-flex-100">
+          <label for="apellido" class="visually-hidden">Apellido</label>
           <input type="text" name="apellido" id="apellido" class="inputs-register" placeholder="Apellido *"
-            value="<%= (typeof oldData !== 'undefined' && oldData.apellido) ? oldData.apellido : '' %>" required />
+            value="<%= (typeof oldData !== 'undefined' && oldData.apellido) ? oldData.apellido : '' %>" required
+            autocomplete="family-name" aria-describedby="error-apellido"
+            aria-invalid="<%= (locals && locals.errors && errors.apellido) ? 'true' : 'false' %>" />
           <% if (locals && locals.errors && errors.apellido) { %>
-            <p class="feedback"><%= errors.apellido.msg %></p>
+          <p id="error-apellido" class="feedback" role="alert"><%= errors.apellido.msg %></p>
           <% } %>
         </div>
       </div>
 
-      <!-- Email -->
+      <label for="email" class="visually-hidden">Correo Electrónico</label>
       <input type="email" name="email" id="email" placeholder="Correo Electrónico *" class="inputs-register"
-        value="<%= (typeof oldData !== 'undefined' && oldData.email) ? oldData.email : '' %>" required />
+        value="<%= (typeof oldData !== 'undefined' && oldData.email) ? oldData.email : '' %>" required
+        autocomplete="email" aria-describedby="error-email"
+        aria-invalid="<%= (locals && locals.errors && errors.email) ? 'true' : 'false' %>" />
       <% if (locals && locals.errors && errors.email) { %>
-        <p class="feedback"><%= errors.email.msg %></p>
+      <p id="error-email" class="feedback" role="alert"><%= errors.email.msg %></p>
       <% } %>
 
-      <!-- Fecha de nacimiento -->
       <div class="flex-container-row">
+        <label for="fecha_nacimiento" class="visually-hidden">Fecha de nacimiento</label>
         <input type="date" name="fecha_nacimiento" id="fecha_nacimiento" class="inputs-register"
-          value="<%= (typeof oldData !== 'undefined' && oldData.fecha_nacimiento) ? oldData.fecha_nacimiento : '' %>" />
+          value="<%= (typeof oldData !== 'undefined' && oldData.fecha_nacimiento) ? oldData.fecha_nacimiento : '' %>"
+          autocomplete="bday" aria-describedby="error-fecha-nacimiento"
+          aria-invalid="<%= (locals && locals.errors && errors.fecha_nacimiento) ? 'true' : 'false' %>" />
         <% if (locals && locals.errors && errors.fecha_nacimiento) { %>
-          <p class="feedback"><%= errors.fecha_nacimiento.msg %></p>
+        <p id="error-fecha-nacimiento" class="feedback" role="alert"><%= errors.fecha_nacimiento.msg %></p>
         <% } %>
 
-        <!-- DNI -->
         <div class="div-flex-100">
+          <label for="dni" class="visually-hidden">DNI</label>
           <input type="text" id="dni" name="dni" maxlength="8" pattern="\d{7,8}" required placeholder="DNI *"
-            class="inputs-register" value="<%= (typeof oldData !== 'undefined' && oldData.dni) ? oldData.dni : '' %>" />
+            class="inputs-register" value="<%= (typeof oldData !== 'undefined' && oldData.dni) ? oldData.dni : '' %>"
+            inputmode="numeric" autocomplete="off" aria-describedby="error-dni"
+            aria-invalid="<%= (locals && locals.errors && errors.dni) ? 'true' : 'false' %>" />
           <% if (locals && locals.errors && errors.dni) { %>
-            <p class="feedback"><%= errors.dni.msg %></p>
+          <p id="error-dni" class="feedback" role="alert"><%= errors.dni.msg %></p>
           <% } %>
         </div>
       </div>
 
-      <!-- Celular -->
-      <input type="text" name="celular" id="celular" class="inputs-register"
-        placeholder="Ej: 1123456789"
-        pattern="[0-9]{2,4}\s?[0-9]{3,4}\s?[0-9]{3,4}"
-        maxlength="15" />
+      <label for="celular" class="visually-hidden">Número de Celular</label>
+      <input type="tel" name="celular" id="celular" class="inputs-register" placeholder="Ej: 1123456789"
+        pattern="[0-9]{2,4}\s?[0-9]{3,4}\s?[0-9]{3,4}" maxlength="15" autocomplete="tel"
+        aria-describedby="error-celular"
+        aria-invalid="<%= (locals && locals.errors && errors.celular) ? 'true' : 'false' %>" />
       <% if (locals && locals.errors && errors.celular) { %>
-        <p class="feedback"><%= errors.celular.msg %></p>
+      <p id="error-celular" class="feedback" role="alert"><%= errors.celular.msg %></p>
       <% } %>
 
-      <!-- Contraseña -->
-      <input type="password" name="contrasenia" placeholder="Contraseña: Mín. 8 caracteres, 1 mayús., 1 número, 1 símbolo" id="contrasenia"
-        class="inputs-register" required />
+      <label for="contrasenia" class="visually-hidden">Contraseña</label>
+      <input type="password" name="contrasenia" id="contrasenia" class="inputs-register" required
+        aria-describedby="password-requirements error-contrasenia"
+        aria-invalid="<%= (locals && locals.errors && errors.contrasenia) ? 'true' : 'false' %>"
+        placeholder="Contraseña *" />
       <% if (locals && locals.errors && errors.contrasenia) { %>
-        <p class="feedback"><%= errors.contrasenia.msg %></p>
+      <p id="error-contrasenia" class="feedback" role="alert"><%= errors.contrasenia.msg %></p>
       <% } %>
 
-      <!-- Confirmar contraseña -->
+      <label for="confirmar-contrasenia" class="visually-hidden">Confirmar Contraseña</label>
       <input type="password" name="confirmar_contrasenia" placeholder="Confirmar Contraseña *"
-        id="confirmar-contraseña" class="inputs-register" required />
+        id="confirmar-contrasenia" class="inputs-register" required
+        aria-describedby="error-confirmar-contrasenia"
+        aria-invalid="<%= (locals && locals.errors && errors.confirmar_contrasenia) ? 'true' : 'false' %>" />
       <% if (locals && locals.errors && errors.confirmar_contrasenia) { %>
-        <p class="feedback"><%= errors.confirmar_contrasenia.msg %></p>
+      <p id="error-confirmar-contrasenia" class="feedback" role="alert"><%= errors.confirmar_contrasenia.msg %></p>
       <% } %>
 
-      <div class="inputs-contra">
+      <div class="inputs-contra" id="password-requirements">
         <p>La contraseña debe contener:</p>
-        <ul>
+        <ul role="list">
           <li>Al menos 8 caracteres</li>
           <li>Una letra mayúscula</li>
           <li>Un número</li>
@@ -93,16 +112,13 @@
         </ul>
       </div>
 
-      <!-- Botón de registro -->
       <button type="submit" class="button-form button-register btn-confirmar">
         <span class="label">Registrarse</span>
-        <svg class="icon" xmlns="http://www.w3.org/2000/svg" fill="none" width="30" height="30"
-          viewBox="0 0 24 24" stroke="currentColor">
-          <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
-            d="M17 8l4 4m0 0l-4 4m4-4H3" />
+        <svg class="icon" xmlns="http://www.w3.org/2000/svg" fill="none" width="30" height="30" viewBox="0 0 24 24"
+          stroke="currentColor" aria-hidden="true">
+          <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M17 8l4 4m0 0l-4 4m4-4H3" />
         </svg>
       </button>
-
     </form>
   </main>
 
@@ -113,9 +129,10 @@
     <%- include('./partials/modalConfirmacion.ejs', {
     modalTitle: '¿Confirmar registro?',
     modalMessage: 'registro ...'
-}) %>
+    }) %>
   </div>
 
   <%- include('./partials/footer.ejs') %>
 </body>
+
 </html>
