@@ -1,54 +1,65 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="es">
   <head>
-    <%- include('./partials/head.ejs') %>
-    <link rel="stylesheet" href="/css/perfil.css" />
-  </head>
-  <body>
-    <%- include('./partials/header.ejs') %>
+  <%- include('./partials/head.ejs') %>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Mi Perfil de Usuario - [Nombre de tu Tienda]</title>
+  <link rel="stylesheet" href="/css/perfil.css" />
+</head>
 
-    <main class="main-profile">
-      <h2>Mi perfil</h2>
+<body>
+  <%- include('./partials/header.ejs') %>
 
-  <% if (usuarioLogueado) { %>
-  <img src="/images/avatars/<%= usuarioLogueado.imagen %>" alt="fotoDePerfil" style="max-width: 200px; cursor: pointer;" />
-  <p>Nombre: <%= usuarioLogueado.nombre %> <%= usuarioLogueado.apellido %></p>
-  <p>Celular: <%= usuarioLogueado.celular %></p>
-  <p>Fecha de nacimiento: <%= usuarioLogueado.fecha_nacimiento %></p>
-  <% if (usuarioLogueado.aptoMedico) { %>
-    <p>Apto Médico cargado:</p>
-  
-    <% if (usuarioLogueado.aptoMedico.endsWith('.pdf')) { %>
-      <a href="/uploads/aptoMedico/<%= usuarioLogueado.aptoMedico %>" target="_blank">📄 Ver Apto Médico (PDF)</a>
+  <main class="main-profile" aria-labelledby="profile-main-title">
+    <h1 id="profile-main-title">Mi Perfil</h1>
+    <% if (usuarioLogueado) { %>
+    <section class="user-details-section" aria-labelledby="user-info-heading">
+      <h2 id="user-info-heading" class="visually-hidden">Detalles de la Cuenta</h2>
+      <div class="profile-avatar">
+        <img src="/images/avatars/<%= usuarioLogueado.imagen %>" alt="Foto de perfil del usuario <%= usuarioLogueado.nombre %> <%= usuarioLogueado.apellido %>" style="max-width: 200px;" />
+        </div>
+
+      <p><strong>Nombre completo:</strong> <%= usuarioLogueado.nombre %> <%= usuarioLogueado.apellido %></p>
+      <p><strong>Celular:</strong> <%= usuarioLogueado.celular %></p>
+      <p><strong>Fecha de nacimiento:</strong> <%= usuarioLogueado.fecha_nacimiento %></p>
+
+      <h3>Información del Apto Médico</h3>
+      <% if (usuarioLogueado.aptoMedico) { %>
+        <p>Apto médico cargado:</p>
+        <% if (usuarioLogueado.aptoMedico.endsWith('.pdf')) { %>
+          <a href="/uploads/aptoMedico/<%= usuarioLogueado.aptoMedico %>" target="_blank" rel="noopener noreferrer" aria-label="Ver Apto Médico en formato PDF, se abre en una nueva pestaña">📄 Ver Apto Médico (PDF)</a>
+          <% } else { %>
+          <a href="/uploads/aptoMedico/<%= usuarioLogueado.aptoMedico %>" target="_blank" rel="noopener noreferrer" aria-label="Ver imagen del Apto Médico, se abre en una nueva pestaña">
+            <img src="/uploads/aptoMedico/<%= usuarioLogueado.aptoMedico %>" alt="Imagen de apto médico del usuario" style="max-width: 200px;" />
+            </a>
+        <% } %>
+      <% } else { %>
+        <p>No se ha cargado un apto médico.</p>
+      <% } %>
+
+      <h3>Estado de la Membresía</h3>
+      <p><strong>Estado actual:</strong> <%= usuarioLogueado.estado_membresia %></p>
+
+      <% if (usuarioLogueado.fecha_fin_cuota) { %>
+        <p><strong>Vigente hasta:</strong> <%= usuarioLogueado.fecha_fin_cuota %></p>
+      <% } else { %>
+        <p>Sin fecha de vencimiento de cuota registrada.</p>
+      <% } %>
+    </section>
+
     <% } else { %>
-      <a href="/uploads/aptoMedico/<%= usuarioLogueado.aptoMedico %>" target="_blank">
-        <img src="/uploads/aptoMedico/<%= usuarioLogueado.aptoMedico %>" alt="Apto Médico" style="max-width: 200px; cursor: pointer;" />
-      </a>
+    <p>No has iniciado sesión. Para ver tu perfil, por favor <a href="/users/login">inicia sesión aquí</a>.</p>
     <% } %>
-  <% } else { %>
-    <p>No hay apto médico cargado.</p>
-  <% } %>
-  <p>Estado de membresía: <%= usuarioLogueado.estado_membresia %></p>
 
-<% if (usuarioLogueado.fecha_fin_cuota) { %>
-  <p>Vigente hasta: <%= usuarioLogueado.fecha_fin_cuota %></p>
-<% } else { %>
-  <p>Sin fecha de vencimiento registrada.</p>
-<% } %>
-
-  
-<% } else { %>
-  <p>No has iniciado sesión</p>
-<% } %>
-
-
-
+    <nav aria-label="Opciones principales del perfil">
       <ul class="botones">
-        <a href="/perfil/editar" class="crear-editar">Editar</a>
-        <a href="/" class="crear-editar">VOLVER</a>
-      </ul>
-    </main>
+        <li><a href="/perfil/editar" class="crear-editar">Editar mi perfil</a></li>
+        <li><a href="/" class="crear-editar">Volver a la página principal</a></li>
+        </ul>
+    </nav>
+  </main>
 
-    <%- include('./partials/footer.ejs') %>
-  </body>
+  <%- include('./partials/footer.ejs') %>
+</body>
+
 </html>

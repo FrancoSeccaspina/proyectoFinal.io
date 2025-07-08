@@ -1,32 +1,63 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="es">
+  <head>
+  <%- include('./partials/head.ejs') %>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Nuestras Recetas Saludables - [Nombre de tu Tienda]</title>
+  <link rel="stylesheet" href="/css/recetaDetail.css">
+  <link rel="stylesheet" href="/css/footer.css">
 
-    <head>
-        <%- include('./partials/head.ejs') %>
-        <link rel="stylesheet" href="/css/recetaDetail.css">
-        <link rel="stylesheet" href="/css/footer.css">
-    </head>
+</head>
 
-    <body>
-        <%- include('./partials/header.ejs') %>
-    
-        <div class="accordion-container">
-            <% recetas.forEach(receta => { %>
-                <div class="accordion-card">
-                    <button class="accordion-toggle" onclick="this.parentNode.classList.toggle('open')">
-                        <h2><%= receta.nombre %></h2>
-                        <span class="arrow">&#9660;</span>
-                    </button>
-                    <div class="accordion-content">
-                        <p style="white-space: pre-line;">
-                            <%= receta.descripcion %>
-                        </p>
-                    </div>
-                </div>
-            <% }); %>
+<body>
+  <%- include('./partials/header.ejs') %>
+
+  <main>
+    <h1 class="visually-hidden">Recetas Saludables</h1>
+    <div class="accordion-container" role="list" aria-label="Lista de recetas saludables">
+      <% recetas.forEach((receta, index) => { %>
+      <div class="accordion-card">
+        <h2 class="accordion-header">
+          <button class="accordion-toggle" aria-expanded="false" aria-controls="accordion-content-<%= index %>"
+            id="accordion-button-<%= index %>" onclick="toggleAccordion(this)">
+            <%= receta.nombre %>
+            <span class="arrow" aria-hidden="true">&#9660;</span>
+            </button>
+        </h2>
+        <div class="accordion-content" id="accordion-content-<%= index %>" role="region"
+          aria-labelledby="accordion-button-<%= index %>" hidden>
+          <p style="white-space: pre-line;"><%= receta.descripcion %></p>
         </div>
-    </body>
-    <footer class="main-footer">
-        <%- include('./partials/footer.ejs') %>
-    </footer>
+      </div>
+      <% }); %>
+    </div>
+  </main>
+
+  <footer class="main-footer">
+    <%- include('./partials/footer.ejs') %>
+  </footer>
+
+  <script>
+    // Función JavaScript para manejar el acordeón y actualizar atributos ARIA.
+    function toggleAccordion(button) {
+      const card = button.parentNode.parentNode; // accordion-card
+      const content = card.querySelector('.accordion-content');
+      const isExpanded = button.getAttribute('aria-expanded') === 'true';
+
+      // Alternar la clase 'open' en la tarjeta para el estilo visual
+      card.classList.toggle('open');
+
+      // Actualizar el atributo aria-expanded en el botón
+      button.setAttribute('aria-expanded', String(!isExpanded));
+
+      // Actualizar el atributo hidden en el contenido
+      if (isExpanded) {
+        content.setAttribute('hidden', '');
+      } else {
+        content.removeAttribute('hidden');
+      }
+    }
+  </script>
+</body>
+
 </html>

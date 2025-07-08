@@ -1,26 +1,31 @@
 <!DOCTYPE html>
 <html lang="es">
+
 <head>
   <meta charset="UTF-8">
-  <title>Pago con Mercado Pago</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Pagar con Mercado Pago - [Nombre de tu Tienda]</title>
   <link rel="stylesheet" href="/css/mPago.css">
 </head>
+
 <body>
-  <section class="pago-container">
-    <h2>Pago con Mercado Pago</h2>
-    <p>Puedes pagar escaneando el siguiente código QR o usando el botón de abajo:</p>
+  <main>
+    <section class="pago-container" aria-labelledby="payment-heading">
+      <h1 id="payment-heading">Pago con Mercado Pago</h1>
+      <p>Puedes pagar escaneando el siguiente código QR o usando el botón de abajo:</p>
 
-    <div class="qr-container">
-      <img src="/images/qr-mercadopago.png" alt="QR Mercado Pago" style="width:200px;">
-    </div>
+      <div class="qr-container">
+        <img src="/images/qr-mercadopago.png" alt="Código QR para pagar con Mercado Pago" style="width:200px;">
+        </div>
 
-    <p>O bien hacé clic en el botón para ser redirigido a Mercado Pago:</p>
+      <p>O bien hace clic en el botón para ser redirigido a Mercado Pago:</p>
+      <a href="https://www.mercadopago.com.ar/" target="_blank" rel="noopener noreferrer" aria-label="Pagar con Mercado Pago (se abre en una nueva pestaña)">
+        <button type="button" class="pagar-btn">Pagar con Mercado Pago</button>
+        </a>
 
-    <a href="https://www.mercadopago.com.ar/" target="_blank">
-      <button class="pagar-btn">Pagar con Mercado Pago</button>
-    </a>
-
-    <a href="/" class="volver-link"> Volver al inicio</a>
-  </section>
+      <a href="/" class="volver-link">Volver al inicio</a>
+      </section>
+  </main>
 </body>
+
 </html>

@@ -1,121 +1,133 @@
-<!DOCTYPE html>
-<html lang="en">
+<<!DOCTYPE html>
+<html lang="es">
+  <head>
+  <%- include('./partials/head.ejs') %>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Rutinas de Entrenamiento - Guía por Grupo Muscular - [Nombre de tu Tienda/Sitio]</title>
+  <link rel="stylesheet" href="/css/rutinas.css">
+  <link rel="stylesheet" href="/css/footer.css">
 
-<head>
-    <%- include('./partials/head.ejs') %>
-    <link rel="stylesheet" href="/css/rutinas.css">
-    <link rel="stylesheet" href="/css/footer.css">
 </head>
 
 <body>
-    <!-- HEADER -->
-    <%- include('./partials/header.ejs') %>
+  <%- include('./partials/header.ejs') %>
 
-    <!-- MAIN CON EL LIENZO DE FONDO -->
-    <main class="mainRutinas">
-        
-        <section id="rutina">
-            <h2>Rutinas</h2>
-        </section>
+      <!-- Main con Lienzo-->
+  <main class="mainRutinas" aria-labelledby="main-heading-rutinas">
+    <h1 id="main-heading-rutinas" class="visually-hidden">Explora Rutinas de Entrenamiento por Grupo Muscular</h1>
+    <section id="rutina" aria-labelledby="section-title-rutinas">
+      <h2 id="section-title-rutinas">Rutinas</h2>
+    </section>
 
-        <section class="rutinas_subidas">
-            <div class="titulo">
-                <h4>¿Queres ideas para tu entrenamiento?</h4>
-                <p>Guia para cada grupo muscular</p>
+    <section class="rutinas_subidas" aria-labelledby="rutinas-subidas-title">
+      <div class="titulo">
+        <h3 id="rutinas-subidas-title">¿Querés ideas para tu entrenamiento?</h3>
+        <p>Guía para cada grupo muscular</p>
+      </div>
+
+      <section class="moverlo" role="grid" aria-label="Tarjetas de ejercicios por grupo muscular">
+        <div class="card" role="gridcell" aria-labelledby="abdominales-title">
+          <h5 class="card-title" id="abdominales-title">Abdominales</h5>
+          <div class="card-body">
+            <img src="/images/abs.png" class="card-img-top" alt="Ilustración de ejercicios de abdominales.">
+            <div class="boton">
+              <a href="/ejercicios/1" class="btn-primary" aria-label="Ver ejercicios de Abdominales">Ver</a>
+              </div>
+          </div>
+        </div>
+
+        <div class="card" role="gridcell" aria-labelledby="pecho-title">
+          <h5 class="card-title" id="pecho-title">Pecho</h5>
+          <div class="card-body">
+            <img src="/images/pecho.png" class="card-img-top" alt="Ilustración de ejercicios para el pecho.">
+            <div class="boton">
+              <a href="/ejercicios/2" class="btn-primary" aria-label="Ver ejercicios de Pecho">Ver</a>
             </div>
-            <section class="moverlo">
-              <div class="card">
-                <h5 class="card-title">Abdominales</h5>
-                <div class="card-body">
-                  <img src="/images/abs.png" class="card-img-top" alt="Abdominales">
-                  <div class="boton">
-                    <a href="/ejercicios/1" class="btn-primary">Ver</a>
-                  </div>
-                </div>
-              </div>
-              <div class="card">
-                <h5 class="card-title">Pecho</h5>
-                <div class="card-body">
-                  <img src="/images/pecho.png" class="card-img-top" alt="Pecho">
-                  <div class="boton">
-                    <a href="/ejercicios/2" class="btn-primary">Ver</a>
-                  </div>
-                </div>
-              </div>
-              <div class="card">
-                <h5 class="card-title">Biceps</h5>
-                <div class="card-body">
-                  <img src="/images/biceps.png" class="card-img-top" alt="Biceps">
-                  <div class="boton">
-                    <a href="/ejercicios/3" class="btn-primary">Ver</a>
-                  </div>
-                </div>
-              </div>
-              <div class="card">
-                <h5 class="card-title">Hombros</h5>
-                <div class="card-body">
-                  <img src="/images/hombros.png" class="card-img-top" alt="Hombros">
-                  <div class="boton">
-                    <a href="/ejercicios/4" class="btn-primary">Ver</a>
-                  </div>
-                </div>
-              </div>
-              <div class="card">
-                <h5 class="card-title">Espalda</h5>
-                <div class="card-body">
-                  <img src="/images/espalda.png" class="card-img-top" alt="Espalda">
-                  <div class="boton">
-                    <a href="/ejercicios/5" class="btn-primary">Ver</a>
-                  </div>
-                </div>
-              </div>
-              <div class="card">
-                <h5 class="card-title">Triceps</h5>
-                <div class="card-body">
-                  <img src="/images/triceps.png" class="card-img-top" alt="Triceps">
-                  <div class="boton">
-                    <a href="/ejercicios/6" class="btn-primary">Ver</a>
-                  </div>
-                </div>
-              </div>
-              <div class="card">
-                <h5 class="card-title">Femorales</h5>
-                <div class="card-body">
-                  <img src="/images/femorales.jpg" class="card-img-top" alt="Femorales">
-                  <div class="boton">
-                    <a href="/ejercicios/7" class="btn-primary">Ver</a>
-                  </div>
-                </div>
-              </div>
-              <div class="card">
-                <h5 class="card-title">Gluteos</h5>
-                <div class="card-body">
-                  <img src="/images/gluteos.jpg" class="card-img-top" alt="Gluteos">
-                  <div class="boton">
-                    <a href="/ejercicios/8" class="btn-primary">Ver</a>
-                  </div>
-                </div>
-              </div>
-              <div class="card">
-                <h5 class="card-title">Cuadriceps</h5>
-                <div class="card-body">
-                  <img src="/images/cuadriceps.png" class="card-img-top" alt="Cuadriceps">
-                </div>
-                <div class="boton">
-                  <a href="/ejercicios/9" class="btn-primary">Ver</a>
-                </div>
-              </div>
-            </section>
-              
-            <div class="consultar">
-                <a href="https://api.whatsapp.com/send?phone=5491166601356">Consulta a tu asesor</a>
-            </div>
-        </section>
-    </main>
+          </div>
+        </div>
 
-    <!-- FOOTER -->
-    <footer class="main-footer">
-        <%- include('./partials/footer.ejs') %>
-    </footer>
+        <div class="card" role="gridcell" aria-labelledby="biceps-title">
+          <h5 class="card-title" id="biceps-title">Bíceps</h5>
+          <div class="card-body">
+            <img src="/images/biceps.png" class="card-img-top" alt="Ilustración de ejercicios para bíceps.">
+            <div class="boton">
+              <a href="/ejercicios/3" class="btn-primary" aria-label="Ver ejercicios de Bíceps">Ver</a>
+            </div>
+          </div>
+        </div>
+
+        <div class="card" role="gridcell" aria-labelledby="hombros-title">
+          <h5 class="card-title" id="hombros-title">Hombros</h5>
+          <div class="card-body">
+            <img src="/images/hombros.png" class="card-img-top" alt="Ilustración de ejercicios para hombros.">
+            <div class="boton">
+              <a href="/ejercicios/4" class="btn-primary" aria-label="Ver ejercicios de Hombros">Ver</a>
+            </div>
+          </div>
+        </div>
+
+        <div class="card" role="gridcell" aria-labelledby="espalda-title">
+          <h5 class="card-title" id="espalda-title">Espalda</h5>
+          <div class="card-body">
+            <img src="/images/espalda.png" class="card-img-top" alt="Ilustración de ejercicios para la espalda.">
+            <div class="boton">
+              <a href="/ejercicios/5" class="btn-primary" aria-label="Ver ejercicios de Espalda">Ver</a>
+            </div>
+          </div>
+        </div>
+
+        <div class="card" role="gridcell" aria-labelledby="triceps-title">
+          <h5 class="card-title" id="triceps-title">Tríceps</h5>
+          <div class="card-body">
+            <img src="/images/triceps.png" class="card-img-top" alt="Ilustración de ejercicios para tríceps.">
+            <div class="boton">
+              <a href="/ejercicios/6" class="btn-primary" aria-label="Ver ejercicios de Tríceps">Ver</a>
+            </div>
+          </div>
+        </div>
+
+        <div class="card" role="gridcell" aria-labelledby="femorales-title">
+          <h5 class="card-title" id="femorales-title">Femorales</h5>
+          <div class="card-body">
+            <img src="/images/femorales.jpg" class="card-img-top" alt="Ilustración de ejercicios para femorales.">
+            <div class="boton">
+              <a href="/ejercicios/7" class="btn-primary" aria-label="Ver ejercicios de Femorales">Ver</a>
+            </div>
+          </div>
+        </div>
+
+        <div class="card" role="gridcell" aria-labelledby="gluteos-title">
+          <h5 class="card-title" id="gluteos-title">Glúteos</h5>
+          <div class="card-body">
+            <img src="/images/gluteos.jpg" class="card-img-top" alt="Ilustración de ejercicios para glúteos.">
+            <div class="boton">
+              <a href="/ejercicios/8" class="btn-primary" aria-label="Ver ejercicios de Glúteos">Ver</a>
+            </div>
+          </div>
+        </div>
+
+        <div class="card" role="gridcell" aria-labelledby="cuadriceps-title">
+          <h5 class="card-title" id="cuadriceps-title">Cuádriceps</h5>
+          <div class="card-body">
+            <img src="/images/cuadriceps.png" class="card-img-top" alt="Ilustración de ejercicios para cuádriceps.">
+          </div>
+          <div class="boton">
+            <a href="/ejercicios/9" class="btn-primary" aria-label="Ver ejercicios de Cuádriceps">Ver</a>
+          </div>
+        </div>
+      </section>
+
+      <div class="consultar">
+        <a href="https://api.whatsapp.com/send?phone=5491166601356" target="_blank" rel="noopener noreferrer">
+          <span class="visually-hidden">Abrir chat de WhatsApp para </span>Consulta a tu asesor
+        </a>
+      </div>
+    </section>
+  </main>
+
+  <footer class="main-footer">
+    <%- include('./partials/footer.ejs') %>
+  </footer>
 </body>
+
 </html>

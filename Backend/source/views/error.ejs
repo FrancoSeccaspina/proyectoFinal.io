@@ -3,33 +3,45 @@
 
 <head>
   <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>
-    <%= code || 404 %>
+    Error: <%= code || 404 %>
   </title>
   <link rel="stylesheet" href="/css/error.css" />
 </head>
 
 <body>
-  <div class="error-container">
-    <div class="error-code">
+  <div class="error-container" role="alertdialog" aria-labelledby="error-code-heading" aria-describedby="error-message-description">
+    <div class="error-code" id="error-code-heading">
+      <h1 class="visually-hidden">Código de Error</h1>
       <%= code || 404 %>
     </div>
-    <div class="error-message">
+
+    <div class="error-message" id="error-message-description">
+      <h2 class="visually-hidden">Mensaje de Error</h2>
       <%= message || 'Página no encontrada' %>
     </div>
-    <div class="error-description">
+
+    <p class="error-description">
       <%= description || 'La página que buscás no existe o fue movida.' %>
-    </div>
+    </p>
 
-   <% if (typeof error !== 'undefined') { %>
-  <div><%= error %></div>
-<% } else { %>
-  <div>Error no identificado.</div>
-<% } %>
+    <% if (typeof error !== 'undefined' && error) { %>
+      <div role="status" aria-live="polite">
+      <p><span class="visually-hidden">Detalles del Error: </span><%= error %></p>
+        </div>
+    <% } else { %>
+      <div role="status" aria-live="polite">
+      <p><span class="visually-hidden">Estado del Error: </span>Error no identificado.</p>
+        </div>
+    <% } %>
 
-
-    <a href="/">Volver al inicio</a>
+    <nav aria-label="Navegación de recuperación">
+      <a href="/" class="button-link">Volver al inicio</a>
+      </nav>
   </div>
+
+
 </body>
 
 </html>
