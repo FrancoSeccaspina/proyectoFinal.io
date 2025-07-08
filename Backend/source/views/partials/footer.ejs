@@ -1,16 +1,18 @@
 
   <style>
-    .flotante {
-      display: flex;
-      position: fixed;
+.flotante {
+    display: flex;
+    position: fixed;
+    color: white;    
+    font-size: 14px;
 
-      bottom: 0px;
-      left: 0px;
-      right: 0px;
-      box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
-      background-color: #2e2e2e;
-      justify-content: center;
-    }
+    bottom: 0px;
+    left: 0px;
+    right: 0px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+    background-color: #2e2e2e;
+    justify-content: space-between;
+}
 
 @media (prefers-color-scheme: dark) {
   :root {
@@ -31,8 +33,10 @@
   color: var(--text-color);
   list-style: none;
   padding: 0;
+  padding-right: 2rem;
   margin: 0;
 }
+
 
 .breadcrumb-item {
   display: flex;
@@ -120,8 +124,10 @@ html[dir="rtl"] .breadcrumb-icon {
   <!-- navegador de interfaces -->
   <% if (usuarioLogueado && usuarioLogueado.rol == "admin") { %>        
     <div class="flotante">
-      
-      <nav aria-label="Breadcrumb">
+      <div>
+        <span>Usá estos accesos rápidos para cambiar entre interfaces:</span>
+      </div>
+      <nav>
         <ol class="breadcrumb">
           <li class="breadcrumb-item">
             <a href="http://localhost:3032/" class="breadcrumb-link">Cliente</a>

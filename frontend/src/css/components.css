@@ -114,17 +114,19 @@ h6{
     }
 }
 
-    .flotante {
-      display: flex;
-      position: fixed;
-      
-      bottom: 0px;
-      left: 0px;
-      right: 0px;
-      box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
-      background-color: #2e2e2e;
-      justify-content: center;
-    }
+.flotante {
+    display: flex;
+    position: fixed;
+    color: white;    
+    font-size: 14px;
+
+    bottom: 0px;
+    left: 0px;
+    right: 0px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+    background-color: #2e2e2e;
+    justify-content: space-between;
+}
 
 @media (prefers-color-scheme: dark) {
   :root {
@@ -145,6 +147,8 @@ h6{
   color: var(--text-color);
   list-style: none;
   padding: 0;
+    padding-right: 2rem;
+
   margin: 0;
 }
 
