@@ -1,25 +1,33 @@
+import { exec } from 'child_process';
+import os from 'os';
+
 const port: number | string = process.env.PORT || 3032;
 
 const start = (): void => {
-  console.log('servidor corriendo...');
-  console.log('http://localhost:3032');
+  const url = `http://localhost:${port}`;
+  console.log(`Servidor corriendo en ${url}`);
+
+  let command: string;
+  switch (os.platform()) {
+    case 'win32':
+      command = `start ${url}`;
+      break;
+    case 'darwin':
+      command = `open ${url}`;
+      break;
+    case 'linux':
+      command = `xdg-open ${url}`;
+      break;
+    default:
+      console.log('No se puede abrir automaticamente el navegador en este sistema operativo');
+      return;
+  }
+
+  exec(command, (error) => {
+    if (error) {
+      console.error('No se pudo abrir el navegador:', error);
+    }
+  });
 };
 
 export { port, start };
-
-/*const express = require('express');
-const path = require('path');
-const app = express();
-const PORT = process.env.PORT || 3000;
-
-// Servir archivos estáticos desde /public
-app.use(express.static(path.join(__dirname, '../../public')));
-
-// Ruta para /usuarios
-app.get('/usuarios', (req, res) => {
-  res.sendFile(path.join(__dirname, '../../public/dashboard.html'));
-});
-
-app.listen(PORT, () => {
-  console.log(`Servidor corriendo en http://localhost:${PORT}`);
-});*/

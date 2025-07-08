@@ -1,19 +1,17 @@
 {
    "scripts": {
-    "start": "npm install && npm run concurrently",
-    "concurrently": "concurrently \"npm run server\" \"npm run client\"",
-    "server": "cd backend && npm run start:dev",
-    "client": "cd frontend && npm install && npm start"
-  },
-
-  "dependencies": {
-    "@types/multer": "^1.4.12",
-    "multer": "^2.0.0",
-    "react-axios": "^2.0.6"
-  },
-
-  "devDependencies": {
-    "concurrently": "^9.1.2"
-  }
-  
+      "start": "npm install && npm run concurrently",
+      "concurrently": "concurrently \"npm run server\" \"npm run client\"",
+      "server": "cd backend && npm run start:dev",
+      "client": "cd frontend && npm install && npm start"
+   },
+   "dependencies": {
+      "@types/multer": "^1.4.12",
+      "multer": "^2.0.0",
+      "open": "^10.1.2",
+      "react-axios": "^2.0.6"
+   },
+   "devDependencies": {
+      "concurrently": "^9.1.2"
+   }
 }

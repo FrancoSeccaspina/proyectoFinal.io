@@ -125,4 +125,8 @@ app.use('/public', express.static(path.join(__dirname, 'public')));
 app.use('/uploads', express.static('uploads'));
 
 // Escuchar el servidor
-app.listen(port, start);
+// app.listen(port, start);
+app.listen(port, () => {
+  // Cuando el servidor esté listo, llamás start para abrir el navegador
+  start();
+});
