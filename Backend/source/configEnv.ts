@@ -17,7 +17,6 @@ export function validarVariablesDeEntorno() {
     'JWT_SECRET',
     'SESSION_PASSWORD',
     'DATABASE_NAME',
-    'DATABASE_PASSWORD',
     'DATABASE_USER',
     'DATABASE_HOST',
     'TIEMPO_CONTROL_STOCK_MINUTOS',
