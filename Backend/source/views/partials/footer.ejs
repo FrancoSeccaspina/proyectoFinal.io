@@ -1,3 +1,73 @@
+
+  <style>
+    .flotante {
+      display: flex;
+      position: fixed;
+
+      bottom: 0px;
+      left: 0px;
+      right: 0px;
+      box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+      background-color: #2e2e2e;
+      justify-content: center;
+    }
+
+@media (prefers-color-scheme: dark) {
+  :root {
+    --border-color: #4b5563;   /* gray-600 */
+    --bg-color: #1f2937;       /* gray-800 */
+    --text-color: #e5e7eb;     /* gray-200 */
+    --link-bg-color: #374151;  /* gray-700 */
+    --hover-color: #ffffff;
+  }
+}
+
+
+.breadcrumb {
+  display: flex;
+  align-items: center;
+  gap: 4px;
+  font-size: 14px;
+  color: var(--text-color);
+  list-style: none;
+  padding: 0;
+  margin: 0;
+}
+
+.breadcrumb-item {
+  display: flex;
+  align-items: center;
+
+}
+
+.breadcrumb-link {
+  text-decoration: none;
+  color: white;
+  transition: color 0.2s;
+  display: block;
+}
+
+
+.breadcrumb-link:hover {
+  color: blue;
+}
+
+
+.breadcrumb-separator {
+  display: flex;
+  align-items: center;
+}
+
+.breadcrumb-icon {
+  width: 16px;
+  height: 16px;
+}
+
+html[dir="rtl"] .breadcrumb-icon {
+  transform: rotate(180deg);
+}
+
+</style>
 <footer class="main-footer">
   <div class="content">
     <div class="links">
@@ -19,7 +89,7 @@
           <li>
             <i class="fa-solid fa-location-dot" title="ActivaFitness"></i>
             <a href="https://www.google.com/maps/place/Activa+Fitness/@-34.7648863,-58.3810669,19.5z/data=!4m6!3m5!1s0x95bcd2c10f71fb7f:0xdfe8ecf5e5dd18b9!8m2!3d-34.7648439!4d-58.3810378!16s%2Fg%2F11fy9hdt08?entry=ttu&g_ep=EgoyMDI1MDUyMS4wIKXMDSoJLDEwMjExNDUzSAFQAw%3D%3D" target="_blank">Esmeralda 1340, Temperley, Provincia de Buenos Aires</a>
-            
+
 
           </li>
         </ul>
@@ -47,5 +117,29 @@
     </div>
   </div>
 
+  <!-- navegador de interfaces -->
+  <% if (usuarioLogueado && usuarioLogueado.rol == "admin") { %>        
+    <div class="flotante">
+      
+      <nav aria-label="Breadcrumb">
+        <ol class="breadcrumb">
+          <li class="breadcrumb-item">
+            <a href="http://localhost:3032/" class="breadcrumb-link">Cliente</a>
+          </li>
+          
+          <li class="breadcrumb-separator">
+            <svg class="breadcrumb-icon" xmlns="http://www.w3.org/2000/svg" fill="none"
+            viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor">
+            <path stroke-linecap="round" stroke-linejoin="round" d="m9 20.247 6-16.5" />
+          </svg>
+        </li>
 
+        <li class="breadcrumb-item">
+          <a href="http://localhost:3000" class="breadcrumb-link">Admin</a>
+        </li>
+        </ol>
+      </nav>
+    </div>
+  <% }%>
+  
 </footer>

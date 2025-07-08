@@ -26,6 +26,28 @@ function Sidebar(){
                     <a href="http://localhost:3032/users/logout">Volver</a>
                 </div>
             </div>
+            
+            <div class="flotante">
+            <nav aria-label="Breadcrumb">
+                <ol class="breadcrumb">
+                <li class="breadcrumb-item">
+                    <a href="http://localhost:3032/" class="breadcrumb-link">Cliente</a>
+                </li>
+
+                <li class="breadcrumb-separator">
+                    <svg class="breadcrumb-icon" xmlns="http://www.w3.org/2000/svg" fill="none"
+                        viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor">
+                    <path stroke-linecap="round" stroke-linejoin="round" d="m9 20.247 6-16.5" />
+                    </svg>
+                </li>
+
+                <li class="breadcrumb-item">
+                    <a href="http://localhost:3000" class="breadcrumb-link">Admin</a>
+                </li>
+                </ol>
+            </nav>
+
+            </div>
         </React.Fragment>
     )
 }

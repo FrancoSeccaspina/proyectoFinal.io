@@ -15,15 +15,12 @@ main {
 
 .main-content {
     width: 100%;
-    max-width: 1200px;
     margin: auto;
+    padding: 0px;
 }
 
 .carousel-container {
-    width: 100vw;
-    margin-left: -50vw;
-    left: 50%;
-    position: relative;
+    width: 100%;
 }
 
 .carousel-img {
