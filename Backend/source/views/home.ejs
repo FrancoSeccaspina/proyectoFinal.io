@@ -28,16 +28,18 @@
           <% } %>
         </div>
 
-        <div class="carousel-inner">
-          <% for(let i = 1; i <= 8; i++) { %>
-            <div class="carousel-item <%= i === 1 ? 'active' : '' %>">
-              <img 
-                src="/images/carrousel<%= i %>.jpeg" 
-                class="d-block w-100 carousel-img" 
-                alt="Imagen ilustrativa número <%= i %> del gimnasio ActivaFitness">
-            </div>
-          <% } %>
-        </div>
+     <div class="carousel-inner">
+     <% for(let i = 1; i <= 8; i++) { %>
+     <div class="carousel-item <%= i === 1 ? 'active' : '' %>">
+     <img 
+     src="/images/carrouselve<%= i %>_suave.png" 
+     class="d-block w-100 carousel-img" 
+     alt="Imagen ilustrativa número <%= i %> del gimnasio ActivaFitness">
+       </div>
+        <% } %>
+      </div>
+
+
 
         <button class="carousel-control-prev" type="button" data-bs-target="#carouselExampleIndicators" data-bs-slide="prev">
           <span class="carousel-control-prev-icon" aria-hidden="true"></span>
@@ -49,7 +51,7 @@
         </button>
       </div>
     </div>
-    
+    <!--
     <div class="planes" role="region" aria-label="Planes disponibles">
       <section class="planMensual">
         <img src="/images/planMensual.png" alt="Imagen descriptiva del plan mensual">
@@ -60,8 +62,9 @@
         <a href="https://api.whatsapp.com/send?phone=5491166601356" aria-label="Consultar sobre el plan anual vía WhatsApp">Consulta a tu asesor</a>
       </section>
     </div>
+ -->
   </main>
-
+ 
   <%- include('./partials/footer.ejs') %>
   <!--
   <div class="gestion-boton">
@@ -74,4 +77,3 @@
 <script src="./js/soundtrack.js"></script>
 <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.5/dist/js/bootstrap.bundle.min.js"></script>
 </html>
-
