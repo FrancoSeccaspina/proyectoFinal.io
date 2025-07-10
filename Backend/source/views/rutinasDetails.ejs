@@ -1,54 +1,66 @@
 <!DOCTYPE html>
 <html lang="es">
   <head>
-  <%- include('./partials/head.ejs') %>
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Ejercicios por Grupo Muscular - Detalles de Rutina - [Nombre de tu Tienda/Sitio]</title>
-  <link rel="stylesheet" href="/css/rutinasDetails.css">
+    <%- include('./partials/head.ejs') %>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Ejercicios por Grupo Muscular - Detalles de Rutina - [Nombre de tu Tienda/Sitio]</title>
+    <link rel="stylesheet" href="/css/rutinasDetails.css">
+  </head>
 
-</head>
+  <body>
+    <%- include('./partials/header.ejs') %>
 
-<body>
-<%- include('./partials/header.ejs') %>
+    <!-- LIENZO DE FONDO -->
+    <main class="mainLienzo" aria-labelledby="main-heading-ejercicios">
+      <h1 id="main-heading-ejercicios" class="visually-hidden">
+        Detalles de Ejercicios por Grupo Muscular
+      </h1>
 
-<main aria-labelledby="main-heading-ejercicios">
-    <h1 id="main-heading-ejercicios" class="visually-hidden">Detalles de Ejercicios por Grupo Muscular</h1>
-    <% if (success) { %>
-    <section aria-labelledby="ejercicios-group-title">
+      <% if (success) { %>
+      <section aria-labelledby="ejercicios-group-title">
         <h2 id="ejercicios-group-title">Ejercicios para el grupo muscular</h2>
         <div class="accordion-container">
-        <% ejercicios.forEach((ejercicio, index) => { %>
+          <% ejercicios.forEach((ejercicio, index) => { %>
             <div class="accordion-card">
-            <h3 class="visually-hidden" id="ejercicio-heading-<%= index %>"><%= ejercicio.nombre %></h3>
-            <button class="accordion-toggle" onclick="toggleAccordion('<%= index %>')"
-                aria-expanded="false"
-                aria-controls="accordion-content-<%= index %>"
-                id="accordion-button-<%= index %>">
+              <h3 class="visually-hidden" id="ejercicio-heading-<%= index %>">
+                <%= ejercicio.nombre %>
+              </h3>
+
+              <button class="accordion-toggle"
+                      onclick="toggleAccordion('<%= index %>')"
+                      aria-expanded="false"
+                      aria-controls="accordion-content-<%= index %>"
+                      id="accordion-button-<%= index %>">
                 <span class="accordion-title-text"><%= ejercicio.nombre %></span>
                 <span class="arrow" aria-hidden="true">&#9662;</span>
-                </button>
-            <div class="accordion-content" id="accordion-content-<%= index %>" role="region"
-                aria-labelledby="ejercicio-heading-<%= index %>" hidden>
-                <p><strong>Descripción:</strong> <%= ejercicio.descripcion ? ejercicio.descripcion : 'No disponible' %></p>
-                <% if (ejercicio.video) { %>
-                <a href="<%= ejercicio.video %>" target="_blank" rel="noopener noreferrer" class="boton-video"
-                    aria-label="Ver video de <%= ejercicio.nombre %> (se abre en una nueva pestaña)">Ver video</a>
-                <% } else { %>
-                <em>Video no disponible</em>
-                <% } %>
-            </div>
-            </div>
-        <% }); %>
-        </div>
-    </section>
-    <% } else { %>
-    <div class="error" role="alert">
-        <p><%= errors.msg ? errors.msg : 'Ha ocurrido un error al cargar los ejercicios.' %></p>
-        </div>
-    <% } %>
-</main>
-<script src="/js/accordion.js"></script>
-<%- include('./partials/footer.ejs') %>
-</body>
+              </button>
 
+              <div class="accordion-content"
+                   id="accordion-content-<%= index %>"
+                   role="region"
+                   aria-labelledby="ejercicio-heading-<%= index %>"
+                   hidden>
+                <p><strong>Descripción:</strong> <%= ejercicio.descripcion ? ejercicio.descripcion : 'No disponible' %></p>
+
+                <% if (ejercicio.video) { %>
+                  <a href="<%= ejercicio.video %>" target="_blank" rel="noopener noreferrer" class="boton-video"
+                     aria-label="Ver video de <%= ejercicio.nombre %> (se abre en una nueva pestaña)">Ver video</a>
+                <% } else { %>
+                  <em>Video no disponible</em>
+                <% } %>
+              </div>
+            </div>
+          <% }); %>
+        </div>
+      </section>
+      <% } else { %>
+        <div class="error" role="alert">
+          <p><%= errors.msg ? errors.msg : 'Ha ocurrido un error al cargar los ejercicios.' %></p>
+        </div>
+      <% } %>
+    </main>
+
+    <script src="/js/accordion.js"></script>
+    <%- include('./partials/footer.ejs') %>
+  </body>
 </html>

@@ -10,15 +10,21 @@ body {
     flex-direction: column;
     background-image: url("/images/Lienzo01vero.jpeg");
     background-size: 100% auto;
-    background-repeat: repeat-y; /* se repite hacia abajo */
+    background-repeat: repeat-y;
     background-position: center top;
     background-attachment: fixed;
     min-height: 100vh;
     background-color: transparent;
     justify-content: center;
     align-items: center;
-    padding-top: 0;
-    padding-bottom: 2rem;
+
+    
+    margin-top: 1.5rem;
+    margin-bottom: 1.5rem;
+
+    /* Conservo aspecto contenedor */
+    border-radius: 8px;
+    overflow: hidden;
 }
 
 #rutina {
