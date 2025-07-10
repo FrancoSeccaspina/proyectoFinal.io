@@ -12,26 +12,27 @@
 <body>
   <%- include('./partials/header.ejs') %>
 
-  <main>
-    <h1 class="visually-hidden">Recetas Saludables</h1>
-    <div class="accordion-container" role="list" aria-label="Lista de recetas saludables">
-      <% recetas.forEach((receta, index) => { %>
-      <div class="accordion-card">
-        <h2 class="accordion-header">
-          <button class="accordion-toggle" aria-expanded="false" aria-controls="accordion-content-<%= index %>"
-            id="accordion-button-<%= index %>" onclick="toggleAccordion(this)">
-            <%= receta.nombre %>
-            <span class="arrow" aria-hidden="true">&#9660;</span>
-            </button>
-        </h2>
-        <div class="accordion-content" id="accordion-content-<%= index %>" role="region"
-          aria-labelledby="accordion-button-<%= index %>" hidden>
-          <p style="white-space: pre-line;"><%= receta.descripcion %></p>
-        </div>
+<main class="mainLienzo" aria-labelledby="main-heading-recetas">
+  <h1 id="main-heading-recetas" class="visually-hidden">Recetas Saludables</h1>
+  <div class="accordion-container" role="list" aria-label="Lista de recetas saludables">
+    <% recetas.forEach((receta, index) => { %>
+    <div class="accordion-card">
+      <h2 class="accordion-header">
+        <button class="accordion-toggle" aria-expanded="false" aria-controls="accordion-content-<%= index %>"
+          id="accordion-button-<%= index %>" onclick="toggleAccordion(this)">
+          <%= receta.nombre.toUpperCase() %>
+          <span class="arrow" aria-hidden="true">&#9660;</span>
+        </button>
+      </h2>
+      <div class="accordion-content" id="accordion-content-<%= index %>" role="region"
+        aria-labelledby="accordion-button-<%= index %>" hidden>
+        <p><%= receta.descripcion %></p>
       </div>
-      <% }); %>
     </div>
-  </main>
+    <% }); %>
+  </div>
+</main>
+
 
     <%- include('./partials/footer.ejs') %>
 

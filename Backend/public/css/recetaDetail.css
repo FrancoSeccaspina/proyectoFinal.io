@@ -14,11 +14,12 @@ h2 {
     padding: 0 1rem;
 }
 .accordion-card {
-    border: 1px solid #ccc;
+    border: 1px solid white;
     border-radius: 8px;
     margin-bottom: 10px;
     overflow: hidden;
-    background: #f9f9f9;
+    background-color: transparent;
+    backdrop-filter: blur(2px);
     transition: box-shadow 0.3s ease;
 }
 .accordion-card:hover {
@@ -41,8 +42,16 @@ h2 {
 .accordion-content {
     display: none;
     padding: 15px;
-    background-color: #fff;
+    background-color: transparent;
+    color: white !important; /* fuerza el blanco incluso si hay otras reglas */
+    font-weight: 500;
+    backdrop-filter: blur(2px);
     transition: max-height 0.3s ease-out;
+}
+
+.accordion-content p {
+    color: white !important;  /* asegura que los <p> internos también sean blancos */
+    font-weight: 500;
 }
 .accordion-card.open .accordion-content {
     display: block;
@@ -90,3 +99,34 @@ p {
     clip: rect(0, 0, 0, 0);
     border: 0;
     }
+.mainLienzo {
+    margin-top: 1rem;
+    margin-bottom: 1rem;
+    padding: 1rem;
+    background-image: url('/images/Lienzo01vero.jpeg');
+    background-size: cover;
+    background-repeat: no-repeat;
+    background-position: center;
+    border-radius: 8px;
+    overflow: hidden;
+    box-shadow: 0px 4px 12px rgba(0, 0, 0, 0.12);
+}
+
+.accordion-toggle {
+    background-color: rgba(255, 255, 255, 0.12);
+    color: white;
+    border: 1px solid white;
+    border-radius: 6px;
+    padding: 10px 16px;
+    font-size: 0.9rem;
+    text-transform: uppercase;
+    font-weight: 500;
+    width: 100%;
+    text-align: left;
+    cursor: pointer;
+    transition: background-color 0.3s ease;
+}
+
+.accordion-toggle:hover {
+    background-color: rgba(255, 255, 255, 0.3);
+}

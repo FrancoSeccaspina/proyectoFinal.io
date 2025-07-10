@@ -89,18 +89,18 @@ body {
 }
 
 .btn-primary {
-    width: 100%;
-    font-size: 12px;
-    color: #000000;
-    background-color: #cecccc;
-    border: 1px solid #000000;
-    border-radius: 6px;
-    padding: 6px 10px;
-    font-weight: 500;
-    text-decoration: none;
-    display: flex;
-    justify-content: center;
-    cursor: pointer;
+  width: 100%;
+  font-size: 12px;
+  color: white;
+  background-color: rgba(255, 255, 255, 0.12);
+  border: 1px solid white;
+  border-radius: 6px;
+  padding: 6px 10px;
+  font-weight: 500;
+  text-decoration: none;
+  display: flex;
+  justify-content: center;
+  cursor: pointer;
 }
 
 .boton {
@@ -110,13 +110,21 @@ body {
 }
 
 .consultar a {
-    text-decoration: none;
-    color: black;
-    background-color: #cecccc;
-    border: 1px solid #000000;
-    padding: 8px 12px;
-    font-weight: 500;
-    cursor: pointer;
+  display: inline-block;
+  text-decoration: none;
+  color: white;
+  background-color: rgba(255, 255, 255, 0.12);
+  border: 1px solid white;
+  padding: 6px 10px;
+  font-weight: 500;
+  border-radius: 6px;
+  backdrop-filter: blur(3px);
+  font-size: 13px;
+  transition: background-color 0.3s ease;
+}
+
+.consultar a:hover {
+  background-color: rgba(255, 255, 255, 0.3);
 }
 
 /* RESPONSIVE */
