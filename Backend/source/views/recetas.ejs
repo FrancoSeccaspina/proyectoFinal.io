@@ -1,108 +1,61 @@
 <!DOCTYPE html>
 <html lang="es">
 <head>
-<%- include('./partials/head.ejs') %>
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Categorías de Recetas Saludables - [Nombre de tu Tienda]</title>
-<link rel="stylesheet" href="/css/recetas.css">
-
+  <%- include('./partials/head.ejs') %>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Categorías de Recetas Saludables - [Nombre de tu Tienda]</title>
+  <link rel="stylesheet" href="/css/recetas.css">
+  <link rel="stylesheet" href="/css/general.css">
 </head>
 
 <body>
-<%- include('./partials/header.ejs') %>
+  <%- include('./partials/header.ejs') %>
 
-<main class="mainRecetas" aria-labelledby="main-heading-recetas">
+  <main class="mainLienzo" aria-labelledby="main-heading-recetas">
     <h1 id="main-heading-recetas" class="visually-hidden">Explorar Nuestras Categorías de Recetas Saludables</h1>
+
     <section id="recetas" aria-labelledby="recetas-title">
-    <h2 id="recetas-title">Recetas</h2>
+      <h2 id="recetas-title">Recetas</h2>
     </section>
 
     <section class="recetas_subidas" aria-labelledby="ideas-title">
-    <div class="titulo">
+      <div class="titulo">
         <h3 id="ideas-title">Ideas para cocinar</h3>
         <p>Te brindamos algunas recetas útiles para tu alimentación.</p>
-    </div>
+      </div>
 
-    <div class="moverlo">
-        <ul role="list" aria-label="Categorías de recetas">
-        <li class="card">
-            <article aria-labelledby="ganancia-masa-title">
-            <h4 class="card-title" id="ganancia-masa-title">Ganancia de Masa</h4>
-            <div class="card-body">
-                <a href="/recetas/categoria/1" aria-label="Ver recetas para Ganancia de Masa Muscular">
-                <img src="/images/masaMusculas.jpg" class="card-img-top" alt="Imagen representativa de recetas para ganancia de masa muscular.">
+      <div class="moverlo">
+        <% const recetas = [
+          { id: 1, titulo: 'Ganancia de Masa', img: 'masaMusculas.jpg' },
+          { id: 2, titulo: 'Veganas', img: 'veganos.jpg' },
+          { id: 3, titulo: 'Pérdida de Peso', img: 'perdidaPeso.jpg' },
+          { id: 4, titulo: 'Definición', img: 'definicion.jpg' },
+          { id: 5, titulo: 'Sin Gluten', img: 'sinGluten.jpg' },
+          { id: 6, titulo: 'Rápidas y Fáciles', img: 'comidaRapida.jpg' },
+        ]; %>
+        <% recetas.forEach(r => { %>
+          <li class="card">
+            <article aria-labelledby="receta-<%= r.id %>">
+              <h4 class="card-title" id="receta-<%= r.id %>"><%= r.titulo %></h4>
+              <div class="card-body">
+                <a href="/recetas/categoria/<%= r.id %>" aria-label="Ver recetas para <%= r.titulo %>">
+                  <img src="/images/<%= r.img %>" class="card-img-top" alt="Imagen representativa de <%= r.titulo %>.">
                 </a>
-                <a href="/recetas/categoria/1" class="btn-primary">Ver Recetas</a>
-                </div>
+                <a href="/recetas/categoria/<%= r.id %>" class="btn-primary">Ver Recetas</a>
+              </div>
             </article>
-        </li>
-        <li class="card">
-            <article aria-labelledby="veganas-title">
-            <h4 class="card-title" id="veganas-title">Veganas</h4>
-            <div class="card-body">
-                <a href="/recetas/categoria/2" aria-label="Ver recetas Veganas">
-                <img src="/images/veganos.jpg" class="card-img-top" alt="Imagen representativa de recetas veganas.">
-                </a>
-                <a href="/recetas/categoria/2" class="btn-primary">Ver Recetas</a>
-            </div>
-            </article>
-        </li>
-        <li class="card">
-            <article aria-labelledby="perdida-peso-title">
-            <h4 class="card-title" id="perdida-peso-title">Pérdida de Peso</h4>
-            <div class="card-body">
-                <a href="/recetas/categoria/3" aria-label="Ver recetas para Pérdida de Peso">
-                <img src="/images/perdidaPeso.jpg" class="card-img-top" alt="Imagen representativa de recetas para pérdida de peso.">
-                </a>
-                <a href="/recetas/categoria/3" class="btn-primary">Ver Recetas</a>
-            </div>
-            </article>
-        </li>
-        <li class="card">
-            <article aria-labelledby="definicion-title">
-            <h4 class="card-title" id="definicion-title">Definición</h4>
-            <div class="card-body">
-                <a href="/recetas/categoria/4" aria-label="Ver recetas para Definición">
-                <img src="/images/definicion.jpg" class="card-img-top" alt="Imagen representativa de recetas para definición muscular.">
-                </a>
-                <a href="/recetas/categoria/4" class="btn-primary">Ver Recetas</a>
-            </div>
-            </article>
-        </li>
-        <li class="card">
-            <article aria-labelledby="sin-gluten-title">
-            <h4 class="card-title" id="sin-gluten-title">Sin Gluten</h4>
-            <div class="card-body">
-                <a href="/recetas/categoria/5" aria-label="Ver recetas Sin Gluten">
-                <img src="/images/sinGluten.jpg" class="card-img-top" alt="Imagen representativa de recetas sin gluten.">
-                </a>
-                <a href="/recetas/categoria/5" class="btn-primary">Ver Recetas</a>
-            </div>
-            </article>
-        </li>
-        <li class="card">
-            <article aria-labelledby="rapidas-faciles-title">
-            <h4 class="card-title" id="rapidas-faciles-title">Rápidas y Fáciles</h4>
-            <div class="card-body">
-                <a href="/recetas/categoria/6" aria-label="Ver recetas Rápidas y Fáciles">
-                <img src="/images/comidaRapida.jpg" class="card-img-top" alt="Imagen representativa de recetas rápidas y fáciles.">
-                </a>
-                <a href="/recetas/categoria/6" class="btn-primary">Ver Recetas</a>
-            </div>
-            </article>
-        </li>
-        </ul>
-    </div>
+          </li>
+        <% }) %>
+      </div>
 
-    <div class="consultar">
+      <div class="consultar">
         <a href="https://api.whatsapp.com/send?phone=5491166601356" target="_blank" rel="noopener noreferrer">
-        Consulta a tu asesor por WhatsApp
+          Consulta a tu asesor por WhatsApp
         </a>
-    </div>
+      </div>
     </section>
-</main>
+  </main>
 
-<%- include('./partials/footer.ejs') %>
+  <%- include('./partials/footer.ejs') %>
 </body>
-
 </html>
