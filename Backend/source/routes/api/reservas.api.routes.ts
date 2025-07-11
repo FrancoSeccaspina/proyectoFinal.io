@@ -11,5 +11,5 @@ route.get('/reservas/estadisticasPorProducto', reservaApiController.estadisticas
 route.get("/reservas/mostrar", verificarTokenPorRol([Roles.ADMIN]), (req: Request, res: Response) => {reservaApiController.listaReservas(req, res)})
 route.put("/reservas/confirmar/:id", verificarTokenPorRol([Roles.ADMIN]), (req: Request, res: Response) => { reservaApiController.confirmarReserva(req, res) });
 route.put("/reservas/cancelar/:id", verificarTokenPorRol([Roles.ADMIN]), (req: Request, res: Response) => { reservaApiController.cancelarReserva(req, res) });
-
+route.delete('/reservas/:id_reserva', (res, req) => { reservaApiController.delete(res, req) })
 export default route;

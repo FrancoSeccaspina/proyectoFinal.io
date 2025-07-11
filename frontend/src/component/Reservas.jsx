@@ -1,12 +1,14 @@
 import ReservaCard from "./ReservaCard";
 import { useEffect, useState } from "react";
 import axios from "axios";
+import * as XLSX from "xlsx";
 import "../css/header.css";
 import "../css/reservas.css";
 
 function Reservas() {
   const [reservas, setReservas] = useState([]);
   const [loading, setLoading] = useState(true);
+  const [search, setSearch] = useState("");
 
   const getReservas = async () => {
     try {
@@ -21,6 +23,42 @@ function Reservas() {
       setLoading(false);
     }
   };
+  // Función de búsqueda
+  const searcher = (e) => {
+    setSearch(e.target.value);
+  };
+  const eliminarReserva = (id_reserva) => {
+    setReservas(prev => prev.filter(r => r.id_reserva !== id_reserva));
+  };
+
+  // Filtrado
+  const resultado = !search
+  ? reservas
+  : reservas.filter((reserva) =>
+    reserva.estado.toLowerCase().includes(search.toLowerCase())    
+  );
+  const exportarExcel = () => {
+    // Creamos una lista para almacenar filas
+    const datosParaExportar = [];
+    resultado.forEach((reserva) => {
+      const primerDetalle = Array.isArray(reserva.DetalleReservas) ? reserva.DetalleReservas[0] : null;
+  
+      datosParaExportar.push({
+        "ID Reserva": reserva.id_reserva,
+        "Fecha": new Date(reserva.fecha).toLocaleString(),  // fecha más legible
+        "Estado": reserva.estado,
+        "Total": reserva.total,
+        "Cliente": `${reserva.id_usuario || ''}`,
+        "Producto": primerDetalle?.Producto?.nombre || '',
+        "Cantidad": primerDetalle?.cantidad || '',
+      });
+    });
+
+    const wb = XLSX.utils.book_new();
+    const ws = XLSX.utils.json_to_sheet(datosParaExportar);
+    XLSX.utils.book_append_sheet(wb, ws, "Reservas");
+    XLSX.writeFile(wb, "reservas.xlsx");
+  };
 
   useEffect(() => {
     getReservas();
@@ -31,12 +69,21 @@ function Reservas() {
       <section className="moverJuntos">
         <h2 className="box-title">Lista de Reservas</h2>
       </section>
-
+      <input
+        value={search}
+        onChange={searcher}
+        type="text"
+        placeholder='Buscar por Estado'
+        className='form-control'
+      />
+      <button onClick={exportarExcel} className="btn-exportar">
+        Exportar a Excel
+      </button>
       {loading ? (
         <p>Cargando reservas...</p>
       ) : reservas.length > 0 ? (
-        reservas.map((reserva) => (
-          <ReservaCard key={reserva.id_reserva} reserva={reserva} />
+        resultado.map((reserva) => (
+          <ReservaCard key={reserva.id_reserva} reserva={reserva}  onDelete={eliminarReserva}/>
         ))
       ) : (
         <p>No hay reservas para mostrar.</p>

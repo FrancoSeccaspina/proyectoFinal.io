@@ -246,6 +246,33 @@ export class reservaApiController {
             res.status(500).json({ message: 'Error al filtrar' });
         }
     }
+    async delete(req: Request, res: Response): Promise<Response> {
+        try {
+          const { id_reserva } = req.params;
+          const reserva = await Reserva.findOne({ where: { id_reserva } });
+    
+          if (!reserva) {
+            return res.status(404).json({
+              success: false,
+              message: "Reserva no encontrado"
+            });
+          }
+    
+          await reserva.destroy();
+    
+          return res.status(200).json({
+            success: true,
+            message: "reserva eliminada con éxito"
+          });
+    
+        } catch (error) {
+          console.error("Error en delete reserva:", (error as Error).message);
+          return res.status(500).json({
+            success: false,
+            message: "Error interno del servidor"
+          });
+        }
+      }
 }
 
 export default new reservaApiController();

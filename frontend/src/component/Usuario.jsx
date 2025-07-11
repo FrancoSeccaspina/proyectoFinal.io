@@ -25,10 +25,12 @@ const Usuarios = () => {
 
   // Filtrado
   const resultado = !search
-    ? usuarios
-    : usuarios.filter((usuario) =>
-        usuario.dni.toString().includes(search)
-      );
+  ? usuarios
+  : usuarios.filter((usuario) =>
+      usuario.rol.toLowerCase().includes(search.toLowerCase()) ||
+      usuario.dni.toString().includes(search) ||
+      usuario.apellido.toLowerCase().includes(search.toLowerCase())
+    );
 
   useEffect(() => {
     showData();
@@ -54,7 +56,7 @@ const Usuarios = () => {
         value={search}
         onChange={searcher}
         type="text"
-        placeholder='Buscar por DNI'
+        placeholder='Buscar por Rol o DNI o Apellido'
         className='form-control'
       />
       <table className='table table-dark table-striped'>

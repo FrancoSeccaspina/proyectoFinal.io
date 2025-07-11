@@ -2,7 +2,7 @@ import { EstadosReserva } from "../constants/estadoReserva";
 import { useState } from "react";
 import axios from "axios";
 
-function ReservaCard({ reserva: reservaProp }) {
+function ReservaCard({ reserva: reservaProp, onDelete }) {
   const [reserva, setReserva] = useState(reservaProp);
 
   const onclickConfirm = async () => {
@@ -29,6 +29,17 @@ function ReservaCard({ reserva: reservaProp }) {
       alert("Error al cancelar la reserva");
     }
   };
+  const handleDelete = async (id_reserva) => {
+    if (window.confirm("¿Estás seguro de que querés eliminar esta reserva?")) {
+      try {
+        await axios.delete(`http://localhost:3032/api/reservas/${id_reserva}`, { withCredentials: true });
+        onDelete?.(reserva.id_reserva);
+      } catch (error) {
+        console.error('Error al eliminar reserva:', error);
+        alert(`Error: ${error.response?.data?.message || error.message}`);
+      }
+    }
+  };
 
   return (
     <div className="table-container">
@@ -39,7 +50,7 @@ function ReservaCard({ reserva: reservaProp }) {
             <th>Fecha</th>
             <th>Estado</th>
             <th>Total</th>
-            <th>Cliente : N° {reserva.Usuario?.id}</th>
+            <th>Cliente : N° {reserva.id_usuario}</th>
           </tr>
         </thead>
         <tbody>
@@ -74,8 +85,10 @@ function ReservaCard({ reserva: reservaProp }) {
           <button className="btn btn-danger" onClick={onclickCancel}>
             Cancelar reserva
           </button>
-        </div>
+          </div>
       )}
+      <button className="btn btn-danger" onClick={() => handleDelete(reserva.id_reserva)}>Eliminar Reserva</button>
+        
     </div>
   );
 }
