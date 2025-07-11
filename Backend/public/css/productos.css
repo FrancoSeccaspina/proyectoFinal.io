@@ -1,144 +1,145 @@
-main{
-    background-color: #ebebeb;
-    padding-top: 3vh;
+body {
+  margin: 0;
+  padding: 0;
+  background-color: transparent;
 }
 
-.container-image{
-    width: 24rem;
-    margin: auto;
-    height: 24rem;
-}
-.img-juego{
-    width: 100%;
-    height: 100%;
-}
-.modificar{
-    display: flex;
-}
-.container-allMain{
-    display: flex;
-    flex-direction: row;
-    flex-wrap: wrap;
-    justify-content: center;
-}
-.productos{
-    max-width: 280px;
-    display: flex;
-    flex-flow: column;
-    border-radius: 6px;
-    box-shadow: 0 0 0.1rem #848484;
-    background-color: rgb(255 255 255 / 93%);
-    cursor: pointer;
-    margin: 1rem;
-}
-.titulo{
-    display: flex;
-    padding: 2rem 3rem 0;
-    align-items: center;
-    justify-content: space-between;
-}
-.productos:hover{
-    box-shadow: 2px 0px 3px #848484;
-    transition-property: box-shadow;
-    transition-duration: 0.3s;
-}
-.productos img{
-    width: 100%;
-    height: 100%;
-    /*object-fit: cover;*/
-}
-.productos picture{
-    width: 15rem;
-    height: 20rem;
-}
-.informacion{
-    border-top: 1px solid #ccc;
-    padding: 1em;
-    display: flex;
-    flex-flow: column;
+.mainLienzo {
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+  background-image: url("/images/Lienzo01vero.jpeg");
+  background-size: 100% auto;
+  background-repeat: repeat-y;
+  background-position: center top;
+  background-attachment: fixed;
+  min-height: 100vh;
+  background-color: transparent;
+  justify-content: center;
+  align-items: center;
+  margin-top: 1rem;
+  margin-bottom: 1rem;
+  border-radius: 8px;
+  overflow: hidden;
+  box-shadow: 0px 4px 12px rgba(0, 0, 0, 0.15);
+  color: white;
 }
 
-.tipo-envio {
-    background-color: #000000;
-    color: #fff;
-    font-weight: 600;
-    text-align: center;
-    border-radius: 2px;
+.titulo {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  padding-top: 1rem;
+  color: white;
 }
 
-.container-prices{
-    display: flex;
-    align-items: center;
-    margin-top: 1rem;
+.container-allMain {
+  display: grid;
+  grid-template-columns: repeat(5, 1fr);
+  gap: 2rem;
+  padding: 1rem;
+  max-width: 95vw;
+  justify-content: center;
 }
 
+.card {
+  width: 100%;
+  max-width: 9rem;
+  padding: 0.5rem;
+  border: 1px solid white;
+  background-color: rgba(255, 255, 255, 0.12);
+  backdrop-filter: blur(3px);
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  text-align: center;
+  border-radius: 10px;
+}
+
+.card-title {
+  font-size: 12px;
+  margin-top: 0.3rem;
+  color: white;
+}
+
+.card-body {
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  gap: 0.3rem;
+}
+
+.card-img-top {
+  width: 100%;
+  max-width: 60px;
+  height: auto;
+  object-fit: contain;
+  border-radius: 6px;
+}
 
 .precio-ahora {
-    color: #000000db;
-    font-size: 1.5rem;
-    font-weight: 600;
-}
-.name-product{
-    display: block;
-    color: #0a0a0a;
-    font-weight: 800;
-}
-.tipo-entrega{
-    display: block;
-    color: #6d6c70;
-    font-weight: 500;
-    margin-top: 1rem;
-    opacity: 0.8;
-}
-.productos:hover .name-product,
-.productos:hover .tipo-entrega{
-    display: block;
-    transition-duration: 20s;
-    transition-property: display;
-}
-.botones{
-    border-bottom:solid 1px #ffffff6e ;
-    display: flex;
-    justify-content: space-evenly;
-    background-color: #0e0e0e;
+  color: white;
+  font-size: 0.8rem;
+  font-weight: 600;
 }
 
-.botones a{
-    text-align: center;
-    color: var(--whiteLetter);
-    background-color: #0e0e0e
+.boton {
+  width: 100%;
+  display: flex;
+  justify-content: center;
 }
-.botones form{
-    text-align: center;
-    width: 30%;
-    padding: 1rem;
+
+.btn-primary {
+  width: 100%;
+  font-size: 11px;
+  color: white;
+  background-color: rgba(255, 255, 255, 0.12);
+  border: 1px solid white;
+  border-radius: 6px;
+  padding: 6px 10px;
+  font-weight: 500;
+  text-decoration: none;
+  display: flex;
+  justify-content: center;
+  cursor: pointer;
 }
-.borrarBorde{
-    background-color: #0e0e0e;
+
+.btn-primary:hover {
+  background-color: rgba(255, 255, 255, 0.3);
 }
-.botones button{
-    font-size: 1rem;
-    cursor: pointer;
+
+/* RESPONSIVE */
+@media screen and (max-width: 1200px) {
+  .container-allMain {
+    grid-template-columns: repeat(3, 1fr);
+  }
 }
-.botones a:hover{
-    color: rgb(255, 255, 255);
-    transition: color 0.5s ;
+
+@media screen and (max-width: 768px) {
+  .container-allMain {
+    grid-template-columns: repeat(2, 1fr);
+  }
+
+  .card {
+    max-width: 10rem;
+  }
 }
-a.eliminar:hover {
-    color: red;
-    transition: color 0.5s;
+
+@media screen and (max-width: 480px) {
+  .container-allMain {
+    grid-template-columns: 1fr;
+  }
 }
-.crear-editar{
-    margin: auto;
-    padding: 1rem;
+
+.visually-hidden {
+  position: absolute;
+  width: 1px;
+  height: 1px;
+  margin: -1px;
+  padding: 0;
+  overflow: hidden;
+  clip: rect(0, 0, 0, 0);
+  border: 0;
 }
-    .visually-hidden {
-    position: absolute;
-    width: 1px;
-    height: 1px;
-    margin: -1px;
-    padding: 0;
-    overflow: hidden;
-    clip: rect(0, 0, 0, 0);
-    border: 0;
-    }
