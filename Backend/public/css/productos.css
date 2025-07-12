@@ -2,6 +2,7 @@ body {
   margin: 0;
   padding: 0;
   background-color: transparent;
+  color: white;
 }
 
 .mainLienzo {
@@ -14,38 +15,29 @@ body {
   background-position: center top;
   background-attachment: fixed;
   min-height: 100vh;
-  background-color: transparent;
   justify-content: center;
   align-items: center;
-  margin-top: 1rem;
-  margin-bottom: 1rem;
+  margin-top: 1.5rem;
+  margin-bottom: 1.5rem;
   border-radius: 8px;
   overflow: hidden;
   box-shadow: 0px 4px 12px rgba(0, 0, 0, 0.15);
-  color: white;
 }
 
-.titulo {
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  padding-top: 1rem;
-  color: white;
-}
-
-.container-allMain {
+.moverlo {
   display: grid;
-  grid-template-columns: repeat(5, 1fr);
-  gap: 2rem;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 4rem;
   padding: 1rem;
   max-width: 95vw;
   justify-content: center;
+  list-style-type: none;
 }
 
 .card {
   width: 100%;
-  max-width: 9rem;
-  padding: 0.5rem;
+  max-width: 12rem;
+  padding: 0.4rem;
   border: 1px solid white;
   background-color: rgba(255, 255, 255, 0.12);
   backdrop-filter: blur(3px);
@@ -57,8 +49,8 @@ body {
 }
 
 .card-title {
-  font-size: 12px;
-  margin-top: 0.3rem;
+  font-size: 13px;
+  margin-bottom: 0.4rem;
   color: white;
 }
 
@@ -68,32 +60,19 @@ body {
   flex-direction: column;
   justify-content: center;
   align-items: center;
-  gap: 0.3rem;
+  gap: 0.4rem;
 }
 
 .card-img-top {
   width: 100%;
-  max-width: 60px;
-  height: auto;
+  height: 140px;
   object-fit: contain;
   border-radius: 6px;
 }
 
-.precio-ahora {
-  color: white;
-  font-size: 0.8rem;
-  font-weight: 600;
-}
-
-.boton {
-  width: 100%;
-  display: flex;
-  justify-content: center;
-}
-
 .btn-primary {
   width: 100%;
-  font-size: 11px;
+  font-size: 12px;
   color: white;
   background-color: rgba(255, 255, 255, 0.12);
   border: 1px solid white;
@@ -106,40 +85,38 @@ body {
   cursor: pointer;
 }
 
-.btn-primary:hover {
-  background-color: rgba(255, 255, 255, 0.3);
+.boton {
+  width: 100%;
+  display: flex;
+  justify-content: center;
 }
 
-/* RESPONSIVE */
+.tipo-envio,
+.tipo-entrega,
+.precio-ahora {
+  color: white;
+  font-size: 13px;
+}
+
+/* Responsive */
 @media screen and (max-width: 1200px) {
-  .container-allMain {
+  .moverlo {
     grid-template-columns: repeat(3, 1fr);
   }
 }
 
 @media screen and (max-width: 768px) {
-  .container-allMain {
+  .moverlo {
     grid-template-columns: repeat(2, 1fr);
   }
 
   .card {
-    max-width: 10rem;
+    max-width: 12rem;
   }
 }
 
 @media screen and (max-width: 480px) {
-  .container-allMain {
+  .moverlo {
     grid-template-columns: 1fr;
   }
-}
-
-.visually-hidden {
-  position: absolute;
-  width: 1px;
-  height: 1px;
-  margin: -1px;
-  padding: 0;
-  overflow: hidden;
-  clip: rect(0, 0, 0, 0);
-  border: 0;
 }
