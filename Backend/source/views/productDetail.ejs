@@ -11,7 +11,7 @@
 <body>
 <%- include('./partials/header.ejs') %>
 
-<main>
+<main class="mainProductDetail">
     <% if (typeof message !=='undefined' && message) { %>
     <div class="alert alert-success" role="status" aria-live="polite">
     <p><%= message %></p>
@@ -21,7 +21,7 @@
     <div id="main-content">
     <section class="container-image" aria-labelledby="product-image-title">
         <h2 id="product-image-title" class="visually-hidden">Imágenes del producto <%= producto.nombre %></h2>
-        <img src="../../images/<%= producto.imagen %>" alt="Imagen de <%= producto.nombre %>" class="img-juego" />
+        <img src="/images/<%= producto.imagen %>" alt="Imagen de <%= producto.nombre %>" class="img-juego" />
         </section>
 
     <section class="main-description" aria-labelledby="product-details-heading">
