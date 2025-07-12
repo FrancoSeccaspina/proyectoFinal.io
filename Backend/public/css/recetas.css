@@ -4,48 +4,81 @@ body {
   background-color: transparent;
 }
 
+.mainLienzo {
+  min-height: 90vh;
+  padding: 1rem;
+  background-image: url("/images/Lienzo01vero.jpeg");
+  background-size: cover;
+  background-position: center;
+  background-repeat: no-repeat;
+}
+
+.mainRecetas {
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+  background-image: url("/images/Lienzo01vero.jpeg");
+  background-size: 100% auto;
+  background-repeat: repeat-y;
+  background-position: center top;
+  background-attachment: fixed;
+  min-height: 100vh;
+  background-color: transparent;
+  justify-content: center;
+  align-items: center;
+  margin-top: 1rem;
+  margin-bottom: 1rem;
+  border-radius: 8px;
+  overflow: hidden;
+}
+
 #recetas {
-  padding: 0.5rem 1rem 0.2rem 1rem;
-  border-bottom: 1px solid rgb(55, 55, 55);
-  margin: 0;
-  width: 90%;
+  padding: 0,5rem;
+  border-bottom: 1px solid white;
+  width: 100%;
 }
 
 #recetas h2 {
-  font-size: 16px;
+  font-size: 22px;
   text-align: center;
-  margin: 0;
-}
-
-.recetas_subidas {
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  margin-top: 0.5rem;
+  margin: 30;
+  color: white;
 }
 
 .titulo {
   display: flex;
   flex-direction: column;
   align-items: center;
+  margin-top: 0.5rem;
+  text-align: center;
 }
 
 .titulo h3 {
   padding-top: 0.5rem;
-  font-size: 18px;
-  margin: 0;
+  font-size: 30px;
+  margin: center;
   color: white;
+  line-height: 1.4;
 }
 
 .titulo p {
-  margin: 0;
+  margin: 0.2rem 0 0 0;
   color: white;
+  font-size: 16px;
+  line-height: 1.4;
+}
+
+.recetas_subidas {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  margin-top: 0rem;
 }
 
 .moverlo {
   display: grid;
   grid-template-columns: repeat(3, 1fr);
-  gap: 2rem;
+  gap: 3rem;
   padding: 1rem;
   max-width: 95vw;
   justify-content: center;
@@ -160,4 +193,10 @@ body {
   overflow: hidden;
   clip: rect(0, 0, 0, 0);
   border: 0;
+}
+
+.container-allMain {
+  width: 100%;
+  max-width: 100%;
+  margin: 0 auto;
 }

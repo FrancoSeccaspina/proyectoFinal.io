@@ -11,49 +11,53 @@
 <body>
   <%- include('./partials/header.ejs') %>
 
-  <main class="mainLienzo" aria-labelledby="main-heading-recetas">
+  <main class="mainRecetas" aria-labelledby="main-heading-recetas">
     <h1 id="main-heading-recetas" class="visually-hidden">Explorar Nuestras Categorías de Recetas Saludables</h1>
 
-    <section id="recetas" aria-labelledby="recetas-title">
-      <h2 id="recetas-title">Recetas</h2>
-    </section>
+    <div class="container-allMain">
 
-    <section class="recetas_subidas" aria-labelledby="ideas-title">
-      <div class="titulo">
-        <h3 id="ideas-title">Ideas para cocinar</h3>
-        <p>Te brindamos algunas recetas útiles para tu alimentación.</p>
-      </div>
+      <section id="recetas" aria-labelledby="recetas-title">
+        <h2 id="recetas-title">Recetas</h2>
+      </section>
 
-      <div class="moverlo">
-        <% const recetas = [
-          { id: 1, titulo: 'Ganancia de Masa', img: 'masaMusculas.jpg' },
-          { id: 2, titulo: 'Veganas', img: 'veganos.jpg' },
-          { id: 3, titulo: 'Pérdida de Peso', img: 'perdidaPeso.jpg' },
-          { id: 4, titulo: 'Definición', img: 'definicion.jpg' },
-          { id: 5, titulo: 'Sin Gluten', img: 'sinGluten.jpg' },
-          { id: 6, titulo: 'Rápidas y Fáciles', img: 'comidaRapida.jpg' },
-        ]; %>
-        <% recetas.forEach(r => { %>
-          <li class="card">
-            <article aria-labelledby="receta-<%= r.id %>">
-              <h4 class="card-title" id="receta-<%= r.id %>"><%= r.titulo %></h4>
-              <div class="card-body">
-                <a href="/recetas/categoria/<%= r.id %>" aria-label="Ver recetas para <%= r.titulo %>">
-                  <img src="/images/<%= r.img %>" class="card-img-top" alt="Imagen representativa de <%= r.titulo %>.">
-                </a>
-                <a href="/recetas/categoria/<%= r.id %>" class="btn-primary">Ver Recetas</a>
-              </div>
-            </article>
-          </li>
-        <% }) %>
-      </div>
+      <section class="recetas_subidas" aria-labelledby="ideas-title">
+        <div class="titulo">
+          <h3 id="ideas-title">Ideas para cocinar</h3>
+          <p>Te brindamos algunas recetas útiles para tu alimentación.</p>
+        </div>
 
-      <div class="consultar">
-        <a href="https://api.whatsapp.com/send?phone=5491166601356" target="_blank" rel="noopener noreferrer">
-          Consultar a tu asesor
-        </a>
-      </div>
-    </section>
+        <ul class="moverlo" role="list" aria-label="Categorías de recetas">
+          <% const recetas = [
+            { id: 1, titulo: 'Ganancia de Masa', img: 'masaMusculas.jpg' },
+            { id: 2, titulo: 'Veganas', img: 'veganos.jpg' },
+            { id: 3, titulo: 'Pérdida de Peso', img: 'perdidaPeso.jpg' },
+            { id: 4, titulo: 'Definición', img: 'definicion.jpg' },
+            { id: 5, titulo: 'Sin Gluten', img: 'sinGluten.jpg' },
+            { id: 6, titulo: 'Rápidas y Fáciles', img: 'comidaRapida.jpg' },
+          ]; %>
+          <% recetas.forEach(r => { %>
+            <li class="card">
+              <article aria-labelledby="receta-<%= r.id %>">
+                <h4 class="card-title" id="receta-<%= r.id %>"><%= r.titulo %></h4>
+                <div class="card-body">
+                  <a href="/recetas/categoria/<%= r.id %>" aria-label="Ver recetas para <%= r.titulo %>">
+                    <img src="/images/<%= r.img %>" class="card-img-top" alt="Imagen representativa de <%= r.titulo %>.">
+                  </a>
+                  <a href="/recetas/categoria/<%= r.id %>" class="btn-primary">Ver Recetas</a>
+                </div>
+              </article>
+            </li>
+          <% }) %>
+        </ul>
+
+        <div class="consultar">
+          <a href="https://api.whatsapp.com/send?phone=5491166601356" target="_blank" rel="noopener noreferrer">
+            Consultar a tu asesor
+          </a>
+        </div>
+      </section>
+
+    </div>
   </main>
 
   <%- include('./partials/footer.ejs') %>

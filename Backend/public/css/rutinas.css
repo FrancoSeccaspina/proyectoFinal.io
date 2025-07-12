@@ -17,19 +17,15 @@ body {
     background-color: transparent;
     justify-content: center;
     align-items: center;
-
-    
     margin-top: 1.5rem;
     margin-bottom: 1.5rem;
-
-    /* Conservo aspecto contenedor */
     border-radius: 8px;
     overflow: hidden;
 }
 
 #rutina {
     padding: 0.5rem 1rem;
-    border-bottom: 1px solid rgb(55, 55, 55);
+    border-bottom: 1px solid white;
     width: 90%;
 }
 
