@@ -1,0 +1,33 @@
+thead{
+    color: white;
+    font-weight: bolder;
+}
+p, td{
+    color: white;
+    font-weight: bolder;
+}
+.cuadro-titulo{
+    color: white;
+    text-align: center;
+    font-weight: bolder;
+}
+.cuadro-subtitulo{
+    color: white;
+    text-align: center;
+    font-weight: bolder;
+}
+.totales p{
+    color: white;
+    text-align: center;
+    font-weight: bolder;
+}
+.cuadro-filtros{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+.cuadro-filtros label{
+    color: white;
+    text-align: center;
+    font-weight: bolder;
+}

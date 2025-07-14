@@ -40,29 +40,6 @@ body {
     align-items: center;
 }
 
-.moverlo {
-    display: grid;
-    grid-template-columns: repeat(5, 1fr);
-    gap: 5rem;
-    padding: 1rem;
-    max-width: 95vw;
-    justify-content: center;
-}
-
-.card {
-    width: 100%;
-    max-width: 12rem;
-    padding: 0.4rem;
-    border: 1px solid #ccc;
-    background-color: rgba(255, 255, 255, 0.12);
-    backdrop-filter: blur(3px);
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    text-align: center;
-    border-radius: 10px;
-}
-
 .card-title {
     font-size: 13px;
     margin-bottom: 0.4rem;
@@ -83,22 +60,46 @@ body {
     height: auto;
     border-radius: 6px;
 }
-
-.btn-primary {
-  width: 100%;
-  font-size: 12px;
-  color: white;
-  background-color: rgba(255, 255, 255, 0.12);
-  border: 1px solid white;
-  border-radius: 6px;
-  padding: 6px 10px;
-  font-weight: 500;
-  text-decoration: none;
+.moverlo {
   display: flex;
+  flex-wrap: wrap;
   justify-content: center;
-  cursor: pointer;
+  gap: 20px;
+  padding: 30px 10px;
 }
 
+.card {
+  width: 160px;
+  background-color: rgba(255, 255, 255, 0.12);
+  padding: 15px;
+  border-radius: 10px;
+    border: 1px solid #ccc;
+    backdrop-filter: blur(3px);
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
+  text-align: center;
+}
+
+.card img {
+  width: 100%;
+  height: auto;
+  margin-bottom: 10px;
+  border-radius: 6px;
+}
+
+.btn-primary {
+  display: inline-block;
+  padding: 8px 12px;
+  background-color: transparent;
+  color: white;
+  border-radius: 5px;
+  text-decoration: none;
+  font-weight: bold;
+  border: 1px solid white;
+    width: 100%;
+}
+.btn-primary:hover {
+  background-color: rgba(255, 255, 255, 0.2);
+}
 .boton {
     width: 100%;
     display: flex;
@@ -124,23 +125,24 @@ body {
 }
 
 /* RESPONSIVE */
-@media screen and (max-width: 1200px) {
+@media screen and (min-width: 1200px) {
     .moverlo {
         grid-template-columns: repeat(3, 1fr);
     }
 }
 
-@media screen and (max-width: 768px) {
+@media screen and (min-width: 768px) {
     .moverlo {
         grid-template-columns: repeat(2, 1fr);
     }
 
     .card {
-        max-width: 12rem;
+        width: 25%;
     }
+
 }
 
-@media screen and (max-width: 480px) {
+@media screen and (min-width: 480px) {
     .moverlo {
         grid-template-columns: 1fr;
     }
@@ -191,4 +193,14 @@ body {
     border-radius: 8px; 
     overflow: hidden; 
     box-shadow: 0px 4px 12px rgba(0, 0, 0, 0.15);
+}
+@media screen and (min-width: 1440px) {
+  .moverlo {
+    max-width: 1200px;
+    margin: 0 auto;
+  }
+
+  .card {
+    width: calc((100% - 120px) / 5); /* 5 tarjetas arriba con espacio de 30px entre ellas */
+  }
 }

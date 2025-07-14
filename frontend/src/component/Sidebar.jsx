@@ -1,34 +1,50 @@
-import React from 'react';
-import RedireccionFlotante from './RedireccionFlotante';
-import {Link} from 'react-router-dom';
+import React, { useEffect } from 'react';
+import { Link } from 'react-router-dom';
 import images from '../assets/images/LOGO.png';
-import '../css/components.css'
+import '../css/components.css';
+import '../utils/hamburguer_menu.js';
 
-function Sidebar(){
-    return(
-        <React.Fragment>
-            <div id='header-dashboard'>
-                <img className='logo-image' src={images} alt="Logo activa fitness" />
-                <div className='header-a'>
-                    <Link to="/">Home</Link> 
-        
-                    <Link to="/Usuarios">Usuarios</Link> 
-                    <Link to="/PrecioCuota">Precio Cuota</Link> 
+function Sidebar() {
 
-                    <Link to="/Productos">Productos</Link> 
+    useEffect(() => {
+    const hamburgerBtn = document.getElementById("hamburger-btn");
+    const menu = document.getElementById("menu");
 
-                    <Link to="/Recetas">Recetas</Link>
+    if (hamburgerBtn && menu) {
+      const toggleMenu = () => menu.classList.toggle("active");
+      hamburgerBtn.addEventListener("click", toggleMenu);
 
-                    <Link to="/Rutinas">Rutinas</Link> 
-                    <Link to="/Proveedores">Proveedores</Link> 
-                    <Link to="/Empleados">Empleados</Link>
-                    <Link to="/Reservas">Reservas</Link> 
+      const links = menu.querySelectorAll("a");
+      links.forEach(link =>
+        link.addEventListener("click", () => menu.classList.remove("active"))
+      );
 
-                    <a href="http://localhost:3032/users/logout">Volver</a>
-                </div>
-            </div>
-        <RedireccionFlotante/>    
-        </React.Fragment>
-    )
+      return () => {
+        hamburgerBtn.removeEventListener("click", toggleMenu);
+      };
+    }
+},[]);
+  return (
+    <React.Fragment>
+      <div id='header-dashboard'>
+        <img className='logo-image' src={images} alt="Logo activa fitness" />
+
+        <button id="hamburger-btn" aria-label="Abrir menú">☰</button>
+
+        <nav id='menu' className='header-a'>
+          <Link to="/">Home</Link>
+          <Link to="/Usuarios">Usuarios</Link>
+          <Link to="/PrecioCuota">Precio Cuota</Link>
+          <Link to="/Productos">Productos</Link>
+          <Link to="/Recetas">Recetas</Link>
+          <Link to="/Rutinas">Rutinas</Link>
+          <Link to="/Proveedores">Proveedores</Link>
+          <Link to="/Reservas">Reservas</Link>
+          <a href="http://localhost:3032/">Volver</a>
+        </nav>
+      </div>
+    </React.Fragment>
+  );
 }
+
 export default Sidebar;

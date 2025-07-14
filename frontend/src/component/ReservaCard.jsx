@@ -2,26 +2,25 @@ import { EstadosReserva } from "../constants/estadoReserva";
 import { useState } from "react";
 import axios from "axios";
 
-function ReservaCard({ reserva: reservaProp, onDelete }) {
+function ReservaCard({ reserva: reservaProp }) {
   const [reserva, setReserva] = useState(reservaProp);
 
   const onclickConfirm = async () => {
     try {
       const response = await axios.put(
-        `http://localhost:3032/api/reservas/confirmar/${reserva.id_reserva}`, {}, { withCredentials: true }
+        `http://localhost:3032/api/reservas/confirmar/${reserva.id_reserva}`
       );
       setReserva(...response.data.reserva);
     } catch (error) {
-        console.error("Error al confirmar la reserva:", error);
-        alert("Error al confirmar la reserva");
+      console.error("Error al confirmar la reserva:", error);
+      alert("Error al confirmar la reserva");
     }
   };
 
   const onclickCancel = async () => {
     try {
       const response = await axios.put(
-        `http://localhost:3032/api/reservas/cancelar/${reserva.id_reserva}`, {},
-        { withCredentials: true }
+        `http://localhost:3032/api/reservas/cancelar/${reserva.id_reserva}`
       );
       setReserva(...response.data.reserva);
     } catch (error) {
@@ -29,66 +28,68 @@ function ReservaCard({ reserva: reservaProp, onDelete }) {
       alert("Error al cancelar la reserva");
     }
   };
-  const handleDelete = async (id_reserva) => {
-    if (window.confirm("¿Estás seguro de que querés eliminar esta reserva?")) {
-      try {
-        await axios.delete(`http://localhost:3032/api/reservas/${id_reserva}`, { withCredentials: true });
-        onDelete?.(reserva.id_reserva);
-      } catch (error) {
-        console.error('Error al eliminar reserva:', error);
-        alert(`Error: ${error.response?.data?.message || error.message}`);
-      }
-    }
-  };
 
   return (
-    <div className="table-container">
-      <table className="custom-table">
-        <thead>
-          <tr>
-            <th>Reserva</th>
-            <th>Fecha</th>
-            <th>Estado</th>
-            <th>Total</th>
-            <th>Cliente : N° {reserva.id_usuario}</th>
-          </tr>
-        </thead>
+    <div className="reserva-card">
+      <table className="reserva-table">
         <tbody>
           <tr>
+            <td className="label">Reserva</td>
             <td>{reserva.id_reserva}</td>
+          </tr>
+          <tr>
+            <td className="label">Fecha</td>
             <td>{new Date(reserva.fecha).toLocaleString()}</td>
+          </tr>
+          <tr>
+            <td className="label">Estado</td>
             <td>{reserva.estado}</td>
+          </tr>
+          <tr>
+            <td className="label">Total</td>
             <td>$ {reserva.total}</td>
+          </tr>
+          <tr>
+            <td className="label">
+              Cliente : N° {reserva.Usuario?.id || "N/A"}
+            </td>
             <td>
               {reserva.Usuario?.nombre} {reserva.Usuario?.apellido}
             </td>
           </tr>
         </tbody>
       </table>
+
       {reserva.DetalleReservas?.map((detalle, index) => (
-        <div className="productos-reserva" key={index}>
-          <p>Producto: {detalle.Producto?.nombre}</p>
-          <p>Precio: ${detalle.Producto?.precio}</p>
-          <p>Cantidad: {detalle.cantidad}</p>
-          <p>Subtotal: ${detalle.subtotal}</p>
+        <div className="detalle-producto" key={index}>
+          <p>
+            <strong>Producto:</strong> {detalle.Producto?.nombre}
+          </p>
+          <p>
+            <strong>Precio:</strong> ${detalle.Producto?.precio}
+          </p>
+          <p>
+            <strong>Cantidad:</strong> {detalle.cantidad}
+          </p>
+          <p>
+            <strong>Subtotal:</strong> ${detalle.subtotal}
+          </p>
         </div>
       ))}
-      {reserva.estado !== EstadosReserva.CONFIRMADO && (
-        <div className="estado-pendiente">
-          <button className="btn btn-danger" onClick={onclickConfirm}>
+
+      <div className="estado-botones">
+        {reserva.estado !== EstadosReserva.CONFIRMADO && (
+          <button className="btn btn-confirmar" onClick={onclickConfirm}>
             Confirmar reserva
           </button>
-        </div>
-      )}
-      {reserva.estado !== EstadosReserva.CANCELADO && reserva.estado !== EstadosReserva.EXPIRADO && (
-        <div className="estado-pendiente">
-          <button className="btn btn-danger" onClick={onclickCancel}>
-            Cancelar reserva
-          </button>
-          </div>
-      )}
-      <button className="btn btn-danger" onClick={() => handleDelete(reserva.id_reserva)}>Eliminar Reserva</button>
-        
+        )}
+        {reserva.estado !== EstadosReserva.CANCELADO &&
+          reserva.estado !== EstadosReserva.EXPIRADO && (
+            <button className="btn btn-cancelar" onClick={onclickCancel}>
+              Cancelar reserva
+            </button>
+          )}
+      </div>
     </div>
   );
 }

@@ -44,7 +44,7 @@ const Proveedores = () => {
     
   return (
     
-    <div className='mover_abajo'>
+    <div className='moverJuntos'>
       <h2>Lista de Proveedores</h2>
         <Link to={`/proveedorNuevo`} class="btn btn-primary" >Agregar Nuevo</Link>
         <input value={search} onChange={searcher} type="text" placeholder='Buscar' className='form-control'/>

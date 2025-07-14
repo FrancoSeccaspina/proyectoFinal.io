@@ -3,6 +3,7 @@ import { Link } from 'react-router-dom';
 import axios from "axios";
 import { useLocation } from 'react-router-dom'; /*PASA A PRODUCTOS.JSX*/ 
 import '../css/header.css'
+import '../css/productos.css'
 
 function Productos() {
   console.log('Se está renderizando <Productos />');

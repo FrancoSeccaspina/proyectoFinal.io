@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from 'react';
 import { Link } from 'react-router-dom';
 import axios from 'axios';
-
+import '../css/precioCuota.css';
 const Cuota = () => {
   const [cuotaPrecio, setCuota] = useState([]);
   const showData = async () => {

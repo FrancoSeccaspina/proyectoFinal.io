@@ -107,69 +107,68 @@ h6{
 .btn {
     width: auto;
   
+}
+#hamburger-btn {
+  display: none;
+  font-size: 28px;
+  background: none;
+  color: white;
+  border: none;
+  cursor: pointer;
+  z-index: 1001;
+}
+
+/* Mobile styles */
+@media screen and (max-width: 769px) {
+  #header-dashboard {
+    flex-direction: row;
+    justify-content: space-between;
+    align-items: center;
+    padding: 0.5rem 1rem;
+    position: relative;
   }
+
+  #hamburger-btn {
+    display: block;
+  }
+
+  #menu {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    background-color: #000;
+    position: absolute;
+    top: 60px;
+    left: 0;
+    right: 0;
+    max-height: 0;
+    overflow: hidden;
+    transition: max-height 0.3s ease-in-out;
+    z-index: 999;
+  }
+
+  #menu.active {
+    max-height: 500px;
+  }
+
+  #menu a {
+    color: white;
+    padding: 1rem;
+    text-align: center;
+    width: 100%;
+    border-bottom: 1px solid #333;
+    text-decoration: none;
+    font-weight: bold;
+  }
+
+  #menu a:hover {
+    background-color: #fff;
+    color: #000;
+  }
+}
+
 @media screen and (min-width: 1240px) {
     .title-products{
         font-size: 18px;
     }
-}
-
-.flotante {
-    display: flex;
-    position: fixed;
-    color: white;    
-    font-size: 14px;
-
-    bottom: 0px;
-    left: 0px;
-    right: 0px;
-    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
-    background-color: #2e2e2e;
-    justify-content: space-between;
-}
-
-.texto_redireccion {
-  display: flex;
-  align-items: center;
-  gap: 4px;
-  font-size: 14px;
-  color: var(--text-color);
-  list-style: none;
-  padding: 0;
-    padding-right: 2rem;
-
-  margin: 0;
-}
-
-.texto_redireccion-item {
-  display: flex;
-  align-items: center;
-
-}
-
-.texto_redireccion-link {
-  text-decoration: none;
-  color: white;
-  transition: color 0.2s;
-  display: block;
-}
-
-
-.texto_redireccion-link:hover {
-  color: blue;
-}
-
-
-.texto_redireccion-separator {
-  display: flex;
-  align-items: center;
-}
-
-.texto_redireccion-icon {
-  width: 16px;
-  height: 16px;
-}
-
-html[dir="rtl"] .texto_redireccion-icon {
-  transform: rotate(180deg);
 }

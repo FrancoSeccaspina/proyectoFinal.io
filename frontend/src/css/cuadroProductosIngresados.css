@@ -77,3 +77,62 @@
     font-size: 1rem;
     color: #374151;
   }
+
+@media screen and (max-width: 425px) {
+  .cuadro-container {
+    padding: 1rem;
+    max-width: 100%;
+    border-radius: 8px;
+    box-shadow: none;
+  }
+
+  .cuadro-titulo {
+    font-size: 1.4rem;
+    margin-bottom: 0.75rem;
+  }
+
+  .cuadro-filtros {
+    flex-direction: column;
+    gap: 1rem;
+    margin-bottom: 1rem;
+  }
+
+  .cuadro-filtros label {
+    font-size: 0.9rem;
+  }
+
+  .cuadro-filtros input,
+  .cuadro-filtros select {
+    padding: 0.3rem 0.5rem;
+    font-size: 0.9rem;
+    margin-top: 0.2rem;
+  }
+
+  .grafico-wrapper {
+    height: 200px;
+    margin-top: 0.75rem;
+  }
+
+  .cuadro-subtitulo {
+    margin-top: 1.25rem;
+    font-size: 1rem;
+  }
+
+  .tabla-wrapper {
+    margin-top: 0.75rem;
+  }
+
+  .tabla-datos {
+    font-size: 0.85rem;
+  }
+
+  .tabla-datos th,
+  .tabla-datos td {
+    padding: 0.4rem;
+  }
+
+  .totales {
+    margin-top: 1rem;
+    font-size: 0.9rem;
+  }
+}

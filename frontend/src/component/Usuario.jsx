@@ -1,16 +1,16 @@
 import React, { useState, useEffect } from 'react';
-import { Link, resolvePath } from 'react-router-dom';
+import { Link } from 'react-router-dom';
 import axios from 'axios';
+import '../css/productos.css';
+import '../css/header.css'
 
 const Usuarios = () => {
   const [usuarios, setUsuarios] = useState([]);
-  const [search, setSearch] = useState("");
+  const [search, setSearch] = useState('');
 
   const showData = async () => {
     try {
-      const response = await fetch("http://localhost:3032/api/usuarios", { credentials: 'include' });
-      console.log('DATA RECIBIDA:', response);
-      const data = await response.json();
+      const { data } = await axios.get('http://localhost:3032/api/usuarios');
       console.log('DATA RECIBIDA:', data);
       setUsuarios(data);
     } catch (error) {
@@ -18,48 +18,44 @@ const Usuarios = () => {
     }
   };
 
-  // Función de búsqueda
-  const searcher = (e) => {
-    setSearch(e.target.value);
-  };
-
-  // Filtrado
+  
   const resultado = !search
-  ? usuarios
-  : usuarios.filter((usuario) =>
-      usuario.rol.toLowerCase().includes(search.toLowerCase()) ||
-      usuario.dni.toString().includes(search) ||
-      usuario.apellido.toLowerCase().includes(search.toLowerCase())
-    );
+    ? usuarios
+    : usuarios.filter((usuario) =>
+        usuario.dni?.toString().toLowerCase().includes(search.toLowerCase())
+      );
 
   useEffect(() => {
     showData();
   }, []);
 
   const handleDelete = async (id) => {
-    if (window.confirm("¿Estás seguro de que querés eliminar este usuario?")) {
+    if (window.confirm('¿Estás seguro de que querés eliminar este usuario?')) {
       try {
-        await axios.delete(`http://localhost:3032/api/usuarios/${id}`, { withCredentials: true });
-        setUsuarios(prevUsuarios => prevUsuarios.filter(u => u.id !== id));
+        await axios.delete(`http://localhost:3032/api/usuarios/${id}`);
+        setUsuarios((prev) => prev.filter((u) => u.id !== id));
       } catch (error) {
+        const msg = error.response?.data?.message || error.message || 'Error desconocido';
         console.error('Error al eliminar usuario:', error);
-        alert(`Error: ${error.response?.data?.message || error.message}`);
+        alert(`Error: ${msg}`);
       }
     }
   };
 
   return (
-    <div className='mover_abajo'>
-      <h2 className='box-title'>Lista de Usuarios</h2>
-      <Link to="http://localhost:3032/register" className="btn btn-primary">Agregar Nuevo</Link>
+    <div className="container-products">
+      <section className="moverJuntos">
+        <h2 className="box-title">Lista de Usuarios</h2>
+        <Link to="/nuevoUsuario" className="btn btn-primary">Agregar Nuevo</Link>
+      </section>
       <input
         value={search}
-        onChange={searcher}
         type="text"
-        placeholder='Buscar por Rol o DNI o Apellido'
-        className='form-control'
+        placeholder="Buscar por DNI"
+        className="form-control mt-2 mb-3"
       />
-      <table className='table table-dark table-striped'>
+
+      <table className="table table-dark table-striped">
         <thead>
           <tr>
             <th>Nombre</th>
@@ -79,10 +75,10 @@ const Usuarios = () => {
               <td>{usuario.dni}</td>
               <td>{usuario.aptoMedico}</td>
               <td>
-                <Link to={`/usuarios/editar/${usuario.id}`} className="btn btn-success">Editar</Link>{' '}
-                <button className="btn btn-danger" onClick={() => handleDelete(usuario.id)}>Eliminar</button>{' '}
-                <Link to={`/cuota/${usuario.id}`} className="btn btn-primary">Historial Cuota</Link>{' '}
-                <Link to={`/cuotaNueva/${usuario.id}`} className="btn btn-warning">Agregar Cuota</Link>
+                <Link to={`/usuarios/editar/${usuario.id}`} className="btn btn-success btn-sm">Editar</Link>{' '}
+                <button className="btn btn-danger btn-sm" onClick={() => handleDelete(usuario.id)}>Eliminar</button>{' '}
+                <Link to={`/cuota/${usuario.id}`} className="btn btn-primary btn-sm">Historial Cuota</Link>{' '}
+                <Link to={`/cuotaNueva/${usuario.id}`} className="btn btn-warning btn-sm">Agregar Cuota</Link>
               </td>
             </tr>
           ))}
