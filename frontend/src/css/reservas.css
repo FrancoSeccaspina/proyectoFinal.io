@@ -79,8 +79,24 @@
 .btn:hover {
   opacity: 0.85;
 }
+.btn-exportar {
+  background-color: #000;        
+  color: #fff;                   
+  padding: 8px 16px;
+  border: 2px solid #fff;        
+  border-radius: 4px;
+  font-weight: bold;
+  cursor: pointer;
+  margin-top: 10px;
+  transition: all 0.3s ease;
+  }
+  
+  .btn-exportar:hover {
+  background-color: #fff;        
+  color: #000;                   
+  border-color: #000;            
+}
 
-/* Responsive */
 @media (max-width: 425px) {
   .reserva-card {
     margin: 0.5rem;
