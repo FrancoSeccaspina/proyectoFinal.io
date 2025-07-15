@@ -50,7 +50,6 @@
             </div>
 
             <form class="cantidadProductos" action="/carrito/agregar" method="POST" aria-label="Formulario para agregar producto al carrito">
-            <span id="stock-info">Stock disponible: <%= producto.stock %></span>
             <input type="hidden" name="id_producto" value="<%= producto.id %>">
 
             <label for="cantidad-producto" class="visually-hidden">Cantidad a comprar</label>

@@ -76,7 +76,9 @@ button.crear:hover {
 }
 
 .precios {
-    padding: 0 1rem;
+    display: flex;
+    padding: 0.5rem;
+    align-items: center;
 }
 
 .precio-ahora {
@@ -143,7 +145,6 @@ button.crear:hover {
     padding: 1rem 0;
 }
 
-/*banner header*/
 #banner-image {
     display: none;
 }
@@ -161,9 +162,8 @@ footer {
     }
 
     .section-description {
-        display: flex;
         align-items: center;
-        justify-content: space-evenly;
+        justify-content: center;
     }
 
     .list-products {

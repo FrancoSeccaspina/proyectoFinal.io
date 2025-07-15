@@ -4,7 +4,7 @@ window.addEventListener('load', function () {
     function filterList() {
       const searchInput = document.querySelector('#search-input')
       const filter = searchInput.value.toLowerCase()
-      const listItems = document.querySelectorAll('.list-group-item')
+      const listItems = document.querySelectorAll('.card')
   
       listItems.forEach((item) => {
         let text = item.textContent;
@@ -17,7 +17,7 @@ window.addEventListener('load', function () {
       })
     }
     document.querySelector('#clearFilter').addEventListener('click', e => {
-      const listItems = document.querySelectorAll('.list-group-item')
+      const listItems = document.querySelectorAll('.card')
       listItems.forEach((item) => {
         item.style.display = '';
       })
