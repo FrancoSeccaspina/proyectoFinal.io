@@ -84,11 +84,8 @@ class carritoController {
     public async mostrarCarrito(req: Request, res: Response): Promise<void>{
         try {
             const productosCarrito = await obtenerProductosEnCarrito(req);
-            const usuarioLogueado = SessionService.usuarioLogeado(req);
             res.render("carrito", {
                 productosCarrito: productosCarrito,
-                showModal: false,
-                usuarioLogueado: usuarioLogueado
             });
 
         } catch (error) {
