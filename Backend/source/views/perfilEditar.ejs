@@ -13,7 +13,7 @@
 
   <main class="main-profile" aria-labelledby="edit-profile-heading">
     <h1 id="edit-profile-heading" class="visually-hidden">Editar Perfil de Usuario</h1>
-    <form action="/users/<%= usuarioLogueado.id %>?_method=PUT" method="POST" enctype="multipart/form-data" class="FormularioEditar" aria-describedby="form-description">
+    <form action="/users/<%= usuarioLogueado.id %>" method="POST" enctype="multipart/form-data" class="FormularioEditar" aria-describedby="form-description">
       <p id="form-description" class="visually-hidden">
         Utiliza este formulario para actualizar tu información personal y documentos. Los campos marcados con un asterisco son obligatorios.
       </p>
