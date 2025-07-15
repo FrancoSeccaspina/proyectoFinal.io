@@ -1,3 +1,5 @@
+import '../css/redireccionamientoFlotante.css';
+
 function RedireccionFlotante(){
     return (
             <div class="flotante">

@@ -1,3 +1,4 @@
+import RedireccionFlotante from './RedireccionFlotante';
 import React, { useEffect } from 'react';
 import { Link } from 'react-router-dom';
 import images from '../assets/images/LOGO.png';
@@ -43,6 +44,7 @@ function Sidebar() {
           <a href="http://localhost:3032/">Volver</a>
         </nav>
       </div>
+        <RedireccionFlotante/>
     </React.Fragment>
   );
 }
