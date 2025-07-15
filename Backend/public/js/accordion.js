@@ -5,24 +5,24 @@ document.addEventListener("DOMContentLoaded", () => {
     button.addEventListener("click", () => {
       const card = button.closest(".accordion-card");
       const content = card.querySelector(".accordion-content");
+      const isOpen = card.classList.contains("open");
 
-      const isExpanded = button.getAttribute("aria-expanded") === "true";
-      document.querySelectorAll(".accordion-content").forEach((el) => {
-        el.style.display = "none";
-        el.setAttribute("hidden", true);
-      });
-      document.querySelectorAll(".accordion-toggle").forEach((btn) => {
-        btn.setAttribute("aria-expanded", false);
+      // Cierra todos los acordeones
+      document.querySelectorAll(".accordion-card").forEach((otherCard) => {
+        otherCard.classList.remove("open");
+        const otherContent = otherCard.querySelector(".accordion-content");
+        const otherButton = otherCard.querySelector(".accordion-toggle");
+        otherContent.style.display = "none";
+        otherContent.setAttribute("hidden", true);
+        otherButton.setAttribute("aria-expanded", "false");
       });
 
-      if (!isExpanded) {
+      // Si el actual no estaba abierto, lo abre
+      if (!isOpen) {
+        card.classList.add("open");
         content.style.display = "block";
         content.removeAttribute("hidden");
-        button.setAttribute("aria-expanded", true);
-      } else {
-        content.style.display = "none";
-        content.setAttribute("hidden", true);
-        button.setAttribute("aria-expanded", false);
+        button.setAttribute("aria-expanded", "true");
       }
     });
   });

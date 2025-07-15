@@ -8,11 +8,13 @@ h2 {
     margin: 0;
     width: 100%;
 }
+
 .accordion-container {
     max-width: 800px;
     margin: 2rem auto;
     padding: 0 1rem;
 }
+
 .accordion-card {
     border: 1px solid white;
     border-radius: 8px;
@@ -22,94 +24,9 @@ h2 {
     backdrop-filter: blur(2px);
     transition: box-shadow 0.3s ease;
 }
+
 .accordion-card:hover {
     box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
-}
-.accordion-toggle {
-    background-color: #5d5d5d;
-    color: white;
-    padding: 15px;
-    width: 100%;
-    text-align: left;
-    font-size: 1rem;
-    border: none;
-    outline: none;
-    cursor: pointer;
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-}
-.accordion-content {
-    display: none;
-    padding: 15px;
-    background-color: transparent;
-    color: white !important; /* fuerza el blanco incluso si hay otras reglas */
-    font-weight: 500;
-    backdrop-filter: blur(2px);
-    transition: max-height 0.3s ease-out;
-}
-
-.accordion-content p {
-    color: white !important;  /* asegura que los <p> internos también sean blancos */
-    font-weight: 500;
-}
-.accordion-card.open .accordion-content {
-    display: block;
-}
-.arrow {
-    transition: transform 0.3s ease;
-}
-.accordion-card.open .arrow {
-    transform: rotate(180deg);
-}
-p {
-    color: black;
-    font-weight: 650;
-    white-space: pre-line;
-    margin: 0;
-}
-
-@media screen and (min-width:320px) {
-    h2{
-        font-size: 12px;
-        width: 100%;
-    }
-    p{
-        font-size: 10px;
-        font-weight: bolder;
-    }
-}
-@media screen and (min-width:768px) {
-    h2{
-        font-size: 20px;
-        width: 100%;
-    }
-    p{
-        font-size: 15px;
-        font-weight: bolder;
-    }
-}
-    .visually-hidden {
-    position: absolute;
-    width: 1px;
-    height: 1px;
-    margin: -1px;
-    padding: 0;
-    overflow: hidden;
-    clip: rect(0, 0, 0, 0);
-    border: 0;
-    }
-.mainLienzo {
-    margin-top: 1rem;
-    margin-bottom: 1rem;
-    padding: 1rem;
-    background-image: url('/images/Lienzo01vero.jpeg');
-    background-size: cover;
-    background-repeat: no-repeat;
-    background-position: center;
-    border-radius: 8px;
-    overflow: hidden;
-    box-shadow: 0px 4px 12px rgba(0, 0, 0, 0.12);
 }
 
 .accordion-toggle {
@@ -130,6 +47,90 @@ p {
 .accordion-toggle:hover {
     background-color: rgba(255, 255, 255, 0.3);
 }
+
+.accordion-content {
+    display: none;
+    padding: 15px;
+    background-color: transparent;
+    color: white !important;
+    font-weight: 500;
+    backdrop-filter: blur(2px);
+    transition: max-height 0.3s ease-out;
+}
+
+.accordion-content p {
+    color: white !important;
+    font-weight: 500;
+}
+
+.accordion-card.open .accordion-content {
+    display: block;
+}
+
+.arrow {
+    display: inline-block;
+    margin-left: 10px;
+    transition: transform 0.3s ease;
+}
+
+.accordion-card.open .arrow {
+    transform: rotate(180deg);
+}
+
+/* CAMBIO: Limitamos los estilos de <p> para no afectar el footer */
+.mainRecetaDetail p {
+    color: white;
+    font-weight: 500;
+    white-space: pre-line;
+    margin: 0;
+}
+
+@media screen and (min-width: 320px) {
+    h2 {
+        font-size: 12px;
+        width: 100%;
+    }
+
+    .mainRecetaDetail p {
+        font-size: 10px;
+    }
+}
+
+@media screen and (min-width: 768px) {
+    h2 {
+        font-size: 20px;
+        width: 100%;
+    }
+
+    .mainRecetaDetail p {
+        font-size: 15px;
+    }
+}
+
+.visually-hidden {
+    position: absolute;
+    width: 1px;
+    height: 1px;
+    margin: -1px;
+    padding: 0;
+    overflow: hidden;
+    clip: rect(0, 0, 0, 0);
+    border: 0;
+}
+
+.mainLienzo {
+    margin-top: 1rem;
+    margin-bottom: 1rem;
+    padding: 1rem;
+    background-image: url('/images/Lienzo01vero.jpeg');
+    background-size: cover;
+    background-repeat: no-repeat;
+    background-position: center;
+    border-radius: 8px;
+    overflow: hidden;
+    box-shadow: 0px 4px 12px rgba(0, 0, 0, 0.12);
+}
+
 .mainRecetaDetail {
     margin-top: 1rem;
     margin-bottom: 1rem;

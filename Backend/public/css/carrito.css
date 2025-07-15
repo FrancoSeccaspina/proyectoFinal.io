@@ -2,7 +2,6 @@
     box-sizing: border-box;
 }
 
-
 @import url(./productDetail.css);
 
 main {
@@ -11,7 +10,7 @@ main {
 
 #header-cart {
     padding: 3rem 1rem 2rem;
-    color: #000000;
+    color: white !important;
     display: flex;
     flex-direction: column;
     align-items: flex-start;
@@ -20,10 +19,11 @@ main {
 #header-cart p {
     font-size: 0.8rem;
     margin-left: 0.5rem;
+    color: white !important;
 }
 
 #header-cart h1 {
-    color: #4f4f4f;
+    color: white !important;
     font-size: 30px;
     font-weight: 800;
 }
@@ -33,6 +33,7 @@ main {
     font-size: 0.9rem;
     align-items: center;
     margin-top: 0.8rem;
+    color: white !important;
 }
 
 #warning-sentence img {
@@ -42,18 +43,15 @@ main {
 #terms-products {
     font-size: 0.9rem;
     padding: 0.5rem;
-    color: #000000;
+    color: white !important;
     border-bottom: 1px solid #ccc;
-}
-
-#terms-products {
     display: flex;
     justify-content: space-around;
     align-items: center;
 }
 
 .details-p {
-    color: #979797;
+    color: white !important;
 }
 
 .product-name-img {
@@ -67,13 +65,13 @@ main {
 .product-name-img h2 {
     font-size: 0.9rem;
     margin-left: 0.5rem;
-    color: #393939;
+    color: white !important;
 }
 
 .name-ul-product {
     display: flex;
     flex-direction: column;
-    color: #171717dd;
+    color: white !important;
     align-items: flex-end;
     justify-content: space-around;
 }
@@ -86,18 +84,19 @@ main {
     font-size: 1.3rem;
     font-weight: bolder;
     margin-left: 1rem;
-    color: #000000;
+    color: white !important;
 }
 
 #description-product-cart {
     margin: 1rem;
+    color: white !important;
 }
 
 .trash-button {
     margin: 0;
     font-size: 0;
     background: transparent;
-    color: rgb(0, 0, 0);
+    color: white !important;
 }
 
 .trash-button i {
@@ -111,7 +110,7 @@ main {
     outline: none;
     font-size: 15px;
     border-radius: 2px;
-    color: white;
+    color: white !important;
 }
 
 .quantity-box {
@@ -122,14 +121,16 @@ main {
 #cards-products {
     margin: 1rem;
     border-radius: 0.5rem;
-    /* border: 2px solid #000000; */
-    background: #ffffffa6;
+    background-color: rgba(255, 255, 255, 0.1); /* fondo translúcido */
+    border: 1px solid white;
+    backdrop-filter: blur(2px);
+    color: white !important;
 }
 
 .pay-sentence {
     display: flex;
     align-items: center;
-    color: #000000;
+    color: white !important;
     font-size: 14px;
     margin-left: 1rem;
     flex-direction: column;
@@ -138,7 +139,7 @@ main {
 .methods-img {
     display: flex;
     margin-left: 2rem;
-    color: rgb(136 136 136);
+    color: white !important;
     align-items: center;
     gap: 1rem;
     flex-direction: row;
@@ -161,7 +162,7 @@ main {
     flex-direction: row;
     align-items: center;
     justify-content: center;
-    color: black;
+    color: white !important;
     font-weight: 900;
 }
 
@@ -169,7 +170,7 @@ main {
     padding: 1rem 0;
 }
 
-@media screen and (min-width:320px) {
+@media screen and (min-width: 320px) {
     .product-name-img {
         display: flex;
         flex-direction: column;
@@ -208,7 +209,7 @@ main {
 .cart-title {
     font-size: 1.25rem;
     font-weight: bold;
-    color: #1f2937;
+    color: white !important;
 }
 
 .cart-list {
@@ -237,18 +238,19 @@ main {
 
 .cart-details {
     flex-grow: 1;
+    color: white !important;
 }
 
 .cart-product-name {
     font-size: 0.875rem;
-    color: #1f2937;
+    color: white !important;
     margin: 0;
 }
 
 .cart-attributes {
     margin-top: 0.25rem;
     font-size: 10px;
-    color: #6b7280;
+    color: white !important;
 }
 
 .cart-attributes div {
@@ -259,6 +261,7 @@ main {
 .cart-attributes dd {
     display: inline;
     margin: 0;
+    font-size: 1.1rem;
 }
 
 .cart-actions {
@@ -279,17 +282,10 @@ main {
     color: #6b7280;
 }
 
-.cart-quantity-input::-webkit-inner-spin-button,
-.cart-quantity-input::-webkit-outer-spin-button {
-    margin: 0;
-    appearance: none;
-}
-
-
 .cart-remove-button {
     background: none;
     border: none;
-    color: #6b7280;
+    color: white !important;
     cursor: pointer;
     transition: color 0.3s;
 }
@@ -303,24 +299,11 @@ main {
     height: 1rem;
 }
 
-.visually-hidden {
-    position: absolute;
-    width: 1px;
-    height: 1px;
-    padding: 0;
-    margin: -1px;
-    overflow: hidden;
-    clip: rect(0, 0, 0, 0);
-    white-space: nowrap;
-    border: 0;
-}
-
 @media screen and (min-width: 768px) {
     #cards-products {
         margin: auto;
         width: 45rem;
     }
-
 }
 
 @media screen and (min-width: 1024px) {
@@ -330,14 +313,19 @@ main {
     }
 }
 
-
 .card-precio {
     display: flex;
     align-items: center;
     gap: 0.5rem;
-    padding: 0.5rem;
+    padding: 1rem;
     flex-direction: row;
     width: 100%;
+    background-color: rgba(255, 255, 255, 0.1);
+    border: 1px solid white;
+    border-radius: 8px;
+    box-shadow: 0 4px 6px rgba(0,0,0,0.15);
+    backdrop-filter: blur(2px);
+    color: white !important;
 }
 
 .icon {
@@ -347,25 +335,20 @@ main {
     display: flex;
     align-items: center;
     justify-content: center;
+    width: 1.25rem;
+    height: 1.25rem;
+    stroke: currentColor;
+    transition: stroke 0.2s ease-in-out;
 }
 
 .svg-icon {
     width: 2.5rem;
-    /* height: 1rem; */
 }
 
-.info .amount {
-    font-size: 1rem;
-    font-weight: 500;
-    color: #111827;
-    /* text-gray-900 */
-    margin: 0;
-}
-
+.info .amount,
 .info .label {
-    font-size: 0.875rem;
-    color: #6b7280;
-    /* text-gray-500 */
+    font-size: 1rem;
+    color: white !important;
     margin: 0;
 }
 
@@ -377,13 +360,6 @@ main {
 
 .label {
     font-size: 0.875rem;
-}
-
-.icon {
-    width: 1.25rem;
-    height: 1.25rem;
-    stroke: currentColor;
-    transition: stroke 0.2s ease-in-out;
 }
 
 .flex-container {
@@ -404,7 +380,6 @@ main {
     justify-content: center;
 }
 
-
 .carrito-container {
     padding: 2rem;
 }
@@ -413,13 +388,56 @@ main {
     padding: 2rem;
 }
 
-    .visually-hidden {
+.mainLienzo {
+    margin-top: 1rem;
+    margin-bottom: 1rem;
+    padding: 1rem;
+    background-image: url('/images/Lienzo01vero.jpeg');
+    background-size: 100% auto;
+    background-repeat: repeat-y;
+    background-position: center top;
+    background-attachment: fixed;
+    border-radius: 8px;
+    overflow: hidden;
+    box-shadow: 0px 4px 12px rgba(0, 0, 0, 0.12);
+}
+
+.btn-confirmar-reserva {
+    background-color: rgba(255, 255, 255, 0.12);
+    color: white;
+    border: 1px solid white;
+    border-radius: 6px;
+    padding: 10px 16px;
+    font-size: 0.9rem;
+    text-transform: uppercase;
+    font-weight: 500;
+    cursor: pointer;
+    transition: background-color 0.3s ease;
+}
+
+.btn-confirmar-reserva:hover {
+    background-color: rgba(255, 255, 255, 0.3);
+    color: white;
+}
+
+.visually-hidden {
     position: absolute;
-    width: 1px; 
+    width: 1px;
     height: 1px;
-    margin: -1px;
     padding: 0;
+    margin: -1px;
     overflow: hidden;
     clip: rect(0, 0, 0, 0);
     border: 0;
-    }
+}
+#terms-products svg {
+    fill: white;
+}
+.cart-remove-button svg {
+    fill: white;
+    transition: fill 0.3s ease;
+}
+
+.cart-remove-button:hover svg {
+    fill: #dc2626;
+}
