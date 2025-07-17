@@ -18,7 +18,7 @@ export const verificarTokenPorRol = (rolesPermitidos: string[]) => {
   return (req: Request, res: Response, next: NextFunction): void => {
     
     const token = req.cookies?.token;
-
+    console.log("TOOKEM  : ", token)
     if (!token) {
       console.warn(`Acceso denegado: Token no proporcionado. Ruta: ${req.originalUrl}.`);
       res.status(401).json({ mensaje: 'No se ha proporcionado el token de autenticación.' });

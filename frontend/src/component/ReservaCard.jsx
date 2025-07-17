@@ -1,15 +1,39 @@
 import { EstadosReserva } from "../constants/estadoReserva";
+import ModalConfirm from "./ModalDeConfirmacion"
 import { useState } from "react";
 import axios from "axios";
 
 function ReservaCard({ reserva: reservaProp }) {
   const [reserva, setReserva] = useState(reservaProp);
+  const [isOpen, setIsOpen] = useState(false);
+  const [mensaje, setMensaje] = useState("")
+  const [accionConfirmar, setAccionConfirmar] = useState(null);
+
+  const modalConfirmarReserva = () => {
+    setAccionConfirmar(() => () => {
+      onclickConfirm()
+      setIsOpen(false)
+    })
+    setMensaje("Desea confirmar reserva?")
+    setIsOpen(true)
+  }
+
+  const modalCancelarReserva = () => {
+    setAccionConfirmar(() => () => {
+      onclickCancel()
+      setIsOpen(false)
+    })
+    setMensaje("Desea confirmar reserva?")
+    setIsOpen(true)
+  }
 
   const onclickConfirm = async () => {
     try {
       const response = await axios.put(
-        `http://localhost:3032/api/reservas/confirmar/${reserva.id_reserva}`
-      );
+        `http://localhost:3032/api/reservas/confirmar/${reserva.id_reserva}`, {},
+        {
+          withCredentials: true
+        });
       setReserva(...response.data.reserva);
     } catch (error) {
       console.error("Error al confirmar la reserva:", error);
@@ -20,7 +44,10 @@ function ReservaCard({ reserva: reservaProp }) {
   const onclickCancel = async () => {
     try {
       const response = await axios.put(
-        `http://localhost:3032/api/reservas/cancelar/${reserva.id_reserva}`
+        `http://localhost:3032/api/reservas/cancelar/${reserva.id_reserva}`, {},
+        {
+          withCredentials: true
+        }
       );
       setReserva(...response.data.reserva);
     } catch (error) {
@@ -78,17 +105,27 @@ function ReservaCard({ reserva: reservaProp }) {
       ))}
 
       <div className="estado-botones">
+
         {reserva.estado !== EstadosReserva.CONFIRMADO && (
-          <button className="btn btn-confirmar" onClick={onclickConfirm}>
+          <button className="btn btn-confirmar" onClick={modalConfirmarReserva}>
             Confirmar reserva
           </button>
         )}
+
         {reserva.estado !== EstadosReserva.CANCELADO &&
           reserva.estado !== EstadosReserva.EXPIRADO && (
-            <button className="btn btn-cancelar" onClick={onclickCancel}>
+            <button className="btn btn-cancelar" onClick={modalCancelarReserva}>
               Cancelar reserva
             </button>
           )}
+
+        <ModalConfirm 
+          isOpen={isOpen}
+          onClose={() => setIsOpen(false)}
+          onConfirm={accionConfirmar}
+          message={mensaje}
+          />
+          
       </div>
     </div>
   );

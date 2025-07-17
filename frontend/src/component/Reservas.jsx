@@ -66,9 +66,11 @@ function Reservas() {
 
   return (
     <div className="table-wrapper">
+
       <section className="moverJuntos">
         <h2 className="box-title">Lista de Reservas</h2>
       </section>
+
       <input
         value={search}
         onChange={searcher}
@@ -76,9 +78,11 @@ function Reservas() {
         placeholder='Buscar por Estado'
         className='form-control'
       />
+
       <button onClick={exportarExcel} className="btn-exportar">
         Exportar a Excel
       </button>
+
       {loading ? (
         <p>Cargando reservas...</p>
       ) : reservas.length > 0 ? (
