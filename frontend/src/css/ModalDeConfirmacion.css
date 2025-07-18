@@ -1,61 +1,53 @@
 .modal-overlay {
   position: fixed;
   inset: 0;
-  z-index: 50;
-  display: none;
+  z-index: 1000;
+  display: grid;
   place-content: center;
   background-color: rgba(0, 0, 0, 0.5);
   padding: 1rem;
 }
 
-.modal-overlay.active {
-  display: grid;
-}
-
-.modal-content {
-  overflow: hidden;
-  max-width: 28rem;
+.modal-box {
   background-color: #ffffff;
   padding: 1.5rem;
   border-radius: 0.5rem;
   border-top: 5px solid red;
   border-bottom: 5px solid red;
   box-shadow: 0 10px 15px rgba(0, 0, 0, 0.1);
+  max-width: 28rem;
+  width: 100%;
+  overflow: hidden;
+  text-align: center;
 }
 
 @media (prefers-color-scheme: dark) {
-  .modal-content {
+  .modal-box {
     background-color: #000000;
     color: #f1f5f9;
   }
 }
 
-.modal-title {
+.modal-box h2 {
   font-size: 1.25rem;
   font-weight: bold;
-  color: #1f2937;
+  margin-bottom: 1rem;
+  color: #000;
+}
+
+.modal-box p {
+  margin-bottom: 1.5rem;
+  color: #333;
 }
 
 @media (prefers-color-scheme: dark) {
-  .modal-title {
+  .modal-box h2,
+  .modal-box p {
     color: #f1f5f9;
   }
 }
 
-.modal-body {
-  margin-top: 1rem;
-  color: #1f2937;
-  line-height: 1.6;
-}
-
-@media (prefers-color-scheme: dark) {
-  .modal-body {
-    color: #f1f5f9;
-  }
-}
-
-.modal-footer {
-  margin-top: 1.5rem;
+.modal-buttons {
   display: flex;
   justify-content: flex-end;
   gap: 0.5rem;
@@ -71,31 +63,31 @@
   transition: background-color 0.2s ease;
 }
 
-.btn-cancel {
+.cancel {
   background-color: #f3f4f6;
   color: #374151;
 }
 
-.btn-cancel:hover {
+.cancel:hover {
   background-color: #e5e7eb;
 }
 
 @media (prefers-color-scheme: dark) {
-  .btn-cancel {
+  .cancel {
     background-color: #2d3748;
     color: #e2e8f0;
   }
 
-  .btn-cancel:hover {
+  .cancel:hover {
     background-color: #4a5568;
   }
 }
 
-.btn-confirm {
+.confirm {
   background-color: #2563eb;
   color: white;
 }
 
-.btn-confirm:hover {
+.confirm:hover {
   background-color: #1d4ed8;
 }
