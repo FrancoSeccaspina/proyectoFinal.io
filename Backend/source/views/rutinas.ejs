@@ -1,62 +1,61 @@
 <!DOCTYPE html>
 <html lang="es">
   <head>
-  <%- include('./partials/head.ejs') %>
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Rutinas de Entrenamiento - Guía por Grupo Muscular - [Nombre de tu Tienda/Sitio]</title>
-  <link rel="stylesheet" href="/css/rutinas.css">
-  <link rel="stylesheet" href="/css/footer.css">
-</head>
+    <%- include('./partials/head.ejs') %>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Rutinas de Entrenamiento - Guía por Grupo Muscular</title>
+    <link rel="stylesheet" href="/css/rutinas.css">
+    <link rel="stylesheet" href="/css/footer.css">
+  </head>
 
-<body>
-  <%- include('./partials/header.ejs') %>
+  <body>
+    <%- include('./partials/header.ejs') %>
 
-  <main class="mainRutinas" aria-labelledby="main-heading-rutinas">
-    <h1 id="main-heading-rutinas" class="visually-hidden">Explora Rutinas de Entrenamiento por Grupo Muscular</h1>
-    <section id="rutina" aria-labelledby="section-title-rutinas">
-      <h2 id="section-title-rutinas">Rutinas</h2>
-    </section>
+    <main class="mainRutinas" aria-labelledby="main-heading-rutinas">
+      <h1 id="main-heading-rutinas" class="visually-hidden">Explora Rutinas de Entrenamiento por Grupo Muscular</h1>
 
-    <section class="rutinas_subidas" aria-labelledby="rutinas-subidas-title">
-      <div class="titulo">
-        <h3 id="rutinas-subidas-title">¿Querés ideas para tu entrenamiento?</h3>
-        <p>Guía para cada grupo muscular</p>
-      </div>
-
-      <section class="moverlo" role="grid" aria-label="Tarjetas de ejercicios por grupo muscular">
-        <% const grupos = [
-          { id: 1, nombre: 'Abdominales', img: 'abs.png' },
-          { id: 2, nombre: 'Pecho', img: 'pecho.png' },
-          { id: 3, nombre: 'Bíceps', img: 'biceps.png' },
-          { id: 4, nombre: 'Hombros', img: 'hombros.png' },
-          { id: 5, nombre: 'Espalda', img: 'espalda.png' },
-          { id: 6, nombre: 'Tríceps', img: 'triceps.png' },
-          { id: 7, nombre: 'Femorales', img: 'femorales.jpg' },
-          { id: 8, nombre: 'Glúteos', img: 'gluteos.jpg' },
-          { id: 9, nombre: 'Cuádriceps', img: 'cuadriceps.png' }
-        ]; %>
-
-        <% grupos.forEach(grupo => { %>
-          <div class="card" role="gridcell" aria-labelledby="<%= grupo.nombre.toLowerCase() %>-title">
-            <h5 class="card-title" id="<%= grupo.nombre.toLowerCase() %>-title"><%= grupo.nombre %></h5>
-            <div class="card-body">
-              <img src="/images/<%= grupo.img %>" class="card-img-top" alt="Ilustración de ejercicios para <%= grupo.nombre.toLowerCase() %>.">
-              <div class="boton">
-                <a href="/ejercicios/<%= grupo.id %>" class="btn-primary" aria-label="Ver ejercicios de <%= grupo.nombre %>">VER</a>
-              </div>
-            </div>
-          </div>
-        <% }); %>
+      <section id="rutina" aria-labelledby="section-title-rutinas">
+        <h2 id="section-title-rutinas">Rutinas</h2>
       </section>
 
-      <div class="consultar">
-        <a href="https://api.whatsapp.com/send?phone=5491166601356" target="_blank" rel="noopener noreferrer">
-          <span class="visually-hidden">Abrir chat de WhatsApp para </span>Consultar a un asesor
-        </a>
-      </div>
-    </section>
-  </main>
+      <section class="rutinas_subidas titulo" aria-labelledby="rutinas-subidas-title">
+      <h3 id="rutinas-subidas-title">¿Querés ideas para tu entrenamiento?</h3>
+      <p>Guía para cada grupo muscular</p>
 
-  <%- include('./partials/footer.ejs') %>
-</body>
+        <section class="moverlo" role="grid" aria-label="Tarjetas de ejercicios por grupo muscular">
+          <% const grupos = [
+            { id: 1, nombre: 'Abdominales', img: 'abs.png' },
+            { id: 2, nombre: 'Pecho', img: 'pecho.png' },
+            { id: 3, nombre: 'Bíceps', img: 'biceps.png' },
+            { id: 4, nombre: 'Hombros', img: 'hombros.png' },
+            { id: 5, nombre: 'Espalda', img: 'espalda.png' },
+            { id: 6, nombre: 'Tríceps', img: 'triceps.png' },
+            { id: 7, nombre: 'Femorales', img: 'femorales.jpg' },
+            { id: 8, nombre: 'Glúteos', img: 'gluteos.jpg' },
+            { id: 9, nombre: 'Cuádriceps', img: 'cuadriceps.png' }
+          ]; %>
+
+          <% grupos.forEach(grupo => { %>
+            <div class="card" role="gridcell" aria-labelledby="<%= grupo.nombre.toLowerCase() %>-title">
+              <h5 class="card-title" id="<%= grupo.nombre.toLowerCase() %>-title"><%= grupo.nombre %></h5>
+              <div class="card-body">
+                <img src="/images/<%= grupo.img %>" class="card-img-top" alt="Ilustración de ejercicios para <%= grupo.nombre.toLowerCase() %>.">
+                <div class="boton">
+                  <a href="/ejercicios/<%= grupo.id %>" class="btn-primary" aria-label="Ver ejercicios de <%= grupo.nombre %>">VER</a>
+                </div>
+              </div>
+            </div>
+          <% }); %>
+        </section>
+
+        <div class="consultar">
+          <a href="https://api.whatsapp.com/send?phone=5491166601356" target="_blank" rel="noopener noreferrer">
+            <span class="visually-hidden">Abrir chat de WhatsApp para </span>Consultar a un asesor
+          </a>
+        </div>
+      </section>
+    </main>
+
+    <%- include('./partials/footer.ejs') %>
+  </body>
 </html>

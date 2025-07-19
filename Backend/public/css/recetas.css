@@ -4,15 +4,6 @@ body {
   background-color: transparent;
 }
 
-.mainLienzo {
-  min-height: 90vh;
-  padding: 1rem;
-  background-image: url("/images/Lienzo01vero.jpeg");
-  background-size: cover;
-  background-position: center;
-  background-repeat: no-repeat;
-}
-
 .mainRecetas {
   width: 100%;
   display: flex;
@@ -32,49 +23,30 @@ body {
   overflow: hidden;
 }
 
+/* Título 'RECETAS' con línea blanca inferior */
 #recetas {
-  padding: 0,5rem;
+  padding: 0.5rem;
   border-bottom: 1px solid white;
   width: 100%;
 }
 
-#recetas h2 {
-  font-size: 22px;
-  text-align: center;
-  margin: 30;
-  color: white;
-}
-
-.titulo {
+/* Subtítulos alineados al centro */
+.subtitulo {
   display: flex;
   flex-direction: column;
   align-items: center;
-  margin-top: 0.5rem;
   text-align: center;
+  margin-top: 0.5rem;
 }
 
-.titulo h3 {
-  padding-top: 0.5rem;
-  font-size: 30px;
-  margin: center;
-  color: white;
-  line-height: 1.4;
-}
-
-.titulo p {
-  margin: 0.2rem 0 0 0;
-  color: white;
-  font-size: 16px;
-  line-height: 1.4;
-}
-
+/* Cards contenedoras de recetas */
 .recetas_subidas {
   display: flex;
   flex-direction: column;
   align-items: center;
-  margin-top: 0rem;
 }
 
+/* Grilla de cards */
 .moverlo {
   display: grid;
   grid-template-columns: repeat(3, 1fr);
@@ -84,6 +56,7 @@ body {
   justify-content: center;
 }
 
+/* Estilo individual de cada card */
 .card {
   width: 100%;
   max-width: 12rem;
@@ -98,12 +71,14 @@ body {
   border-radius: 10px;
 }
 
+/* Título de la card */
 .card-title {
   font-size: 13px;
   margin-bottom: 0.4rem;
   color: white;
 }
 
+/* Contenido interno de la card */
 .card-body {
   width: 100%;
   display: flex;
@@ -113,31 +88,14 @@ body {
   gap: 0.4rem;
 }
 
+/* Imagen de la card */
 .card-img-top {
   width: 100%;
   height: auto;
   border-radius: 6px;
 }
 
-.btn-primary {
-  width: 100%;
-  font-size: 12px;
-  color: white;
-  background-color: rgba(255, 255, 255, 0.12);
-  border: 1px solid white;
-  border-radius: 6px;
-  padding: 6px 10px;
-  font-weight: 500;
-  text-decoration: none;
-  display: flex;
-  justify-content: center;
-  cursor: pointer;
-}
-
-.btn-primary:hover {
-  background-color: rgba(255, 255, 255, 0.3);
-}
-
+/* Botón de 'Consultar' */
 .consultar {
   margin-top: 1.5rem;
 }
@@ -160,7 +118,7 @@ body {
   background-color: rgba(255, 255, 255, 0.3);
 }
 
-/* RESPONSIVE */
+/* Responsive */
 @media screen and (max-width: 1200px) {
   .moverlo {
     grid-template-columns: repeat(3, 1fr);
@@ -183,20 +141,22 @@ body {
   }
 }
 
-/* LECTOR */
-.visually-hidden {
-  position: absolute;
-  width: 1px;
-  height: 1px;
-  margin: -1px;
-  padding: 0;
-  overflow: hidden;
-  clip: rect(0, 0, 0, 0);
-  border: 0;
-}
-
 .container-allMain {
   width: 100%;
   max-width: 100%;
   margin: 0 auto;
+}
+#recetas h2 {
+  color: white;
+  font-size: 22px; /* solo el título 'RECETAS' */
+}
+
+.subtitulo h3 {
+  color: white;
+  font-size: 30px; /* como en rutinas */
+}
+
+.subtitulo p {
+  color: white;
+  font-size: 16px; /* como en rutinas */
 }
