@@ -44,7 +44,20 @@ export class reservaApiController {
             }
 
             const reserva = await Reserva.findByPk(idReserva, {
-                include: [{ model: DetalleReserva }]
+                include: [
+                        {
+                            model: DetalleReserva,
+                            include: [
+                                {
+                                    model: Producto
+                                }
+                            ]
+                        },
+                        {
+                            model: Usuario,
+                            attributes: ['id', 'nombre', 'apellido']
+                        }
+                    ]
             });
 
             if (!reserva) {
@@ -63,35 +76,9 @@ export class reservaApiController {
 
             await reserva.update({ estado: EstadosReserva.CONFIRMADO });
 
-
-            transaccionApiController.registrartransaccion(
-                TipoTransaccion.INGRESO, /* tipo */
-                reserva.total, /* monto */
-                OrigenTransaccion.CARRITO, /* origen */
-                reserva.id_reserva, /* id_origen */
-            );
-
-            const reservas = await Reserva.findAll({
-                include: [
-                    {
-                        model: DetalleReserva,
-                        include: [
-                            {
-                                model: Producto
-                            }
-                        ]
-                    },
-                    {
-                        model: Usuario,
-                        attributes: ['id', 'nombre', 'apellido']
-                    }
-                ],
-                order: [['fecha', 'DESC']],
-            });
-
             return res.status(200).json({
                 message: "Reserva confirmada correctamente",
-                reserva: reservas
+                reserva: reserva
             });
 
         } catch (error) {
@@ -109,7 +96,20 @@ export class reservaApiController {
             }
 
             const reserva = await Reserva.findByPk(idReserva, {
-                include: [{ model: DetalleReserva }]
+                include: [
+                        {
+                            model: DetalleReserva,
+                            include: [
+                                {
+                                    model: Producto
+                                }
+                            ]
+                        },
+                        {
+                            model: Usuario,
+                            attributes: ['id', 'nombre', 'apellido']
+                        }
+                    ]
             });
 
             if (!reserva) {
@@ -128,22 +128,9 @@ export class reservaApiController {
                 )
             ));
 
-            const reservasActualizadas = await Reserva.findAll({
-                include: [
-                    {
-                        model: DetalleReserva,
-                        include: [{ model: Producto }]
-                    },
-                    {
-                        model: Usuario,
-                        attributes: ['id', 'nombre', 'apellido']
-                    }
-                ]
-            });
-
             return res.status(200).json({
                 message: "Reserva cancelada correctamente",
-                reserva: reservasActualizadas
+                reserva: reserva
             });
 
         } catch (error) {

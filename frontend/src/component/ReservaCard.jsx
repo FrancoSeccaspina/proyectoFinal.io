@@ -3,8 +3,8 @@ import ModalConfirm from "./ModalDeConfirmacion"
 import { useState } from "react";
 import axios from "axios";
 
-function ReservaCard({ reserva: reservaProp, onDelete , actualizarReserva}) {
-  const reserva = reservaProp;
+function ReservaCard({ reserva: reservaProp, onDelete}) {
+  const [reservaActual, setReservaActual] = useState(reservaProp)
   const [isOpen, setIsOpen] = useState(false);
   const [mensaje, setMensaje] = useState("")
   const [accionConfirmar, setAccionConfirmar] = useState(null);
@@ -30,11 +30,12 @@ function ReservaCard({ reserva: reservaProp, onDelete , actualizarReserva}) {
   const onclickConfirm = async () => {
     try {
       const response = await axios.put(
-        `http://localhost:3032/api/reservas/confirmar/${reserva.id_reserva}`, {},
+        `http://localhost:3032/api/reservas/confirmar/${reservaActual.id_reserva}`, {},
         {
           withCredentials: true
         });
-      actualizarReserva(response.data.reserva[0])
+      setReservaActual(response.data.reserva)
+
     } catch (error) {
       console.error("Error al confirmar la reserva:", error);
     }
@@ -43,12 +44,13 @@ function ReservaCard({ reserva: reservaProp, onDelete , actualizarReserva}) {
   const onclickCancel = async () => {
     try {
       const response = await axios.put(
-        `http://localhost:3032/api/reservas/cancelar/${reserva.id_reserva}`, {},
+        `http://localhost:3032/api/reservas/cancelar/${reservaActual.id_reserva}`, {},
         {
           withCredentials: true
         }
       );
-      actualizarReserva(response.data.reserva[0])
+      setReservaActual(response.data.reserva)
+
     } catch (error) {
       console.error("Error al cancelar la reserva:", error);
     }
@@ -57,8 +59,8 @@ function ReservaCard({ reserva: reservaProp, onDelete , actualizarReserva}) {
   const handleDelete = async (id_reserva) => {
     if (window.confirm("¿Estás seguro de que querés eliminar esta reserva?")) {
       try {
-        await axios.delete(`http://localhost:3032/api/reservas/${id_reserva}`, { withCredentials: true });
-        onDelete?.(reserva.id_reserva);
+        await axios.delete(`http://localhost:3032/api/reservas/${reservaActual.id_reserva}`, { withCredentials: true });
+        onDelete?.(reservaActual.id_reserva);
       } catch (error) {
         console.error('Error al eliminar reserva:', error);
         alert(`Error: ${error.response?.data?.message || error.message}`);
@@ -72,32 +74,32 @@ function ReservaCard({ reserva: reservaProp, onDelete , actualizarReserva}) {
         <tbody>
           <tr>
             <td className="label">Reserva</td>
-            <td>{reserva.id_reserva}</td>
+            <td>{reservaActual.id_reserva}</td>
           </tr>
           <tr>
             <td className="label">Fecha</td>
-            <td>{new Date(reserva.fecha).toLocaleString()}</td>
+            <td>{new Date(reservaActual.fecha).toLocaleString()}</td>
           </tr>
           <tr>
             <td className="label">Estado</td>
-            <td>{reserva.estado}</td>
+            <td>{reservaActual.estado}</td>
           </tr>
           <tr>
             <td className="label">Total</td>
-            <td>$ {reserva.total}</td>
+            <td>$ {reservaActual.total}</td>
           </tr>
           <tr>
             <td className="label">
-              Cliente : N° {reserva.Usuario?.id || "N/A"}
+              Cliente : N° {reservaActual.Usuario?.id || "N/A"}
             </td>
             <td>
-              {reserva.Usuario?.nombre} {reserva.Usuario?.apellido}
+              {reservaActual.Usuario?.nombre} {reservaActual.Usuario?.apellido}
             </td>
           </tr>
         </tbody>
       </table>
 
-      {reserva.DetalleReservas?.map((detalle, index) => (
+      {reservaActual.DetalleReservas?.map((detalle, index) => (
         <div className="detalle-producto" key={index}>
           <p>
             <strong>Producto:</strong> {detalle.Producto?.nombre}
@@ -116,20 +118,20 @@ function ReservaCard({ reserva: reservaProp, onDelete , actualizarReserva}) {
 
       <div className="estado-botones">
 
-        {reserva.estado !== EstadosReserva.CONFIRMADO && (
+        {reservaActual.estado !== EstadosReserva.CONFIRMADO && (
           <button className="btn btn-confirmar" onClick={modalConfirmarReserva}>
             Confirmar reserva
           </button>
         )}
 
-        {reserva.estado !== EstadosReserva.CANCELADO &&
-          reserva.estado !== EstadosReserva.EXPIRADO && (
+        {reservaActual.estado !== EstadosReserva.CANCELADO &&
+          reservaActual.estado !== EstadosReserva.EXPIRADO && (
             <button className="btn btn-cancelar" onClick={modalCancelarReserva}>
               Cancelar reserva
             </button>
         )}
 
-        <button className="btn btn-danger" onClick={() => handleDelete(reserva.id_reserva)}>Eliminar Reserva</button>
+        <button className="btn btn-danger" onClick={() => handleDelete(reservaActual.id_reserva)}>Eliminar Reserva</button>
 
         <ModalConfirm 
           isOpen={isOpen}

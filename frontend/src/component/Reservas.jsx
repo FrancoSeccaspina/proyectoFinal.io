@@ -23,15 +23,7 @@ function Reservas() {
       setLoading(false);
     }
   };
-
-  const actualizarReserva = (reservaActualizada) => {
-    setReservas(prev =>
-      prev.map(r =>
-        r.id_reserva === reservaActualizada.id_reserva ? reservaActualizada : r
-      )
-    );
-  };
-
+  
   // Función de búsqueda
   const searcher = (e) => {
     setSearch(e.target.value);
@@ -94,20 +86,16 @@ function Reservas() {
         Exportar a Excel
       </button>
 
-      {loading ? (
-        <p>Cargando reservas...</p>
-      ) : reservas.length > 0 ? (
-        resultado.map((reserva) => (
-          <ReservaCard 
-            key={reserva.id_reserva} 
-            reserva={reserva}  
-            onDelete={eliminarReserva}
-            actualizarReserva={actualizarReserva}
-            />
-        ))
-      ) : (
-        <p>No hay reservas para mostrar.</p>
-      )}
+      { loading ? ( <p>Cargando reservas...</p> ) : reservas.length > 0 ? (
+          resultado.map((reserva) => (
+            <ReservaCard 
+              reserva={reserva}  
+              onDelete={eliminarReserva}
+              />
+            )
+          )
+        ) : ( <p>No hay reservas para mostrar.</p> )
+      }
     </div>
   );
 }
