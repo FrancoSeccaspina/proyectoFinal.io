@@ -32,7 +32,9 @@ const Usuarios = () => {
   const handleDelete = async (id) => {
     if (window.confirm('¿Estás seguro de que querés eliminar este usuario?')) {
       try {
-        await axios.delete(`http://localhost:3032/api/usuarios/${id}`);
+        await axios.delete(`http://localhost:3032/api/usuarios/${id}`, 
+          {withCredentials: true}
+        );
         setUsuarios((prev) => prev.filter((u) => u.id !== id));
       } catch (error) {
         const msg = error.response?.data?.message || error.message || 'Error desconocido';

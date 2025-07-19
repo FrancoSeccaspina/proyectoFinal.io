@@ -71,7 +71,7 @@ const AltaCuota = () => {
     e.preventDefault();
 
     try {
-      await axios.post('http://localhost:3032/api/cuotas', cuota);
+      await axios.post('http://localhost:3032/api/cuotas', cuota, {withCredentials: true});
       console.log("Cuota creada exitosamente");
       navigate('/Usuarios');
     } catch (error) {

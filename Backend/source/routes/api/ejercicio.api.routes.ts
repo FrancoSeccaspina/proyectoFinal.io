@@ -1,7 +1,7 @@
-import { Router } from 'express';
 import ejerciciosApiController from "../../controllers/api/ejercicio.api.Controller"
 import multer from 'multer';
 import path from 'path';
+import { Router } from 'express';
 import { Roles } from '../../constants/roles';
 import { verificarTokenPorRol } from '../../middlewares/verificarToken';
 

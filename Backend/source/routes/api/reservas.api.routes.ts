@@ -6,10 +6,10 @@ import { Roles } from '../../constants/roles';
 const route = Router();
 
 // routes/reservaApiRoutes.ts
-route.get('/reservas/estadisticasPorProducto', reservaApiController.estadisticasPorProducto);
-
+route.get('/reservas/estadisticasPorProducto', verificarTokenPorRol([Roles.ADMIN]), reservaApiController.estadisticasPorProducto);
 route.get("/reservas/mostrar", verificarTokenPorRol([Roles.ADMIN]), (req: Request, res: Response) => {reservaApiController.listaReservas(req, res)})
 route.put("/reservas/confirmar/:id", verificarTokenPorRol([Roles.ADMIN]), (req: Request, res: Response) => { reservaApiController.confirmarReserva(req, res) });
 route.put("/reservas/cancelar/:id", verificarTokenPorRol([Roles.ADMIN]), (req: Request, res: Response) => { reservaApiController.cancelarReserva(req, res) });
-route.delete('/reservas/:id_reserva', (res, req) => { reservaApiController.delete(res, req) })
+route.delete('/reservas/:id_reserva', verificarTokenPorRol([Roles.ADMIN, Roles.CLIENTE]), (res, req) => { reservaApiController.delete(res, req) })
+
 export default route;

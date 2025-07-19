@@ -55,7 +55,7 @@ const CuotaFormulario = () => {
   const handleDelete = async (idCuota) => {
     if (window.confirm("¿Estás seguro de que querés eliminar esta Cuota?")) {
       try {
-        await axios.delete(`http://localhost:3032/api/cuotas/${idCuota}`);
+        await axios.delete(`http://localhost:3032/api/cuotas/${idCuota}`, { withCredentials: true });
         setCuotas(prevCuotas => prevCuotas.filter(c => c.id !== idCuota));
       } catch (error) {
         console.error('Error al eliminar cuota:', error);
