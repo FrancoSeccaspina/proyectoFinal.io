@@ -23,10 +23,20 @@ function Reservas() {
       setLoading(false);
     }
   };
+
+  const actualizarReserva = (reservaActualizada) => {
+    setReservas(prev =>
+      prev.map(r =>
+        r.id_reserva === reservaActualizada.id_reserva ? reservaActualizada : r
+      )
+    );
+  };
+
   // Función de búsqueda
   const searcher = (e) => {
     setSearch(e.target.value);
   };
+
   const eliminarReserva = (id_reserva) => {
     setReservas(prev => prev.filter(r => r.id_reserva !== id_reserva));
   };
@@ -37,6 +47,7 @@ function Reservas() {
   : reservas.filter((reserva) =>
     reserva.estado.toLowerCase().includes(search.toLowerCase())    
   );
+
   const exportarExcel = () => {
     // Creamos una lista para almacenar filas
     const datosParaExportar = [];
@@ -87,7 +98,12 @@ function Reservas() {
         <p>Cargando reservas...</p>
       ) : reservas.length > 0 ? (
         resultado.map((reserva) => (
-          <ReservaCard key={reserva.id_reserva} reserva={reserva}  onDelete={eliminarReserva}/>
+          <ReservaCard 
+            key={reserva.id_reserva} 
+            reserva={reserva}  
+            onDelete={eliminarReserva}
+            actualizarReserva={actualizarReserva}
+            />
         ))
       ) : (
         <p>No hay reservas para mostrar.</p>

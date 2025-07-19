@@ -3,8 +3,8 @@ import ModalConfirm from "./ModalDeConfirmacion"
 import { useState } from "react";
 import axios from "axios";
 
-function ReservaCard({ reserva: reservaProp }) {
-  const [reserva, setReserva] = useState(reservaProp);
+function ReservaCard({ reserva: reservaProp, onDelete , actualizarReserva}) {
+  const reserva = reservaProp;
   const [isOpen, setIsOpen] = useState(false);
   const [mensaje, setMensaje] = useState("")
   const [accionConfirmar, setAccionConfirmar] = useState(null);
@@ -34,10 +34,9 @@ function ReservaCard({ reserva: reservaProp }) {
         {
           withCredentials: true
         });
-      setReserva(...response.data.reserva);
+      actualizarReserva(response.data.reserva[0])
     } catch (error) {
       console.error("Error al confirmar la reserva:", error);
-      alert("Error al confirmar la reserva");
     }
   };
 
@@ -49,10 +48,21 @@ function ReservaCard({ reserva: reservaProp }) {
           withCredentials: true
         }
       );
-      setReserva(...response.data.reserva);
+      actualizarReserva(response.data.reserva[0])
     } catch (error) {
       console.error("Error al cancelar la reserva:", error);
-      alert("Error al cancelar la reserva");
+    }
+  };
+
+  const handleDelete = async (id_reserva) => {
+    if (window.confirm("¿Estás seguro de que querés eliminar esta reserva?")) {
+      try {
+        await axios.delete(`http://localhost:3032/api/reservas/${id_reserva}`, { withCredentials: true });
+        onDelete?.(reserva.id_reserva);
+      } catch (error) {
+        console.error('Error al eliminar reserva:', error);
+        alert(`Error: ${error.response?.data?.message || error.message}`);
+      }
     }
   };
 
@@ -117,7 +127,9 @@ function ReservaCard({ reserva: reservaProp }) {
             <button className="btn btn-cancelar" onClick={modalCancelarReserva}>
               Cancelar reserva
             </button>
-          )}
+        )}
+
+        <button className="btn btn-danger" onClick={() => handleDelete(reserva.id_reserva)}>Eliminar Reserva</button>
 
         <ModalConfirm 
           isOpen={isOpen}
