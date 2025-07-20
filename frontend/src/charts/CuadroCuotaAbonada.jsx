@@ -10,6 +10,7 @@ import {
   CartesianGrid,
 } from 'recharts';
 import { createChart } from 'lightweight-charts';
+import '../css/cuadroCuotaAbonada.css';
 //const firstChart = createChart(document.getElementById('firstContainer'));
 const CuadroCuotaAbonada = () => {
   const [graficoData, setGraficoData] = useState([]);
@@ -35,7 +36,7 @@ const CuadroCuotaAbonada = () => {
       console.error('Error al obtener estadísticas:', error);
     }
   };
-  
+
   useEffect(() => {
     fetchEstadisticas();
   }, [anio, mes]);
@@ -59,19 +60,19 @@ const CuadroCuotaAbonada = () => {
           />
         </label>
         <label>
-  Mes:
-  <select value={mes} onChange={(e) => setMes(e.target.value)} style={{ marginLeft: '0.5rem' }}>
-    <option value="">Todos</option>
-    {[
-      "Enero", "Febrero", "Marzo", "Abril", "Mayo", "Junio",
-      "Julio", "Agosto", "Septiembre", "Octubre", "Noviembre", "Diciembre"
-    ].map((nombreMes, index) => (
-      <option key={index + 1} value={index + 1}>
-        {nombreMes}
-      </option>
-    ))}
-  </select>
-</label>
+          Mes:
+          <select value={mes} onChange={(e) => setMes(e.target.value)} style={{ marginLeft: '0.5rem' }}>
+            <option value="">Todos</option>
+            {[
+              "Enero", "Febrero", "Marzo", "Abril", "Mayo", "Junio",
+              "Julio", "Agosto", "Septiembre", "Octubre", "Noviembre", "Diciembre"
+            ].map((nombreMes, index) => (
+              <option key={index + 1} value={index + 1}>
+                {nombreMes}
+              </option>
+            ))}
+          </select>
+        </label>
 
       </div>
 
@@ -87,7 +88,7 @@ const CuadroCuotaAbonada = () => {
         </ResponsiveContainer>
       </div>
 
-      <h4 style={{ marginTop: '2rem' }}>Cuadro de cuotas abonadas por mes</h4>
+      <h4 className='titulos'>Cuadro de cuotas abonadas por mes</h4>
       <table border="1" cellPadding="6" style={{ width: '100%', textAlign: 'center', marginTop: '1rem' }}>
         <thead>
           <tr>
@@ -111,15 +112,15 @@ const CuadroCuotaAbonada = () => {
         </tbody>
       </table>
 
-              <p style={{ marginTop: '1rem' }}>
-          <strong>Total abonadas:</strong> {totalCuotas}
-        </p>
-        <p style={{ marginTop: '0.5rem' }}>
-          <strong>Total montos abonados:</strong> ${totalMonto.toLocaleString('es-AR', { minimumFractionDigits: 2 })}
-        </p>
-          <section className='Proveedores'>
+      <p className='titulos'>
+        <strong>Total abonadas:</strong> {totalCuotas}
+      </p>
+      <p className='titulos'>
+        <strong>Total montos abonados:</strong> ${totalMonto.toLocaleString('es-AR', { minimumFractionDigits: 2 })}
+      </p>
+      <section className='Proveedores'>
 
-          </section>
+      </section>
     </div>
   );
 };

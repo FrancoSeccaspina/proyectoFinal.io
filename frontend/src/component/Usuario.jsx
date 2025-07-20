@@ -77,10 +77,12 @@ const Usuarios = () => {
               <td>{usuario.dni}</td>
               <td>{usuario.aptoMedico}</td>
               <td>
-                <Link to={`/usuarios/editar/${usuario.id}`} className="btn btn-success btn-sm">Editar</Link>{' '}
-                <button className="btn btn-danger btn-sm" onClick={() => handleDelete(usuario.id)}>Eliminar</button>{' '}
-                <Link to={`/cuota/${usuario.id}`} className="btn btn-primary btn-sm">Historial Cuota</Link>{' '}
-                <Link to={`/cuotaNueva/${usuario.id}`} className="btn btn-warning btn-sm">Agregar Cuota</Link>
+                <div className="acciones-botones">
+                  <Link to={`/usuarios/editar/${usuario.id}`} className="btn btn-success btn-sm">Editar</Link>{' '}
+                  <button className="btn btn-danger btn-sm" onClick={() => handleDelete(usuario.id)}>Eliminar</button>{' '}
+                  <Link to={`/cuota/${usuario.id}`} className="btn btn-primary btn-sm">Historial Cuota</Link>{' '}
+                  <Link to={`/cuotaNueva/${usuario.id}`} className="btn btn-warning btn-sm">Agregar Cuota</Link>
+                </div>
               </td>
             </tr>
           ))}

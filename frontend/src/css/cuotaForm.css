@@ -1,0 +1,25 @@
+.cuota-formulario {
+  padding: 1rem;
+  font-family: Arial, sans-serif;
+}
+
+.cuotas-table {
+  width: 100%;
+  border-collapse: collapse;
+  text-align: center;
+}
+
+.cuotas-table th, .cuotas-table td {
+  padding: 10px;
+  border: 1px solid #ccc;
+}
+
+.estado-vencida {
+  color: red;
+  font-weight: bold;
+}
+
+.estado-pagada {
+  color: green;
+  font-weight: bold;
+}

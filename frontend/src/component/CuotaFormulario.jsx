@@ -1,7 +1,9 @@
-
 import { useParams, Link } from 'react-router-dom';
 import { useState, useEffect } from 'react';
 import axios from 'axios';
+import '../css/cuotaForm.css';
+import { estadoCuota } from '../utils/estadoCuota'; // Ruta ajustable
+
 import {
   BarChart, Bar, XAxis, YAxis, CartesianGrid, Tooltip, ResponsiveContainer
 } from 'recharts';
@@ -22,7 +24,9 @@ const CuotaFormulario = () => {
           axios.get(`http://localhost:3032/api/cuotasdelUsuario/${id}`)
         ]);
         setUsuario(usuarioRes.data);
-        setCuotas(cuotasRes.data);
+
+        const cuotasActualizadas = estadoCuota(cuotasRes.data);
+        setCuotas(cuotasActualizadas);
       } catch (err) {
         console.error(err);
         alert('Error al cargar usuario/cuotas');
@@ -65,10 +69,10 @@ const CuotaFormulario = () => {
   };
 
   return (
-    <div style={{ padding: '1rem' }}>
+    <div className="cuota-formulario">
       <h2>Cuotas de {usuario?.nombre} - DNI: {usuario?.dni}</h2>
 
-      <table border="1" cellPadding="6" style={{ width: '100%', textAlign: 'center' }}>
+      <table className="cuotas-table">
         <thead>
           <tr>
             <th>#</th>
@@ -88,7 +92,9 @@ const CuotaFormulario = () => {
               <td>{cuota.fecha}</td>
               <td>{cuota.descripcion}</td>
               <td>${cuota.monto}</td>
-              <td>{cuota.estado}</td>
+              <td className={cuota.estado === 'VENCIDA' ? 'estado-vencida' : 'estado-pagada'}>
+                {cuota.estado}
+              </td>
               <td>${cuota.faltante}</td>
               <td>${cuota.sobrante}</td>
               <td>

@@ -13,3 +13,76 @@
     justify-content: center;
     align-items: center;
 }
+.acciones-botones {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.5rem;
+  justify-content: center;
+}
+
+.acciones-botones .btn {
+  flex: 1 1 45%;
+  min-width: 100px;
+  padding: 6px 8px;
+  font-size: 0.85rem;
+  font-weight: bold;
+  text-align: center;
+  border-radius: 6px;
+  white-space: nowrap;
+}
+
+.acciones-botones .editar {
+  background-color: #28a745;
+  color: white;
+}
+
+.acciones-botones .eliminar {
+  background-color: #dc3545;
+  color: white;
+}
+
+.acciones-botones .historial {
+  background-color: #007bff;
+  color: white;
+}
+
+.acciones-botones .agregar {
+  background-color: #ffc107;
+  color: black;
+}
+
+@media (max-width: 768px) {
+  .acciones-botones {
+    flex-direction: column;
+    align-items: stretch;
+  }
+
+  .acciones-botones .btn {
+    width: 100%;
+  }
+
+  .table td {
+    vertical-align: middle;
+  }
+}
+@media (min-width: 1440px) and (max-width: 1919px) {
+  .acciones-botones .btn {
+    padding: 10px 14px;
+    font-size: 1rem;
+    min-width: 130px;
+    flex: 1 1 22%;
+  }
+}
+@media (min-width: 1920px) {
+  .acciones-botones .btn {
+    padding: 14px 20px;
+    font-size: 1.15rem;
+    min-width: 150px;
+    flex: 1 1 20%;
+  }
+
+  .acciones-botones {
+    gap: 1.5rem;
+    justify-content: center;
+  }
+}

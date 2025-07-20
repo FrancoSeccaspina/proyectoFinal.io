@@ -1,113 +1,111 @@
-html, body {
-  margin: 0;
-  padding: 0;
-  width: 100%;
-  overflow-x: hidden;
-  background-color: #000000; /* como tu fondo */
-  font-family: Arial, sans-serif;
-}
-
-/* Contenedor principal */
 .cuadro-container {
-  max-width: 100%;   /* que no se pase del 100% del viewport */
-  width: 100%;
-  padding: 1rem;
-  color: #fff;
-  background-color: #000000;
-  border-radius: 8px;
-  box-sizing: border-box;
+  padding: 2rem;
+  font-family: 'Segoe UI', sans-serif;
+  color: #222;
 }
 
-/* Formularios y campos */
+h2 {
+  font-size: 1.8rem;
+  margin-bottom: 1.5rem;
+  text-align: center;
+}
+
 .formulario {
   display: flex;
-  flex-wrap: wrap;  /* para que los hijos puedan bajar de línea */
-  gap: 1rem;
-  margin-bottom: 2rem;
   justify-content: space-between;
+  gap: 2rem;
+  margin-bottom: 2rem;
+  flex-wrap: wrap;
 }
 
 .campo {
-  flex: 1 1 45%;  /* toma el 45% del contenedor, y puede achicarse */
   display: flex;
   flex-direction: column;
-  min-width: 150px; /* para que no se achique demasiado */
+  align-items: center;
+  justify-content: center;
 }
 
-.campo input,
-.campo button {
-  width: 100%; /* que tomen todo el ancho de su contenedor */
-  box-sizing: border-box;
-  font-size: 1rem;
+.campo h4 {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  margin-bottom: 0.5rem;
+}
+
+input {
+  width: auto;
   padding: 0.5rem;
   margin-bottom: 0.5rem;
+  font-size: 1rem;
+  border: 1px solid #ccc;
   border-radius: 4px;
+}
+
+button {
+  padding: 0.5rem 1rem;
+  font-size: 0.95rem;
   border: none;
+  border-radius: 4px;
+  cursor: pointer;
+  transition: background-color 0.2s ease;
 }
 
 .btn-ingreso {
-  background-color: #4caf50;
-  color: black;
-  font-weight: bold;
-  cursor: pointer;
+  background-color: #4CAF50;
+  color: white;
+  width: 90%;
+}
+
+.btn-ingreso:hover {
+  background-color: #45a049;
 }
 
 .btn-cobro {
-  background-color: #2196f3;
-  color: black;
-  font-weight: bold;
-  cursor: pointer;
+  background-color: #2196F3;
+  color: white;
+  width: 90%;
 }
 
-/* Gráfico */
+.btn-cobro:hover {
+  background-color: #1976D2;
+}
+
 .grafico {
-  width: 100%;
-  height: 250px;
-  margin-bottom: 5rem;
+  margin: 2rem 0;
 }
 
-/* Tabla resumen */
-.resumen {
-  overflow-x: auto; /* permitir scroll si no cabe */
+.grafico h4 {
+  text-align: center;
+  margin-bottom: 1rem;
 }
 
-.resumen table {
+.resumen h4 {
+  margin-bottom: 1rem;
+  text-align: center;
+}
+
+table {
   width: 100%;
   border-collapse: collapse;
-  min-width: 300px; /* para evitar demasiado achique */
+  background-color: #000;
+  color: #fff;
+  font-size: 1rem;
 }
 
-.resumen th, .resumen td {
-  border: 1px solid #fff;
+th {
+  background-color: #111;
   padding: 0.75rem;
+}
+
+td {
+  padding: 0.5rem;
   text-align: center;
-  color: white;
+  border-top: 1px solid #444;
 }
 
-/* ---- Responsive para móviles ---- */
-/* Mobile XS: hasta 320px */
 @media screen and (max-width: 320px) {
-  .cuadro-container {
-    max-width: 100%;
-    width: 100%;
-    padding: 0.5rem 0.5rem;
-    margin: 0 0.25rem;
-    border-radius: 6px;
-    box-sizing: border-box;
-  }
-
-  .campo input,
-  .campo button {
-    font-size: 0.9rem;
-    padding: 0.4rem;
-  }
-}
-
-/* Mobile L: desde >320px hasta 425px */
-@media screen and (min-width: 321px) and (max-width: 425px) {
-  .cuadro-container {
-    padding: 0.5rem;
-    max-width: 100%;
+  h2 {
+    font-size: 1.3rem;
   }
 
   .formulario {
@@ -115,59 +113,34 @@ html, body {
     gap: 1rem;
   }
 
-  .campo {
-    width: 100%;
+  input {
+    font-size: 0.85rem;
   }
 
-  .campo input {
-    font-size: 1rem;
+  button {
+    font-size: 0.85rem;
   }
 
-  .campo button {
-    width: 100%;
-    font-size: 1rem;
-  }
-
-  .grafico {
-    height: 250px;
-  }
-
-  .resumen table,
-  .resumen thead,
-  .resumen tbody,
-  .resumen th,
-  .resumen td,
-  .resumen tr {
-    display: block;
-  }
-
-  .resumen thead tr {
-    position: absolute;
-    top: -9999px;
-    left: -9999px;
-  }
-
-  .resumen tr {
-    margin-bottom: 1rem;
-    border: 1px solid #000000;
-    padding: 0.5rem;
-    border-radius: 8px;
-  }
-
-  .resumen td {
-    border: none;
-    position: relative;
-    padding-left: 50%;
-    text-align: left;
-  }
-
-  .resumen td:before {
-    position: absolute;
-    top: 0;
-    left: 0.75rem;
-    width: 45%;
+  table {
+    font-size: 0.75rem;
     white-space: nowrap;
-    font-weight: bold;
-    content: attr(data-label);
+    display: block;
+    overflow-x: auto;
+  }
+}
+@media screen and (min-width: 768px) {
+  h2 {
+    font-size: 1.6rem;
+  }
+
+  .formulario {
+    flex-direction: column;
+    gap: 1.5rem;
+  }
+
+  table {
+    width: 100%;
+    margin: 0;
+    font-size: 0.9rem;
   }
 }
