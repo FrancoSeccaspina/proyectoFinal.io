@@ -9,7 +9,7 @@ const ModalConfirm = ({ isOpen, onClose, onConfirm, message }) => {
       <div className="modal-box">
         <h2>¿Estás seguro?</h2>
         <p>{message || "Esta acción no se puede deshacer."}</p>
-        <div className="modal-buttons">
+        <div className="fixed-bottom-bar">
           <button className="btn cancel" onClick={onClose}>Cancelar</button>
           <button className="btn confirm" onClick={onConfirm}>Confirmar</button>
         </div>

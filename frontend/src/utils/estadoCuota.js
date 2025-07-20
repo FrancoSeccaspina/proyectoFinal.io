@@ -2,15 +2,19 @@ export const estadoCuota = (cuotas) => {
   const hoy = new Date();
 
   return cuotas.map(cuota => {
+    if (!cuota.fecha) return cuota; 
+
     const fechaPago = new Date(cuota.fecha);
     const proximoVencimiento = new Date(fechaPago);
-    proximoVencimiento.setMonth(fechaPago.getMonth() + 1);
+    proximoVencimiento.setMonth(proximoVencimiento.getMonth() + 1);
 
     let nuevoEstado = cuota.estado;
 
-    if (cuota.faltante === 0 && hoy <= proximoVencimiento) {
+    if (cuota.faltante === 0 && hoy < proximoVencimiento) {
       nuevoEstado = 'PAGADA';
-    } else if (hoy > proximoVencimiento) {
+    }
+
+    if (hoy >= proximoVencimiento) {
       nuevoEstado = 'VENCIDA';
     }
 
