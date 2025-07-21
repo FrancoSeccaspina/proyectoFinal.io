@@ -1,45 +1,3 @@
-<style>
-  .nav-links {
-    display: flex;
-    list-style: none;
-    padding: 0;
-    margin: 0;
-  }
-
-  .nav-container {
-    display: flex;
-    align-items: center;
-    justify-content: flex-end;
-    gap: 1rem;
-    width: 100%;
-  }
-
-  .item-nav {
-    color: #fff;
-    transition: color 0.2s;
-  }
-
-  .item-nav:hover {
-    color: red;
-  }
-
-.icon-nav {
-  width: 6vw;
-  max-width: 32px;
-  min-width: 24px;
-  aspect-ratio: 1 / 1;
-  display: inline-flex;
-  align-items: center;
-  justify-content: center;
-  color: currentColor;
-}
-
-.icon-nav i {
-  font-size: 100%;
-}
-
-</style>
-
 <header role="banner">
   <div id="header-container">
 
@@ -61,6 +19,7 @@
             <path d="M3 10L12 2L21 10V20C21 20.55 20.55 21 20 21H16C15.45 21 15 20.55 15 20V16C15 15.45 14.55 15 14 15H10C9.45 15 9 15.45 9 16V20C9 20.55 8.55 21 8 21H4C3.45 21 3 20.55 3 20V10Z"/>
           </svg>
         </div>
+        <span class="nav-label">home</span>
       </a>
 
 
@@ -71,10 +30,11 @@
             <path d="M10.5 17h14c.278 0 .5.223.5.5s-.222.5-.5.5h-14c-.276 0-.5-.223-.5-.5s.224-.5.5-.5zm-1-4h16c.278 0 .5.223.5.5s-.222.5-.5.5h-16c-.276 0-.5-.223-.5-.5s.224-.5.5-.5zm-9-8c-.653 0-.67 1 0 1h3.6c.078.346.64 2.81 1.312 5.736.717 3.126 1.452 7.32 1.606 7.893.132.494.255 1.055.62 1.544.362.488 1 .826 1.862.826h16c.86 0 1.5-.338 1.863-.826.364-.49.487-1.05.62-1.545.265-.993 1.62-6.944 1.89-7.952.152-.566.202-1.156.022-1.69-.18-.534-.72-.988-1.395-.988h-20c-.653 0-.66 1 0 1h20c.325 0 .366.07.447.31.08.238.076.674-.04 1.108-.267.992-1.62 6.945-1.89 7.953-.135.506-.262.945-.456 1.206-.194.262-.42.424-1.06.424h-16c-.64 0-.866-.162-1.06-.424-.195-.26-.322-.7-.458-1.205-.114-.426-.88-4.732-1.595-7.856-.717-3.125-1.4-6.125-1.4-6.125C4.938 5.16 4.735 5 4.5 5zm23 18c-1.373 0-2.5 1.125-2.5 2.5s1.127 2.5 2.5 2.5c1.376 0 2.5-1.125 2.5-2.5S24.877 23 23.5 23zm0 1c.836 0 1.5.666 1.5 1.5s-.664 1.5-1.5 1.5c-.833 0-1.5-.666-1.5-1.5s.667-1.5 1.5-1.5zm-12-1C10.128 23 9 24.125 9 25.5s1.127 2.5 2.5 2.5c1.376 0 2.5-1.125 2.5-2.5S12.877 23 11.5 23zm0 1c.836 0 1.5.666 1.5 1.5s-.664 1.5-1.5 1.5c-.833 0-1.5-.666-1.5-1.5s.667-1.5 1.5-1.5z" />
           </svg>
         </div>
+        <span class="nav-label">carrito</span>
       </a>
 
+      <!-- Registro -->
       <% if (!usuarioLogueado) { %>
-        <!-- Registro -->
         <a class="item-nav" href="/register" title="Registrar usuario" aria-label="Registrar nuevo usuario">
           <div class="icon-nav">
             <svg viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg" aria-hidden="true" focusable="false">
@@ -86,6 +46,7 @@
               <circle cx="12" cy="8" r="5" fill="currentColor" />
             </svg>
           </div>
+          <span class="nav-label">registro</span>
         </a>
 
         <!-- Login -->
@@ -96,11 +57,12 @@
               <circle cx="12" cy="8" r="5" fill="currentColor" />
             </svg>
           </div>
+          <span class="nav-label">login</span>
         </a>
       <% } %>
 
+      <!-- Perfil -->
       <% if (usuarioLogueado && usuarioLogueado.rol != "admin") { %>
-        <!-- Perfil -->
         <a class="item-nav" href="/perfil" title="Perfil de usuario" aria-label="Ir a Perfil de usuario">
           <div class="icon-nav">
             <svg viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg" aria-hidden="true" focusable="false">
@@ -109,11 +71,12 @@
               <circle cx="20" cy="4" r="2" fill="currentColor"/>
             </svg>
           </div>
+          <span class="nav-label">Mi perfil</span>
         </a>
       <% } %>
 
+      <!-- Logout -->
       <% if (usuarioLogueado) { %>
-        <!-- Logout -->
         <a class="item-nav" href="/users/logout" title="Cerrar Sesión" aria-label="Cerrar sesión de usuario">
           <div class="icon-nav">
             <svg viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg" aria-hidden="true" focusable="false">
@@ -121,6 +84,7 @@
               <path d="M4 12C4 7.58172 7.58172 4 12 4M12 20C9.47362 20 7.22075 18.8289 5.75463 17" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" />
             </svg>
           </div>
+          <span class="nav-label">Salir</span>
         </a>
       <% } %>
 
