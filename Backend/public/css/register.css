@@ -1,5 +1,5 @@
-body{
-    background-color: #f1f1f1;
+body {
+  background-color: transparent;
 }
 main{
     padding: 4rem 0;
@@ -62,10 +62,10 @@ footer{
     background-color: #747474;
 }
 
-    @media screen and (min-width: 0px) and (max-width: 767px) {
-        #search-categories{
-            display: none;
-       }
+@media screen and (min-width: 0px) and (max-width: 767px) {
+    #search-categories{
+        display: none;
+   }
 }
 
 @media screen and (min-width: 1023px){
@@ -76,16 +76,15 @@ footer{
     .inputs-register{
         width: 100%;
     }
-   }
+}
 
-   @media screen and (min-width: 1440px){
+@media screen and (min-width: 1440px){
     #h2-register{
         font-size: 22px;
     }
     #button-register{
         font-size: 18px;
     } 
-
 }
 
 .inputs-register::placeholder{
@@ -93,7 +92,7 @@ footer{
     color: white !important;
 }
 
-  .form-container {
+.form-container {
     padding: 2rem 0rem 2rem 0rem;
     display: flex;
     max-width: 50%;
@@ -102,25 +101,21 @@ footer{
     align-items: center;
     justify-content: center;
     gap: 1rem;
-  }
+}
 
-  .flex-container-row {
+.flex-container-row {
     width: 100%;
     display: flex;
     flex-direction: row;
     padding-left: 0px;
     gap: 1rem;
-  }
+}
 
-  .button-register {
+.button-register {
     border: none;
     width: 80%;
-  }
-
-  .button-register {
     height: 60px;
-  }
-
+}
 
 .div-flex-100{
     display: flex; 
@@ -128,7 +123,7 @@ footer{
     width: 100%;
 }
 
-  .inputs-contra {
+.inputs-contra {
     background-color: #f9f9f9;
     border: 1px solid #ddd;
     border-left: 5px solid #007acc;
@@ -137,39 +132,48 @@ footer{
     margin-bottom: 16px;
     font-family: sans-serif;
     width: 100%;
-  }
+}
 
-  .inputs-contra p {
+.inputs-contra p {
     margin: 0 0 8px;
     font-weight: bold;
     color: #333;
     font-size: 14px;
-  }
+}
 
-  .inputs-contra ul {
+.inputs-contra ul {
     list-style-type: disc;
     padding-left: 20px;
     margin: 0;
     color: #555;
     font-size: 13px;
-  }
+}
 
-  .inputs-contra li {
+.inputs-contra li {
     margin-bottom: 6px;
-  }
+}
 
-  .nota-requerida {
+.nota-requerida {
     font-size: 0.9rem;
     color: #555;
     margin-bottom: 10px;
-  }
-    .visually-hidden {
-      position: absolute;
-      width: 1px;
-      height: 1px;
-      margin: -1px;
-      padding: 0;
-      overflow: hidden;
-      clip: rect(0, 0, 0, 0);
-      border: 0;
-    }
+}
+
+.visually-hidden {
+    position: absolute;
+    width: 1px;
+    height: 1px;
+    margin: -1px;
+    padding: 0;
+    overflow: hidden;
+    clip: rect(0, 0, 0, 0);
+    border: 0;
+}
+
+.mainRegister {
+    background-color: rgba(255, 255, 255, 0.1);
+    backdrop-filter: blur(4px);
+    padding: 2rem;
+    border-radius: 8px;
+    min-height: calc(100vh - 200px);
+}
