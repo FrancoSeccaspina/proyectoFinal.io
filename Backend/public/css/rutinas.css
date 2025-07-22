@@ -156,3 +156,6 @@ body {
     width: 90%;
   }
 }
+#rutinas-subidas-title {
+  border-bottom: none;
+}
