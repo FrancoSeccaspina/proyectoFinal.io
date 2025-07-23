@@ -99,3 +99,21 @@
     overflow: hidden;
     box-shadow: 0px 4px 12px rgba(0, 0, 0, 0.12);
 }
+.button-access {
+    background-color: #dc2626 !important; /* rojo fuerte */
+    color: white !important;
+    font-size: 1.1rem;
+    border: 1px solid white;
+    border-radius: 8px;
+    width: 80%;
+    height: 60px;
+    cursor: pointer;
+    box-shadow: 0 0 10px rgba(255, 255, 255, 0.1);
+    letter-spacing: 1px;
+    text-transform: uppercase;  /* convierte texto a mayúscula */
+    transition: background-color 0.3s ease;
+    margin-top: 1rem;
+}
+.button-access:hover {
+    background-color: #b91c1c !important;
+}

@@ -26,18 +26,19 @@ h2{
 form{
     display: flex;
     flex-direction: column;
-    align-items: center;
+    align-items: center; /*alineado al centro, de lo contrario usar strech*/
     justify-content: center;
 }
 .inputs-login{
-    color: #dddddd;
-    background-color: rgba(16,16,16,.4);
+    color: white;
+    background-color: transparent; 
     width: 100%;
-    padding: 1rem;
-    margin: 1rem;
-    box-shadow: inset 0 0 0 2px #3d3d3d;
+    padding: 0.5rem;
+    box-shadow: inset 0 0 0 2px rgb(151, 148, 148); 
     border-radius: 8px;
     outline: none;
+    border: none; 
+    margin-bottom: 1rem;
 }
 #iniciar-sesion{
     margin: 1rem;
@@ -56,7 +57,7 @@ form{
     text-align: center;
 }
 #olvide-contraseña a{
-    color: #000000;
+    color: #faf8f8;
     text-decoration: none;
 }
 #registrate{
@@ -64,7 +65,7 @@ form{
     text-align: center;
 }
 #registrate a{
-    color: var(--whiteLetter);
+    color: white;
     text-decoration: none;
 }
 #recordame-me{
@@ -112,3 +113,55 @@ header #search-categories{
     clip: rect(0, 0, 0, 0);
     border: 0;
     }
+.mainLogin {
+    background-image: url('/images/Lienzo01vero.jpeg');
+    background-repeat: repeat-y;
+    background-size: 100% auto;
+    background-position: top;
+    background-attachment: fixed;
+    min-height: 100vh;
+    margin-top: 1rem;
+    margin-bottom: 1rem;
+    padding-top: 2rem;
+    padding-bottom: 2rem;
+}
+.mainLogin * {
+    color: white !important;
+}
+.form-container {
+  background-color: rgba(46, 45, 45, 0.6);
+  padding: 0.5rem 2rem 2rem 2rem; /* top reducido */
+  border-radius: 15px;
+  border: 1px solid white;
+  max-width: 500px;
+  margin: 2rem auto;
+  box-shadow: 0 0 10px rgba(255, 255, 255, 0.1);
+  max-height: 600px;
+}
+#login-heading {
+  text-align: center;
+  color: white;
+  font-size: 1.5rem;  /* Igual que en Register */
+  padding-bottom: 0.5rem;
+  border-bottom: 1px solid white;
+  margin-bottom: 2rem;
+}
+label {
+  display: block;
+  margin-bottom: 0.8rem;
+  color: white;
+}
+body.login-body {
+    background-color: white;
+    padding-top: 1rem;
+    padding-bottom: 1rem;
+}
+#h2-login {
+    text-align: center;
+    margin: 0 auto 1rem auto;
+    border-bottom: 1px solid white;
+    padding-bottom: 0.5rem;
+    width: 90%;
+    font-size: 22px;
+    color: white;
+}

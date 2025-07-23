@@ -90,7 +90,7 @@ footer{
 
 .inputs-register::placeholder{
     font-size: 18px;
-    color: white !important;
+    color: rgb(131, 130, 130) !important;
 }
 
 .form-container {
@@ -108,7 +108,6 @@ footer{
     border: 1px solid white;   /* contorno blanco finito */
     border-radius: 16px; /* bordes redondeados */ 
     box-shadow: 0 0 20px rgba(255, 255, 255, 0.1);   /* resalta sutilmente la card */
-    backdrop-filter: blur(4px);   /* mejora legibilidad sobre fondo complejo */
 }
 
 .flex-container-row {
