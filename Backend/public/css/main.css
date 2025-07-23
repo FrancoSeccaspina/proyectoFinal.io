@@ -1,6 +1,12 @@
 @import url('header.css');
 @import url('footer.css');
 
+.body-style{
+  display: flex;
+  flex-direction: column;
+  min-height: 100vh;
+}
+
 a {
     text-decoration: none;
 }
@@ -9,19 +15,18 @@ li {
 }
 
 main {
-    background-color: #f1f1f1;
     padding: 1rem;
 }
 
 .main-content {
+    background-color: #d7d6d6;
     width: 100%;
     margin: auto;
     padding: 0px;
 }
 
 .carousel-container {
-    width: 100%;
-    max-height: 90vh;
+    max-height: 60vh;
     display: flex;
     align-items: center;
     justify-content: center;
@@ -34,6 +39,7 @@ main {
 
 .carousel-img {
     object-fit: contain;
+    max-height: 60vh;
     width: 100%;
     height: auto;
     display: block;
