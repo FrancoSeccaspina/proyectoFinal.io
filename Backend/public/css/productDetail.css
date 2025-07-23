@@ -17,7 +17,6 @@
     backdrop-filter: blur(2px);
     margin: 1rem auto;
     border: 1px solid white;
-    border-radius: 8px;
     padding: 1rem;
     max-width: 600px;
 }
