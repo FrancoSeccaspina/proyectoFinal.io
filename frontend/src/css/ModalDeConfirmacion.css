@@ -9,7 +9,7 @@
 }
 
 .modal-box {
-  background-color: #ffffff;
+  background-color: #000000;
   padding: 1.5rem;
   border-radius: 0.5rem;
   border-top: 5px solid red;
@@ -19,32 +19,22 @@
   width: 100%;
   overflow: hidden;
   text-align: center;
-}
-
-@media (prefers-color-scheme: dark) {
-  .modal-box {
-    background-color: #000000;
-    color: #f1f5f9;
-  }
+  color: #f1f5f9;
 }
 
 .modal-box h2 {
   font-size: 1.25rem;
   font-weight: bold;
   margin-bottom: 1rem;
-  color: #000;
 }
 
 .modal-box p {
   margin-bottom: 1.5rem;
-  color: #333;
 }
 
-@media (prefers-color-scheme: dark) {
-  .modal-box h2,
-  .modal-box p {
-    color: #f1f5f9;
-  }
+.modal-box h2,
+.modal-box p {
+  color: #f1f5f9;
 }
 
 .modal-buttons {
@@ -64,23 +54,12 @@
 }
 
 .cancel {
-  background-color: #f3f4f6;
-  color: #374151;
+  background-color: #2d3748;
+  color: #e2e8f0;
 }
 
 .cancel:hover {
-  background-color: #e5e7eb;
-}
-
-@media (prefers-color-scheme: dark) {
-  .cancel {
-    background-color: #2d3748;
-    color: #e2e8f0;
-  }
-
-  .cancel:hover {
-    background-color: #4a5568;
-  }
+  background-color: #4a5568;
 }
 
 .confirm {

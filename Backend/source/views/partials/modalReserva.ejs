@@ -14,19 +14,12 @@
   .modal-content {
     overflow: hidden;
     max-width: 28rem;
-    background-color: #ffffff;
+    background-color: #000000;
     padding: 1.5rem;
     border-radius: 0.5rem;
     border-top: 5px solid red;
     border-bottom: 5px solid red;
     box-shadow: 0 10px 15px rgba(0, 0, 0, 0.1);
-  }
-
-  @media (prefers-color-scheme: dark) {
-    .modal-content {
-      background-color: #000000;
-      color: #f1f5f9;
-    }
   }
 
   .modal-title {
@@ -59,31 +52,21 @@
   }
 
   .btn-volver {
-    background-color: #f3f4f6;
-    color: #374151;
+    background-color: #2d3748;
+    color: #e2e8f0;
   }
 
   .btn-volver:hover {
-    background-color: #e5e7eb;
+    background-color: #4a5568;
   }
 
-  @media (prefers-color-scheme: dark) {
-    .btn-volver {
-      background-color: #2d3748;
-      color: #e2e8f0;
-    }
-
-    .btn-volver:hover {
-      background-color: #4a5568;
-    }
-  }
   .btn-login-register,
   .btn-reservar {
     background-color: #2563eb;
     color: white;
   }
 
-  .btn-login-register,
+  .btn-login-register:hover,
   .btn-reservar:hover {
     background-color: #1d4ed8;
   }
@@ -131,7 +114,7 @@
           </div>
         <% } %>
 
-        <footer class="modal-footer">
+        <div class="modal-footer">
           <button type="button" class="btn btn-volver">Volver</button>
           <% if (usuarioLogueado) { %>
             <button type="submit" class="btn btn-reservar">Reservar</button>
@@ -140,7 +123,7 @@
             
             <a href="/register" class="btn btn-login-register">Registrarse</a>
           <% } %>
-        </footer>
+          </div>
       </form>
   </div> 
   </div>
