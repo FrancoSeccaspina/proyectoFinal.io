@@ -1,54 +1,58 @@
 <!DOCTYPE html>
 <html lang="es">
   <head>
-  <%- include('./partials/head.ejs') %>
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Editar Mi Perfil - [Nombre de tu Tienda]</title>
-  <link rel="stylesheet" href="/css/perfilEditar.css" />
-  <link rel="stylesheet" href="/css/FormularioEditar.css" />
-</head>
+    <%- include('./partials/head.ejs') %>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Editar Mi Perfil</title>
+    <link rel="stylesheet" href="/css/perfilEditar.css" />
+  </head>
 
-<body>
-  <%- include('./partials/header.ejs') %>
+  <body>
+    <%- include('./partials/header.ejs') %>
 
-  <main class="profile-card" aria-labelledby="edit-profile-heading">
-    <h1 id="edit-profile-heading" class="visually-hidden">Editar Perfil de Usuario</h1>
-    <form action="/users/<%= usuarioLogueado.id %>" method="POST" enctype="multipart/form-data" class="FormularioEditar" aria-describedby="form-description">
-      <p id="form-description" class="visually-hidden">
-        Utiliza este formulario para actualizar tu información personal y documentos. Los campos marcados con un asterisco son obligatorios.
-      </p>
-      <article class="container-user">
-        <h2 class="visually-hidden">Datos de usuario</h2>
-        <div class="profile-picture-upload" aria-label="Cambiar foto de perfil">
-          <img src="/images/avatars/<%= usuarioLogueado.imagen %>" alt="Foto de perfil actual del usuario" id="fotoDePerfil" class="img-user" />
-          <label for="imagen-upload" class="file-upload-label">
-            <span class="visually-hidden">Seleccionar nueva foto de perfil:</span>
-            Cambiar foto
-          </label>
-          <input type="file" name="imagen" id="imagen-upload" accept="image/*" class="visually-hidden" />
+    <main class="main-editar-perfil" aria-labelledby="edit-profile-heading">
+      
+      <form action="/users/<%= usuarioLogueado.id %>" method="POST" enctype="multipart/form-data" class="form-editar-perfil" aria-describedby="form-description">
+
+        <article class="container-user">
+
+          <div class="avatar-edit-section" aria-label="Cambiar foto de perfil">
+            <img src="/images/avatars/<%= usuarioLogueado.imagen %>" alt="Foto de perfil actual del usuario" id="fotoDePerfil" class="img-user" />
+            
+            <label for="imagen-upload" class="file-upload-label">
+              <span class="upload-title">Seleccionar nueva foto de perfil:</span>
+              Cambiar foto
+            </label>
+            <input type="file" name="imagen" id="imagen-upload" accept="image/*" class="input-file" />
           </div>
 
-        <div class="datos-usuario">
-          <label for="nombre">Nombre:</label>
-          <input type="text" id="nombre" name="nombre" value="<%= usuarioLogueado.nombre %>" required autocomplete="given-name" />
-          <label for="apellido">Apellido:</label>
-          <input type="text" id="apellido" name="apellido" value="<%= usuarioLogueado.apellido %>" required autocomplete="family-name" />
-          <label for="celular">Celular:</label>
-          <input type="tel" id="celular" name="celular" value="<%= usuarioLogueado.celular %>" required autocomplete="tel" pattern="[0-9]{10}" title="Por favor, introduce un número de 10 dígitos." />
-          <label for="aptomedico">Apto Médico (PDF, JPG o PNG):</label>
-          <input type="file" name="aptomedico" id="aptomedico" accept=".jpg,.jpeg,.png,.pdf" aria-describedby="apto-medico-info" />
-          <p id="apto-medico-info" class="hint-text">Carga tu certificado médico actual. Se aceptan formatos JPG, PNG o PDF.</p>
-          <label for="fecha_nacimiento">Fecha de nacimiento:</label>
-          <input type="date" id="fecha_nacimiento" name="fecha_nacimiento" value="<%= usuarioLogueado.fecha_nacimiento %>" required autocomplete="bday" />
-          <label for="email">Email:</label>
-          <input type="email" id="email" name="email" value="<%= usuarioLogueado.email %>" required autocomplete="email" />
-          <button type="submit" class="btn-guardar">Guardar cambios</button>
-        </div>
-      </article>
-    </form>
-  </main>
+          <div class="user-fields">
+            <label for="nombre">Nombre:</label>
+            <input type="text" id="nombre" name="nombre" value="<%= usuarioLogueado.nombre %>" required autocomplete="given-name" />
 
-  <%- include('./partials/footer.ejs') %>
-</body>
+            <label for="apellido">Apellido:</label>
+            <input type="text" id="apellido" name="apellido" value="<%= usuarioLogueado.apellido %>" required autocomplete="family-name" />
 
+            <label for="celular">Celular:</label>
+            <input type="tel" id="celular" name="celular" value="<%= usuarioLogueado.celular %>" required autocomplete="tel" pattern="[0-9]{10}" title="Por favor, introduce un número de 10 dígitos." />
+
+            <label for="aptomedico">Apto Médico (PDF, JPG o PNG):</label>
+            <input type="file" name="aptomedico" id="aptomedico" accept=".jpg,.jpeg,.png,.pdf" class="input-file" aria-describedby="apto-medico-info" />
+            <p id="apto-medico-info" class="hint-text">Carga tu certificado médico actual. Se aceptan formatos JPG, PNG o PDF.</p>
+
+            <label for="fecha_nacimiento">Fecha de nacimiento:</label>
+            <input type="date" id="fecha_nacimiento" name="fecha_nacimiento" value="<%= usuarioLogueado.fecha_nacimiento %>" required autocomplete="bday" />
+
+            <label for="email">Email:</label>
+            <input type="email" id="email" name="email" value="<%= usuarioLogueado.email %>" required autocomplete="email" />
+
+            <button type="submit" class="btn-guardar">Guardar cambios</button>
+          </div>
+
+        </article>
+      </form>
+    </main>
+
+    <%- include('./partials/footer.ejs') %>
+  </body>
 </html>
