@@ -2,7 +2,7 @@ body {
   margin: 0;
   padding: 0;
   font-family: Arial, sans-serif;
-  background-color: #000000;
+  background-color: white;
   color: #ffffff;
 }
 
@@ -15,81 +15,172 @@ body {
   margin: auto;
   padding: 1rem;
   border: 5px solid #2e2e2e;
-  background-color: #1a1a1a;
+  background-color: #2e2e2e;
   color: white;
   border-radius: 12px;
 }
 
-h2 {
-  text-align: center;
-  font-size: 2rem;
-  border-bottom: 2px solid #fff;
-  padding-bottom: 0.5rem;
-  margin-bottom: 1.5rem;
+.avatar-bordered {
+  width: 15rem;
+  height: 15rem;
+  padding: 4px;
+  border-radius: 9999px;
+  border: 3px solid #6b7280;
 }
 
-.section-userDetail {
+.avatar-container {
   display: flex;
-  flex-direction: column;
   align-items: center;
+  flex-direction: column;
 }
 
-.container-user {
-  display: flex;
-  flex-direction: row;
-  gap: 2rem;
-  align-items: flex-start;
+.profile-data {
+  margin: auto;
+  width: 100%;
+  max-width: 500px;
+  padding: 1.5rem;
+  border: 1px solid #ccc;
+  border-radius: 12px;
+  box-shadow: 0 2px 6px rgba(0, 0, 0, 0.05);
+  background-color: black;
+  font-family: system-ui, sans-serif;
 }
 
-.img-user {
-  width: 150px;
-  height: 150px;
-  border-radius: 50%;
-  border: 2px solid #fff;
-  object-fit: cover;
-  background-color: #333;
+.profile-title {
+  font-size: 1.25rem;
+  font-weight: 600;
+  margin-bottom: 1rem;
+  border-bottom: 1px solid #ddd;
+  padding-bottom: 0.5rem;
 }
 
-.userDetail-container {
+.profile-info {
   display: flex;
   flex-direction: column;
-  gap: 0.8rem;
+  gap: 0.75rem;
 }
 
-.description-user {
-  font-size: 1rem;
-  padding: 0.5rem;
-  border-bottom: 1px solid #666;
+.info-row {
+  display: flex;
+  justify-content: space-between;
+  flex-wrap: wrap;
 }
 
-.btn-perfil {
+.label {
+  font-weight: 500;
+  flex: 1 1 45%;
+}
+
+.value {
+  flex: 1 1 50%;
+  text-align: right;
+}
+
+.apto-medico {
+  margin-top: 1.5rem;
+  display: flex;
+  flex-direction: column;
+  gap: 0.75rem;
+}
+
+.section-title {
+  font-size: 1.1rem;
+  font-weight: 600;
+  margin-bottom: 0.5rem;
+  border-bottom: 1px solid #ddd;
+  padding-bottom: 0.25rem;
+}
+
+.info-text {
+  font-size: 0.95rem;
+}
+
+.apto-link {
+  text-decoration: none;
+  font-weight: 500;
+}
+
+.apto-img {
+  max-width: 200px;
+  border: 1px solid #ccc;
+  border-radius: 6px;
+}
+
+.display-flex-justify-center {
   display: flex;
   justify-content: center;
-  gap: 2rem;
-  list-style: none;
-  padding: 0;
 }
 
-.crear-editar {
-  text-decoration: none;
-  color: #000000;
-  background-color: #ffffff;
-  padding: 0.7rem 1.5rem;
-  border-radius: 5px;
+.button-access {
+  background-color: #dc2626 !important;
+  color: white !important;
+  font-size: 1.1rem;
+  border: 1px solid white;
+  border-radius: 8px;
+  width: 80%;
+  height: 60px;
+  cursor: pointer;
+  box-shadow: 0 0 10px rgba(255, 255, 255, 0.1);
+  letter-spacing: 1px;
+  text-transform: uppercase;
   transition: background-color 0.3s ease;
+  margin-top: 1rem;
 }
 
-.crear-editar:hover {
-  background-color: #cccccc;
+.button-access:hover {
+  background-color: #b91c1c !important;
 }
 
-.visually-hidden {
-  position: absolute;
-  width: 1px;
-  height: 1px;
-  margin: -1px;
-  padding: 0;
-  overflow: hidden;
-  clip: rect(0, 0, 0, 0);
-  border: 0;
+/* ========== MEDIA QUERIES ========== */
+
+@media (max-width: 1024px) {
+  .profile-card {
+    max-width: 70%;
+  }
+}
+
+@media (max-width: 768px) {
+  .profile-card {
+    max-width: 90%;
+  }
+
+  .info-row {
+    flex-direction: column;
+    gap: 0.3rem;
+  }
+
+  .label, .value {
+    flex: 1 1 100%;
+    text-align: left;
+  }
+
+  .avatar-bordered {
+    width: 12rem;
+    height: 12rem;
+  }
+
+  .apto-img {
+    max-width: 100%;
+    height: auto;
+  }
+
+  .button-access {
+    width: 100%;
+  }
+}
+
+@media (max-width: 480px) {
+  .avatar-bordered {
+    width: 10rem;
+    height: 10rem;
+  }
+
+  .profile-title,
+  .section-title {
+    font-size: 1.1rem;
+  }
+
+  .info-text {
+    font-size: 0.9rem;
+  }
 }

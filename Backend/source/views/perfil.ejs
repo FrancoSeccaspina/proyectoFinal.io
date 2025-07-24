@@ -8,96 +8,6 @@
   <link rel="stylesheet" href="/css/perfil.css" />
 </head>
 <style>
-  .main-profile {
-    color: black;
-    background-color: white;
-  }
-
-  .avatar-bordered {
-    width: 15rem;
-    height: 15rem;
-    padding: 4px;
-    border-radius: 9999px;
-    border: 3px solid #6b7280;
-  }
-
-  .avatar-container {
-    display: flex;
-    align-items: center;
-    flex-direction: column;
-  }
-
-  .profile-data {
-    margin: auto;
-    width: 100%;
-    max-width: 500px;
-    padding: 1.5rem;
-    border: 1px solid #ccc;
-    border-radius: 12px;
-    box-shadow: 0 2px 6px rgba(0, 0, 0, 0.05);
-    background-color: black;
-    font-family: system-ui, sans-serif;
-  }
-
-  .profile-title {
-    font-size: 1.25rem;
-    font-weight: 600;
-    margin-bottom: 1rem;
-    border-bottom: 1px solid #ddd;
-    padding-bottom: 0.5rem;
-  }
-
-  .profile-info {
-    display: flex;
-    flex-direction: column;
-    gap: 0.75rem;
-  }
-
-  .info-row {
-    display: flex;
-    justify-content: space-between;
-    flex-wrap: wrap;
-  }
-
-  .label {
-    font-weight: 500;
-    flex: 1 1 45%;
-  }
-
-  .value {
-    flex: 1 1 50%;
-    text-align: right;
-  }
-
-  .apto-medico {
-  margin-top: 1.5rem;
-  display: flex;
-  flex-direction: column;
-  gap: 0.75rem;
-}
-
-.section-title {
-  font-size: 1.1rem;
-  font-weight: 600;
-  margin-bottom: 0.5rem;
-  border-bottom: 1px solid #ddd;
-  padding-bottom: 0.25rem;
-}
-
-.info-text {
-  font-size: 0.95rem;
-}
-
-.apto-link {
-  text-decoration: none;
-  font-weight: 500;
-}
-
-.apto-img {
-  max-width: 200px;
-  border: 1px solid #ccc;
-  border-radius: 6px;
-}
 
 </style>
 
@@ -105,80 +15,78 @@
   <%- include('./partials/header.ejs') %>
 
   <main class="main-profile" aria-labelledby="profile-main-title">
-    <h1 id="profile-main-title">Mi Perfil</h1>
-
     <div class="profile-card" aria-labelledby="user-info-heading">
 
       <% if (usuarioLogueado) { %>
 
-      <div class="avatar-container">
-        <div style="position: relative;">
-          <img class="avatar-bordered" src="/images/avatars/<%= usuarioLogueado.imagen %>" alt="Bordered avatar">
-        </div>
-      </div>
-
-      <div class="profile-data">
-        <h2 class="profile-title">Perfil del Usuario</h2>
-
-        <div class="profile-info">
-          <div class="info-row">
-            <span class="label">Nombre completo:</span>
-            <span class="value"><%= usuarioLogueado.nombre %> <%= usuarioLogueado.apellido %></span>
-          </div>
-
-          <div class="info-row">
-            <span class="label">Celular:</span>
-            <span class="value"><%= usuarioLogueado.celular %></span>
-          </div>
-
-          <div class="info-row">
-            <span class="label">Fecha de nacimiento:</span>
-            <span class="value"><%= usuarioLogueado.fecha_nacimiento %></span>
-          </div>
-
-          <div class="info-row">
-            <span class="label">Estado de la Membresía:</span>
-            <span class="value"><%= usuarioLogueado.estado_membresia %></span>
-          </div>
-
-          <div class="info-row">
-            <% if (usuarioLogueado.fecha_fin_cuota) { %>
-            <span class="label">Vigente hasta:</span>
-            <span class="value"><%= usuarioLogueado.fecha_fin_cuota %></span>
-            <% } else { %>
-            <span class="value">Sin fecha de vencimiento de cuota registrada.</span>
-            <% } %>
+        <div class="avatar-container">
+          <div style="position: relative;">
+            <img class="avatar-bordered" src="/images/avatars/<%= usuarioLogueado.imagen %>" alt="Bordered avatar">
           </div>
         </div>
-      </div>
+
+        <div class="profile-data">
+          <h1 class="profile-title">Perfil del Usuario</h1>
+
+          <div class="profile-info">
+            <div class="info-row">
+              <span class="label">Nombre completo:</span>
+              <span class="value"><%= usuarioLogueado.nombre %> <%= usuarioLogueado.apellido %></span>
+            </div>
+
+            <div class="info-row">
+              <span class="label">Celular:</span>
+              <span class="value"><%= usuarioLogueado.celular %></span>
+            </div>
+
+            <div class="info-row">
+              <span class="label">Fecha de nacimiento:</span>
+              <span class="value"><%= usuarioLogueado.fecha_nacimiento %></span>
+            </div>
+
+            <div class="info-row">
+              <span class="label">Estado de la Membresía:</span>
+              <span class="value"><%= usuarioLogueado.estado_membresia %></span>
+            </div>
+
+            <div class="info-row">
+              <% if (usuarioLogueado.fecha_fin_cuota) { %>
+              <span class="label">Vigente hasta:</span>
+              <span class="value"><%= usuarioLogueado.fecha_fin_cuota %></span>
+              <% } else { %>
+              <span class="value">Sin fecha de vencimiento de cuota registrada.</span>
+              <% } %>
+            </div>
+          </div>
+        </div>
 
 
-      <div class="apto-medico">
-        <h3 class="section-title">Información del Apto Medico</h3>
+        <div class="apto-medico">
+          <h3 class="section-title">Información del Apto Medico</h3>
 
-        <% if (usuarioLogueado.aptoMedico) { %>
-        <p class="info-text">Apto médico cargado:</p>
+          <% if (usuarioLogueado.aptoMedico) { %>
+          <p class="info-text">Apto médico cargado:</p>
 
-        <% if (usuarioLogueado.aptoMedico.endsWith('.pdf')) { %>
+          <% if (usuarioLogueado.aptoMedico.endsWith('.pdf')) { %>
 
-        <a class="apto-link" href="/uploads/aptoMedico/<%= usuarioLogueado.aptoMedico %>" target="_blank" rel="noopener noreferrer" aria-label="Ver Apto Médico en formato PDF, se abre en una nueva pestaña">
-          📄 Ver Apto Médico (PDF)
-        </a>
+          <a class="apto-link" href="/uploads/aptoMedico/<%= usuarioLogueado.aptoMedico %>" target="_blank" rel="noopener noreferrer" aria-label="Ver Apto Médico en formato PDF, se abre en una nueva pestaña">
+            📄 Ver Apto Médico (PDF)
+          </a>
 
-        <% } else { %>
+          <% } else { %>
 
-        <a class="apto-link" href="/uploads/aptoMedico/<%= usuarioLogueado.aptoMedico %>" target="_blank" rel="noopener noreferrer" aria-label="Ver imagen del Apto Médico, se abre en una nueva pestaña">
+          <a class="apto-link" href="/uploads/aptoMedico/<%= usuarioLogueado.aptoMedico %>" target="_blank" rel="noopener noreferrer" aria-label="Ver imagen del Apto Médico, se abre en una nueva pestaña">
 
-          <img class="apto-img" src="/uploads/aptoMedico/<%= usuarioLogueado.aptoMedico %>" alt="Imagen de apto médico del usuario" />
+            <img class="apto-img" src="/uploads/aptoMedico/<%= usuarioLogueado.aptoMedico %>" alt="Imagen de apto médico del usuario" />
 
-        </a>
+          </a>
 
-        <% } %>
+          <% } %>
 
-        <% } else { %>
-        <p class="info-text">No se ha cargado un apto medico.</p>
-        <% } %>
-      </div>
+          <% } else { %>
+          <p class="info-text">No se ha cargado un apto medico.</p>
+          <% } %>
+        </div>
 
       <% } %>
       
