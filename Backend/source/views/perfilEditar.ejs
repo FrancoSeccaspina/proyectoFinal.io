@@ -11,7 +11,7 @@
 <body>
   <%- include('./partials/header.ejs') %>
 
-  <main class="main-profile" aria-labelledby="edit-profile-heading">
+  <main class="profile-card" aria-labelledby="edit-profile-heading">
     <h1 id="edit-profile-heading" class="visually-hidden">Editar Perfil de Usuario</h1>
     <form action="/users/<%= usuarioLogueado.id %>" method="POST" enctype="multipart/form-data" class="FormularioEditar" aria-describedby="form-description">
       <p id="form-description" class="visually-hidden">

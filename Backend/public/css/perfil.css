@@ -9,12 +9,18 @@ body {
   color: #000000;
 }
 
-.main-profile {
-  max-width: 800px;
-  margin: 2rem auto;
+.profile-card {
+  display: flex;
+  justify-content: center;
+  flex-direction: column;
+  gap: 2rem;
+  max-width: 50%;
+  margin: auto;
   padding: 1rem;
-  border: 1px solid #000;
-  background-color: #f9f9f9;
+  border: 5px solid #2e2e2e;
+  background-color: #1a1a1a;
+  color: white;
+  border-radius: 12px;
 }
 
 h2 {
@@ -59,10 +65,10 @@ h2 {
   border-bottom: 1px solid #ccc;
 }
 
-.botones {
+.btn-perfil {
   display: flex;
   justify-content: center;
-  margin-top: 2rem;
+  gap: 2rem;
   list-style: none;
   padding: 0;
 }
@@ -85,11 +91,6 @@ h2 {
   body {
     background-color: #000000;
     color: #ffffff;
-  }
-
-  .main-profile {
-    background-color: #1a1a1a;
-    border: 1px solid #fff;
   }
 
   h2 {

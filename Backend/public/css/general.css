@@ -113,3 +113,18 @@
 .button-access:hover {
     background-color: #b91c1c !important;
 }
+
+.as-button {
+  display: inline-block;
+  text-decoration: none;
+  text-align: center;
+  padding: 1rem;
+  line-height: normal;
+  height: auto;
+  max-width: 40rem;
+}
+
+.display-flex-justify-center{
+    display: flex;
+    justify-content: center;
+}
