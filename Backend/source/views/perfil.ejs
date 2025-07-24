@@ -3,53 +3,56 @@
   <head>
   <%- include('./partials/head.ejs') %>
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Mi Perfil de Usuario - [Nombre de tu Tienda]</title>
+  <title>Mi Perfil</title>
   <link rel="stylesheet" href="/css/perfil.css" />
 </head>
+<style>
+.avatar-bordered {
+  width: 15rem;
+  height: 15rem;
+  padding: 4px;
+  border-radius: 9999px;
+  border: 3px solid #6b7280; /* ring-2 ring-gray-300 */
+}
+
+.avatar-container{
+    display: flex;
+    align-items: center;
+    flex-direction: column;
+}
+
+</style>
 
 <body>
   <%- include('./partials/header.ejs') %>
 
-  <main class="main-profile" aria-labelledby="profile-main-title">
+  <main aria-labelledby="profile-main-title">
     <h1 id="profile-main-title">Mi Perfil</h1>
-    <% if (usuarioLogueado) { %>
-    <section class="user-details-section" aria-labelledby="user-info-heading">
-      <h2 id="user-info-heading" class="visually-hidden">Detalles de la Cuenta</h2>
-      <div class="profile-avatar">
-        <img src="/images/avatars/<%= usuarioLogueado.imagen %>" alt="Foto de perfil del usuario <%= usuarioLogueado.nombre %> <%= usuarioLogueado.apellido %>" style="max-width: 200px;" />
-        </div>
 
-      <p><strong>Nombre completo:</strong> <%= usuarioLogueado.nombre %> <%= usuarioLogueado.apellido %></p>
-      <p><strong>Celular:</strong> <%= usuarioLogueado.celular %></p>
-      <p><strong>Fecha de nacimiento:</strong> <%= usuarioLogueado.fecha_nacimiento %></p>
+    <div class="main-profile">
+      <% if (usuarioLogueado) { %>
+        <section class="user-details-section" aria-labelledby="user-info-heading">
+          <div class="avatar-container">
+            <div style="position: relative;">
+              <img class="avatar-bordered" src="/images/avatars/<%= usuarioLogueado.imagen %>" alt="Bordered avatar">
+            </div>
+          </div>
 
-      <h3>Información del Apto Médico</h3>
-      <% if (usuarioLogueado.aptoMedico) { %>
-        <p>Apto médico cargado:</p>
-        <% if (usuarioLogueado.aptoMedico.endsWith('.pdf')) { %>
-          <a href="/uploads/aptoMedico/<%= usuarioLogueado.aptoMedico %>" target="_blank" rel="noopener noreferrer" aria-label="Ver Apto Médico en formato PDF, se abre en una nueva pestaña">📄 Ver Apto Médico (PDF)</a>
+          <p><strong>Nombre completo:</strong> <%= usuarioLogueado.nombre %> <%= usuarioLogueado.apellido %></p>
+          <p><strong>Celular:</strong> <%= usuarioLogueado.celular %></p>
+          <p><strong>Fecha de nacimiento:</strong> <%= usuarioLogueado.fecha_nacimiento %></p>
+          <p><strong>Estado de la Membresía:</strong> <%= usuarioLogueado.estado_membresia %></p>
+  
+          <% if (usuarioLogueado.fecha_fin_cuota) { %>
+            <p><strong>Vigente hasta:</strong> <%= usuarioLogueado.fecha_fin_cuota %></p>
           <% } else { %>
-          <a href="/uploads/aptoMedico/<%= usuarioLogueado.aptoMedico %>" target="_blank" rel="noopener noreferrer" aria-label="Ver imagen del Apto Médico, se abre en una nueva pestaña">
-            <img src="/uploads/aptoMedico/<%= usuarioLogueado.aptoMedico %>" alt="Imagen de apto médico del usuario" style="max-width: 200px;" />
-            </a>
-        <% } %>
-      <% } else { %>
-        <p>No se ha cargado un apto médico.</p>
+            <p>Sin fecha de vencimiento de cuota registrada.</p>
+          <% } %>
+  
+        </section>
       <% } %>
+    </div>
 
-      <h3>Estado de la Membresía</h3>
-      <p><strong>Estado actual:</strong> <%= usuarioLogueado.estado_membresia %></p>
-
-      <% if (usuarioLogueado.fecha_fin_cuota) { %>
-        <p><strong>Vigente hasta:</strong> <%= usuarioLogueado.fecha_fin_cuota %></p>
-      <% } else { %>
-        <p>Sin fecha de vencimiento de cuota registrada.</p>
-      <% } %>
-    </section>
-
-    <% } else { %>
-    <p>No has iniciado sesión. Para ver tu perfil, por favor <a href="/users/login">inicia sesión aquí</a>.</p>
-    <% } %>
 
     <nav aria-label="Opciones principales del perfil">
       <ul class="botones">
@@ -57,6 +60,7 @@
         <li><a href="/" class="crear-editar">Volver a la página principal</a></li>
         </ul>
     </nav>
+
   </main>
 
   <%- include('./partials/footer.ejs') %>
