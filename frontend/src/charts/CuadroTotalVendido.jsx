@@ -23,7 +23,8 @@ const CuadroProductosIngresados = () => {
       if (anio) params.anio = anio;
       if (mes) params.mes = mes;
 
-      const res = await axios.get('http://localhost:3032/api/reservas/estadisticasPorProducto', { params });
+      const res = await axios.get('http://localhost:3032/api/reservas/estadisticasPorProducto', { params, withCredentials:true }
+      );
 
       const formateado = res.data.map(item => ({
         mesAnio: new Date(item.Reserva.fecha).toLocaleDateString('es-AR', {
