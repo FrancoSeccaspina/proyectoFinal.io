@@ -115,7 +115,43 @@ body {
   background-color: #b91c1c;
 }
 
-/* ========== RESPONSIVE ========== */
+.apto-medico-upload {
+  display: flex;
+  flex-direction: column;
+  align-items: start;
+  gap: 0.5rem;
+  margin-top: 1rem;
+}
+
+.upload-title {
+  font-weight: 600;
+  font-size: 1rem;
+  margin-bottom: 0.25rem;
+}
+
+.file-upload-label {
+  background-color: #444;
+  color: #fff;
+  padding: 10px 16px;
+  border-radius: 6px;
+  cursor: pointer;
+  font-size: 0.95rem;
+  transition: background-color 0.3s ease;
+  display: inline-block;
+}
+
+.file-upload-label:hover {
+  background-color: #666;
+}
+
+.input-file {
+  display: none;
+}
+
+.hint-text {
+  font-size: 0.85rem;
+  color: #aaa;
+}
 
 @media (max-width: 768px) {
   .form-editar-perfil {
