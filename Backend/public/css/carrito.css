@@ -481,3 +481,18 @@ main.mainCarrito {
   max-height: 100%;
   flex-grow: 1;
 }
+.franja-blanca {
+  width: 100%;
+  height: 1rem;
+  background-color: white;
+}
+/* cesto p/eliminar producto en vista carrito */
+.cart-remove-button svg {
+  fill: white;
+  transition: fill 0.3s ease;
+}
+
+.cart-remove-button:hover svg {
+  fill: #dc2626; /* rojo al pasar el mouse */
+}
+/* fin cesto p/eliminar producto en vista carrito */

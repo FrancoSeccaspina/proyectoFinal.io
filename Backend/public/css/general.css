@@ -136,4 +136,13 @@
   width: 100%;
   text-align: center !important;
 }
-
+.bodyHome {
+  /* fondo blco al body */
+  background-color: white !important;
+  /* margenes sup e inf */
+  margin-top: 1rem;
+  margin-bottom: 1rem;
+}
+html {
+  background-color: white !important;
+}
