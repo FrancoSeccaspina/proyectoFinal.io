@@ -7,7 +7,8 @@ window.addEventListener('load', function () {
       const listItems = document.querySelectorAll('.card')
   
       listItems.forEach((item) => {
-        let text = item.textContent;
+        let  nombre = item.querySelector('.card-title');
+        let text = nombre ? nombre.textContent : '';
         if (text.toLowerCase().includes(filter.toLowerCase())) {
           item.style.display = '';
         }
