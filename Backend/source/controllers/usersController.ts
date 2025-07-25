@@ -7,6 +7,7 @@ import { SessionService } from '../services/serivicioSesion'
 import { firmarToken } from '../utils/generadorToken'
 import bcrypt from 'bcryptjs';
 import { Cuota } from "../database/models/cuota";
+import { transporter } from "../config/mailer";
 
 export class UsuarioController {
 
@@ -281,7 +282,7 @@ export class UsuarioController {
       if (usuario.rol === Roles.ADMIN) {
         return res.redirect("http://localhost:3000");
       }
-      
+
       return res.redirect("/");
 
     } catch (error) {
@@ -412,5 +413,47 @@ export class UsuarioController {
       });
     }
   }
+  async envioEmail(req: Request, res: Response): Promise<Response> {
+    try {
+      const { email } = req.body;
+      const usuario = await Autenticacion.findOne({ where: { email } });
+      if (!usuario) {
+        return res.status(404).json({
+          success: false,
+          message: "Usuario no encontrado",
+        });
+      }
+      // Url que le va a llegar al usuario
+      const resetUrl = `http://localhost:3000/reset-password/${usuario.id}`;
+
+      async () => {
+        const info = await transporter.sendMail({
+          from: '"Olvide Mi Contraseña" <activafitness@gmail.com>',
+          to: email,
+          subject: "Olvide Mi Contraseña",
+          html: //aca se envia un <a> con el link de reset
+            `<p>Hola,</p>
+          <p>Recibimos una solicitud para restablecer tu contraseña.</p>
+          <p>Por favor, haz clic en el siguiente enlace para restablecer tu contraseña:</p>
+          <a href="${resetUrl}">Restablecer Contraseña</a>
+          <p>Si no solicitaste este cambio, puedes ignorar este mensaje.</p>
+          <p>Saludos,</p>`
+        });
+
+        console.log("Message sent:", info.messageId);
+      }
+      return res.status(200).json({
+        success: true,
+        message: "Email enviado correctamente",
+      });
+    } catch (error) {
+      console.error("Error en solicitudChangePassword:", (error as Error).message);
+      return res.status(500).json({
+        success: false,
+        message: "Error al procesar la solicitud de cambio de contraseña",
+      });
+    }
+  }
 }
+
 export default new UsuarioController();

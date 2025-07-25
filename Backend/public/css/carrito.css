@@ -1,3 +1,19 @@
+html, body {
+  height: 100%;
+  margin: 0;
+  padding: 0;
+}
+
+body {
+  display: flex;
+  flex-direction: column;
+  min-height: 100vh;
+  /* importante: dejar doble el lienzo a continuacion */
+  background-image: url('/images/Lienzo01vero.jpeg'), url('/images/Lienzo01vero.jpeg');
+  background-repeat: repeat-y;
+  background-size: contain;
+  background-position: top center;
+}
 * {
     box-sizing: border-box;
 }
@@ -5,6 +21,7 @@
 @import url(./productDetail.css);
 
 main {
+    flex: 1;
     padding: 0;
 }
 
@@ -28,17 +45,32 @@ main {
     font-weight: 800;
 }
 
+/* lineas previas a card */
 #warning-sentence {
-    display: flex;
-    font-size: 0.9rem;
-    align-items: center;
-    margin-top: 0.8rem;
-    color: white !important;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 0.6rem;
+  font-size: 1.1rem; /* Tamaño intermedio */
+  color: white;
+  margin: 1rem auto;
+  text-align: center;
+  max-width: 90%;
+  width: fit-content;
 }
 
 #warning-sentence img {
-    margin-top: -1.15rem;
+  height: 1.5rem; /* Tamaño acorde al texto */
+  margin: 0;
+  filter: brightness(0) invert(1); /* lo paso a blanco */
 }
+
+#warning-sentence p {
+  margin: 0;
+  color: white;
+  font-size: 1.1rem;
+}
+/* fin lineas previas a card */
 
 #terms-products {
     font-size: 0.9rem;
@@ -384,10 +416,6 @@ main {
     padding: 2rem;
 }
 
-.container-allMain-cart {
-    padding: 2rem;
-}
-
 .mainLienzo {
     background-image: url('/images/Lienzo01vero.jpeg');
     background-size: 100% auto;
@@ -437,3 +465,34 @@ main {
 .cart-remove-button:hover svg {
     fill: #dc2626;
 }
+
+.mainCarrito {
+  margin-top: 1rem;
+  margin-bottom: 1rem;
+  padding: 0 2rem;
+  background-color: white;
+}
+body {
+  overflow-y: auto;
+}
+
+main.mainCarrito {
+  overflow-y: auto;
+  max-height: 100%;
+  flex-grow: 1;
+}
+.franja-blanca {
+  width: 100%;
+  height: 1rem;
+  background-color: white;
+}
+/* cesto p/eliminar producto en vista carrito */
+.cart-remove-button svg {
+  fill: white;
+  transition: fill 0.3s ease;
+}
+
+.cart-remove-button:hover svg {
+  fill: #dc2626; /* rojo al pasar el mouse */
+}
+/* fin cesto p/eliminar producto en vista carrito */
