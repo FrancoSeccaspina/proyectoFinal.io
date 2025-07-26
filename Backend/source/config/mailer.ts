@@ -6,11 +6,11 @@ export const transporter = nodemailer.createTransport({
     port: 465,
     secure: true,
     auth: {
-        user: "",
-        pass: "",
+        user: "activafitness0@gmail.com",
+        pass: "irzw rxgt yvte snvy",
     },
 });
 
 transporter.verify().then(() => {
-    console.log("Mailer is ready to send emails");
+    console.log("Mailer ya puede enviar correos");
 })

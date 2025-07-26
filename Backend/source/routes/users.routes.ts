@@ -31,7 +31,8 @@ route.post('/users/login', validationLogin, (req: Request, res: Response) => { u
 
 route.get('/users/show/:id', verificarTokenPorRol([Roles.CLIENTE, Roles.ADMIN]), (req, res) => { usersController.show(req, res) });
 route.get('/users/logout', verificarTokenPorRol([Roles.CLIENTE, Roles.ADMIN]), (req, res) => { usersController.logout(req, res) });
-route.post('/users/change-password', verificarTokenPorRol([Roles.CLIENTE, Roles.ADMIN]), (req: Request, res: Response) => { usersController.changePassword(req, res) });
+route.put('/users/change-password/:id', (req: Request, res: Response) => { usersController.changePassword(req, res) });
+route.post('/users/update-password', (req: Request, res: Response) => { usersController.envioEmail(req, res) });
 route.post('/users/:id', verificarTokenPorRol([Roles.CLIENTE, Roles.ADMIN]), upload.fields([
   { name: 'imagen', maxCount: 1 },
   { name: 'aptomedico', maxCount: 1 }
