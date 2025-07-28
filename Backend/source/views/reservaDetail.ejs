@@ -1,81 +1,67 @@
 <!DOCTYPE html>
 <html lang="es">
-  <head>
+
+<head>
   <%- include('./partials/head.ejs') %>
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Reserva Confirmada - Detalle de Compra - [Nombre de tu Tienda]</title>
-  <link rel="stylesheet" href="/css/register.css" />
   <link rel="stylesheet" href="/css/carrito.css">
   <link rel="stylesheet" href="/css/button-form.css">
-  <link rel="stylesheet" href="/css/reservaDetail.css"
-  <style>
-    /* Esta clase estándar oculta elementos visualmente pero los mantiene disponibles para los lectores de pantalla. Es útil para añadir contexto sin recargar el diseño. */
-    
-  </style>
+  <link rel="stylesheet" href="/css/reservaDetail.css">
 </head>
 
 <body>
 
-<%- include('./partials/header.ejs') %>
+  <%- include('./partials/header.ejs') %>
 
-<main class="container-allMain-cart" aria-labelledby="main-heading-reserva">
-    <h1 id="main-heading-reserva" class="visually-hidden">Detalles de la Reserva Confirmada</h1>
-    <section id="header-cart">
-    <h2>¡Reserva confirmada!</h2>
-    <div id="warning-sentence" role="alert" aria-live="assertive">
-        <img src="/images/exclamation.png" alt="Icono de exclamación: Advertencia importante."
-        aria-hidden="true">
+  <main class="main-reserva-detail" aria-labelledby="main-heading-reserva">
+    <div class="header-cart">
+      <h1>¡Reserva confirmada!</h1>
+      <div id="warning-sentence" role="alert" aria-live="assertive">
+        <img src="/images/exclamation.png" alt="Icono de exclamación: Advertencia importante." aria-hidden="true">
         <p><strong>Importante:</strong> La compra se completa únicamente al finalizar el proceso de pago.</p>
+      </div>
     </div>
-    </section>
 
-    <section class="contenedor-compras" aria-labelledby="detalle-reserva-heading">
-    <h2 id="detalle-reserva-heading">Detalle de tu reserva</h2>
-    <% if (reserva && detalleReserva && detalleReserva.length > 0) { %>
-        <ul role="list">
+    <div class="contenedor-compras" aria-labelledby="detalle-reserva-heading">
+      <h2 id="detalle-reserva-heading">Detalles de tu reserva</h2>
+      <% if (reserva && detalleReserva && detalleReserva.length > 0) { %>
+      <ul class="ul-reserva-detail">
         <% detalleReserva.forEach(function(detalle, index) { %>
-            <li class="compra" aria-labelledby="producto-nombre-<%= index %>">
-            <% if ( reserva.estado && reserva.estado == 'pendiente'){ %>
-                <p><strong>La reserva vence en:</strong> <span class="cuenta-regresiva" data-vencimiento="<%= reserva.vencimiento %>"></span></p>
-            <% } %>
-            <p><strong>Estado:</strong> <span id="estado-reserva"><%= reserva.estado ? reserva.estado : 'No disponible' %></span></p>
-            <p><strong>Fecha de Reserva:</strong> <%= reserva.fecha ? (reserva.fecha.toLocaleString ? reserva.fecha.toLocaleString() : reserva.fecha) : 'No disponible' %></p>
-            <p><strong>Producto:</strong> <span id="producto-nombre-<%= index %>"><%= detalle.Producto ? detalle.Producto.nombre : 'No disponible' %></span></p>
-            <p><strong>Cantidad:</strong> <%= detalle.cantidad ? detalle.cantidad : 'No disponible' %></p>
-            <p><strong>Precio Unitario:</strong> $<%= detalle.Producto && detalle.Producto.precio ? detalle.Producto.precio : 'No disponible' %></p>
-            <p class="visually-hidden">Descripción del producto: <%= detalle.Producto && detalle.Producto.descripcion ? detalle.Producto.descripcion : 'No disponible' %></p>
-            <p><strong>Subtotal por Producto:</strong> $<%= detalle.subtotal ? detalle.subtotal : 'No disponible' %></p>
-            </li>
+        <li class="compra" aria-labelledby="producto-nombre-<%= index %>">
+          <% if ( reserva.estado && reserva.estado == 'pendiente'){ %>
+          <p><strong>La reserva vence en:</strong> <span class="cuenta-regresiva" data-vencimiento="<%= reserva.vencimiento %>"></span></p>
+          <% } %>
+          <p><strong>Estado:</strong> <span id="estado-reserva"><%= reserva.estado ? reserva.estado : 'No disponible' %></span></p>
+          <p><strong>Fecha de Reserva:</strong> <%= reserva.fecha ? (reserva.fecha.toLocaleString ? reserva.fecha.toLocaleString() : reserva.fecha) : 'No disponible' %></p>
+          <p><strong>Producto:</strong> <span id="producto-nombre-<%= index %>"><%= detalle.Producto ? detalle.Producto.nombre : 'No disponible' %></span></p>
+          <p><strong>Cantidad:</strong> <%= detalle.cantidad ? detalle.cantidad : 'No disponible' %></p>
+          <p><strong>Precio Unitario:</strong> $<%= detalle.Producto && detalle.Producto.precio ? detalle.Producto.precio : 'No disponible' %></p>
+          <p class="visually-hidden">Descripción del producto: <%= detalle.Producto && detalle.Producto.descripcion ? detalle.Producto.descripcion : 'No disponible' %></p>
+          <p><strong>Subtotal por Producto:</strong> $<%= detalle.subtotal ? detalle.subtotal : 'No disponible' %></p>
+        </li>
         <% }) %>
-        </ul>
-        <div class="compra" style="background:#e2e8f0;">
+      </ul>
+      <div class="compra" style="background:#e2e8f0;">
         <p><strong>Total de la reserva:</strong> $<%= reserva.total ? reserva.total : 'No disponible' %></p>
-        </div>
-    <% } else { %>
-        <div class="compra">
+      </div>
+      <% } else { %>
+      <div class="compra">
         <p>No hay detalles para esta reserva.</p>
-        </div>
-    <% } %>
-    </section>
+      </div>
+      <% } %>
 
-    <!-- <section id="payments" aria-labelledby="payment-methods-heading">
-            
-        <h2 id="payment-methods-heading">Elegí tu método de pago</h2>
-        <div class="methods-img" role="group" aria-label="Opciones de método de pago">
-            <a href="/transferencia" class="button-link">
-            <button id="transferencia-btn">Transferencia Bancaria</button>
-            </a>
-            <a href="/mPago" class="button-link">
-            <button id="mercadopago-btn">Mercado Pago</button>
-            </a>
-        </div>
-    </section> -->
-</main>
+      <div class="display-flex-justify-center">
+        <a href="/transferencia" class="button-access as-button">Transferencia Bancaria</a>
+      </div>
+    </div>
 
-<%- include('./partials/footer.ejs') %>
+  </main>
 
-<script src="/js/carrito.js"></script>
-<script src="/js/estadoProductos.js"></script>
+  <%- include('./partials/footer.ejs') %>
+
+  <script src="/js/carrito.js"></script>
+  <script src="/js/estadoProductos.js"></script>
 </body>
 
 </html>

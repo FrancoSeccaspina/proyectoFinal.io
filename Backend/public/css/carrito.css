@@ -8,8 +8,6 @@ body {
   display: flex;
   flex-direction: column;
   min-height: 100vh;
-  /* importante: dejar doble el lienzo a continuacion */
-  background-image: url('/images/Lienzo01vero.jpeg'), url('/images/Lienzo01vero.jpeg');
   background-repeat: repeat-y;
   background-size: contain;
   background-position: top center;

@@ -1,3 +1,24 @@
+.main-reserva-detail{
+    display: flex;
+    flex-direction: column;
+    gap: 2rem;
+    margin: 1rem 0px;
+    padding: 2rem;
+    background-color: black;
+    color: white;
+}
+
+.ul-reserva-detail{
+    padding: 0px;
+}
+
+
+.header-cart{
+    padding: 2rem;
+    font-size: 2rem;
+    font-family: Arial, sans-serif;
+}
+
 .visually-hidden {
     position: absolute;
     width: 1px;
@@ -7,33 +28,33 @@
     overflow: hidden;
     clip: rect(0, 0, 0, 0);
     border: 0;
-    }
+}
 
-    .contenedor-compras {
-    max-width: 500px;
-    margin: 50px auto;
-    padding: 20px;
+.contenedor-compras {
+    min-width: 30%;
+    display: flex;
+    margin: auto;
+    padding: 2rem;
     background-color: #f8fafc;
-    border: 1px solid #e2e8f0;
     border-radius: 12px;
-    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
     font-family: Arial, sans-serif;
-    }
+    flex-direction: column;
+}
 
-    .contenedor-compras h2 {
+.contenedor-compras h2 {
     text-align: center;
     margin-bottom: 20px;
     color: #2d3748;
-    }
+}
 
-    .compra {
+.compra {
     background-color: #edf2f7;
     padding: 15px;
     margin-bottom: 15px;
     border-radius: 8px;
-    }
+}
 
-    .compra p {
+.compra p {
     margin: 5px 0;
     color: #4a5568;
-    }
+}
