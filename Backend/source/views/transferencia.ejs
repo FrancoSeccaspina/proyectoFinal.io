@@ -2,27 +2,24 @@
 <html lang="es">
 <head>
   <meta charset="UTF-8">
-  <title>Transferencia Bancaria</title>
-  <link rel="stylesheet" href="/css/transferencia.css"> <!-- si tenés un CSS -->
+  <title>Confirmación de Reserva</title>
+  <link rel="stylesheet" href="/css/transferencia.css">
 </head>
-<body>
-  <section class="pago-container">
-    <h2>Pago por Transferencia Bancaria</h2>
-    <p>Para completar tu compra, realizá una transferencia con los siguientes datos:</p>
+<body class="body-transferencia">
+  <main class="main-transferencia">
+    <div class="pago-container" aria-labelledby="confirmacion-heading">
+      <h2 id="confirmacion-heading">Reserva realizada con éxito</h2>
 
-    <div class="datos-bancarios">
-      <p><strong>Banco:</strong> Banco Ejemplo</p>
-      <p><strong>CBU:</strong> 0000000000000000000012</p>
-      <p><strong>Alias:</strong> mipagina.transfer</p>
-      <p><strong>Titular:</strong> Mi Empresa SRL</p>
+      <p>Gracias por tu reserva. Para finalizar el proceso de compra, necesitás comunicarte directamente con el gimnasio.</p>
+
+      <div class="contacto-info">
+        <p><strong>Teléfono / WhatsApp:</strong> <a href="https://wa.me/5491112345678" target="_blank">+54 9 11 1234-5678</a></p>
+        <p><strong>Horario de atención:</strong> Lunes a Viernes de 9:00 a 18:00 hs</p>
+        <p><strong>Importante:</strong> La reserva quedará pendiente hasta que se confirme el pago con el dueño del gimnasio.</p>
+      </div>
+
+      <a href="/" class="volver-link">Volver al inicio</a>
     </div>
-
-    <p>Una vez realizada la transferencia, por favor enviá el comprobante al siguiente email o WhatsApp:</p>
-    <p><strong>Email:</strong> pagos@mipagina.com</p>
-    <p><strong>WhatsApp:</strong> +54 9 11 1234-5678</p>
-    
-    <a href="/finalizarCompra" class="crear">Finalizar Compra</a>
-    <a href="/" class="volver-link"> Volver al inicio</a>
-  </section>
+  </main>
 </body>
 </html>
