@@ -1,4 +1,4 @@
-.main-reserva-detail{
+.main-reserva-detail {
     display: flex;
     flex-direction: column;
     gap: 2rem;
@@ -8,12 +8,11 @@
     color: white;
 }
 
-.ul-reserva-detail{
+.ul-reserva-detail {
     padding: 0px;
 }
 
-
-.header-cart{
+.header-cart {
     padding: 2rem;
     font-size: 2rem;
     font-family: Arial, sans-serif;
@@ -57,4 +56,66 @@
 .compra p {
     margin: 5px 0;
     color: #4a5568;
+}
+
+@media (max-width: 768px) {
+    .main-reserva-detail {
+        padding: 1rem;
+        gap: 1.5rem;
+    }
+
+    .header-cart {
+        padding: 1rem;
+        font-size: 1.5rem;
+        text-align: center;
+    }
+
+    .header-cart img {
+        max-width: 40px;
+        height: auto;
+        display: block;
+        margin: 0 auto 0.5rem;
+    }
+
+    .contenedor-compras {
+        padding: 1rem;
+        width: 100%;
+        min-width: unset;
+    }
+
+    .compra {
+        padding: 1rem;
+        font-size: 0.95rem;
+    }
+
+    .display-flex-justify-center {
+        display: flex;
+        justify-content: center;
+        margin-top: 1rem;
+    }
+
+    .button-access {
+        width: 100%;
+        text-align: center;
+        padding: 0.75rem 1rem;
+        font-size: 1rem;
+    }
+}
+
+@media (max-width: 480px) {
+    .header-cart {
+        font-size: 1.25rem;
+    }
+
+    .compra p {
+        font-size: 0.9rem;
+    }
+
+    .contenedor-compras h2 {
+        font-size: 1.2rem;
+    }
+
+    .button-access {
+        font-size: 0.95rem;
+    }
 }
