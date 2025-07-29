@@ -309,6 +309,26 @@ class reservaController {
             console.error("Error al devolver stock de reservas vencidas:", (error as Error).message);
         }
     }
+
+    public async mostrarDatosParaConfirmarReserva(req: Request, res: Response) {
+            try {
+                const reservaId = req.params.id;
+                const admin = await Usuario.findOne({where: {nombre : "admin"}})
+                const numeroContacto = admin? admin.celular : "";
+
+            res.status(200).render("ReservaConfirmarContacto", {
+                numeroContacto : numeroContacto,
+                reservaId : reservaId,  
+            });
+
+        } catch (error) {
+            console.error("Error :", (error as Error).message);
+            res.status(500).json({
+                message: "Error al mostrar los datos para confirmar esta reserva ",
+                error: (error as Error).message
+            });
+        }
+    }
 }
 
 export default new reservaController();

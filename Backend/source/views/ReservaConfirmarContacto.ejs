@@ -1,13 +1,18 @@
-  <%
-    const telefono = admin.telefono
-    const mensaje = encodeURIComponent("Hola, quiero concretar la reserva: ");
-    const linkVista = encodeURIComponent(`https://localhost:3032/api/reserva/${reserva.id}/confirmar`);
-    
-    const whatsappURL = `https://wa.me/${telefono}?text=${mensaje}%20${linkVista}`;
-  %>
+<%
+    const telefono = `549${numeroContacto}`;
+    const link = `https://localhost:3032/Reserva/${reservaId}`;
+    const mensaje = `Hola, quiero concretar la reserva: ${link}`;
+    const mensajeCodificado = encodeURIComponent(mensaje);
+
+    const whatsappURL = `https://wa.me/${telefono}?text=${mensajeCodificado}`;
+    const whatsappURLParaQR = encodeURIComponent(whatsappURL);
+%>
+
+
 
 <!DOCTYPE html>
 <html lang="es">
+
 <head>
   <meta charset="UTF-8">
   <title>Confirmación de Reserva</title>
@@ -19,11 +24,16 @@
     <div class="pago-container" aria-labelledby="confirmacion-heading">
       <h2 id="confirmacion-heading">Reserva realizada con éxito</h2>
 
+      <img src="https://api.qrserver.com/v1/create-qr-code/?data=<%= whatsappURLParaQR %>&size=200x200" alt="Código QR para WhatsApp" />
+
 
       <p>Gracias por tu reserva. Para finalizar el proceso de compra, necesitás comunicarte directamente con el gimnasio.</p>
 
       <div class="contacto-info">
-        <p><strong>Teléfono / WhatsApp:</strong> <a href="https://wa.me/5491112345678" target="_blank">+54 9 11-1234-5678</a></p>
+        <p><strong>Teléfono / WhatsApp:</strong> <a href="<%= whatsappURL %>" target="_blank" rel="noopener noreferrer">
+            <%= telefono %>
+          </a></p>
+
         <p><strong>Horario de atención:</strong> Lunes a Viernes de 9:00 a 18:00 hs</p>
         <p><strong>Importante:</strong> La reserva quedará pendiente hasta que se confirme el pago con el dueño del gimnasio.</p>
       </div>
@@ -32,4 +42,5 @@
     </div>
   </main>
 </body>
+
 </html>
