@@ -1,5 +1,3 @@
-import transaccionApiController from './transaccion.api.Controller';
-import { TipoTransaccion, OrigenTransaccion } from '../../constants/tipoTransacciones'
 import { Request, Response } from 'express';
 import { Reserva } from '../../database/models/reserva';
 import { Producto } from '../../database/models/producto';
@@ -8,6 +6,33 @@ import { DetalleReserva } from '../../database/models/detalleReserva';
 import { EstadosReserva } from '../../constants/estadoReserva';
 import { Sequelize, Op, fn, col, where } from 'sequelize';
 export class reservaApiController {
+    async reservaPorId(req: Request, res: Response): Promise<void> {
+        try {
+            const idReserva = req.params.id;
+            const reserva = await Reserva.findByPk(idReserva, {
+                include: [
+                    {
+                        model: DetalleReserva,
+                        include: [
+                            {
+                                model: Producto
+                            }
+                        ]
+                    },
+                    {
+                        model: Usuario,
+                        attributes: ['id', 'nombre', 'apellido']
+                    }
+                ],
+            })
+
+            res.status(200).json({reserva: reserva});
+        } catch (error) {
+            console.error('Error al mostrar reserva:', error);
+            res.status(500).json({ message: 'Error al mostrar reserva, error 500' });
+        }
+    }
+
     async listaReservas(req: Request, res: Response): Promise<void> {
         try {
             const reservas = await Reserva.findAll({
@@ -175,6 +200,7 @@ export class reservaApiController {
             });
         }
     }
+
     async filtrarPorFecha(req: Request, res: Response): Promise<void> {
         try {
             const { fecha } = req.query;
@@ -233,6 +259,7 @@ export class reservaApiController {
             res.status(500).json({ message: 'Error al filtrar' });
         }
     }
+
     async delete(req: Request, res: Response): Promise<Response> {
         try {
           const { id_reserva } = req.params;
@@ -259,7 +286,7 @@ export class reservaApiController {
             message: "Error interno del servidor"
           });
         }
-      }
+    }
 }
 
 export default new reservaApiController();

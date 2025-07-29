@@ -7,9 +7,9 @@ import Sidebar from './component/Sidebar';
 import CuotaFormulario from './component/CuotaFormulario';
 import Proveedores from './component/Proveedores';
 import Reservas from './component/Reservas';
+import ReservaPorId from './component/ReservaPorId'
 import PrecioCuota from './component/PrecioCuota';
 import Empleados from './component/Empleados';
-import axios from 'axios';
 import { BrowserRouter, Route, Routes } from 'react-router-dom';
 
 import EdicionReceta from './ABM/EdicionRece';
@@ -41,6 +41,7 @@ function App() {
           <Route path="/Recetas" element={<Recetas />} />
           <Route path="/Proveedores" element={<Proveedores />} />
           <Route path="/Reservas" element={<Reservas />} />
+          <Route path="/Reserva/:id" element={<ReservaPorId />} />
           <Route path="/PrecioCuota" element={<PrecioCuota />} />
           <Route path="/Empleados" element={<Empleados />} />
           

@@ -1,5 +1,5 @@
-import ReservaCard from "./ReservaCard";
 import { useEffect, useState } from "react";
+import ReservaCard from "./ReservaCard";
 import axios from "axios";
 import * as XLSX from "xlsx";
 import "../css/header.css";
@@ -89,6 +89,7 @@ function Reservas() {
       { loading ? ( <p>Cargando reservas...</p> ) : reservas.length > 0 ? (
           resultado.map((reserva) => (
             <ReservaCard 
+              key={reserva.id_reserva}
               reserva={reserva}  
               onDelete={eliminarReserva}
               />

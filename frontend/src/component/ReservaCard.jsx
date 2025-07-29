@@ -1,16 +1,18 @@
 import { EstadosReserva } from "../constants/estadoReserva";
-import ModalConfirm from "./ModalDeConfirmacion"
+// import { useNavigate } from "react-router-dom";
 import { useState } from "react";
+import ModalConfirm from "./ModalDeConfirmacion"
 import axios from "axios";
 
-function ReservaCard({ reserva: reservaProp, onDelete}) {
-  const [reservaActual, setReservaActual] = useState(reservaProp)
+function ReservaCard({ reserva, onDelete}) {
+  // const navigate = useNavigate();
+  const [reservaActual, setReservaActual] = useState(reserva)
   const [isOpen, setIsOpen] = useState(false);
   const [mensaje, setMensaje] = useState("")
-  const [accionConfirmar, setAccionConfirmar] = useState(null);
+  const [accionConfirmarModal, setAccionConfirmarModal] = useState(null);
 
   const modalConfirmarReserva = () => {
-    setAccionConfirmar(() => () => {
+    setAccionConfirmarModal(() => () => {
       onclickConfirm()
       setIsOpen(false)
     })
@@ -19,11 +21,20 @@ function ReservaCard({ reserva: reservaProp, onDelete}) {
   }
 
   const modalCancelarReserva = () => {
-    setAccionConfirmar(() => () => {
+    setAccionConfirmarModal(() => () => {
       onclickCancel()
       setIsOpen(false)
     })
     setMensaje("Desea confirmar reserva?")
+    setIsOpen(true)
+  }
+
+  const modalEliminarReserva = () => {
+    setAccionConfirmarModal(() => () => {
+      handleDelete()
+      setIsOpen(false)
+    })
+    setMensaje("Desea eliminar la reserva?")
     setIsOpen(true)
   }
 
@@ -56,15 +67,13 @@ function ReservaCard({ reserva: reservaProp, onDelete}) {
     }
   };
 
-  const handleDelete = async (id_reserva) => {
-    if (window.confirm("¿Estás seguro de que querés eliminar esta reserva?")) {
-      try {
-        await axios.delete(`http://localhost:3032/api/reservas/${reservaActual.id_reserva}`, { withCredentials: true });
-        onDelete?.(reservaActual.id_reserva);
-      } catch (error) {
-        console.error('Error al eliminar reserva:', error);
-        alert(`Error: ${error.response?.data?.message || error.message}`);
-      }
+  const handleDelete = async () => {
+    try {
+      const idAEliminar = reservaActual.id_reserva;
+      await axios.delete(`http://localhost:3032/api/reservas/${idAEliminar}`, { withCredentials: true });
+      onDelete?.(idAEliminar);
+    } catch (error) {
+      console.error('Error al eliminar reserva:', error);
     }
   };
 
@@ -131,12 +140,12 @@ function ReservaCard({ reserva: reservaProp, onDelete}) {
             </button>
         )}
 
-        <button className="btn btn-danger" onClick={() => handleDelete(reservaActual.id_reserva)}>Eliminar Reserva</button>
+        <button className="btn btn-danger" onClick={modalEliminarReserva}>Eliminar Reserva</button>
 
         <ModalConfirm 
           isOpen={isOpen}
           onClose={() => setIsOpen(false)}
-          onConfirm={accionConfirmar}
+          onConfirm={accionConfirmarModal}
           message={mensaje}
           />
           

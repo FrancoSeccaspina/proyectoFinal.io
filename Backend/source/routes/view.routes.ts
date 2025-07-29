@@ -32,9 +32,6 @@ route.get("/carrito", function (req, res) {
 route.get("/mPago", function (req, res) {
     res.render("mPago");
 });
-route.get("/transferencia", function (req, res) {
-    res.render("transferencia");
-});
 route.get('/perfil', verificarTokenPorRol([Roles.CLIENTE]), middleware.setUsuarioLogueado, (req, res) => {
     res.render('perfil'); // los datos están en res.locals.usuarioLogueado
 });

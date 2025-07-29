@@ -11,5 +11,6 @@ route.get("/reservas/mostrar", verificarTokenPorRol([Roles.ADMIN]), (req: Reques
 route.put("/reservas/confirmar/:id", verificarTokenPorRol([Roles.ADMIN]), (req: Request, res: Response) => { reservaApiController.confirmarReserva(req, res) });
 route.put("/reservas/cancelar/:id", verificarTokenPorRol([Roles.ADMIN]), (req: Request, res: Response) => { reservaApiController.cancelarReserva(req, res) });
 route.delete('/reservas/:id_reserva', verificarTokenPorRol([Roles.ADMIN, Roles.CLIENTE]), (res, req) => { reservaApiController.delete(res, req) })
+route.get("/reserva/:id/confirmar", (req: Request, res: Response) => {reservaApiController.reservaPorId(req, res)});
 
 export default route;
