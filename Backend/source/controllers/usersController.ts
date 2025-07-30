@@ -393,8 +393,9 @@ export class UsuarioController {
       const { token } = req.params;
       const { contrasenia } = req.body;
 
+      console.log("token :", token)
       const decodedUsuario = obtenerPayload(token);
-
+      console.log("decodedUsuario :", decodedUsuario)
       const usuario = await Autenticacion.findOne({ where: { id_usuario: decodedUsuario.id } });
       if (!usuario) {
         res.status(404).render("login", {
@@ -484,7 +485,11 @@ export class UsuarioController {
   }
   async renderChangePassword(req: Request, res: Response) {
     const { token } = req.params;
-    res.render('changePassword', { token: token });
+    res.render('changePassword', {
+      token,
+      errors: {},
+      oldData: {}
+    });
   }
 }
 

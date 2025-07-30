@@ -5,6 +5,7 @@ import express from 'express';
 import usersController from '../controllers/usersController';
 import validationLogin from '../validations/login';
 import validationRegister from '../validations/register';
+import validationRecuperarContra from '../validations/recuperarContra';
 
 import multer from 'multer';
 import path from 'path';
@@ -31,7 +32,7 @@ route.post('/users/login', validationLogin, (req: Request, res: Response) => { u
 
 route.get('/users/show/:id', verificarTokenPorRol([Roles.CLIENTE, Roles.ADMIN]), (req, res) => { usersController.show(req, res) });
 route.get('/users/logout', verificarTokenPorRol([Roles.CLIENTE, Roles.ADMIN]), (req, res) => { usersController.logout(req, res) });
-route.post('/users/change-password/:token', (req: Request, res: Response) => { usersController.changePassword(req, res) });
+route.post('/users/change-password/:token', validationRecuperarContra, (req: Request, res: Response) => { usersController.changePassword(req, res) });
 route.post('/users/update-password', (req: Request, res: Response) => { usersController.envioEmail(req, res) });
 route.post('/users/:id', verificarTokenPorRol([Roles.CLIENTE, Roles.ADMIN]), upload.fields([
   { name: 'imagen', maxCount: 1 },
