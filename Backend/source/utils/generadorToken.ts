@@ -8,7 +8,7 @@ interface UsuarioToken {
 }
 
 export function firmarToken (usuario: UsuarioToken) {
-    const token = jwt.sign(usuario, JWT_SECRET, { expiresIn: "2h" });
+    const token = jwt.sign(usuario, JWT_SECRET, { expiresIn: "1h" });
     return token;
 }
 

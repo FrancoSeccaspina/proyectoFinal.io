@@ -4,10 +4,13 @@ import { Autenticacion } from '../database/models/autenticacion';
 import { Usuario } from '../database/models/usuario';
 import { Roles } from "../constants/roles";
 import { SessionService } from '../services/serivicioSesion'
-import { firmarToken } from '../utils/generadorToken'
+import { firmarToken, obtenerPayload } from '../utils/generadorToken'
 import bcrypt from 'bcryptjs';
 import { Cuota } from "../database/models/cuota";
 import { transporter } from "../config/mailer";
+import { JWT_SECRET } from '../configEnv';
+
+const jwt = require('jsonwebtoken')
 
 export class UsuarioController {
 
@@ -385,49 +388,67 @@ export class UsuarioController {
 
 
 
-  async changePassword(req: Request, res: Response): Promise<Response> {
+  async changePassword(req: Request, res: Response): Promise<void> {
     try {
-      const { id } = req.params;
+      const { token } = req.params;
       const { contrasenia } = req.body;
 
-      const usuario = await Autenticacion.findOne({ where: { id_usuario: id } });
+      const decodedUsuario = obtenerPayload(token);
+
+      const usuario = await Autenticacion.findOne({ where: { id_usuario: decodedUsuario.id } });
       if (!usuario) {
-        return res.status(404).json({
-          success: false,
-          message: "Usuario no encontrado",
+        res.status(404).render("login", {
+          mostrarModal: true,
+          modalTitle: "Recuperar contraseña",
+          modalMessage: "Usuario no encontrado"
         });
+        return
       }
 
-      const hashedPassword = bcrypt.hashSync(contrasenia, 10);
+      const hashedPassword = bcrypt.hashSync(contrasenia, 8);
       await usuario.update({ contrasenia: hashedPassword });
 
-      return res.status(200).json({
-        success: true,
-        message: "Contraseña actualizada correctamente",
+      res.status(200).render("login", {
+        mostrarModal: true,
+        modalTitle: "Recuperar contraseña",
+        modalMessage: "Autenticacion actualizada"
       });
+      return
+
     } catch (error) {
       console.error("Error al cambiar contraseña:", (error as Error).message);
-      return res.status(500).json({
-        success: false,
+      res.status(500).render("error", {
+        title: "Error del servidor",
+        code: 500,
         message: "Error al cambiar la contraseña",
+        description: "Ocurrió un error inesperado.",
+        error: (error as Error).message
       });
+      return
     }
   }
 
   async envioEmail(req: Request, res: Response): Promise<void> {
     try {
       const { email } = req.body;
-      console.log("email dentro en envioEmil : ", email)
-      const usuario = await Autenticacion.findOne({ where: { email } });
-      if (!usuario) {
-        res.status(404).json({
-          success: false,
-          message: "Usuario no encontrado",
+      const autenticacionUsuario = await Autenticacion.findOne({ where: { email } });
+      if (!autenticacionUsuario) {
+        res.status(404).render("login", {
+          mostrarModal: true,
+          modalTitle: "Recuperar contraseña",
+          modalMessage: "Usuario no encontrado"
         });
-        return 
+        return
       }
+
+      const token = firmarToken({
+        id: autenticacionUsuario.id_usuario,
+        nombre: "",
+        rol: "",
+      })
+
       // Url que le va a llegar al usuario
-      const resetUrl = `http://localhost:3032/users/change-password/${usuario.id_usuario}`;
+      const resetUrl = `http://localhost:3032/users/change-password/${token}`;
 
       const info = await transporter.sendMail({
         from: '"Olvide Mi Contraseña" <activafitness0@gmail.com>',
@@ -442,8 +463,8 @@ export class UsuarioController {
           <p>Saludos,</p>`
       });
 
-      res.status(200).render("login", {    
-        mostrarModal:true, 
+      res.status(200).render("login", {
+        mostrarModal: true,
         modalTitle: "Correo de verificación enviado",
         modalMessage: "Se envió un correo de verificación a la dirección ingresada. Revisá tu bandeja de entrada y seguí las instrucciones para continuar."
 
@@ -451,16 +472,19 @@ export class UsuarioController {
 
     } catch (error) {
       console.error("Error en solicitudChangePassword:", (error as Error).message);
-      res.status(500).json({
-        success: false,
+      res.status(500).render("error", {
+        title: "Error del servidor",
+        code: 500,
         message: "Error al procesar la solicitud de cambio de contraseña",
+        description: "Ocurrió un error inesperado.",
+        error: (error as Error).message
       });
-      return 
+      return
     }
   }
   async renderChangePassword(req: Request, res: Response) {
-    const { id } = req.params;
-    res.render('changePassword', { id });
+    const { token } = req.params;
+    res.render('changePassword', { token: token });
   }
 }
 
