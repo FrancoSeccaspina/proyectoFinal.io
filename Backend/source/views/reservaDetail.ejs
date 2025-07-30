@@ -1,67 +1,88 @@
 <!DOCTYPE html>
 <html lang="es">
 
-<head>
-  <%- include('./partials/head.ejs') %>
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Reserva Confirmada - Detalle de Compra - [Nombre de tu Tienda]</title>
-  <link rel="stylesheet" href="/css/carrito.css">
-  <link rel="stylesheet" href="/css/button-form.css">
-  <link rel="stylesheet" href="/css/reservaDetail.css">
-</head>
+  <head>
+    <%- include('./partials/head.ejs') %>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Reserva Confirmada - Detalle de Compra - [Nombre de tu Tienda]</title>
+    <link rel="stylesheet" href="/css/carrito.css">
+    <link rel="stylesheet" href="/css/button-form.css">
+    <link rel="stylesheet" href="/css/reservaDetail.css">
+  </head>
+  <style>
 
-<body>
+  </style>
 
-  <%- include('./partials/header.ejs') %>
+  <body>
 
-  <main class="main-reserva-detail" aria-labelledby="main-heading-reserva">
-    <div class="header-cart">
-      <h1>¡Reserva confirmada!</h1>
-      <div class="warning-sentence" role="alert" aria-live="assertive">
-        <img src="/images/exclamation.png" alt="Icono de exclamación: Advertencia importante." aria-hidden="true">
-        <p><strong>Importante:</strong> La compra se completa únicamente al finalizar el proceso de pago.</p>
+    <%- include('./partials/header.ejs') %>
+
+    <main class="main-reserva-detail" aria-labelledby="main-heading-reserva">
+      <div class="header-cart">
+        <h1>¡Reserva confirmada!</h1>
+        <div class="warning-sentence" role="alert" aria-live="assertive">
+          <img src="/images/exclamation.png" alt="Icono de exclamación: Advertencia importante." aria-hidden="true">
+          <p><strong>Importante:</strong> La compra se completa únicamente al finalizar el proceso de pago.</p>
+        </div>
       </div>
+
+      <div class="contenedor-compras" aria-labelledby="detalle-reserva-heading">
+        <% if (reserva && detalleReserva && detalleReserva.length > 0) { %> 
+          <div class="header-reserva-detail">
+            <h2 id="detalle-reserva-heading">Detalles de tu reserva</h2>
+            <form action="/reserva/eliminar/<%= reserva.id_reserva %>?_method=PATCH" method="POST">
+                <button type="submit" class="icono-eliminar btn-confirmar">
+                    <span class="visually-hidden">Eliminar Reserva</span>
+                    <svg xmlns="http://www.w3.org/2000/svg" width="32" height="32" fill="#111827" viewBox="0 0 256 256">
+                        <path d="M216,48H176V40a24,24,0,0,0-24-24H104A24,24,0,0,0,80,40v8H40a8,8,0,0,0,0,16h8V208a16,16,0,0,0,16,16H192a16,16,0,0,0,16-16V64h8a8,8,0,0,0,0-16ZM96,40a8,8,0,0,1,8-8h48a8,8,0,0,1,8,8v8H96Zm96,168H64V64H192ZM112,104v64a8,8,0,0,1-16,0V104a8,8,0,0,1,16,0Zm48,0v64a8,8,0,0,1-16,0V104a8,8,0,0,1,16,0Z"/>
+                    </svg>                                    
+                </button>
+            </form>
+          </div>
+          
+          <ul class="ul-reserva-detail">
+            <% detalleReserva.forEach(function(detalle, index) { %>
+            <li class="compra" aria-labelledby="producto-nombre-<%= index %>">
+              <% if ( reserva.estado && reserva.estado == 'pendiente'){ %>
+              <p><strong>La reserva vence en:</strong> <span class="cuenta-regresiva" data-vencimiento="<%= reserva.vencimiento %>"></span></p>
+              <% } %>
+              <p><strong>Estado:</strong> <span id="estado-reserva"><%= reserva.estado ? reserva.estado : 'No disponible' %></span></p>
+              <p><strong>Fecha de Reserva:</strong> <%= reserva.fecha ? (reserva.fecha.toLocaleString ? reserva.fecha.toLocaleString() : reserva.fecha) : 'No disponible' %></p>
+              <p><strong>Producto:</strong> <span id="producto-nombre-<%= index %>"><%= detalle.Producto ? detalle.Producto.nombre : 'No disponible' %></span></p>
+              <p><strong>Cantidad:</strong> <%= detalle.cantidad ? detalle.cantidad : 'No disponible' %></p>
+              <p><strong>Precio Unitario:</strong> $<%= detalle.Producto && detalle.Producto.precio ? detalle.Producto.precio : 'No disponible' %></p>
+              <p class="visually-hidden">Descripción del producto: <%= detalle.Producto && detalle.Producto.descripcion ? detalle.Producto.descripcion : 'No disponible' %></p>
+              <p><strong>Subtotal por Producto:</strong> $<%= detalle.subtotal ? detalle.subtotal : 'No disponible' %></p>
+            </li>
+            <% }) %>
+          </ul>
+          <div class="compra" style="background:#e2e8f0;">
+            <p><strong>Total de la reserva:</strong> $<%= reserva.total ? reserva.total : 'No disponible' %></p>
+          </div>
+        <% } else { %>
+        <div class="compra">
+          <p>No hay detalles para esta reserva.</p>
+        </div>
+        <% } %>
+
+        <div class="display-flex-justify-center">
+          <a href="/reserva/confirmar/<%=reserva.id_reserva%>" class="button-access as-button">Transferencia Bancaria</a>
+        </div>
+      </div>
+
+    </main>
+
+    <div>
+      <%- include('./partials/modalConfirmacion.ejs', {
+        modalTitle: '¿Eliminar producto?',
+        modalMessage: '¿Estás seguro de que deseas eliminar este producto del carrito?'
+      }) %>
     </div>
 
-    <div class="contenedor-compras" aria-labelledby="detalle-reserva-heading">
-      <h2 id="detalle-reserva-heading">Detalles de tu reserva</h2>
-      <% if (reserva && detalleReserva && detalleReserva.length > 0) { %>
-      <ul class="ul-reserva-detail">
-        <% detalleReserva.forEach(function(detalle, index) { %>
-        <li class="compra" aria-labelledby="producto-nombre-<%= index %>">
-          <% if ( reserva.estado && reserva.estado == 'pendiente'){ %>
-          <p><strong>La reserva vence en:</strong> <span class="cuenta-regresiva" data-vencimiento="<%= reserva.vencimiento %>"></span></p>
-          <% } %>
-          <p><strong>Estado:</strong> <span id="estado-reserva"><%= reserva.estado ? reserva.estado : 'No disponible' %></span></p>
-          <p><strong>Fecha de Reserva:</strong> <%= reserva.fecha ? (reserva.fecha.toLocaleString ? reserva.fecha.toLocaleString() : reserva.fecha) : 'No disponible' %></p>
-          <p><strong>Producto:</strong> <span id="producto-nombre-<%= index %>"><%= detalle.Producto ? detalle.Producto.nombre : 'No disponible' %></span></p>
-          <p><strong>Cantidad:</strong> <%= detalle.cantidad ? detalle.cantidad : 'No disponible' %></p>
-          <p><strong>Precio Unitario:</strong> $<%= detalle.Producto && detalle.Producto.precio ? detalle.Producto.precio : 'No disponible' %></p>
-          <p class="visually-hidden">Descripción del producto: <%= detalle.Producto && detalle.Producto.descripcion ? detalle.Producto.descripcion : 'No disponible' %></p>
-          <p><strong>Subtotal por Producto:</strong> $<%= detalle.subtotal ? detalle.subtotal : 'No disponible' %></p>
-        </li>
-        <% }) %>
-      </ul>
-      <div class="compra" style="background:#e2e8f0;">
-        <p><strong>Total de la reserva:</strong> $<%= reserva.total ? reserva.total : 'No disponible' %></p>
-      </div>
-      <% } else { %>
-      <div class="compra">
-        <p>No hay detalles para esta reserva.</p>
-      </div>
-      <% } %>
+    <%- include('./partials/footer.ejs') %>
 
-      <div class="display-flex-justify-center">
-        <a href="/reserva/confirmar/<%=reserva.id_reserva%>" class="button-access as-button">Transferencia Bancaria</a>
-      </div>
-    </div>
-
-  </main>
-
-  <%- include('./partials/footer.ejs') %>
-
-  <script src="/js/carrito.js"></script>
-  <script src="/js/estadoProductos.js"></script>
-</body>
+    <script src="/js/carrito.js"></script>
+    <script src="/js/estadoProductos.js"></script>
+  </body>
 
 </html>

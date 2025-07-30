@@ -10,7 +10,7 @@ route.get("/reserva/mostrar/ultimaReserva", verificarTokenPorRol([Roles.CLIENTE,
 route.get("/reserva/mostrar/reserva/:id", verificarTokenPorRol([Roles.CLIENTE, Roles.ADMIN]), (req: Request, res: Response) => { reservaController.mostrarReservaPorId(req, res) });
 route.get("/reserva/mostrar/reservas", verificarTokenPorRol([Roles.CLIENTE, Roles.ADMIN]), (req: Request, res: Response) => { reservaController.mostrarReservas(req, res) });
 route.post("/reserva/agregar", verificarTokenPorRol([Roles.CLIENTE, Roles.ADMIN]), (req: Request, res: Response) => { reservaController.reservarCompra(req, res); });
-route.patch("/reserva/eliminar/:id", verificarTokenPorRol([Roles.CLIENTE, Roles.ADMIN]), (req: Request, res: Response) => { reservaController.cancelarReservaPorId(req, res) });
+route.patch("/reserva/eliminar/:id", verificarTokenPorRol([Roles.CLIENTE, Roles.ADMIN]), (req: Request, res: Response) => { reservaController.eliminarReservaPorId(req, res) });
 route.get("/reserva/confirmar/:id", (req: Request, res: Response) => { reservaController.mostrarDatosParaConfirmarReserva(req, res) })
 
 export default route;

@@ -10,6 +10,7 @@ import { DetalleReserva } from "../database/models/detalleReserva";
 import { Producto } from "../database/models/producto";
 import { Op } from 'sequelize';
 import dotenv from 'dotenv';
+import { Transaccion } from '../database/models/transaccion';
 
 dotenv.config();
 
@@ -148,7 +149,6 @@ class reservaController {
         try {
             const usuarioLogueado = SessionService.obtenerSessionUsuario(req);
             if (!usuarioLogueado) {
-                // TODO : renderizar mensaje a la vista
                 throw new Error("Debes iniciar sesión para ver tus reservas");
             }
 
@@ -236,7 +236,8 @@ class reservaController {
         }
     }
 
-    public async cancelarReservaPorId(req: Request, res: Response) {
+    public async eliminarReservaPorId(req: Request, res: Response) {
+        const t = await sequelize.transaction();
         try {
             const { id } = req.params;
             const id_reserva = parseInt(id, 10);
@@ -246,25 +247,26 @@ class reservaController {
                 include: [{
                     model: DetalleReserva,
                     attributes: ['id_producto', 'cantidad']
-                }]
+                }],
+                transaction: t
             });
 
             if (reserva && reserva.DetalleReservas) {
                 await Promise.all(reserva.DetalleReservas.map(detalle =>
                     Producto.increment(
                         { stock: detalle.cantidad },
-                        { where: { id: detalle.id_producto } }
+                        { where: { id: detalle.id_producto }, 
+                        transaction: t}
                     )
                 ));
-
-                await Reserva.update(
-                    { estado: EstadosReserva.CANCELADO },
-                    { where: { id_reserva } }
-                );
+                reserva.destroy();
             }
+            await t.commit()
+            res.status(200).redirect('/reserva/mostrar/reservas');
 
-            res.redirect('/reserva/mostrar/reservas');
         } catch (error) {
+
+            await t.rollback();
             console.error("Error al cancelar reserva:", (error as Error).message);
             res.status(500).json({
                 message: "Error al cancelar reserva",

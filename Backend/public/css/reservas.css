@@ -54,25 +54,6 @@
   padding: 0 2rem;
 }
 
-.icono-eliminar {
-  border: none;
-  cursor: pointer;
-  display: inline-flex;
-  align-items: center;
-  justify-content: center;
-  color: #111827;
-  transition: color 0.3s ease;
-}
-
-.icono-eliminar svg {
-  fill: currentColor;
-  transition: fill 0.3s ease;
-}
-
-.icono-eliminar:hover {
-  color: #b91c1c;
-}
-
 .header-compra {
   border-bottom: 2px solid #111827;
 }
