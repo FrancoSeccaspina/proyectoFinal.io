@@ -117,33 +117,36 @@
               <% }) %>
             </ul>
   
-            <div class="flex-container">
-              <div class="item1">
-                <article class="card-precio" aria-label="Total del carrito">
-                  <span class="icon">
-                    <svg xmlns="http://www.w3.org/2000/svg" class="svg-icon" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2" aria-hidden="true" focusable="false">
-                      <path stroke-linecap="round" stroke-linejoin="round" d="M17 9V7a2 2 0 00-2-2H5a2 2 0 00-2 2v6a2 2 0 002 2h2m2 4h10a2 2 0 002-2v-6a2 2 0 00-2-2H9a2 2 0 00-2 2v6a2 2 0 002 2zm7-5a2 2 0 11-4 0 2 2 0 014 0z" />
-                    </svg>
-                  </span>
-                  <div class="info">
-                    <p class="amount"><span class="visually-hidden">Monto total: </span>$ <%= productosCarrito.resultados.total %></p>
-                  </div>
-                </article>
-              </div>
-  
-              <div class="item2">
-                <form action="/reserva/mostrar/ultimaReserva" method="POST">
-                  <button type="submit" class="btn-confirmar-reserva" style="border: none;" aria-label="Confirmar y reservar productos del carrito">
-                    <div class="button-form">
-                      <span class="label">Reservar</span>
-                      <svg class="icon" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor" aria-hidden="true" focusable="false">
-                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M17 8l4 4m0 0l-4 4m4-4H3" />
+            <% if (productosCarrito.productos.length > 0) { %>
+              <div class="flex-container">
+                <div class="item1">
+                  <article class="card-precio" aria-label="Total del carrito">
+                    <span class="icon">
+                      <svg xmlns="http://www.w3.org/2000/svg" class="svg-icon" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2" aria-hidden="true" focusable="false">
+                        <path stroke-linecap="round" stroke-linejoin="round" d="M17 9V7a2 2 0 00-2-2H5a2 2 0 00-2 2v6a2 2 0 002 2h2m2 4h10a2 2 0 002-2v-6a2 2 0 00-2-2H9a2 2 0 00-2 2v6a2 2 0 002 2zm7-5a2 2 0 11-4 0 2 2 0 014 0z" />
                       </svg>
+                    </span>
+                    <div class="info">
+                      <p class="amount"><span class="visually-hidden">Monto total: </span>$ <%= productosCarrito.resultados.total %></p>
                     </div>
-                  </button>
-                </form>
+                  </article>
+                </div>
+    
+                <div class="item2">
+                  <form action="/reserva/mostrar/ultimaReserva" method="POST">
+                    <button type="submit" class="btn-confirmar-reserva" style="border: none;" aria-label="Confirmar y reservar productos del carrito">
+                      <div class="button-form">
+                        <span class="label">Reservar</span>
+                        <svg class="icon" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor" aria-hidden="true" focusable="false">
+                          <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M17 8l4 4m0 0l-4 4m4-4H3" />
+                        </svg>
+                      </div>
+                    </button>
+                  </form>
+                </div>
               </div>
-            </div>
+            <% } %>
+
           </div>
   
         </div>
