@@ -1,0 +1,13 @@
+<% if (mostrarModal) { %>
+  <div class="modal-overlay active" role="dialog" aria-modal="true" aria-labelledby="modalTitle">
+    <div class="modal-content">
+      <h2 id="modalTitle" class="modal-title"><%= modalTitle || 'Información' %></h2>
+      <div class="modal-body">
+        <p><%= modalMessage || 'Operación realizada.' %></p>
+      </div>
+      <footer class="modal-footer">
+        <a href="/" class="btn btn-confirm">Volver</a>
+      </footer>
+    </div>
+  </div>
+<% } %>

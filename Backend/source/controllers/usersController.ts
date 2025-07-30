@@ -414,15 +414,17 @@ export class UsuarioController {
     }
   }
 
-  async envioEmail(req: Request, res: Response): Promise<Response> {
+  async envioEmail(req: Request, res: Response): Promise<void> {
     try {
       const { email } = req.body;
+      console.log("email dentro en envioEmil : ", email)
       const usuario = await Autenticacion.findOne({ where: { email } });
       if (!usuario) {
-        return res.status(404).json({
+        res.status(404).json({
           success: false,
           message: "Usuario no encontrado",
         });
+        return 
       }
       // Url que le va a llegar al usuario
       const resetUrl = `http://localhost:3032/users/change-password/${usuario.id_usuario}`;
@@ -440,16 +442,20 @@ export class UsuarioController {
           <p>Saludos,</p>`
       });
 
-      return res.status(200).json({
-        success: true,
-        message: "Email enviado correctamente",
+      res.status(200).render("login", {    
+        mostrarModal:true, 
+        modalTitle: "Correo de verificación enviado",
+        modalMessage: "Se envió un correo de verificación a la dirección ingresada. Revisá tu bandeja de entrada y seguí las instrucciones para continuar."
+
       });
+
     } catch (error) {
       console.error("Error en solicitudChangePassword:", (error as Error).message);
-      return res.status(500).json({
+      res.status(500).json({
         success: false,
         message: "Error al procesar la solicitud de cambio de contraseña",
       });
+      return 
     }
   }
 }

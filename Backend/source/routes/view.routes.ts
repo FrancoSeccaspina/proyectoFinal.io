@@ -21,8 +21,14 @@ route.get("/productDetail", function (req, res) {
     res.render('productDetail');
 });
 route.get("/login", function (req, res) {
-    res.render("login");
+    res.status(200).render("login", {    
+      mostrarModal:false, 
+      modalTitle:"", 
+      modalMessage:""
+    });
 });
+
+
 route.get("/register", function (req, res) {
     res.render("register");
 });

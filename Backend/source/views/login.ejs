@@ -67,8 +67,15 @@
   <%- include('./partials/modalOlvidaste.ejs', {
     modalTitle: '¿Olvidaste tu contraseña?',
     modalMessage: 'Ingresá tu correo electrónico y te enviaremos un enlace para restablecerla.',
-    modalAction: '/recuperar-contrasena'
+    modalAction: '/users/update-password'
   }) %>
+
+  <%- include('./partials/modalConfirmacion.ejs', {
+    modalTitle: '¿Eliminar producto?',
+    modalMessage: '¿Estás seguro de que deseas eliminar este producto del carrito?'
+  }) %>
+
+  <%- include('./partials/modalMensaje.ejs', { mostrarModal, modalTitle, modalMessage }) %>
 
   <script src="https://unpkg.com/validator@latest/validator.min.js"></script>
   <script src="../js/login.js"></script>
