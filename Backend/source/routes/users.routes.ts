@@ -43,4 +43,8 @@ route.post('/users/:id', verificarTokenPorRol([Roles.CLIENTE, Roles.ADMIN]), upl
 route.delete('/users/:id', verificarTokenPorRol([Roles.ADMIN]), (req, res) => { usersController.softDelete(req, res) });
 route.put('/users/:id', verificarTokenPorRol([Roles.ADMIN]), (req, res) => { usersController.update(req, res) });
 
+route.get('/users/change-password/:id', (req: Request, res: Response) => {
+  usersController.renderChangePassword(req, res);
+});
+
 export default route;
