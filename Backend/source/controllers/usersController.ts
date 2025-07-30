@@ -452,6 +452,10 @@ export class UsuarioController {
       });
     }
   }
+  async renderChangePassword(req: Request, res: Response) {
+    const { id } = req.params;
+    res.render('changePassword', { id });
+  }
 }
 
 export default new UsuarioController();
