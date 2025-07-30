@@ -51,10 +51,23 @@ main {
   align-items: center;
 }
 
-.terms-products svg,
-.cart-remove-button svg {
-  fill: white;
+.cart-remove-button {
+  background: none;
+  border: none;
+  cursor: pointer;
+  transition: color 0.3s;
+}
+
+.cart-remove-button svg,
+.terms-products svg {
+  width: 2rem;
+  height: 2rem;
+  fill: #2d3748; /* gris oscuro */
   transition: fill 0.3s ease;
+}
+
+.cart-remove-button:hover {
+  color: #dc2626;
 }
 
 .cart-remove-button:hover svg {
@@ -255,20 +268,9 @@ main {
   padding: 0;
   text-align: center;
   font-size: 0.75rem;
-  background-color: #f9fafb;
+  /* background-color: #f9fafb; */
   border: 1px solid #e5e7eb;
   color: #6b7280;
-}
-
-.cart-remove-button {
-  background: none;
-  border: none;
-  cursor: pointer;
-  transition: color 0.3s;
-}
-
-.cart-remove-button:hover {
-  color: #dc2626;
 }
 
 .card-precio {
@@ -518,11 +520,6 @@ main {
     height: 1.8rem;
     width: 2.5rem;
     font-size: 0.7rem;
-  }
-
-  .cart-remove-button svg {
-    width: 1rem;
-    height: 1rem;
   }
 
   .cart-details {
