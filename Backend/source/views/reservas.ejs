@@ -1,99 +1,13 @@
 <!DOCTYPE html>
 <html lang="en">
 
-<head>
-  <%- include('./partials/head.ejs') %>
-  <link rel="stylesheet" href="/css/register.css" />
-  <link rel="stylesheet" href="/css/carrito.css">
-  <link rel="stylesheet" href="/css/button-form.css">
-</head>
-
-<style>
-
-    .main-reservas {
-    display: flex;
-    flex-direction: column;
-    background-color: #e2e8f0;
-    margin: 1rem 0px;
-    padding: 2rem 0px;
-  }
-
-  .contenedor-compras {
-    display: flex;
-    flex-direction: column;
-    gap: 1rem;
-    padding: 2rem;
-    width: 60%;
-    margin: auto;
-    background-color: #f8fafc;
-    border-radius: 12px;
-    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
-    font-family: Arial, sans-serif;
-  }
-
-  .compra {
-    background-color: #edf2f7;
-    padding: 1rem;
-    border-radius: 8px;
-  }
-
-  .compra p {
-    margin: 0.5rem;
-    color: #4a5568;
-  }
-
-  .compra-total {
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-    background: #e2e8f0;
-    padding: 0.5rem;
-    border-radius: 8px;
-    font-weight: bold;
-  }
-
-  .header-reservas {
-    color: black;
-    font-family: Arial, sans-serif;
-    padding: 2rem;
-  }
-
-  .mensaje-warining-reservas{
-    display: flex;
-    gap: 1rem;
-    color: black;
-    font-family: Arial, sans-serif;
-    padding: 0px 2rem;
-  }
-
-.icono-eliminar {
-  border: none;
-  align-items: center;
-  justify-content: center;
-  transition: color 0.3s ease;
-  color: #111827;
-}
-
-.icono-eliminar svg {
-  fill: currentColor;
-  transition: fill 0.3s ease;
-}
-
-.icono-eliminar:hover {
-  color: #b91c1c;
-}
-
-.header-compra{
-    border-bottom: solid 2px #111827;
-}
-.productos-compra{
-    display: flex;
-    justify-content: space-between;
-}
-.productos-compra>p{
-    display: inline-block;
-}
-</style>
+    <head>
+    <%- include('./partials/head.ejs') %>
+    <link rel="stylesheet" href="/css/register.css" />
+    <link rel="stylesheet" href="/css/carrito.css">
+    <link rel="stylesheet" href="/css/button-form.css">
+    <link rel="stylesheet" href="/css/reservas.css">
+    </head>
 
     <body class="body-style">
 
@@ -107,45 +21,45 @@
             <p>Verifica el estado de tu reserva.</p>
             </div>
 
-        <div class="contenedor-compras">
-            <% if (reservas && reservas.length> 0) { %>
-            <% reservas.forEach(function(reserva) { %>
-                <% if (reserva.detalleReserva && reserva.detalleReserva.length> 0) { %>
-                    <div class="compra">
-                        <div class="header-compra">
-                            <% if ( reserva.estado && reserva.estado=='pendiente' ){ %>
-                                <p><strong>La reserva vence en : </strong> <span class="cuenta-regresiva" data-vencimiento="<%= reserva.vencimiento %>"></span></p>
-                            <% } %>
+            <div class="contenedor-compras">
+                <% if (reservas && reservas.length> 0) { %>
+                <% reservas.forEach(function(reserva) { %>
+                    <% if (reserva.detalleReserva && reserva.detalleReserva.length> 0) { %>
+                        <div class="compra">
+                            <div class="header-compra">
+                                <% if ( reserva.estado && reserva.estado=='pendiente' ){ %>
+                                    <p><strong>La reserva vence en : </strong> <span class="cuenta-regresiva" data-vencimiento="<%= reserva.vencimiento %>"></span></p>
+                                <% } %>
 
-                            <p><strong>Estado : </strong><%= reserva.estado ? reserva.estado : '' %></p>
-                            <p><strong>Fecha : </strong><%= reserva.fecha ? reserva.fecha.toLocaleString ? reserva.fecha.toLocaleString() : reserva.fecha : '' %></p>
-                        </div>
+                                <p><strong>Estado : </strong><%= reserva.estado ? reserva.estado : '' %></p>
+                                <p><strong>Fecha : </strong><%= reserva.fecha ? reserva.fecha.toLocaleString ? reserva.fecha.toLocaleString() : reserva.fecha : '' %></p>
+                            </div>
 
-                        
-                        <% reserva.detalleReserva.forEach(function(detalle) { %>
-                            <div class="productos-compra">
-                                <p><strong>Producto : </strong><%= detalle.Producto ? detalle.Producto.nombre : '' %></p>
-                                <p><strong>Cantidad : </strong><%= detalle.cantidad %></p>
-                                
-                            </div>
-                        <% }) %>
-                        <div class="compra-total">
-                            <div>
-                                <p><strong>Total de la reserva:</strong> $<%= reserva.total %></p>
-                            </div>
-                            <div>
-                                <a href="/reserva/mostrar/reserva/<%= reserva.id_reserva ? reserva.id_reserva : '' %>" class="as-button" > ver detalles</a>
+                            
+                            <% reserva.detalleReserva.forEach(function(detalle) { %>
+                                <div class="productos-compra">
+                                    <p><strong>Producto : </strong><%= detalle.Producto ? detalle.Producto.nombre : '' %></p>
+                                    <p><strong>Cantidad : </strong><%= detalle.cantidad %></p>
+                                    
+                                </div>
+                            <% }) %>
+                            <div class="compra-total">
+                                <div>
+                                    <p><strong>Total de la reserva:</strong> $<%= reserva.total %></p>
+                                </div>
+                                <div>
+                                    <a href="/reserva/mostrar/reserva/<%= reserva.id_reserva ? reserva.id_reserva : '' %>" class="as-button" > ver detalles</a>
+                                </div>
                             </div>
                         </div>
-                    </div>
+                    <% } %>
+                <% }) %>    
+                <% } else { %>
+                <div class="compra">
+                    <p>No hay reservas para mostrar.</p>
+                </div>
                 <% } %>
-            <% }) %>    
-            <% } else { %>
-            <div class="compra">
-                <p>No hay reservas para mostrar.</p>
             </div>
-            <% } %>
-        </div>
         </main>
 
         <%- include('./partials/footer.ejs') %>
