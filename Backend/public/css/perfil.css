@@ -7,17 +7,16 @@ body {
 }
 
 .profile-card {
-  display: flex;
-  justify-content: center;
-  flex-direction: column;
-  gap: 2rem;
-  max-width: 50%;
-  margin: auto;
-  padding: 1rem;
-  border: 5px solid #2e2e2e;
-  background-color: #2e2e2e;
-  color: white;
-  border-radius: 12px;
+    display: flex;
+    justify-content: center;
+    flex-direction: column;
+    gap: 2rem;
+    max-width: 50%;
+    margin: auto;
+    padding: 1rem;
+    background-color: #e2e8f0;
+    color: white;
+    border-radius: 12px;
 }
 
 .avatar-bordered {
@@ -77,6 +76,7 @@ body {
 }
 
 .apto-medico {
+  color: black;
   margin-top: 1.5rem;
   display: flex;
   flex-direction: column;
