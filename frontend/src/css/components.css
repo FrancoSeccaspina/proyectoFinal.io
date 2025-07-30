@@ -118,7 +118,6 @@ h6{
   z-index: 1001;
 }
 
-/* Mobile styles */
 @media screen and (max-width: 769px) {
   #header-dashboard {
     flex-direction: row;
@@ -148,9 +147,9 @@ h6{
   }
 
   #menu.active {
-    max-height: 500px;
+    max-height: 100vh;  
+    overflow-y: auto;   
   }
-
   #menu a {
     color: white;
     padding: 1rem;
