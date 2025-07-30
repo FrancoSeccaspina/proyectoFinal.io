@@ -18,9 +18,10 @@ const validationLogin = [
         if (!errors.isEmpty()) {
             return res.status(400).render("login", {
                 errors: errors.mapped(),
-                oldData: req.body
+                oldData: req.body,
             });
         }
+        
         next();
     }
 ];

@@ -1,3 +1,7 @@
+<% const modalVisible = typeof mostrarModal !== 'undefined' ? mostrarModal : false; %>
+<% const title = typeof modalTitle !== 'undefined' ? modalTitle : ''; %>
+<% const message = typeof modalMessage !== 'undefined' ? modalMessage : ''; %>
+
 <!DOCTYPE html>
 <html lang="es">
 
@@ -85,7 +89,7 @@
     modalMessage: '¿Estás seguro de que deseas eliminar este producto del carrito?'
   }) %>
 
-  <%- include('./partials/modalMensaje.ejs', { mostrarModal, modalTitle, modalMessage }) %>
+  <%- include('./partials/modalMensaje.ejs', {mostrarModal: modalVisible, modalTitle:title, modalMessage:message }) %>
 
   <script src="https://unpkg.com/validator@latest/validator.min.js"></script>
   <script src="../js/login.js"></script>
