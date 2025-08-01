@@ -1,17 +1,15 @@
 import { Sequelize } from 'sequelize';
 import {
   DATABASE_NAME,
-  DATABASE_USER,
-  DATABASE_PASSWORD,
-  DATABASE_HOST
+  DATABASE_USER_CONECT,
+  DATABASE_HOST,
+  DATABASE_PASSWORD_CONECT
 } from '../../configEnv';
-import dotenv from 'dotenv';
-dotenv.config();
 
 const sequelize = new Sequelize(
   DATABASE_NAME || '',
-  DATABASE_USER || '',
-  DATABASE_PASSWORD || '',
+  DATABASE_USER_CONECT || '', 
+  DATABASE_PASSWORD_CONECT || '',
   {
     host: DATABASE_HOST || '',
     dialect: 'mysql',

@@ -6,18 +6,17 @@ export const ENTORNO = process.env.NODE_ENV;
 
 export const SESSION_PASSWORD = process.env.SESSION_PASSWORD;
 export const DATABASE_NAME = process.env.DATABASE_NAME;
-export const DATABASE_PASSWORD = process.env.DATABASE_PASSWORD;
-export const DATABASE_USER = process.env.DATABASE_USER;
+export const DATABASE_USER_CONECT = process.env.DATABASE_USER_CONECT;
+export const DATABASE_PASSWORD_CONECT = process.env.DATABASE_PASSWORD_CONECT;
 export const DATABASE_HOST = process.env.DATABASE_HOST;
 export const TIEMPO_CONTROL_STOCK_MINUTOS = process.env.TIEMPO_CONTROL_STOCK_MINUTOS;
 export const JWT_SECRET = process.env.JWT_SECRET;
 
 export function validarVariablesDeEntorno() {
   const variablesRequeridas = [
-    'JWT_SECRET',
     'SESSION_PASSWORD',
     'DATABASE_NAME',
-    'DATABASE_USER',
+    'DATABASE_USER_CONECT',
     'DATABASE_HOST',
     'TIEMPO_CONTROL_STOCK_MINUTOS',
     'JWT_SECRET',

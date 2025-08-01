@@ -40,6 +40,9 @@ import transaccionesApiController from './routes/api/transacciones.api.routes';
 import membresiaApiController from './routes/api/membresia.api.routes';
 import empleadosApiController from './routes/api/empleados.api.routes';
 
+import dotenv from 'dotenv';
+dotenv.config();
+
 // cron
 import './cron-task/devolver-stock-reservas-vencidas'
 
@@ -58,8 +61,12 @@ app.use(cors({
 const publicPath = path.resolve(__dirname, '../public/');
 app.use(staticHandler(publicPath));
 
-// Configuración de EJS
-app.set('views', path.resolve(__dirname, 'views'));
+console.log("NODE_ENV: ", process.env.NODE_ENV)
+const viewsPath = process.env.NODE_ENV === "prod"
+  ? path.join('/app', 'source', 'views')
+  : path.join(__dirname, "views");
+
+app.set("views", viewsPath);
 app.set('view engine', 'ejs');
 
 // Middleware de body y JSON
@@ -83,8 +90,8 @@ app.use(cookieParser());
 // Method Override para PUT, PATCH y DELETE
 app.use(methodOverride('_method'));
 
-// Middleware personalizado
-// app.use(userMiddleware);
+const rutaPublic = path.join('/app', 'public')
+app.use(express.static(rutaPublic));
 
 // Rutas
 app.use('', viewRoutes);
@@ -121,7 +128,7 @@ app.use('/uploads/aptoMedico', express.static(path.join(__dirname, '..', 'upload
 // verifica que las rutas no existan y redirige a la página de error 404
 app.use(rutaNoEncontrada);
 
-app.use('/public', express.static(path.join(__dirname, 'public')));
+// app.use('/public', express.static(path.join(__dirname, 'public')));
 app.use('/uploads', express.static('uploads'));
 
 // Escuchar el servidor

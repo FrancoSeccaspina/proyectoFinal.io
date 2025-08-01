@@ -9,10 +9,6 @@ import { Reserva } from "../database/models/reserva";
 import { DetalleReserva } from "../database/models/detalleReserva";
 import { Producto } from "../database/models/producto";
 import { Op } from 'sequelize';
-import dotenv from 'dotenv';
-import { Transaccion } from '../database/models/transaccion';
-
-dotenv.config();
 
 interface ProductoCarrito {
     id: number;

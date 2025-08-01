@@ -17,7 +17,7 @@ interface ConfigGroup {
 const config: ConfigGroup = {
   development: {
     username: 'root',
-    password: '1234',
+    password: '',
     database: 'gimnasio_activa',
     host: 'localhost',
     dialect: 'mysql',
