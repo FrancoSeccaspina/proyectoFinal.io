@@ -61,7 +61,6 @@ app.use(cors({
 const publicPath = path.resolve(__dirname, '../public/');
 app.use(staticHandler(publicPath));
 
-console.log("NODE_ENV: ", process.env.NODE_ENV)
 const viewsPath = process.env.NODE_ENV === "prod"
   ? path.join('/app', 'source', 'views')
   : path.join(__dirname, "views");

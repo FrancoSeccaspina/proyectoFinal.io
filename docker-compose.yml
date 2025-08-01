@@ -28,11 +28,21 @@ services:
       DATABASE_HOST: ${DATABASE_HOST}
       NODE_ENV : ${NODE_ENV}
     ports:
-      - "4000:3032"
+      - "3032:3032"
     depends_on:
       - activa-db-image
 
-  # frontend:
+  activa-frontend-image:
+    build:
+      context: .
+      dockerfile: Dockerfile.frontend
+    container_name: activa-frontend-container
+    env_file: ./frontend/.env
+    restart: always
+    ports:
+      - "3000:3000"
+    depends_on:
+      - activa-db-image
 
 volumes:
   activa-db-data:

@@ -3,9 +3,9 @@
 -- https://www.phpmyadmin.net/
 --
 -- Servidor: 127.0.0.1
--- Tiempo de generación: 26-06-2025 a las 08:09:04
+-- Tiempo de generación: 01-08-2025 a las 02:19:42
 -- Versión del servidor: 10.4.32-MariaDB
--- Versión de PHP: 8.2.12
+-- Versión de PHP: 8.0.30
 
 SET SQL_MODE = "NO_AUTO_VALUE_ON_ZERO";
 START TRANSACTION;
@@ -40,32 +40,9 @@ CREATE TABLE `autenticacion` (
 
 INSERT INTO `autenticacion` (`id`, `email`, `contrasenia`, `id_usuario`) VALUES
 (1, 'admin@activafitness.com', '$2b$10$RCIHIHvb6asptQgSa.Yc.eTaj1N.VlCWFsNnsoPxuY.bELwO95QsG', 1),
-(15, 'pepe@gmail.com', '$2b$10$V9LuPIN9nz7vDB8qVhJcO.NIuyPYss4e7WCy6RCWjW9MNETE49qKu', 24),
-(16, 'marina@gmail.com', '$2b$10$gg7TRVQpd4B1lVdZ0.PXaeF7lKKamoOWcBZWlmLtcAoBIVu5Ptdw6', 25),
-(18, 'gustavo.jimenez.crespo@gmail.com', '$2b$10$lpM7DCvhbY9QXSNhs85pouRAbN68lcUxmC8nAdTZB6xjIXTpkoKsW', 27),
 (19, 'francolector@gmail.com', '$2b$08$77S9p1bhG/zNyBc71teU6eFnTVRrk3ysEb6mj8eSqBDKDFV3qijca', 28),
-(20, 'lufrancolu@gmail.com', '$2b$08$59.4M2LJQWTz6lEzFq4jHezyLnHumzitUXhTGg5ei31A9qWVLgSv6', 29);
-
--- --------------------------------------------------------
-
---
--- Estructura de tabla para la tabla `carrito`
---
-
-CREATE TABLE `carrito` (
-  `id` int(11) NOT NULL,
-  `id_usuario` int(11) NOT NULL,
-  `id_producto` int(11) NOT NULL,
-  `cantidad` int(11) DEFAULT 1,
-  `fecha_agregado` datetime DEFAULT current_timestamp()
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
-
---
--- Volcado de datos para la tabla `carrito`
---
-
-INSERT INTO `carrito` (`id`, `id_usuario`, `id_producto`, `cantidad`, `fecha_agregado`) VALUES
-(1, 23, 8, 1, '2025-05-13 16:38:24');
+(20, 'lufrancolu@gmail.com', '$2b$08$59.4M2LJQWTz6lEzFq4jHezyLnHumzitUXhTGg5ei31A9qWVLgSv6', 29),
+(22, 'gustavo.jimenez.crespo@gmail.com', '$2b$08$o9POXNlcYJAiggiTSXAxjeKjRkrJE8UHuUXkF/z7ItG9TDmt1K6Uy', 31);
 
 -- --------------------------------------------------------
 
@@ -161,7 +138,41 @@ CREATE TABLE `detalle_reservas` (
 
 INSERT INTO `detalle_reservas` (`id_detalle_reserva`, `id_producto`, `cantidad`, `id_reserva`, `subtotal`) VALUES
 (27, 8, 1, 31, 4),
-(28, 9, 1, 32, 45000);
+(28, 9, 1, 32, 45000),
+(29, 9, 1, 33, 45000),
+(30, 8, 2, 34, 8),
+(31, 9, 1, 34, 45000),
+(32, 9, 1, 35, 45000),
+(33, 10, 1, 36, 35000),
+(34, 12, 1, 36, 20000),
+(35, 10, 1, 37, 35000),
+(36, 9, 1, 38, 45000),
+(37, 10, 2, 39, 70000),
+(38, 11, 1, 40, 40000),
+(39, 9, 1, 41, 45000),
+(40, 9, 1, 42, 45000),
+(41, 12, 1, 43, 20000),
+(42, 10, 1, 44, 35000),
+(43, 15, 1, 45, 1),
+(44, 12, 1, 46, 20000),
+(45, 12, 1, 47, 20000),
+(46, 12, 1, 48, 20000),
+(47, 11, 1, 49, 40000),
+(48, 10, 1, 50, 35000),
+(49, 12, 1, 51, 20000),
+(50, 15, 1, 52, 1),
+(51, 10, 1, 53, 35000),
+(52, 9, 1, 54, 45000),
+(53, 9, 1, 55, 45000),
+(54, 10, 1, 56, 35000),
+(55, 10, 1, 57, 35000),
+(56, 12, 1, 58, 20000),
+(57, 11, 1, 59, 40000),
+(58, 12, 1, 59, 20000),
+(59, 12, 1, 60, 20000),
+(60, 15, 1, 60, 1),
+(61, 9, 1, 61, 45000),
+(62, 15, 1, 62, 1);
 
 -- --------------------------------------------------------
 
@@ -184,7 +195,6 @@ CREATE TABLE `ejercicios` (
 --
 
 INSERT INTO `ejercicios` (`id`, `nombre`, `descripcion`, `grupo_muscular_id`, `video`, `titulo`, `imagen`) VALUES
-(8, 'Toque culo', 'Colócate de pie lateralmente a la polea baja. Sujeta el agarre con la mano más alejada de la polea. Mantén los pies separados al ancho de los hombros y el brazo extendido a lo largo de tu cuerpo. Inclina tu torso lateralmente hacia el lado de la polea, llevando tu mano hacia tu talón del mismo lado. Siente la contracción en los músculos oblicuos del lado que se flexiona. Regresa lentamente a la posición inicial, controlando la resistencia.\r\nMúsculos trabajados: Oblicuos externos e internos - estos músculos son los principales responsables de la flexión lateral del tronco y la rotación. Recto abdominal - se activa para ayudar en la flexión del tronco y la estabilización.', 1, 'https://www.youtube.com/shorts/2xNfS78E1qE', 'asdasda', NULL),
 (9, 'Giro Ruso', 'Siéntate en el suelo con las rodillas flexionadas y los pies apoyados o ligeramente elevados (para mayor intensidad). Inclina ligeramente tu torso hacia atrás, manteniendo la espalda recta. Puedes juntar tus manos frente al pecho o entrelazarlas. Gira tu torso hacia un lado, llevando tus manos lo más lejos posible sin perder el equilibrio. Siente la contracción en los músculos oblicuos. Regresa al centro y repite el movimiento hacia el otro lado. Realiza el movimiento de forma controlada, evitando impulsos.\r\nMúsculos trabajados: Oblicuos externos e internos - son los principales responsables de la rotación del tronco. Recto abdominal - ayuda en la estabilización y en mantener la postura. Transverso del abdomen - contribuye a la estabilidad del core. ', 1, 'https://www.youtube.com/watch?v=GaS6v-9Rs2k', 'Polea y Maquina', NULL),
 (10, 'Abdominales Con Rueda', 'Arrodíllate en el suelo y sujeta las asas de la rueda abdominal con ambas manos. Coloca la rueda en el suelo frente a ti, de manera que tus brazos estén extendidos. Lentamente, rueda la rueda hacia adelante, extendiendo tu cuerpo hacia el suelo. Mantén la espalda recta y el core activado para evitar que tu espalda baja se arquee demasiado. Llega hasta donde puedas controlar el movimiento sin perder la forma. Contrae los músculos abdominales para tirar de la rueda hacia atrás, regresando a la posición inicial arrodillada. Realiza el movimiento de forma controlada.\r\nMúsculos trabajados: Recto abdominal - se estira y contrae intensamente durante el movimiento. Oblicuos externos e internos - ayudan a estabilizar y controlar el movimiento. Transverso del abdomen - crucial para la estabilidad del core. Dorsales (especialmente el dorsal ancho) - se activan para controlar la extensión del cuerpo. Hombros y tríceps - contribuyen a la estabilización y al movimiento de los brazos.', 1, 'https://www.youtube.com/watch?v=76uV2p-733k', 'Polea y Maquina', NULL),
 (11, 'Abdominales En L', 'Siéntate en el suelo con las piernas extendidas hacia adelante. Coloca tus manos a los lados de tus caderas o ligeramente detrás para apoyarte. Utilizando la fuerza de tus abdominales, eleva simultáneamente tus piernas extendidas y tu torso, tratando de formar una \"L\" con tu cuerpo. Tu punto de apoyo serán tus glúteos. Mantén esta posición durante unos segundos, sintiendo la contracción en los abdominales. Baja lentamente tus piernas y tu torso a la posición inicial de forma controlada.\r\nMúsculos trabajados:  Recto abdominal - es fundamental para la flexión del tronco y la elevación de las piernas. Oblicuos externos e internos - ayudan a estabilizar el torso y controlar el movimiento. Flexores de la cadera (iliopsoas, recto femoral, sartorio) - son cruciales para elevar las piernas.', 1, 'https://www.youtube.com/watch?v=Ku0uk5qWdR8', 'Polea y Maquina', NULL),
@@ -229,9 +239,9 @@ INSERT INTO `ejercicios` (`id`, `nombre`, `descripcion`, `grupo_muscular_id`, `v
 (50, 'Vuelos Laterales Con Mancuerna', 'Ponte de pie con los pies separados al ancho de los hombros, sosteniendo una mancuerna en cada mano a los lados de tu cuerpo con las palmas mirando hacia adentro (agarre neutro).\r\nMantén una ligera flexión en los codos durante todo el ejercicio. Eleva las mancuernas hacia los lados y hacia arriba en un arco controlado, manteniendo la ligera flexión en los codos. Imagina que estás intentando tocar algo con tus codos. Continúa elevando hasta que tus brazos estén paralelos al suelo o ligeramente por encima. Siente la contracción en los deltoides medios. Baja las mancuernas lentamente y con control a la posición inicial, resistiendo la fuerza de la gravedad.\r\nMúsculos trabajados: Deltoides medio (parte lateral del hombro). Deltoides anterior, trapecio superior, supraespinoso.', 4, 'https://www.youtube.com/shorts/zBqZqAjCnR4', 'Mancuerna', NULL),
 (51, 'Vuelos Frontales Con Mancuerna', 'Ponte de pie con los pies separados al ancho de los hombros, manteniendo una postura recta y el core ligeramente activado para mantener la estabilidad. Sujeta una mancuerna en cada mano con un agarre prono (palmas hacia abajo) o neutro (palmas enfrentadas hacia el cuerpo). Inicialmente, las mancuernas deben colgar frente a tus muslos. Mantén una ligera flexión en los codos durante todo el ejercicio. Eleva una mancuerna hacia adelante y hacia arriba con un movimiento controlado y suave, manteniendo el brazo casi recto (con esa ligera flexión). Levanta la mancuerna hasta que esté aproximadamente a la altura de tus hombros o ligeramente por encima. Haz una breve pausa en la parte superior del movimiento, sintiendo la contracción en el deltoides anterior.\r\nBaja la mancuerna lentamente y con control a la posición inicial, resistiendo la fuerza de la gravedad.\r\nRepite el movimiento con la otra mancuerna. Puedes alternar los brazos en cada repetición o realizar todas las repeticiones con un brazo y luego cambiar al otro.\r\nMúsculos trabajados: Deltoides anterior. Deltoides lateral, trapecio, bíceps braquial. Músculos del core para mantener la estabilidad del tronco y evitar el balanceo durante el movimiento.', 4, 'https://www.youtube.com/shorts/jk7YrK79ciA', 'Mancuerna', NULL),
 (52, 'Push Press Con Barra', 'Coloca la barra sobre la parte superior de tu pecho y la parte frontal de tus hombros, sujetándola con un agarre ligeramente más ancho que el ancho de los hombros, con las palmas mirando hacia adelante. Tus codos deben estar ligeramente por delante de la barra.\r\nMantén los pies separados al ancho de los hombros y las rodillas ligeramente flexionadas. Tu espalda debe estar recta y el core activado. Realiza una pequeña y rápida flexión de rodillas (dip), manteniendo la espalda recta. Inmediatamente después del dip, extiende explosivamente las piernas y utiliza ese impulso para ayudarte a empujar la barra hacia arriba por encima de tu cabeza. Continúa el movimiento extendiendo completamente tus brazos. En la parte superior del movimiento, tus brazos deben estar completamente extendidos (sin bloquear las articulaciones) y la barra debe estar directamente sobre o ligeramente detrás de tu cabeza.\r\nBaja la barra de manera controlada hasta la posición inicial sobre tus hombros, flexionando ligeramente las rodillas para amortiguar el peso.\r\nMúsculos trabajados: Deltoides anterior , deltoides medio, tríceps braquial.\r\nSecundario: Deltoides posterior, trapecio, serrato anterior. Asistencia del Tren Cuádriceps, glúteos. Músculos del core para mantener la estabilidad durante el movimiento.', 4, 'https://www.youtube.com/shorts/MRxd1LA4OYk', 'Barra', NULL),
-(53, 'Vuelo Frontal Con Barra', 'Colócate de pie con los pies separados al ancho de los hombros. Sujeta una barra con un agarre prono (palmas hacia abajo) a la altura de tus muslos, con las manos ligeramente más separadas que el ancho de los hombros. Mantén los brazos rectos pero no bloqueados. Tu espalda debe estar recta, el core activado y la mirada hacia adelante. Levanta la barra hacia adelante y hacia arriba con un movimiento controlado, manteniendo los brazos rectos (con una ligera flexión en los codos para evitar la tensión en las articulaciones). Eleva la barra hasta que esté aproximadamente a la altura de tus hombros o ligeramente por encima. Mantén una breve pausa en la parte superior del movimiento, sintiendo la contracción en los deltoides frontales. Baja la barra lentamente y con control a la posición inicial, resistiendo la fuerza de la gravedad.\r\nMúsculos trabajados: Deltoides anterior.\r\nDeltoides medio , trapecio, serrato anterior. Músculos del core para mantener la estabilidad del tronco y evitar el balanceo durante el movimiento.', 4, 'https://www.youtube.com/shorts/CaZaD7uMsvw', 'Barra', NULL);
+(53, 'Vuelo Frontal Con Barra', 'Colócate de pie con los pies separados al ancho de los hombros. Sujeta una barra con un agarre prono (palmas hacia abajo) a la altura de tus muslos, con las manos ligeramente más separadas que el ancho de los hombros. Mantén los brazos rectos pero no bloqueados. Tu espalda debe estar recta, el core activado y la mirada hacia adelante. Levanta la barra hacia adelante y hacia arriba con un movimiento controlado, manteniendo los brazos rectos (con una ligera flexión en los codos para evitar la tensión en las articulaciones). Eleva la barra hasta que esté aproximadamente a la altura de tus hombros o ligeramente por encima. Mantén una breve pausa en la parte superior del movimiento, sintiendo la contracción en los deltoides frontales. Baja la barra lentamente y con control a la posición inicial, resistiendo la fuerza de la gravedad.\r\nMúsculos trabajados: Deltoides anterior.\r\nDeltoides medio , trapecio, serrato anterior. Músculos del core para mantener la estabilidad del tronco y evitar el balanceo durante el movimiento.', 4, 'https://www.youtube.com/shorts/CaZaD7uMsvw', 'Barra', NULL),
+(54, 'Elevacón Posterior Con Polea Baja', 'Colócate de pie frente a una polea baja. Puedes usar un agarre en \"D\" o una cuerda. Sujeta el accesorio con la mano contraria al lado que vas a trabajar (por ejemplo, si vas a trabajar el hombro derecho, sujeta la polea con la mano izquierda). Cruza tu cuerpo ligeramente para tener un mejor ángulo de tracción.\r\nInclínate ligeramente hacia adelante desde la cintura, manteniendo la espalda recta. Tu brazo debe estar extendido hacia la polea, con una ligera flexión en el codo. Manteniendo el brazo ligeramente flexionado, eleva el brazo hacia atrás y hacia afuera, describiendo un arco. Concéntrate en contraer el deltoides posterior y junta ligeramente tus omóplatos al final del movimiento. Regresa lentamente a la posición inicial, controlando la resistencia de la polea.\r\nMúsculos trabajados: Deltoides posterior \r\nInfraespinoso y redondo menor, trapecio , romboides.', 4, 'https://www.youtube.com/shorts/dsriiSXu1dQ', 'Polea y Maquina', NULL);
 INSERT INTO `ejercicios` (`id`, `nombre`, `descripcion`, `grupo_muscular_id`, `video`, `titulo`, `imagen`) VALUES
-(54, 'Elevacón Posterior Con Polea Baja', 'Colócate de pie frente a una polea baja. Puedes usar un agarre en \"D\" o una cuerda. Sujeta el accesorio con la mano contraria al lado que vas a trabajar (por ejemplo, si vas a trabajar el hombro derecho, sujeta la polea con la mano izquierda). Cruza tu cuerpo ligeramente para tener un mejor ángulo de tracción.\r\nInclínate ligeramente hacia adelante desde la cintura, manteniendo la espalda recta. Tu brazo debe estar extendido hacia la polea, con una ligera flexión en el codo. Manteniendo el brazo ligeramente flexionado, eleva el brazo hacia atrás y hacia afuera, describiendo un arco. Concéntrate en contraer el deltoides posterior y junta ligeramente tus omóplatos al final del movimiento. Regresa lentamente a la posición inicial, controlando la resistencia de la polea.\r\nMúsculos trabajados: Deltoides posterior \r\nInfraespinoso y redondo menor, trapecio , romboides.', 4, 'https://www.youtube.com/shorts/dsriiSXu1dQ', 'Polea y Maquina', NULL),
 (55, 'Elevacón Posterior Con Maquina Apertura', 'Siéntate en la máquina y ajusta la altura del asiento y la posición de los brazos de manera que tus codos o antebrazos se apoyen cómodamente en las almohadillas, y tus brazos estén paralelos al suelo o ligeramente por debajo. Tu pecho debe estar apoyado contra el respaldo. Sujeta las asas con un agarre prono (palmas hacia abajo). Tus brazos deben estar extendidos hacia adelante, con una ligera flexión en los codos. Contrae los deltoides posteriores y tira de las asas hacia atrás y hacia los lados, separando tus brazos. Concéntrate en juntar tus omóplatos al final del movimiento. Regresa lentamente a la posición inicial, controlando el peso y evitando que las placas choquen bruscamente.\r\nMúsculos trabajados: Deltoides posterior. Infraespinoso y redondo menor, trapecio, romboides.', 4, 'https://www.youtube.com/shorts/JyPNDIXjHsw', 'Polea y Maquina', NULL),
 (56, 'Vuelo Lateral Con Polea Baja', 'Colócate de pie lateralmente a la polea baja. Utiliza un agarre en \"D\". Sujeta el agarre con la mano más alejada de la polea. Mantén una postura erguida con los pies separados al ancho de los hombros. Tu brazo debe estar cruzando ligeramente por delante de tu cuerpo, con una ligera flexión en el codo. Manteniendo el brazo ligeramente flexionado, eleva el brazo lateralmente y hacia arriba, describiendo un arco hasta que tu mano esté aproximadamente a la altura de tu hombro o ligeramente superior. Concéntrate en contraer el deltoides medio. Baja lentamente el brazo a la posición inicial, controlando la resistencia de la polea.\r\nMúsculos trabajados: Deltoides medio.\r\nDeltoides anterior, supraespinoso, trapecio.', 4, 'https://www.youtube.com/shorts/7wiuBWONBKA', 'Polea y Maquina', NULL),
 (57, 'Press Hombro Maquina Smith', 'Siéntate en el banco de la máquina Smith, asegurándote de que el respaldo te brinde un buen soporte y que la barra esté a una altura inicial cómoda (generalmente a la altura de la parte superior del pecho o clavícula). Utiliza un agarre prono (palmas hacia adelante), ligeramente más ancho que el ancho de los hombros.\r\nPosición Inicial: Desencaja la barra girándola. La barra debe estar directamente sobre tus hombros, con los codos ligeramente flexionados y apuntando hacia los lados. Empuja la barra hacia arriba de manera controlada y lineal (guiada por la máquina Smith) hasta que tus brazos estén completamente extendidos, pero sin bloquear los codos al final del movimiento. Baja lentamente la barra a la posición inicial, controlando el movimiento y asegurándote de que la barra descienda de manera uniforme.\r\nMúsculos trabajados: Deltoides anterior, deltoides medio. Tríceps braquial, trapecio, serrato anterior. Aunque la máquina Smith proporciona estabilidad, los músculos del core se activan para mantener el torso erguido.', 4, 'http://youtube.com/watch?v=Ri5pkSWOcLY', 'Polea y Maquina', NULL),
@@ -278,9 +288,9 @@ INSERT INTO `ejercicios` (`id`, `nombre`, `descripcion`, `grupo_muscular_id`, `v
 (106, 'Hip Thrust', 'Siéntate en el suelo con la espalda apoyada en un banco (la altura ideal es justo debajo de los omóplatos). Coloca una barra sobre tus caderas, justo por debajo de tus crestas ilíacas. Puedes usar una almohadilla en la barra para mayor comodidad. Sujeta la barra con ambas manos con un agarre ligeramente más ancho que el ancho de los hombros.\r\nTus pies deben estar apoyados en el suelo, separados al ancho de los hombros, con las rodillas flexionadas en un ángulo de aproximadamente 90 grados. Tu barbilla debe estar ligeramente metida hacia el pecho. Empuja a través de tus talones, contrayendo los glúteos para elevar tus caderas del suelo hasta que tu cuerpo forme una línea recta desde tus hombros hasta tus rodillas. Mantén la contracción en la parte superior del movimiento durante un segundo. Baja lentamente tus caderas hacia el suelo, manteniendo el control del movimiento.\r\nMúsculos trabajados: Glúteo mayor. Isquiotibiales, aductores, core.', 8, 'https://www.youtube.com/shorts/bfT0eClO7bA', 'Barra', NULL),
 (107, 'Peso Muerto Con Barra', 'Coloca una barra cargada en el suelo frente a ti. Colócate de pie con los pies ligeramente más estrechos que el ancho de los hombros, con la barra sobre la parte media de tus pies. Tus dedos pueden apuntar ligeramente hacia afuera.\r\nFlexiona las rodillas y las caderas, manteniendo la espalda recta. Agarra la barra con un agarre por fuera de las piernas (prono o mixto si usas mucho peso), aproximadamente al ancho de los hombros. Tu torso debe estar ligeramente inclinado hacia adelante, y tus hombros deben estar por encima de la barra. Empuja a través de tus talones, extendiendo las rodillas y las caderas simultáneamente para levantar la barra del suelo. Mantén la espalda recta y la barra cerca de tu cuerpo durante todo el movimiento. Lleva la barra hasta que estés completamente de pie con las caderas extendidas y los hombros hacia atrás. Baja la barra al suelo invirtiendo el movimiento, flexionando las caderas y las rodillas mientras mantienes la espalda recta y controlas el descenso.\r\nMúsculos trabajados: Isquiotibiales, glúteo mayor, cuádriceps, erector de la columna. Trapecio, romboides, antebrazos, dorsales, abdominales.', 8, 'https://www.youtube.com/shorts/3EhkrUEEPOg', 'Barra', NULL),
 (108, 'Peso Sumo Con Barra', 'Coloca una barra cargada en el suelo frente a ti. Colócate de pie con los pies mucho más separados que el ancho de los hombros, con los dedos apuntando significativamente hacia afuera (aproximadamente 45 grados). La barra debe estar entre tus piernas, cerca de tus espinillas. Flexiona las rodillas y las caderas, manteniendo la espalda recta. Agarra la barra por dentro de tus piernas con un agarre prono (palmas hacia abajo). Tu torso debe estar más vertical que en el peso muerto convencional, y tus hombros deben estar directamente sobre la barra o ligeramente por detrás. Empuja a través de tus pies, extendiendo las rodillas y las caderas simultáneamente para levantar la barra del suelo. Mantén la espalda recta y la barra cerca de tu cuerpo durante todo el movimiento. Lleva la barra hasta que estés completamente de pie con las caderas extendidas y los hombros hacia atrás. Baja la barra al suelo invirtiendo el movimiento, flexionando las caderas y las rodillas mientras mantienes la espalda recta y controlas el descenso.\r\nMúsculos trabajados:  Cuádriceps, glúteo mayor, aductores, isquiotibiales, erector de la columna. Trapecio, romboides, antebrazos , dorsales.', 8, 'https://www.youtube.com/shorts/n66w4uMi9zk', 'Barra', NULL),
-(109, 'Puente Gluteo Con Barra', 'Siéntate en el suelo con la espalda apoyada en un banco o una superficie elevada. Coloca una barra con peso sobre tus caderas, justo debajo de los huesos de la cadera. Puedes usar una almohadilla en la barra para mayor comodidad.\r\nFlexiona las rodillas y apoya los pies en el suelo, separados al ancho de los hombros. Tus omóplatos deben estar apoyados en el banco. Empuja con los talones para elevar tus caderas del suelo, contrayendo los glúteos en la parte superior del movimiento. Tu cuerpo debe formar una línea recta desde los hombros hasta las rodillas. Mantén la contracción por un segundo. Baja lentamente las caderas hacia el suelo, manteniendo el control de la barra.\r\nMúsculos trabajados: Glúteo mayor.\r\nSecundario: Isquiotibiales, aductor mayor, core (para estabilización).', 8, 'https://www.youtube.com/shorts/ldWuxyfoq2A', 'Barra', NULL);
+(109, 'Puente Gluteo Con Barra', 'Siéntate en el suelo con la espalda apoyada en un banco o una superficie elevada. Coloca una barra con peso sobre tus caderas, justo debajo de los huesos de la cadera. Puedes usar una almohadilla en la barra para mayor comodidad.\r\nFlexiona las rodillas y apoya los pies en el suelo, separados al ancho de los hombros. Tus omóplatos deben estar apoyados en el banco. Empuja con los talones para elevar tus caderas del suelo, contrayendo los glúteos en la parte superior del movimiento. Tu cuerpo debe formar una línea recta desde los hombros hasta las rodillas. Mantén la contracción por un segundo. Baja lentamente las caderas hacia el suelo, manteniendo el control de la barra.\r\nMúsculos trabajados: Glúteo mayor.\r\nSecundario: Isquiotibiales, aductor mayor, core (para estabilización).', 8, 'https://www.youtube.com/shorts/ldWuxyfoq2A', 'Barra', NULL),
+(110, 'Peso Muerto En Maquina', 'Ajusta la máquina de peso muerto de palanca a tu altura y carga el peso deseado. Colócate de pie dentro de la máquina, con los pies separados al ancho de los hombros y centrados bajo la plataforma de empuje. Agarra las manijas de la máquina, manteniendo la espalda recta y las rodillas ligeramente flexionadas. Tu torso debe estar inclinado hacia adelante desde las caderas. Empuja hacia abajo con los talones, extendiendo las rodillas y las caderas simultáneamente hasta alcanzar una posición erguida. Mantén la espalda recta durante todo el movimiento y contrae los glúteos en la parte superior.\r\nBaja el peso de manera controlada flexionando las caderas y las rodillas, manteniendo la espalda recta hasta regresar a la posición inicial.\r\nMúsculos trabajados: Glúteo mayor, isquiotibiales, cuádriceps, erector de la columna. Aductores, antebrazos, trapecios (para estabilización).', 8, 'https://www.youtube.com/shorts/IFwDoInXE6I', 'Polea y Maquina', NULL);
 INSERT INTO `ejercicios` (`id`, `nombre`, `descripcion`, `grupo_muscular_id`, `video`, `titulo`, `imagen`) VALUES
-(110, 'Peso Muerto En Maquina', 'Ajusta la máquina de peso muerto de palanca a tu altura y carga el peso deseado. Colócate de pie dentro de la máquina, con los pies separados al ancho de los hombros y centrados bajo la plataforma de empuje. Agarra las manijas de la máquina, manteniendo la espalda recta y las rodillas ligeramente flexionadas. Tu torso debe estar inclinado hacia adelante desde las caderas. Empuja hacia abajo con los talones, extendiendo las rodillas y las caderas simultáneamente hasta alcanzar una posición erguida. Mantén la espalda recta durante todo el movimiento y contrae los glúteos en la parte superior.\r\nBaja el peso de manera controlada flexionando las caderas y las rodillas, manteniendo la espalda recta hasta regresar a la posición inicial.\r\nMúsculos trabajados: Glúteo mayor, isquiotibiales, cuádriceps, erector de la columna. Aductores, antebrazos, trapecios (para estabilización).', 8, 'https://www.youtube.com/shorts/IFwDoInXE6I', 'Polea y Maquina', NULL),
 (111, 'Maquina Gluteo Vertical', 'Ajusta la almohadilla de la máquina para que se apoye cómodamente en la parte posterior de tu muslo, justo por encima de la rodilla. Asegura tu cuerpo al soporte de la máquina. Colócate de pie apoyado en la máquina, con una pierna ligeramente flexionada para mantener el equilibrio y la otra pierna colocada detrás de la almohadilla. Extiende la pierna hacia atrás de manera controlada, elevándola lo más alto posible mientras contraes el glúteo. Evita arquear demasiado la espalda. Regresa lentamente la pierna a la posición inicial, controlando la resistencia. Repite con la misma pierna y luego cambia de lado.\r\nMúsculos trabajados: Glúteo mayor. Isquiotibiales.', 8, 'https://www.youtube.com/shorts/7dAyon8VTz4', 'Polea y Maquina', NULL),
 (112, 'Hip Thrust En Maquina', 'Siéntate en la máquina y apoya la parte superior de tu espalda contra el acolchado. Coloca tus pies planos en la plataforma, separados al ancho de los hombros. Asegura la banda o palanca sobre tus caderas. Desbloquea la máquina (si es necesario) y baja tus caderas hacia el suelo de manera controlada, manteniendo la espalda apoyada. Empuja con los talones para elevar tus caderas hacia arriba, contrayendo los glúteos en la parte superior del movimiento. Tu cuerpo debe formar una línea recta desde los hombros hasta las rodillas. Mantén la contracción por un segundo. Baja lentamente las caderas a la posición inicial, manteniendo el control del peso. \r\nMúsculos trabajados: Glúteo mayor.\r\nIsquiotibiales, cuádriceps , core (para estabilización).', 8, 'https://www.youtube.com/shorts/UjFMrWKMO0M', 'Polea y Maquina', NULL),
 (113, 'Pata Gluteo En Polea Baja', 'Coloca un tobillera con agarre en uno de tus tobillos y sujétala al cable de la polea baja. Sujétate a una estructura estable para mantener el equilibrio.\r\nInclínate ligeramente hacia adelante, manteniendo la espalda recta y una ligera flexión en la rodilla de la pierna de apoyo. La pierna con la tobillera debe estar ligeramente flexionada y detrás de ti. Extiende la pierna hacia atrás de manera controlada, elevándola lo más alto posible mientras contraes el glúteo. Mantén la rodilla ligeramente flexionada durante todo el movimiento y evita arquear demasiado la espalda. Regresa lentamente la pierna a la posición inicial, controlando la resistencia. Repite con la misma pierna y luego cambia de lado.\r\nMúsculos trabajados: Glúteo mayor. Isquiotibiales.', 8, 'https://www.youtube.com/shorts/B9Fqo0KqeWc', 'Polea y Maquina', NULL),
@@ -423,12 +433,12 @@ CREATE TABLE `productos` (
 --
 
 INSERT INTO `productos` (`id`, `nombre`, `descripcion`, `precio`, `categoriaId`, `imagen`, `stock`) VALUES
-(8, 'Proteina whey', 'Post entrenamiento: Ideal para recuperación muscular. Consumir dentro de los 30-60 minutos después de entrenar.Desayuno o entre comidas: Si necesitás aumentar tu ingesta de proteínas diarias.Antes de dormir: En el caso de caseína (de absorción lenta), ayuda a evitar el catabolismo nocturno. Mezclar 1 scoop (medida del envase, aprox. 25-30g de proteína) en: 250-300 ml de agua, leche o bebida vegetal.Podés usar una licuadora o shaker. Si querés sumar calorías, podés agregar banana, avena, mantequi', 4, 2, 'proteinaTruemade.jpg', 1),
+(8, 'Proteina whey', 'Post entrenamiento: Ideal para recuperación muscular. Consumir dentro de los 30-60 minutos después de entrenar.Desayuno o entre comidas: Si necesitás aumentar tu ingesta de proteínas diarias.Antes de dormir: En el caso de caseína (de absorción lenta), ayuda a evitar el catabolismo nocturno. Mezclar 1 scoop (medida del envase, aprox. 25-30g de proteína) en: 250-300 ml de agua, leche o bebida vegetal.Podés usar una licuadora o shaker. Si querés sumar calorías, podés agregar banana, avena, mantequi', 4, 2, 'proteinaTruemade.jpg', 0),
 (9, 'Proteina Platinum Frutilla', 'Post entrenamiento: Ideal para recuperación muscular. Consumir dentro de los 30-60 minutos después de entrenar.Desayuno o entre comidas: Si necesitás aumentar tu ingesta de proteínas diarias.Antes de dormir: En el caso de caseína (de absorción lenta), ayuda a evitar el catabolismo nocturno. Mezclar 1 scoop (medida del envase, aprox. 25-30g de proteína) en: 250-300 ml de agua, leche o bebida vegetal.Podés usar una licuadora o shaker. Si querés sumar calorías, podés agregar banana, avena, mantequi', 45000, 2, 'Wheyproteina_Frutilla.jpg', 110),
 (10, 'Creatina ENA', '5 gramos por día, todos los días, a la misma hora (preferiblemente con una comida o postentreno).No hace falta cargar(es decir, tomar grandes dosis al principio). Pero si querés acelerar la saturación muscular, podés ver más abajo la fase de carga. Cuándo tomarla Postentreno (después de entrenar) es ideal, ya que el cuerpo absorbe mejor nutrientes después del ejercicio. También podés tomarla en cualquier momento del día si no entrenás.Con qué tomarla con agua, jugo o un batido postentreno. Si la', 35000, 1, 'creatinaEna.jpg', 95),
 (11, 'Poteina Bar Banana Split', 'Comerlas Post entrenamiento si no podés tomar batido. Colación entre comidas, especialmente si estás lejos de casa. Antes de entrenar, si no comiste nada.\r\nRecomendaciones:\r\nFijate en la cantidad de proteína por barra (ideal 15g o más). Revisá los ingredientes: algunas tienen mucho azúcar o grasa saturada.No las uses como reemplazo total de comidas, sino como complemento.', 40000, 3, 'EnaProteinBar_banansplit.jpg', 85),
-(12, 'IronBar Frutilla', 'Comerlas Post entrenamiento si no podés tomar batido. Colación entre comidas, especialmente si estás lejos de casa. Antes de entrenar, si no comiste nada.\r\nRecomendaciones:\r\nFijate en la cantidad de proteína por barra (ideal 15g o más). Revisá los ingredientes: algunas tienen mucho azúcar o grasa saturada.No las uses como reemplazo total de comidas, sino como complemento.', 20000, 3, 'Ironbar_frutilla.jpg', 99),
-(15, 'Proteina Truemade Vainilla', 'editado', 1, 1, 'Ironbar_frutilla.jpg', 1);
+(12, 'IronBar Frutilla', 'Comerlas Post entrenamiento si no podés tomar batido. Colación entre comidas, especialmente si estás lejos de casa. Antes de entrenar, si no comiste nada.\r\nRecomendaciones:\r\nFijate en la cantidad de proteína por barra (ideal 15g o más). Revisá los ingredientes: algunas tienen mucho azúcar o grasa saturada.No las uses como reemplazo total de comidas, sino como complemento.', 20000, 3, 'Ironbar_frutilla.jpg', 98),
+(15, 'Proteina Truemade Vainilla', 'editado', 1, 1, 'Ironbar_frutilla.jpg', 3);
 
 -- --------------------------------------------------------
 
@@ -533,7 +543,7 @@ INSERT INTO `recetas` (`id`, `nombre`, `descripcion`, `categoria_id`, `imagen`) 
 CREATE TABLE `reservas` (
   `id_reserva` int(11) NOT NULL,
   `id_usuario` int(11) NOT NULL,
-  `fecha` date NOT NULL,
+  `fecha` datetime NOT NULL,
   `total` float NOT NULL,
   `estado` varchar(255) NOT NULL,
   `vencimiento` datetime NOT NULL
@@ -544,8 +554,14 @@ CREATE TABLE `reservas` (
 --
 
 INSERT INTO `reservas` (`id_reserva`, `id_usuario`, `fecha`, `total`, `estado`, `vencimiento`) VALUES
-(31, 26, '2025-06-03', 4, 'expirado', '2025-06-03 05:57:23'),
-(32, 27, '2025-06-17', 45000, 'expirado', '2025-06-17 15:20:32');
+(45, 31, '2025-07-29 19:34:10', 1, 'expirado', '2025-07-29 20:04:10'),
+(51, 31, '2025-07-29 19:58:51', 20000, 'expirado', '2025-07-29 20:28:51'),
+(52, 31, '2025-07-29 20:22:20', 1, 'expirado', '2025-07-29 20:52:20'),
+(54, 31, '2025-07-29 21:16:22', 45000, 'expirado', '2025-07-29 21:46:22'),
+(55, 31, '2025-07-29 21:23:25', 45000, 'expirado', '2025-07-29 21:53:25'),
+(56, 31, '2025-07-29 21:29:51', 35000, 'expirado', '2025-07-29 21:59:51'),
+(57, 31, '2025-07-29 21:31:39', 35000, 'cancelado', '2025-07-29 22:01:39'),
+(58, 31, '2025-07-29 22:02:49', 20000, 'expirado', '2025-07-29 22:32:49');
 
 -- --------------------------------------------------------
 
@@ -562,6 +578,29 @@ CREATE TABLE `transacciones` (
   `id_origen` int(11) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
+--
+-- Volcado de datos para la tabla `transacciones`
+--
+
+INSERT INTO `transacciones` (`id`, `tipo`, `monto`, `fecha`, `origen`, `id_origen`) VALUES
+(1, 'ingreso', 45000, '2025-07-17 18:44:34', 'carrito', 32),
+(2, 'ingreso', 4, '2025-07-17 18:44:48', 'carrito', 31),
+(3, 'ingreso', 45000, '2025-07-17 19:02:35', 'carrito', 32),
+(4, 'ingreso', 4, '2025-07-18 16:22:51', 'carrito', 31),
+(5, 'ingreso', 45000, '2025-07-18 16:22:55', 'carrito', 32),
+(6, 'ingreso', 4, '2025-07-18 16:23:01', 'carrito', 31),
+(7, 'ingreso', 45000, '2025-07-18 16:23:05', 'carrito', 32),
+(8, 'ingreso', 4, '2025-07-18 16:57:35', 'carrito', 31),
+(9, 'ingreso', 45000, '2025-07-18 16:57:39', 'carrito', 32),
+(10, 'ingreso', 45000, '2025-07-18 16:57:50', 'carrito', 32),
+(11, 'ingreso', 4, '2025-07-19 16:33:52', 'carrito', 31),
+(12, 'ingreso', 4, '2025-07-19 16:34:14', 'carrito', 31),
+(13, 'ingreso', 4, '2025-07-19 16:34:23', 'carrito', 31),
+(14, 'ingreso', 4, '2025-07-19 16:57:14', 'carrito', 31),
+(15, 'ingreso', 4, '2025-07-19 16:57:20', 'carrito', 31),
+(16, 'ingreso', 4, '2025-07-19 17:07:26', 'carrito', 31),
+(17, 'ingreso', 4, '2025-07-19 17:08:19', 'carrito', 31);
+
 -- --------------------------------------------------------
 
 --
@@ -575,7 +614,6 @@ CREATE TABLE `usuarios` (
   `rol` varchar(20) NOT NULL,
   `imagen` varchar(500) DEFAULT NULL,
   `id_membresia` int(11) DEFAULT NULL,
-  `id_autenticacion` int(11) DEFAULT NULL,
   `fecha_nacimiento` date DEFAULT NULL,
   `celular` varchar(20) DEFAULT NULL,
   `aptoMedico` varchar(500) DEFAULT NULL,
@@ -586,10 +624,11 @@ CREATE TABLE `usuarios` (
 -- Volcado de datos para la tabla `usuarios`
 --
 
-INSERT INTO `usuarios` (`id`, `apellido`, `nombre`, `rol`, `imagen`, `id_membresia`, `id_autenticacion`, `fecha_nacimiento`, `celular`, `aptoMedico`, `dni`) VALUES
-(1, 'admin', 'admin', 'admin', 'perfil.jpg', 1, 1, '2025-04-09', '1193868511', 'xd', 12345678),
-(28, 'Buster', 'Frank', 'jubilado', NULL, 1, NULL, '2001-05-03', '1165830511', 'asdasd', 44323448),
-(29, 'Aguirree', 'Lucass', 'socio', 'imagen_usuario_29.jpg', 1, NULL, '2001-05-04', '1165830512', 'aptomedico_usuario_29.pdf', 43245022);
+INSERT INTO `usuarios` (`id`, `apellido`, `nombre`, `rol`, `imagen`, `id_membresia`, `fecha_nacimiento`, `celular`, `aptoMedico`, `dni`) VALUES
+(1, 'admin', 'admin', 'admin', 'perfil.jpg', 1, '2025-04-09', '1193868511', 'xd', 12345678),
+(28, 'Buster', 'Frank', 'jubilado', NULL, 1, '2001-05-03', '1165830511', 'asdasd', 44323448),
+(29, 'Aguirree', 'Lucass', 'socio', 'imagen_usuario_29.jpg', 1, '2001-05-04', '1165830512', 'aptomedico_usuario_29.pdf', 43245022),
+(31, 'Jimenez', 'Gustavo', 'cliente', 'perfil.jpg', 1, '2025-07-20', '1122222222', NULL, 39393939);
 
 --
 -- Índices para tablas volcadas
@@ -601,12 +640,6 @@ INSERT INTO `usuarios` (`id`, `apellido`, `nombre`, `rol`, `imagen`, `id_membres
 ALTER TABLE `autenticacion`
   ADD PRIMARY KEY (`id`),
   ADD KEY `id_usuario` (`id_usuario`);
-
---
--- Indices de la tabla `carrito`
---
-ALTER TABLE `carrito`
-  ADD PRIMARY KEY (`id`);
 
 --
 -- Indices de la tabla `categorias`
@@ -702,8 +735,7 @@ ALTER TABLE `transacciones`
 --
 ALTER TABLE `usuarios`
   ADD PRIMARY KEY (`id`),
-  ADD KEY `fk_membresia` (`id_membresia`),
-  ADD KEY `fk_autenticacion` (`id_autenticacion`);
+  ADD KEY `fk_membresia` (`id_membresia`);
 
 --
 -- AUTO_INCREMENT de las tablas volcadas
@@ -713,13 +745,7 @@ ALTER TABLE `usuarios`
 -- AUTO_INCREMENT de la tabla `autenticacion`
 --
 ALTER TABLE `autenticacion`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=21;
-
---
--- AUTO_INCREMENT de la tabla `carrito`
---
-ALTER TABLE `carrito`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=23;
 
 --
 -- AUTO_INCREMENT de la tabla `categorias`
@@ -743,13 +769,13 @@ ALTER TABLE `cuota`
 -- AUTO_INCREMENT de la tabla `detalle_reservas`
 --
 ALTER TABLE `detalle_reservas`
-  MODIFY `id_detalle_reserva` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=29;
+  MODIFY `id_detalle_reserva` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=63;
 
 --
 -- AUTO_INCREMENT de la tabla `ejercicios`
 --
 ALTER TABLE `ejercicios`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=138;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=139;
 
 --
 -- AUTO_INCREMENT de la tabla `empleados`
@@ -785,31 +811,31 @@ ALTER TABLE `productos`
 -- AUTO_INCREMENT de la tabla `proveedores`
 --
 ALTER TABLE `proveedores`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=4;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=5;
 
 --
 -- AUTO_INCREMENT de la tabla `recetas`
 --
 ALTER TABLE `recetas`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=53;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=54;
 
 --
 -- AUTO_INCREMENT de la tabla `reservas`
 --
 ALTER TABLE `reservas`
-  MODIFY `id_reserva` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=33;
+  MODIFY `id_reserva` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=63;
 
 --
 -- AUTO_INCREMENT de la tabla `transacciones`
 --
 ALTER TABLE `transacciones`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=18;
 
 --
 -- AUTO_INCREMENT de la tabla `usuarios`
 --
 ALTER TABLE `usuarios`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=30;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=32;
 COMMIT;
 
 /*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;
