@@ -1,5 +1,12 @@
 ## Comando para iniciar como desarrollador
 
+### correr docker compose
+```
+docker compose down
+```
+```
+docker compose up
+```
 ### backend
 
 ```
