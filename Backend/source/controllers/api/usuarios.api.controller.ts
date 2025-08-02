@@ -62,7 +62,7 @@ export class usuariosAPIController {
       };
   
       const imagen = files?.imagen?.[0]?.filename;
-      const aptoMedico = files?.aptomedico?.[0]?.filename;
+      const aptoMedico = files?.aptoMedico?.[0]?.filename;
       console.log("Body:", req.body);
       console.log("Files:", req.files);
 

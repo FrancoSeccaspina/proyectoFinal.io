@@ -27,7 +27,7 @@ const EdicionUsuario = () => {
     const handleChange = (e) => {
       const { name, value, files } = e.target;
     
-      if (name === 'imagen' || name === 'aptomedico') {
+      if (name === 'imagen' || name === 'aptoMedico') {
         setUsuario(prev => ({
           ...prev,
           [name]: files[0]
@@ -54,7 +54,7 @@ const EdicionUsuario = () => {
     
       // Muy importante:
       if (usuario.aptoMedico instanceof File) {
-        formData.append('aptomedico', usuario.aptoMedico); // ⬅️ NOMBRE correcto
+        formData.append('aptoMedico', usuario.aptoMedico); 
       }
     
       if (usuario.imagen instanceof File) {
@@ -134,7 +134,7 @@ const EdicionUsuario = () => {
         <label>Apto Médico</label>
         <input 
           type="file" 
-          name="aptomedico"
+          name="aptoMedico"
           accept=".jpg,.jpeg,.png,.pdf"
           onChange={handleChange} 
         />

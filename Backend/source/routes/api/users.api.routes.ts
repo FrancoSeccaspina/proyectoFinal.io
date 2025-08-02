@@ -30,7 +30,7 @@ route.put('/usuarioEditar/:id',
   verificarTokenPorRol([Roles.ADMIN]), 
   upload.fields([
   { name: 'imagen', maxCount: 1 },
-  { name: 'aptomedico', maxCount: 1 }
+  { name: 'aptoMedico', maxCount: 1 }
   ]), (req, res) => {
     usuariosAPIController.update(req, res);
 });
