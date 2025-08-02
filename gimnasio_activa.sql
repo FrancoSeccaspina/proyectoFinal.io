@@ -3,9 +3,9 @@
 -- https://www.phpmyadmin.net/
 --
 -- Servidor: 127.0.0.1
--- Tiempo de generación: 01-08-2025 a las 02:19:42
+-- Tiempo de generación: 02-08-2025 a las 17:33:12
 -- Versión del servidor: 10.4.32-MariaDB
--- Versión de PHP: 8.0.30
+-- Versión de PHP: 8.2.12
 
 SET SQL_MODE = "NO_AUTO_VALUE_ON_ZERO";
 START TRANSACTION;
@@ -337,6 +337,34 @@ CREATE TABLE `empleados` (
 INSERT INTO `empleados` (`id`, `nombre`, `apellido`, `celular`, `actividad`) VALUES
 (1, 'Frank', 'Buster', 1193868511, 'Kick Boxing'),
 (2, 'Keko', 'Landia', 1109730681, 'Funcional');
+
+-- --------------------------------------------------------
+
+--
+-- Estructura de tabla para la tabla `gestion_pago_proveedores`
+--
+
+CREATE TABLE `gestion_pago_proveedores` (
+  `id` int(11) NOT NULL,
+  `fecha` date NOT NULL,
+  `ingreso` double NOT NULL,
+  `egreso` double NOT NULL,
+  `sobrante` double NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
+
+--
+-- Volcado de datos para la tabla `gestion_pago_proveedores`
+--
+
+INSERT INTO `gestion_pago_proveedores` (`id`, `fecha`, `ingreso`, `egreso`, `sobrante`) VALUES
+(1, '2025-07-31', 4000, 3000, 1000),
+(2, '2025-08-01', 1, 2, 5),
+(3, '2025-08-01', 1, 2, 5),
+(4, '2025-08-01', 1, 2, -1),
+(5, '2025-08-01', 1000, 2, 998),
+(6, '2025-08-01', 20, 10, 10),
+(7, '2025-08-01', 3, 2, 1),
+(8, '2025-08-01', 6, 5, 1);
 
 -- --------------------------------------------------------
 
@@ -680,6 +708,12 @@ ALTER TABLE `empleados`
   ADD PRIMARY KEY (`id`);
 
 --
+-- Indices de la tabla `gestion_pago_proveedores`
+--
+ALTER TABLE `gestion_pago_proveedores`
+  ADD PRIMARY KEY (`id`);
+
+--
 -- Indices de la tabla `grupos_musculares`
 --
 ALTER TABLE `grupos_musculares`
@@ -782,6 +816,12 @@ ALTER TABLE `ejercicios`
 --
 ALTER TABLE `empleados`
   MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=4;
+
+--
+-- AUTO_INCREMENT de la tabla `gestion_pago_proveedores`
+--
+ALTER TABLE `gestion_pago_proveedores`
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=9;
 
 --
 -- AUTO_INCREMENT de la tabla `grupos_musculares`

@@ -39,6 +39,7 @@ import precioCuotaApiController from './routes/api/precioCuota.api.routes';
 import transaccionesApiController from './routes/api/transacciones.api.routes';
 import membresiaApiController from './routes/api/membresia.api.routes';
 import empleadosApiController from './routes/api/empleados.api.routes';
+import gestionPagoProveedoresApiController from './routes/api/gestion_pago_proveedores.routes';
 
 import dotenv from 'dotenv';
 dotenv.config();
@@ -119,7 +120,8 @@ app.use('/api',
     precioCuotaApiController,
     transaccionesApiController,
     membresiaApiController,
-    empleadosApiController
+    empleadosApiController,
+    gestionPagoProveedoresApiController
 );
 
 app.use('/uploads/aptoMedico', express.static(path.join(__dirname, '..', 'uploads', 'aptoMedico')));
