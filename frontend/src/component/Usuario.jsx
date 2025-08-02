@@ -17,13 +17,17 @@ const Usuarios = () => {
       console.error('Error al obtener usuarios:', error);
     }
   };
-
-  
+   // Función de búsqueda
+   const searcher = (e) => {
+    setSearch(e.target.value);
+  };
   const resultado = !search
-    ? usuarios
-    : usuarios.filter((usuario) =>
-        usuario.dni?.toString().toLowerCase().includes(search.toLowerCase())
-      );
+  ? usuarios
+  : usuarios.filter((usuario) =>
+      usuario.rol.toLowerCase().includes(search.toLowerCase()) ||
+      usuario.dni.toString().includes(search) ||
+      usuario.apellido.toLowerCase().includes(search.toLowerCase())
+    );
 
   useEffect(() => {
     showData();
@@ -52,8 +56,9 @@ const Usuarios = () => {
       </section>
       <input
         value={search}
+        onChange={searcher}
         type="text"
-        placeholder="Buscar por DNI"
+        placeholder="Buscar por Rol o DNI o Apellido"
         className="form-control mt-2 mb-3"
       />
 
