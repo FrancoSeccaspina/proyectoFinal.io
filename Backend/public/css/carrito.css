@@ -13,12 +13,7 @@ main {
   display: flex;
   flex-direction: column;
   align-items: flex-start;
-  color: #4a5568;
-}
-
-.header-cart h1,
-.header-cart p {
-  color: #4a5568;
+  color: white;
 }
 
 .header-cart h1 {
@@ -62,7 +57,7 @@ main {
 .terms-products svg {
   width: 2rem;
   height: 2rem;
-  fill: #2d3748; /* gris oscuro */
+  fill: white; /* tachito blanco */
   transition: fill 0.3s ease;
 }
 
@@ -140,7 +135,7 @@ main {
   margin: 1rem auto;
   width: 70%;
   border-radius: 0.5rem;
-  background-color: white;
+  /*background-color: white;*/
 }
 
 .pay-sentence {
@@ -253,6 +248,7 @@ main {
   display: inline;
   margin: 0;
   font-size: 1.1rem;
+  color: white;
 }
 
 .cart-actions {
@@ -339,13 +335,7 @@ main {
   padding: 2rem;
 }
 
-.mainLienzo {
-  background: url('/images/Lienzo01vero.jpeg') center top repeat-y;
-  background-size: 100% auto;
-  background-attachment: fixed;
-  overflow: hidden;
-  box-shadow: 0px 4px 12px rgba(0, 0, 0, 0.12);
-}
+
 
 .btn-confirmar-reserva {
   background-color: rgba(255, 255, 255, 0.12);
@@ -539,4 +529,38 @@ main {
   .mainLienzo {
     background-size: cover;
   }
+}
+.mainCarrito {
+  background: url('/images/Lienzo01vero.jpeg') center top repeat-y;
+  background-size: 100% auto;
+  background-attachment: fixed;
+  padding: 1rem;
+}
+.mainLienzo {
+  background: url('/images/Lienzo01vero.jpeg') center top repeat-y;
+  background-size: 100% auto;
+  background-attachment: fixed;
+  overflow: hidden;
+  box-shadow: 0px 4px 12px rgba(0, 0, 0, 0.12);
+}
+.cart-card {
+  background-color: rgba(255, 255, 255, 0.15); /* blanco translúcido */
+  border: 1px solid white;
+  border-radius: 10px;
+  padding: 2rem;
+  backdrop-filter: blur(5px);
+  -webkit-backdrop-filter: blur(5px);
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+}
+.cart-card,
+.cart-card h1,
+.cart-card h2,
+.cart-card h3,
+.cart-card h4,
+.cart-card p,
+.cart-card li,
+.cart-card span,
+.cart-card label,
+.cart-card a {
+  color: white;
 }

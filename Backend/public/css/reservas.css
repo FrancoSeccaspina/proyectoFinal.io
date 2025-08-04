@@ -1,10 +1,4 @@
-.main-reservas {
-  display: flex;
-  flex-direction: column;
-  background-color: #e2e8f0;
-  margin: 1rem 0;
-  padding: 2rem 0;
-}
+
 
 .contenedor-compras {
   display: flex;
@@ -49,7 +43,7 @@
 .mensaje-warining-reservas {
   display: flex;
   gap: 1rem;
-  color: black;
+  color: white;
   font-family: Arial, sans-serif;
   padding: 0 2rem;
 }

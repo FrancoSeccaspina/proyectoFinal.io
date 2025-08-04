@@ -12,8 +12,7 @@ body {
   justify-content: center;
   align-items: center;
   min-height: 100vh;
-  margin-top: 1rem;
-  margin-bottom: 1rem;
+  margin: 0;
   background-image: url("/images/Lienzo01vero.jpeg");
   background-size: 100% auto;
   background-repeat: repeat-y;

@@ -18,17 +18,12 @@ main {
    REUTILIZABLES: Fondo tipo lienzo
 ------------------------------------------ */
 .mainLienzo {
-    margin-top: 1rem;
-    margin-bottom: 1rem;
-    padding: 1rem;
-    background-image: url('/images/Lienzo01vero.jpeg');
-    background-size: cover;
-    background-repeat: no-repeat;
-    background-position: center;
-    background-attachment: fixed;
-    border-radius: 8px;
-    overflow: hidden;
-    box-shadow: 0px 4px 12px rgba(0, 0, 0, 0.12);
+  background: url('/images/Lienzo01vero.jpeg') center top repeat-y;
+  background-size: 100% auto;
+  background-attachment: fixed;
+  padding: 1rem;
+  overflow: hidden;
+  box-shadow: 0px 4px 12px rgba(0, 0, 0, 0.12);
 }
 
 /* -----------------------------------------
@@ -166,13 +161,15 @@ main {
   width: 100%;
   text-align: center !important;
 }
+/*
 .bodyHome {
-  /* fondo blco al body */
+  ..fondo blco al body
   background-color: white !important;
-  /* margenes sup e inf */
+  ..margenes sup e inf
   margin-top: 1rem;
   margin-bottom: 1rem;
 }
 html {
   background-color: white !important;
 }
+*/
