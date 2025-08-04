@@ -105,8 +105,8 @@ export class usuariosAPIController {
     try {
       const { id } = req.params;
       const usuario = await Usuario.findOne({ where: { id } });
-
-      if (!usuario) {
+      const auth = await Autenticacion.findOne({ where: { id_usuario: id } });
+      if (!usuario || !auth) {
         return res.status(404).json({
           success: false,
           message: "Usuario no encontrado"
@@ -114,6 +114,7 @@ export class usuariosAPIController {
       }
 
       await usuario.destroy();
+      await auth.destroy();
 
       return res.status(200).json({
         success: true,
