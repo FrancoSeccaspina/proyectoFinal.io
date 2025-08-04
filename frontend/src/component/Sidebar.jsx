@@ -35,6 +35,7 @@ function Sidebar() {
         <nav id='menu' className='header-a'>
           <Link to="/">Home</Link>
           <Link to="/Usuarios">Usuarios</Link>
+          <Link to="/Empleados">Empleados</Link>
           <Link to="/PrecioCuota">Precio Cuota</Link>
           <Link to="/Productos">Productos</Link>
           <Link to="/Recetas">Recetas</Link>
