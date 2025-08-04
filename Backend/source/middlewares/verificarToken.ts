@@ -20,7 +20,15 @@ export const verificarTokenPorRol = (rolesPermitidos: string[]) => {
     const token = req.cookies?.token;
     if (!token) {
       console.warn(`Acceso denegado: Token no proporcionado. Ruta: ${req.originalUrl}.`);
-      res.status(401).json({ mensaje: 'No se ha proporcionado el token de autenticación.' });
+      res.clearCookie('token', {
+          httpOnly: true,
+          sameSite: 'strict'
+        });
+      res.status(401).render("login", {
+        mostrarModal: true,
+        modalTitle: "Sesion invalida o expirada",
+        modalMessage: "Tu sesion ya no es valida o el enlace ha vencido."
+      });
       return 
     }
 
