@@ -16,10 +16,13 @@
   <main class="mainCarrito" role="main">
     <div style="height: 100%;">
 
-      <div class="header-cart" aria-labelledby="cart-title">
-  
-        <h1 class="cart-title">Carrito <p class="details-p">(<span aria-live="polite"><%= productosCarrito.resultados.cantidadDeProductos %></span> productos)</p>
-        </h1>
+    <div class="header-cart" aria-labelledby="cart-title">
+
+      <h4 id="cart-title" class="titulo-carrito-unificado">
+        Carrito
+        <span class="details-p">(<%= productosCarrito.resultados.cantidadDeProductos %> productos agregados)</span>
+      </h4>
+      <div class="subrayado-blanco"></div>
   
         <div class="warning-sentence" role="alert">
           <img src="/images/exclamation.png" alt="Icono de exclamación">

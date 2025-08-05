@@ -4,7 +4,7 @@ body {
   background-color: transparent;
   color: white;
 }
-
+/*
 .mainProductos {
   padding: 1rem;
   background-image: url('/images/Lienzo01vero.jpeg');
@@ -15,7 +15,7 @@ body {
   overflow: hidden;
   box-shadow: 0px 4px 12px rgba(0, 0, 0, 0.12);
 }
-
+*/
 .container-allMain {
   width: 100%;
   display: flex;

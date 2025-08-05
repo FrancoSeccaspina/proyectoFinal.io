@@ -60,11 +60,11 @@ main {
   fill: white; /* tachito blanco */
   transition: fill 0.3s ease;
 }
-
+/*
 .cart-remove-button:hover {
   color: #dc2626;
 }
-
+*/
 .cart-remove-button:hover svg {
   fill: #dc2626;
 }
@@ -194,12 +194,12 @@ main {
   text-align: center;
   color: #4a5568;
 }
-
+/*
 .cart-title {
   font-size: 1.25rem;
   font-weight: bold;
 }
-
+*/
 .cart-list {
   margin-top: 2rem;
 }

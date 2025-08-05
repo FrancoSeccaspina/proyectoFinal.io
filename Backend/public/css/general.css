@@ -15,7 +15,8 @@ main {
 
 /* reutilizable */
 /* -----------------------------------------
-   REUTILIZABLES: Fondo tipo lienzo
+REUTILIZABLES: Fondo tipo lienzo
+.mainLienzo ya no se usa, se elimina al finalizar limpieza de vistas
 ------------------------------------------ */
 .mainLienzo {
   background: url('/images/Lienzo01vero.jpeg') center top repeat-y;
@@ -52,7 +53,18 @@ main {
   text-align: center;
   margin-bottom: 0.5rem;
 }
-
+/*
+.titulo h2 {
+  padding-top: 0.5rem;
+  font-size: 22px;
+  color: white;
+  text-align: center;
+  border-bottom: 1px solid white;
+  padding-bottom: 0.5rem;
+  width: 90%;
+  margin: 0 auto 1rem auto;
+}
+*/
 /* -----------------------------------------
    REUTILIZABLES: Botón primario
 ------------------------------------------ */
@@ -92,7 +104,12 @@ main {
     margin-top: 1rem;
     transition: background-color 0.3s ease;
 }
-
+.consultar {
+    display: flex;
+    justify-content: center;
+    margin-top: 2rem;
+    margin-bottom: 2rem;
+}
 .consultar a:hover {
     background-color: rgba(255, 255, 255, 0.3);
 }
@@ -173,3 +190,12 @@ html {
   background-color: white !important;
 }
 */
+body {
+  background-image: url('/images/Lienzo01vero.jpeg');
+  background-repeat: repeat-y;
+  background-size: 100% auto;
+  background-position: center top;
+  background-attachment: fixed;
+  margin: 0;
+  padding: 0;
+}
