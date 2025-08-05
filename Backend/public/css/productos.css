@@ -4,18 +4,6 @@ body {
   background-color: transparent;
   color: white;
 }
-/*
-.mainProductos {
-  padding: 1rem;
-  background-image: url('/images/Lienzo01vero.jpeg');
-  background-size: 100% auto;
-  background-repeat: repeat-y;
-  background-position: center top;
-  background-attachment: fixed;
-  overflow: hidden;
-  box-shadow: 0px 4px 12px rgba(0, 0, 0, 0.12);
-}
-*/
 .container-allMain {
   width: 100%;
   display: flex;
