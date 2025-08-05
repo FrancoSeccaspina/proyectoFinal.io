@@ -8,7 +8,7 @@
 
 </head>
 
-<body>
+<body class="body-style">
 <%- include('./partials/header.ejs') %>
 
 <main class="mainProductDetail">
@@ -54,10 +54,16 @@
 
             <label for="cantidad-producto" class="visually-hidden">Cantidad a comprar</label>
             <input type="number" name="cantidad" id="cantidad-producto" min="1" max="<%= producto.stock %>" value="1" required aria-describedby="stock-info">
-            <button type="submit" class="crear">
-                Comprar
-                <i class="fa-solid fa-cart-shopping" aria-hidden="true"></i>
-                </button>
+                
+                <% if(producto.stock != 0) {%>
+                    <button type="submit" class="crear"> Comprar
+                        <i class="fa-solid fa-cart-shopping" aria-hidden="true"></i>
+                    </button>
+                <% } else {%>
+                    <button class="crear"> Sin stock
+                        <i class="fa-solid fa-cart-shopping" aria-hidden="true"></i>
+                    </button>              
+                <% }%>
             </form>
         </div>
         </section>

@@ -316,6 +316,7 @@ main {
 
 .flex-container {
   display: flex;
+  gap: 1rem;
 }
 
 .item1,

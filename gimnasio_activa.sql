@@ -3,9 +3,9 @@
 -- https://www.phpmyadmin.net/
 --
 -- Servidor: 127.0.0.1
--- Tiempo de generación: 02-08-2025 a las 17:33:12
+-- Tiempo de generación: 06-08-2025 a las 00:14:53
 -- Versión del servidor: 10.4.32-MariaDB
--- Versión de PHP: 8.2.12
+-- Versión de PHP: 8.0.30
 
 SET SQL_MODE = "NO_AUTO_VALUE_ON_ZERO";
 START TRANSACTION;
@@ -42,7 +42,8 @@ INSERT INTO `autenticacion` (`id`, `email`, `contrasenia`, `id_usuario`) VALUES
 (1, 'admin@activafitness.com', '$2b$10$RCIHIHvb6asptQgSa.Yc.eTaj1N.VlCWFsNnsoPxuY.bELwO95QsG', 1),
 (19, 'francolector@gmail.com', '$2b$08$77S9p1bhG/zNyBc71teU6eFnTVRrk3ysEb6mj8eSqBDKDFV3qijca', 28),
 (20, 'lufrancolu@gmail.com', '$2b$08$59.4M2LJQWTz6lEzFq4jHezyLnHumzitUXhTGg5ei31A9qWVLgSv6', 29),
-(22, 'gustavo.jimenez.crespo@gmail.com', '$2b$08$o9POXNlcYJAiggiTSXAxjeKjRkrJE8UHuUXkF/z7ItG9TDmt1K6Uy', 31);
+(22, 'gustavo.jimenez.crespo@gmail.com', '$2b$08$o9POXNlcYJAiggiTSXAxjeKjRkrJE8UHuUXkF/z7ItG9TDmt1K6Uy', 31),
+(23, 'verinicagirardi9@gmail.com', '$2b$08$inW.F7IL2xIKnR2cqva4x.JxE1NMu15DH8vDw1BmagXnjWrJKAGUm', 32);
 
 -- --------------------------------------------------------
 
@@ -172,7 +173,9 @@ INSERT INTO `detalle_reservas` (`id_detalle_reserva`, `id_producto`, `cantidad`,
 (59, 12, 1, 60, 20000),
 (60, 15, 1, 60, 1),
 (61, 9, 1, 61, 45000),
-(62, 15, 1, 62, 1);
+(62, 15, 1, 62, 1),
+(63, 9, 1, 63, 45000),
+(64, 10, 1, 63, 35000);
 
 -- --------------------------------------------------------
 
@@ -310,9 +313,6 @@ INSERT INTO `ejercicios` (`id`, `nombre`, `descripcion`, `grupo_muscular_id`, `v
 (127, 'Sillon Cuadriceps', 'Siéntate en la máquina y ajusta el respaldo para que tus rodillas estén alineadas con el eje de rotación de la máquina. Ajusta la almohadilla inferior de manera que quede justo por encima de tus tobillos. Asegura tus muslos debajo de la almohadilla superior (si la tiene) para evitar que se levanten durante el ejercicio. Tus rodillas deben estar flexionadas en un ángulo de aproximadamente 90 grados. Extiende tus piernas levantando la almohadilla inferior hasta que tus rodillas estén completamente extendidas (sin bloquearlas). Concéntrate en la contracción de los músculos de tus muslos. Baja la almohadilla lentamente y con control hasta la posición inicial, manteniendo la tensión en los músculos.\r\nMúsculos trabajados: Cuádriceps', 9, 'https://www.youtube.com/shorts/S50jrJDzO4M', 'Polea y Maquina', NULL),
 (128, 'Femoral Sentado En Maquina', 'Siéntate en la máquina y ajusta el respaldo de manera que tus rodillas estén alineadas con el eje de rotación de la máquina. Ajusta la almohadilla inferior de manera que quede justo por debajo de tus pantorrillas, cerca de tus tobillos.\r\nAsegura tus muslos contra la almohadilla superior (si la tiene). Tus piernas deben estar extendidas. Flexiona tus rodillas, llevando tus talones hacia tus glúteos. Mantén la parte superior de tu cuerpo quieta y concéntrate en la contracción de los músculos de la parte posterior de tus muslos. Regresa lentamente la almohadilla a la posición inicial, controlando el movimiento y resistiendo la tensión.\r\nMúsculos trabajados: Isquiotibiales', 9, 'https://www.youtube.com/shorts/oOE1vaDX71M', 'Polea y Maquina', NULL),
 (129, 'Sentadilla Smith En Maquina', 'Coloca la barra de la máquina Smith a una altura adecuada para que puedas colocarte debajo cómodamente. Carga el peso deseado en la barra. Colócate debajo de la barra, apoyándola en la parte superior de tus trapecios (parte superior de la espalda). Tus pies deben estar separados al ancho de los hombros o ligeramente más, colocados un poco hacia adelante con respecto a la barra (esto puede variar según la preferencia y la biomecánica individual). Desbloquea la barra girándola. Baja lentamente tu cuerpo flexionando las rodillas y las caderas, manteniendo la espalda recta y el pecho elevado. La barra se moverá en un plano vertical fijo. Intenta llevar tus muslos al menos paralelos al suelo. Empuja a través de tus talones para volver a la posición inicial, extendiendo completamente las rodillas y las caderas. Asegúrate de bloquear la barra al finalizar la serie.\r\nMúsculos trabajados: Cuádriceps y isquiotibiales.', 9, 'https://www.youtube.com/shorts/pyY96rjR-HI', 'Polea y Maquina', NULL),
-(133, 'Mate', 'Mate de madera', 1, '20', '20', NULL),
-(134, 'qwe', 'qwe', 1, 'qwe', 'qwe', NULL),
-(135, 'qqqqq', 'qqqqqq', 1, 'qqqqqq', 'qqqqqqq', NULL),
 (136, 'pepe ruti', 'pepe rutipepe ruti', 9, 'pepe rutipepe rutipepe rutipepe ruti', 'Polea y Maquina', NULL),
 (137, 'lucas', 'lucas', 8, 'lucaslucas', 'lucaslucas', NULL);
 
@@ -462,11 +462,11 @@ CREATE TABLE `productos` (
 
 INSERT INTO `productos` (`id`, `nombre`, `descripcion`, `precio`, `categoriaId`, `imagen`, `stock`) VALUES
 (8, 'Proteina whey', 'Post entrenamiento: Ideal para recuperación muscular. Consumir dentro de los 30-60 minutos después de entrenar.Desayuno o entre comidas: Si necesitás aumentar tu ingesta de proteínas diarias.Antes de dormir: En el caso de caseína (de absorción lenta), ayuda a evitar el catabolismo nocturno. Mezclar 1 scoop (medida del envase, aprox. 25-30g de proteína) en: 250-300 ml de agua, leche o bebida vegetal.Podés usar una licuadora o shaker. Si querés sumar calorías, podés agregar banana, avena, mantequi', 4, 2, 'proteinaTruemade.jpg', 0),
-(9, 'Proteina Platinum Frutilla', 'Post entrenamiento: Ideal para recuperación muscular. Consumir dentro de los 30-60 minutos después de entrenar.Desayuno o entre comidas: Si necesitás aumentar tu ingesta de proteínas diarias.Antes de dormir: En el caso de caseína (de absorción lenta), ayuda a evitar el catabolismo nocturno. Mezclar 1 scoop (medida del envase, aprox. 25-30g de proteína) en: 250-300 ml de agua, leche o bebida vegetal.Podés usar una licuadora o shaker. Si querés sumar calorías, podés agregar banana, avena, mantequi', 45000, 2, 'Wheyproteina_Frutilla.jpg', 110),
-(10, 'Creatina ENA', '5 gramos por día, todos los días, a la misma hora (preferiblemente con una comida o postentreno).No hace falta cargar(es decir, tomar grandes dosis al principio). Pero si querés acelerar la saturación muscular, podés ver más abajo la fase de carga. Cuándo tomarla Postentreno (después de entrenar) es ideal, ya que el cuerpo absorbe mejor nutrientes después del ejercicio. También podés tomarla en cualquier momento del día si no entrenás.Con qué tomarla con agua, jugo o un batido postentreno. Si la', 35000, 1, 'creatinaEna.jpg', 95),
+(9, 'Proteina Platinum Frutilla', 'Post entrenamiento: Ideal para recuperación muscular. Consumir dentro de los 30-60 minutos después de entrenar.Desayuno o entre comidas: Si necesitás aumentar tu ingesta de proteínas diarias.Antes de dormir: En el caso de caseína (de absorción lenta), ayuda a evitar el catabolismo nocturno. Mezclar 1 scoop (medida del envase, aprox. 25-30g de proteína) en: 250-300 ml de agua, leche o bebida vegetal.Podés usar una licuadora o shaker. Si querés sumar calorías, podés agregar banana, avena, mantequi', 45000, 2, 'Wheyproteina_Frutilla.jpg', 109),
+(10, 'Creatina ENA', '5 gramos por día, todos los días, a la misma hora (preferiblemente con una comida o postentreno).No hace falta cargar(es decir, tomar grandes dosis al principio). Pero si querés acelerar la saturación muscular, podés ver más abajo la fase de carga. Cuándo tomarla Postentreno (después de entrenar) es ideal, ya que el cuerpo absorbe mejor nutrientes después del ejercicio. También podés tomarla en cualquier momento del día si no entrenás.Con qué tomarla con agua, jugo o un batido postentreno. Si la', 35000, 1, 'creatinaEna.jpg', 94),
 (11, 'Poteina Bar Banana Split', 'Comerlas Post entrenamiento si no podés tomar batido. Colación entre comidas, especialmente si estás lejos de casa. Antes de entrenar, si no comiste nada.\r\nRecomendaciones:\r\nFijate en la cantidad de proteína por barra (ideal 15g o más). Revisá los ingredientes: algunas tienen mucho azúcar o grasa saturada.No las uses como reemplazo total de comidas, sino como complemento.', 40000, 3, 'EnaProteinBar_banansplit.jpg', 85),
 (12, 'IronBar Frutilla', 'Comerlas Post entrenamiento si no podés tomar batido. Colación entre comidas, especialmente si estás lejos de casa. Antes de entrenar, si no comiste nada.\r\nRecomendaciones:\r\nFijate en la cantidad de proteína por barra (ideal 15g o más). Revisá los ingredientes: algunas tienen mucho azúcar o grasa saturada.No las uses como reemplazo total de comidas, sino como complemento.', 20000, 3, 'Ironbar_frutilla.jpg', 98),
-(15, 'Proteina Truemade Vainilla', 'editado', 1, 1, 'Ironbar_frutilla.jpg', 3);
+(15, 'Proteina Truemade Vainilla', 'Protein Bar - Suplemento En Barra Proteica - Ena Caja X16u Sabor Coco Y Dulce De Leche', 1, 1, '1754431010202-103237440.png', 3);
 
 -- --------------------------------------------------------
 
@@ -589,7 +589,8 @@ INSERT INTO `reservas` (`id_reserva`, `id_usuario`, `fecha`, `total`, `estado`, 
 (55, 31, '2025-07-29 21:23:25', 45000, 'expirado', '2025-07-29 21:53:25'),
 (56, 31, '2025-07-29 21:29:51', 35000, 'expirado', '2025-07-29 21:59:51'),
 (57, 31, '2025-07-29 21:31:39', 35000, 'cancelado', '2025-07-29 22:01:39'),
-(58, 31, '2025-07-29 22:02:49', 20000, 'expirado', '2025-07-29 22:32:49');
+(58, 31, '2025-07-29 22:02:49', 20000, 'expirado', '2025-07-29 22:32:49'),
+(63, 1, '2025-08-05 21:53:52', 80000, 'pendiente', '2025-08-05 22:23:52');
 
 -- --------------------------------------------------------
 
@@ -656,7 +657,8 @@ INSERT INTO `usuarios` (`id`, `apellido`, `nombre`, `rol`, `imagen`, `id_membres
 (1, 'admin', 'admin', 'admin', 'perfil.jpg', 1, '2025-04-09', '1193868511', 'xd', 12345678),
 (28, 'Buster', 'Frank', 'jubilado', NULL, 1, '2001-05-03', '1165830511', 'asdasd', 44323448),
 (29, 'Aguirree', 'Lucass', 'socio', 'imagen_usuario_29.jpg', 1, '2001-05-04', '1165830512', 'aptomedico_usuario_29.pdf', 43245022),
-(31, 'Jimenez', 'Gustavo', 'cliente', 'perfil.jpg', 1, '2025-07-20', '1122222222', NULL, 39393939);
+(31, 'Jimenez', 'Gustavo', 'cliente', 'perfil.jpg', 1, '2025-07-20', '1122222222', NULL, 39393939),
+(32, 'Girardi', 'Veronica', 'cliente', 'perfil.jpg', 1, '9999-09-09', '1122222222', NULL, 99999999);
 
 --
 -- Índices para tablas volcadas
@@ -779,7 +781,7 @@ ALTER TABLE `usuarios`
 -- AUTO_INCREMENT de la tabla `autenticacion`
 --
 ALTER TABLE `autenticacion`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=23;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=24;
 
 --
 -- AUTO_INCREMENT de la tabla `categorias`
@@ -803,13 +805,13 @@ ALTER TABLE `cuota`
 -- AUTO_INCREMENT de la tabla `detalle_reservas`
 --
 ALTER TABLE `detalle_reservas`
-  MODIFY `id_detalle_reserva` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=63;
+  MODIFY `id_detalle_reserva` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=65;
 
 --
 -- AUTO_INCREMENT de la tabla `ejercicios`
 --
 ALTER TABLE `ejercicios`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=139;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=140;
 
 --
 -- AUTO_INCREMENT de la tabla `empleados`
@@ -863,7 +865,7 @@ ALTER TABLE `recetas`
 -- AUTO_INCREMENT de la tabla `reservas`
 --
 ALTER TABLE `reservas`
-  MODIFY `id_reserva` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=63;
+  MODIFY `id_reserva` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=64;
 
 --
 -- AUTO_INCREMENT de la tabla `transacciones`
@@ -875,7 +877,7 @@ ALTER TABLE `transacciones`
 -- AUTO_INCREMENT de la tabla `usuarios`
 --
 ALTER TABLE `usuarios`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=32;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=33;
 COMMIT;
 
 /*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;

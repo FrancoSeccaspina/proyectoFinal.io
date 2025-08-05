@@ -44,5 +44,19 @@ services:
     depends_on:
       - activa-db-image
 
+  # activa-ngnix:
+  #   build:
+  #     context: .
+  #     dockerfile: Dockerfile.nginx
+  #   container_name: activa-nginx-container
+  #   restart: always
+  #   ports:
+  #     - "80:80"
+  #     # - "443:443"
+  #   volumes:
+  #     - ./nginx/conf.d:/etc/nginx/conf.d
+  #     - ./nginx/cert:/etc/letsencrypt
+  #     - ./nginx/logs:/var/log/nginx
+
 volumes:
   activa-db-data:

@@ -34,7 +34,12 @@
             </a>
 
             <div class="card-body">
-                <span class="tipo-envio">En stock</span>
+                <% if(producto.stock != 0) {%>
+                    <span class="tipo-envio">En stock</span>
+                <% } else {%>
+                    <span class="tipo-envio">Sin stock</span>                
+                <% }%>
+
                 <div class="container-prices">
                     <span class="precio-ahora">
                       $<%=(producto.precio) %>
@@ -45,8 +50,9 @@
             </div>
 
             <div class="boton">
-              <a href="/productos/<%= producto.id %>" class="btn-primary">Ver más</a>
+                <a href="/productos/<%= producto.id %>" class="btn-primary">Ver más</a>
             </div>
+                
         </article>
         </li>
         <% }); %>

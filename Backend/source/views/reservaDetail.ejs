@@ -41,13 +41,16 @@
           </div>
           
           <ul class="ul-reserva-detail">
+            <li class="compra">
+
+              <p><strong>La reserva vence en:</strong> <span class="cuenta-regresiva" data-vencimiento="<%= reserva.vencimiento %>"></span></p>
+              <p><strong>Estado:</strong> <span id="estado-reserva"><%= reserva.estado ? reserva.estado : 'No disponible' %></span></p>
+              <p><strong>Fecha de Reserva:</strong> <%= reserva.fecha ? (reserva.fecha.toLocaleString ? reserva.fecha.toLocaleString() : reserva.fecha) : 'No disponible' %></p>
+            </li>
             <% detalleReserva.forEach(function(detalle, index) { %>
             <li class="compra" aria-labelledby="producto-nombre-<%= index %>">
               <% if ( reserva.estado && reserva.estado == 'pendiente'){ %>
-              <p><strong>La reserva vence en:</strong> <span class="cuenta-regresiva" data-vencimiento="<%= reserva.vencimiento %>"></span></p>
               <% } %>
-              <p><strong>Estado:</strong> <span id="estado-reserva"><%= reserva.estado ? reserva.estado : 'No disponible' %></span></p>
-              <p><strong>Fecha de Reserva:</strong> <%= reserva.fecha ? (reserva.fecha.toLocaleString ? reserva.fecha.toLocaleString() : reserva.fecha) : 'No disponible' %></p>
               <p><strong>Producto:</strong> <span id="producto-nombre-<%= index %>"><%= detalle.Producto ? detalle.Producto.nombre : 'No disponible' %></span></p>
               <p><strong>Cantidad:</strong> <%= detalle.cantidad ? detalle.cantidad : 'No disponible' %></p>
               <p><strong>Precio Unitario:</strong> $<%= detalle.Producto && detalle.Producto.precio ? detalle.Producto.precio : 'No disponible' %></p>
