@@ -211,7 +211,7 @@ export class UsuarioController {
 
       // Token JWT
       // https://www.npmjs.com/package/cookie
-      const token = firmarToken({ id: usuario.id, nombre: usuario.nombre, rol: usuario.rol });
+      const token = firmarToken({ id: usuario.id, nombre: usuario.nombre, rol: usuario.rol }, "1h");
       res.cookie('token', token, {
         httpOnly: true,
         maxAge: 1 * 60 * 60 * 1000 // 1 hora
@@ -328,10 +328,9 @@ export class UsuarioController {
       const { token } = req.params;
       const { contrasenia } = req.body;
 
-      console.log("token :", token)
       const decodedUsuario = obtenerPayload(token);
-      console.log("decodedUsuario :", decodedUsuario)
       const usuario = await Autenticacion.findOne({ where: { id_usuario: decodedUsuario.id } });
+
       if (!usuario) {
         res.status(404).render("login", {
           mostrarModal: true,
@@ -381,7 +380,7 @@ export class UsuarioController {
         id: autenticacionUsuario.id_usuario,
         nombre: "",
         rol: "",
-      })
+      }, "5m")
 
       // Url que le va a llegar al usuario
       const resetUrl = `http://localhost:3032/users/change-password/${token}`;

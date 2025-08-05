@@ -7,8 +7,8 @@ interface UsuarioToken {
     rol: string;
 }
 
-export function firmarToken (usuario: UsuarioToken) {
-    const token = jwt.sign(usuario, JWT_SECRET, { expiresIn: "1h" });
+export function firmarToken (usuario: UsuarioToken, expiracion:string) {
+    const token = jwt.sign(usuario, JWT_SECRET, { expiresIn: expiracion });
     return token;
 }
 
