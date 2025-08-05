@@ -152,12 +152,3 @@ body {
   font-size: 22px; /* solo el título 'RECETAS' */
 }
 
-.subtitulo h3 {
-  color: white;
-  font-size: 30px; /* como en rutinas */
-}
-
-.subtitulo p {
-  color: white;
-  font-size: 16px; /* como en rutinas */
-}

@@ -4,28 +4,20 @@
   <%- include('./partials/head.ejs') %>
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Categorías de Recetas Saludables - [Nombre de tu Tienda]</title>
-  <link rel="stylesheet" href="/css/recetas.css">
   <link rel="stylesheet" href="/css/general.css">
+  <link rel="stylesheet" href="/css/recetas.css">
 </head>
 
 <body>
   <%- include('./partials/header.ejs') %>
 
-  <main class="mainRecetas" aria-labelledby="main-heading-recetas">
+  <main class="main-content" aria-labelledby="main-heading-recetas">
     <h1 id="main-heading-recetas" class="visually-hidden">Explorar Nuestras Categorías de Recetas Saludables</h1>
 
-    <div class="container-allMain">
-      <section id="recetas" aria-labelledby="recetas-title">
-        <div class="titulo">
-          <h2 id="recetas-title">Recetas</h2>
-        </div>
-      </section>
-
-      <section class="recetas_subidas" aria-labelledby="ideas-title">
-        <div class="subtitulo">
-          <h3 id="ideas-title">Ideas para cocinar</h3>
-          <p>Te brindamos algunas recetas útiles para tu alimentación.</p>
-        </div>
+    <section class="titulo" aria-labelledby="section-title-recetas">
+      <h3 id="section-title-recetas">Recetas</h3>
+      <p>Ideas para cocinar</p>
+      <p>Te brindamos algunas recetas útiles para tu alimentación.</p>
 
         <ul class="moverlo" role="list" aria-label="Categorías de recetas">
           <% const recetas = [
@@ -51,14 +43,14 @@
           <% }) %>
         </ul>
 
-        <div class="consultar">
-          <a href="https://api.whatsapp.com/send?phone=5491166601356" target="_blank" rel="noopener noreferrer">
-            Consultar a tu asesor
-          </a>
-        </div>
-      </section>
-    </div>
-  </main>
+      <div class="consultar">
+        <a href="https://api.whatsapp.com/send?phone=5491166601356" target="_blank" rel="noopener noreferrer">
+          Consultar a tu asesor
+        </a>
+      </div>
+    </section>
+  </div>
+</main>
 
   <%- include('./partials/footer.ejs') %>
 </body>

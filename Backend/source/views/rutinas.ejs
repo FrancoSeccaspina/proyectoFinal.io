@@ -11,16 +11,14 @@
   <body>
     <%- include('./partials/header.ejs') %>
 
-    <main class="mainRutinas" aria-labelledby="main-heading-rutinas">
+    <main class="main-content" aria-labelledby="main-heading-rutinas">
       <h1 id="main-heading-rutinas" class="visually-hidden">Explora Rutinas de Entrenamiento por Grupo Muscular</h1>
 
-      <section id="rutina" aria-labelledby="section-title-rutinas">
-        <h2 id="section-title-rutinas">Rutinas</h2>
+      <section class="titulo" aria-labelledby="section-title-rutinas">
+        <h3 id="section-title-rutinas">Rutinas</h3>
+        <p>¿Querés ideas para tu entrenamiento?</p>
+        <p>Guía para cada grupo muscular</p>
       </section>
-
-      <section class="rutinas_subidas titulo" aria-labelledby="rutinas-subidas-title">
-      <h3 id="rutinas-subidas-title">¿Querés ideas para tu entrenamiento?</h3>
-      <p>Guía para cada grupo muscular</p>
 
         <section class="moverlo" role="grid" aria-label="Tarjetas de ejercicios por grupo muscular">
           <% const grupos = [
@@ -53,7 +51,6 @@
             <span class="visually-hidden">Abrir chat de WhatsApp para </span>Consultar a un asesor
           </a>
         </div>
-      </section>
     </main>
 
     <%- include('./partials/footer.ejs') %>
