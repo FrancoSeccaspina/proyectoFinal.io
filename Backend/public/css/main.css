@@ -164,11 +164,3 @@ main {
 html[dir="rtl"] .texto_redireccion-icon {
   transform: rotate(180deg);
 }
-/* estacios sup e inf: 
-header {
-  margin-bottom: 1rem;
-}
-footer {
-  margin-top: 1rem;
-}
-*/
