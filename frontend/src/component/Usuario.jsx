@@ -69,6 +69,7 @@ const Usuarios = () => {
             <th>Apellido</th>
             <th>Celular</th>
             <th>DNI</th>
+            <th>Rol</th>
             <th>Apto Médico</th>
             <th>Acciones</th>
           </tr>
@@ -80,6 +81,7 @@ const Usuarios = () => {
               <td>{usuario.apellido}</td>
               <td>{usuario.celular}</td>
               <td>{usuario.dni}</td>
+              <td>{usuario.rol}</td>
               <td>{usuario.aptoMedico}</td>
               <td>
                 <div className="acciones-botones">
