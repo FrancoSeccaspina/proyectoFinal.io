@@ -7,8 +7,7 @@
     <link rel="stylesheet" href="/css/general.css">
     <link rel="stylesheet" href="/css/productos.css">
 </head>
-
-<body>
+<body class="body-style">
 <%- include('./partials/header.ejs') %>
 
 <main class="main-content" aria-labelledby="products-main-heading">
@@ -19,6 +18,12 @@
     <div class="subrayado-blanco"></div>
     <p>¿Querés conocer lo mejor en suplementación?</p>
     <p>Elegí el que se adapta a tus necesidades</p>
+    <div class="search-box search-wrapper" role="search">
+        <label for="search-input" class="visually-hidden">Buscar en el sitio</label>
+        <input type="text" placeholder="Buscar" id="search-input">
+        <i class="fas fa-search search-icon" aria-hidden="true"></i>
+    </div>
+
 </section>
 
     <div class="container-allMain">

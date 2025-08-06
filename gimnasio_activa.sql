@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Servidor: 127.0.0.1
--- Tiempo de generación: 06-08-2025 a las 00:14:53
+-- Tiempo de generación: 06-08-2025 a las 02:07:34
 -- Versión del servidor: 10.4.32-MariaDB
 -- Versión de PHP: 8.0.30
 
@@ -43,7 +43,7 @@ INSERT INTO `autenticacion` (`id`, `email`, `contrasenia`, `id_usuario`) VALUES
 (19, 'francolector@gmail.com', '$2b$08$77S9p1bhG/zNyBc71teU6eFnTVRrk3ysEb6mj8eSqBDKDFV3qijca', 28),
 (20, 'lufrancolu@gmail.com', '$2b$08$59.4M2LJQWTz6lEzFq4jHezyLnHumzitUXhTGg5ei31A9qWVLgSv6', 29),
 (22, 'gustavo.jimenez.crespo@gmail.com', '$2b$08$o9POXNlcYJAiggiTSXAxjeKjRkrJE8UHuUXkF/z7ItG9TDmt1K6Uy', 31),
-(23, 'verinicagirardi9@gmail.com', '$2b$08$inW.F7IL2xIKnR2cqva4x.JxE1NMu15DH8vDw1BmagXnjWrJKAGUm', 32);
+(23, 'veronicagirardi9@gmail.com', '$2b$08$inW.F7IL2xIKnR2cqva4x.JxE1NMu15DH8vDw1BmagXnjWrJKAGUm', 32);
 
 -- --------------------------------------------------------
 
@@ -462,8 +462,8 @@ CREATE TABLE `productos` (
 
 INSERT INTO `productos` (`id`, `nombre`, `descripcion`, `precio`, `categoriaId`, `imagen`, `stock`) VALUES
 (8, 'Proteina whey', 'Post entrenamiento: Ideal para recuperación muscular. Consumir dentro de los 30-60 minutos después de entrenar.Desayuno o entre comidas: Si necesitás aumentar tu ingesta de proteínas diarias.Antes de dormir: En el caso de caseína (de absorción lenta), ayuda a evitar el catabolismo nocturno. Mezclar 1 scoop (medida del envase, aprox. 25-30g de proteína) en: 250-300 ml de agua, leche o bebida vegetal.Podés usar una licuadora o shaker. Si querés sumar calorías, podés agregar banana, avena, mantequi', 4, 2, 'proteinaTruemade.jpg', 0),
-(9, 'Proteina Platinum Frutilla', 'Post entrenamiento: Ideal para recuperación muscular. Consumir dentro de los 30-60 minutos después de entrenar.Desayuno o entre comidas: Si necesitás aumentar tu ingesta de proteínas diarias.Antes de dormir: En el caso de caseína (de absorción lenta), ayuda a evitar el catabolismo nocturno. Mezclar 1 scoop (medida del envase, aprox. 25-30g de proteína) en: 250-300 ml de agua, leche o bebida vegetal.Podés usar una licuadora o shaker. Si querés sumar calorías, podés agregar banana, avena, mantequi', 45000, 2, 'Wheyproteina_Frutilla.jpg', 109),
-(10, 'Creatina ENA', '5 gramos por día, todos los días, a la misma hora (preferiblemente con una comida o postentreno).No hace falta cargar(es decir, tomar grandes dosis al principio). Pero si querés acelerar la saturación muscular, podés ver más abajo la fase de carga. Cuándo tomarla Postentreno (después de entrenar) es ideal, ya que el cuerpo absorbe mejor nutrientes después del ejercicio. También podés tomarla en cualquier momento del día si no entrenás.Con qué tomarla con agua, jugo o un batido postentreno. Si la', 35000, 1, 'creatinaEna.jpg', 94),
+(9, 'Proteina Platinum Frutilla', 'Post entrenamiento: Ideal para recuperación muscular. Consumir dentro de los 30-60 minutos después de entrenar.Desayuno o entre comidas: Si necesitás aumentar tu ingesta de proteínas diarias.Antes de dormir: En el caso de caseína (de absorción lenta), ayuda a evitar el catabolismo nocturno. Mezclar 1 scoop (medida del envase, aprox. 25-30g de proteína) en: 250-300 ml de agua, leche o bebida vegetal.Podés usar una licuadora o shaker. Si querés sumar calorías, podés agregar banana, avena, mantequi', 45000, 2, 'Wheyproteina_Frutilla.jpg', 110),
+(10, 'Creatina ENA', '5 gramos por día, todos los días, a la misma hora (preferiblemente con una comida o postentreno).No hace falta cargar(es decir, tomar grandes dosis al principio). Pero si querés acelerar la saturación muscular, podés ver más abajo la fase de carga. Cuándo tomarla Postentreno (después de entrenar) es ideal, ya que el cuerpo absorbe mejor nutrientes después del ejercicio. También podés tomarla en cualquier momento del día si no entrenás.Con qué tomarla con agua, jugo o un batido postentreno. Si la', 35000, 1, 'creatinaEna.jpg', 95),
 (11, 'Poteina Bar Banana Split', 'Comerlas Post entrenamiento si no podés tomar batido. Colación entre comidas, especialmente si estás lejos de casa. Antes de entrenar, si no comiste nada.\r\nRecomendaciones:\r\nFijate en la cantidad de proteína por barra (ideal 15g o más). Revisá los ingredientes: algunas tienen mucho azúcar o grasa saturada.No las uses como reemplazo total de comidas, sino como complemento.', 40000, 3, 'EnaProteinBar_banansplit.jpg', 85),
 (12, 'IronBar Frutilla', 'Comerlas Post entrenamiento si no podés tomar batido. Colación entre comidas, especialmente si estás lejos de casa. Antes de entrenar, si no comiste nada.\r\nRecomendaciones:\r\nFijate en la cantidad de proteína por barra (ideal 15g o más). Revisá los ingredientes: algunas tienen mucho azúcar o grasa saturada.No las uses como reemplazo total de comidas, sino como complemento.', 20000, 3, 'Ironbar_frutilla.jpg', 98),
 (15, 'Proteina Truemade Vainilla', 'Protein Bar - Suplemento En Barra Proteica - Ena Caja X16u Sabor Coco Y Dulce De Leche', 1, 1, '1754431010202-103237440.png', 3);
@@ -590,7 +590,7 @@ INSERT INTO `reservas` (`id_reserva`, `id_usuario`, `fecha`, `total`, `estado`, 
 (56, 31, '2025-07-29 21:29:51', 35000, 'expirado', '2025-07-29 21:59:51'),
 (57, 31, '2025-07-29 21:31:39', 35000, 'cancelado', '2025-07-29 22:01:39'),
 (58, 31, '2025-07-29 22:02:49', 20000, 'expirado', '2025-07-29 22:32:49'),
-(63, 1, '2025-08-05 21:53:52', 80000, 'pendiente', '2025-08-05 22:23:52');
+(63, 1, '2025-08-05 21:53:52', 80000, 'expirado', '2025-08-05 22:23:52');
 
 -- --------------------------------------------------------
 
