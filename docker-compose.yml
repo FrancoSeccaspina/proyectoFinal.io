@@ -1,5 +1,5 @@
 services:
-  activa-db-image:
+  activa-db:
     image: mysql:8.0
     container_name: activa-db-container
     restart: always
@@ -14,7 +14,7 @@ services:
     ports:
       - "3307:3306"
 
-  activa-backend-image:
+  activa-backend:
     build:
       context: .
       dockerfile: Dockerfile.backend
@@ -30,9 +30,9 @@ services:
     ports:
       - "3032:3032"
     depends_on:
-      - activa-db-image
+      - activa-db
 
-  activa-frontend-image:
+  activa-frontend:
     build:
       context: .
       dockerfile: Dockerfile.frontend
@@ -42,21 +42,23 @@ services:
     ports:
       - "3000:3000"
     depends_on:
-      - activa-db-image
+      - activa-db
 
-  # activa-ngnix:
-  #   build:
-  #     context: .
-  #     dockerfile: Dockerfile.nginx
-  #   container_name: activa-nginx-container
-  #   restart: always
-  #   ports:
-  #     - "80:80"
-  #     # - "443:443"
-  #   volumes:
-  #     - ./nginx/conf.d:/etc/nginx/conf.d
-  #     - ./nginx/cert:/etc/letsencrypt
-  #     - ./nginx/logs:/var/log/nginx
+  activa-ngnix:
+    build:
+      context: .
+      dockerfile: Dockerfile.nginx
+    container_name: activa-nginx-container
+    restart: always
+    ports:
+      # puerto http 
+      - "80:80"
+      # puerto https
+      # - "443:443"
+    volumes:
+      - ./nginx/conf.d:/etc/nginx/conf.d
+      - ./nginx/cert:/etc/letsencrypt
+      - ./nginx/logs:/var/log/nginx
 
 volumes:
   activa-db-data:
