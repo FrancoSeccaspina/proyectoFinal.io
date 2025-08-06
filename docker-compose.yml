@@ -32,17 +32,17 @@ services:
     depends_on:
       - activa-db
 
-  activa-frontend:
-    build:
-      context: .
-      dockerfile: Dockerfile.frontend
-    container_name: activa-frontend-container
-    env_file: ./frontend/.env
-    restart: always
-    ports:
-      - "3000:3000"
-    depends_on:
-      - activa-db
+  # activa-frontend:
+  #   build:
+  #     context: .
+  #     dockerfile: Dockerfile.frontend
+  #   container_name: activa-frontend-container
+  #   env_file: ./frontend/.env
+  #   restart: always
+  #   ports:
+  #     - "3000:3000"
+  #   depends_on:
+  #     - activa-db
 
   activa-ngnix:
     build:
