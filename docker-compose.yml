@@ -60,6 +60,14 @@ services:
       - ./nginx/cert:/etc/letsencrypt
       - ./nginx/logs:/var/log/nginx
     
-
+  activa-flask:  
+    restart: always
+    build:
+      context: ./flask
+      dockerfile: Dockerfile
+    ports:
+      - "5000:5000"
+    container_name: activa-flask
+      
 volumes:
   activa-db-data:
