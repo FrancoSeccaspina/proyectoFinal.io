@@ -59,6 +59,7 @@ services:
       - ./nginx/conf.d:/etc/nginx/conf.d
       - ./nginx/cert:/etc/letsencrypt
       - ./nginx/logs:/var/log/nginx
+    
 
 volumes:
   activa-db-data:
