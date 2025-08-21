@@ -95,8 +95,7 @@ declare module "express-session" {
       fecha_nacimiento?: string;
       imagen?: string;
       aptoMedico?: string; // Este es el campo nuevo
-      fecha_fin_cuota?: string;         // ✅ Nuevo campo
-      estado_membresia?: string;        // ✅ Nuevo campo
+      fecha_fin_cuota?: string;         // ✅ Nuevo campo       // ✅ Nuevo campo
     };
   }
 }
@@ -143,7 +142,6 @@ export const SessionService = {
     imagen?: string;
     aptoMedico?: string;
     fecha_fin_cuota?: string;
-    estado_membresia?: string;  
   }) {
     req.session.usuario = {
       id: usuario.id,
@@ -162,7 +160,6 @@ export const SessionService = {
       imagen: usuario.imagen || "default.png",
       aptoMedico: usuario.aptoMedico, // <-- corregido
       fecha_fin_cuota: usuario.fecha_fin_cuota || undefined,
-      estado_membresia: usuario.estado_membresia || 'SIN DATOS'
     };
   },
 

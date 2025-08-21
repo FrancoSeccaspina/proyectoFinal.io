@@ -15,6 +15,7 @@ export class cuotasApiController {
         id_usuario,
         sobrante,
         faltante,
+        pagado,
       } = req.body;
 
       // Validación de campos obligatorios
@@ -25,6 +26,7 @@ export class cuotasApiController {
         !estado ||
         !id_usuario ||
         faltante === undefined ||
+        pagado === undefined ||
         sobrante === undefined
       ) {
         res.status(400).json({
@@ -34,15 +36,12 @@ export class cuotasApiController {
         return;
       }
 
-      // Lógica para fecha_fin y estado_membresia
       let fecha_fin: Date | null = null;
-      let estado_membresia = estado;
 
       if (estado === "PAGADA") {
         const fechaInicio = new Date(fecha);
         fecha_fin = new Date(fechaInicio);   
         fecha_fin.setMonth(fecha_fin.getMonth() + 1); 
-        estado_membresia = "ACTIVO"; 
       }
 
       const nuevaCuota = await Cuota.create({
@@ -54,7 +53,7 @@ export class cuotasApiController {
         faltante,
         sobrante,
         fecha_fin,
-        estado_membresia,
+        pagado,
       });
 
       res
@@ -122,6 +121,7 @@ export class cuotasApiController {
         estado,
         faltante,
         sobrante,
+        pagado,
       } = req.body;
 
       const cuota = await Cuota.findByPk(Number(id));
@@ -130,15 +130,11 @@ export class cuotasApiController {
         res.status(404).json({ message: 'Cuota no encontrada' });
         return;
       }
-
-      // Recalcular fecha_fin y estado_membresia si es pagada
       let fecha_fin: Date | null = cuota.fecha_fin;
-      let estado_membresia = cuota.estado_membresia;
 
       if (estado === "PAGADA") {
         const fechaInicio = new Date(fecha);
         fecha_fin = new Date(fechaInicio.getTime() + 30 * 24 * 60 * 60 * 1000);
-        estado_membresia = "ACTIVO";
       }
 
       await cuota.update({
@@ -149,7 +145,7 @@ export class cuotasApiController {
         faltante,
         sobrante,
         fecha_fin,
-        estado_membresia,
+        pagado,
       });
 
       res.status(200).json({ message: 'Cuota actualizada exitosamente', cuota });
@@ -200,7 +196,6 @@ export class cuotasApiController {
         sobrante = pagado - montoCalculado;
       }
       const fecha_fin = null;
-      const estado_membresia = 'PENDIENTE';
       const nuevaCuota = await Cuota.create({
         id_usuario,
         fecha,
@@ -210,7 +205,6 @@ export class cuotasApiController {
         faltante,
         sobrante,
         fecha_fin,
-        estado_membresia,
       });
 
       return res.status(201).json(nuevaCuota);

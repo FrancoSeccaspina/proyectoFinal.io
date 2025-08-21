@@ -17,6 +17,7 @@ import { initPrecio_CuotaModel, Precio_Cuota } from './precio_cuota';
 import { initTransaccionModel, Transaccion } from './transaccion';
 import { initEmpleadoModel, Empleado } from './empleados';
 import { initGestionPagoProveedoresModel, GestionPagoProveedores } from './gestion_pago_proveedores';
+import { initActividadModel, Actividad } from './Actividad';
 
 
 const inicializarDB = async (models: Record<string, any>) => {
@@ -42,7 +43,7 @@ const inicializarDB = async (models: Record<string, any>) => {
     initTransaccionModel(sequelize);
     initEmpleadoModel(sequelize);
     initGestionPagoProveedoresModel(sequelize);
-
+    initActividadModel(sequelize);
     console.log('Modelos inicializados')
     //Producto.associate({ DetalleReserva });
     //DetalleReserva.associate({ Producto, Reserva });
@@ -76,7 +77,8 @@ export const models = {
   Precio_Cuota,
   Transaccion,
   Empleado,
-  GestionPagoProveedores
+  GestionPagoProveedores,
+  Actividad
 };
 
 inicializarDB(models)

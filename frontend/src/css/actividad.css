@@ -1,0 +1,290 @@
+/* Actividad general */
+.actividad-container {
+  background-color: #000;
+  color: #fff;
+  min-height: 100vh;
+  padding: 1rem;
+  font-family: Arial, sans-serif;
+  box-sizing: border-box;
+  transition: background 0.3s ease;
+}
+
+.actividad-titulo {
+  font-size: clamp(1.2rem, 2.5vw, 2rem);
+  font-weight: bold;
+  margin-bottom: 1.5rem;
+  border-bottom: 1px solid #fff;
+  padding-bottom: 0.5rem;
+  text-align: center;
+  transition: color 0.3s ease;
+}
+
+.actividad-formulario {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.5rem;
+  margin-bottom: 1rem;
+}
+
+.actividad-formulario input {
+  border: 1px solid #fff;
+  background: #000;
+  color: #fff;
+  padding: 0.5rem;
+  flex: 1 1 200px;
+  border-radius: 5px;
+  font-size: clamp(0.8rem, 1vw, 1rem);
+  box-sizing: border-box;
+  transition: all 0.2s ease;
+}
+
+.actividad-formulario input:focus {
+  border-color: #1e90ff;
+  box-shadow: 0 0 8px #1e90ff;
+  outline: none;
+  background-color: #111;
+}
+
+.actividad-botones {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.5rem;
+  justify-content: center;
+  align-items: center;
+}
+
+.actividad-botones button {
+  background-color: #fff;
+  color: #000;
+  padding: 0.4rem 0.8rem;
+  border: none;
+  cursor: pointer;
+  transition: all 0.3s ease;
+  border-radius: 5px;
+  font-size: clamp(0.8rem, 1vw, 1rem);
+  min-width: 80px;
+  max-width: 180px;
+}
+
+.actividad-botones button:hover {
+  background-color: #1e90ff;
+  color: #fff;
+  transform: translateY(-2px);
+  box-shadow: 0 4px 10px rgba(30, 144, 255, 0.4);
+}
+
+.actividad-botones button:active {
+  transform: translateY(0px);
+  box-shadow: none;
+}
+
+/* Tooltips de eventos */
+.evento-tooltip {
+  background-color: #111;
+  color: #fff;
+  padding: 0.8rem 1rem;
+  border-radius: 10px;
+  box-shadow: 0 6px 16px rgba(0,0,0,0.5);
+  font-size: clamp(0.7rem, 1vw, 0.95rem);
+  line-height: 1.4;
+  max-width: 95vw;
+  word-wrap: break-word;
+  display: flex;
+  flex-direction: column;
+  gap: 0.3rem;
+  box-sizing: border-box;
+  white-space: normal;
+  justify-content: center;
+  align-items: center;
+  transition: transform 0.2s ease, background 0.2s ease;
+}
+
+.evento-tooltip:hover {
+  transform: scale(1.05);
+  background-color: #222;
+}
+
+.evento-tooltip strong {
+  font-size: clamp(0.8rem, 1vw, 1rem);
+  margin-bottom: 0.3rem;
+}
+
+.evento-tooltip div {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  margin-bottom: 0.2rem;
+}
+
+/* Contenedor calendario con scroll */
+.actividad-calendario-container {
+  width: 100%;
+  overflow-x: auto; /* scroll horizontal en móviles */
+  -webkit-overflow-scrolling: touch;
+}
+
+/* FullCalendar estilos generales */
+.fc {
+  max-width: 100%;
+  min-width: 320px; /* asegura que no colapse en 320px */
+  overflow-x: auto;
+  margin: 0 auto;
+}
+
+.fc-toolbar-chunk {
+  flex-wrap: wrap;
+  justify-content: center;
+  gap: 0.3rem;
+}
+
+.fc .fc-event {
+  font-size: clamp(0.65rem, 1vw, 0.9rem);
+  padding: 2px 4px;
+  border-radius: 5px;
+  background-color: #000;
+  color: #fff;
+  cursor: pointer;
+  transition: transform 0.2s ease, box-shadow 0.2s ease, background 0.2s ease;
+  white-space: normal; /* wrap de texto */
+}
+
+.fc .fc-event:hover {
+  transform: scale(1.05);
+  box-shadow: 0 4px 12px rgba(255, 255, 255, 0.4);
+  background-color: #111;
+}
+
+.evento-seleccionado {
+  background-color: #fff !important;
+  color: #000 !important;
+  border: 2px solid #fff;
+  transition: all 0.2s ease;
+}
+
+.fc .fc-daygrid-day {
+  min-height: 80px;
+  padding: 2px;
+}
+.fc .fc-list-day-cushion {
+  background: #111;
+  color: #fff;
+  font-size: 0.9rem;
+  text-align: center;
+}
+
+.fc .fc-list-event {
+  background: #000;
+  color: #fff;
+  font-size: 0.8rem;
+  border-left: 3px solid #1e90ff;
+  padding: 0.4rem;
+  margin: 2px 0;
+}
+
+.fc .fc-list-event:hover {
+  background: #111;
+}
+.fc .fc-toolbar-title{
+  font-size: 14px;
+}
+/* Responsive: 320px - 1140px */
+
+/* Mobile S: 320px */
+/* Mobile S: hasta 320px */
+@media (max-width: 320px) {
+  .actividad-container { padding: 0.4rem; }
+
+  /* Header del calendario en columna */
+  .fc-toolbar {
+    flex-direction: column;
+    align-items: center;
+    gap: 0.3rem;
+  }
+
+  .fc .fc-toolbar {
+    align-items: center;
+    display: flex;
+    justify-content: space-between;
+    flex-direction: row;
+  }
+  .fc-toolbar-title{
+    font-size: 14px;
+  }
+
+  .fc-toolbar button {
+    font-size: 0.65rem;
+    padding: 2px 4px;
+  }
+
+  /* Celdas más compactas */
+  .fc .fc-daygrid-day {
+    min-height: 50px;
+    padding: 1px;
+  }
+
+  /* Eventos más chicos con corte de texto */
+  .fc .fc-event {
+    font-size: 0.55rem;
+    padding: 1px 2px;
+    border-radius: 3px;
+    white-space: nowrap;       /* no saltos de línea */
+    overflow: hidden;          /* cortar exceso */
+    text-overflow: ellipsis;   /* agregar "..." */
+  }
+
+  /* Tooltip y formularios también compactos */
+  .evento-tooltip { font-size: 0.65rem; padding: 0.4rem 0.6rem; }
+  .actividad-formulario input { font-size: 0.75rem; padding: 0.3rem; }
+  .actividad-botones button { font-size: 0.75rem; padding: 0.3rem 0.6rem; }
+}
+
+/* Mobile L: hasta 425px */
+@media (max-width: 425px) {
+  .fc .fc-list-day-cushion {
+    background: #111;
+    color: #fff;
+    font-size: 0.85rem;
+  }
+
+  .fc .fc-list-event {
+    background: #000;
+    color: #fff;
+    font-size: 0.8rem;
+    border-left: 3px solid #1e90ff;
+    padding: 0.4rem;
+    margin: 2px 0;
+  }
+
+  .fc .fc-list-event:hover {
+    background: #111;
+  }
+}
+/* Tablet: 768px */
+@media (max-width: 768px) {
+  .actividad-titulo { font-size: 1.5rem; }
+  .actividad-formulario input { flex: 1 1 100%; min-width: 0; }
+  .actividad-botones { flex-direction: column; width: 100%; }
+  .actividad-botones button { width: 100%; }
+  .evento-tooltip { font-size: 0.85rem; padding: 0.6rem 0.9rem; max-width: 180px; }
+  .fc .fc-event { font-size: 0.75rem; padding: 3px 4px; }
+  .fc .fc-daygrid-day { min-height: 90px; }
+}
+
+/* Laptop: 1024px */
+@media (max-width: 1024px) {
+  .actividad-titulo { font-size: 1.7rem; }
+  .evento-tooltip { font-size: 0.9rem; padding: 0.7rem 1rem; max-width: 200px; }
+  .fc .fc-event { font-size: 0.85rem; padding: 4px 5px; }
+  .fc .fc-daygrid-day { min-height: 95px; }
+}
+
+/* Desktop pequeño: 1140px */
+@media (max-width: 1140px) {
+  .actividad-titulo { font-size: 1.9rem; }
+  .evento-tooltip { font-size: 0.95rem; padding: 0.75rem 1rem; max-width: 210px; }
+  .fc .fc-event { font-size: 0.9rem; padding: 5px 6px; }
+  .fc .fc-daygrid-day { min-height: 100px; }
+}
+
+/* Ajuste global */
+input, button { box-sizing: border-box; }

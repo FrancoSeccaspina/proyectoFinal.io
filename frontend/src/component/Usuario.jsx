@@ -51,8 +51,10 @@ const Usuarios = () => {
   return (
     <div className="container-products">
       <section className="moverJuntos">
-        <h2 className="box-title">Lista de Usuarios</h2>
-        <Link to="/nuevoUsuario" className="btn btn-primary">Agregar Nuevo</Link>
+        <h2 className="box-title">Catálogo de Usuarios</h2>
+        <h3 className='box-title'>Usuarios registrados: {resultado.length}</h3>
+        
+        <Link to="http://localhost:3032/register" className="btn btn-primary">Agregar Nuevo</Link>
       </section>
       <input
         value={search}

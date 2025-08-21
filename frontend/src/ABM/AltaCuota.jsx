@@ -44,7 +44,7 @@ const AltaCuota = () => {
 
       if (pagadoNum < montoCalculado) {
         faltante = montoCalculado - pagadoNum;
-      } else if (pagadoNum > montoCalculado) {
+      } else if (pagadoNum >= montoCalculado) {
         sobrante = pagadoNum - montoCalculado;
         estado = 'PAGADA';
       } 

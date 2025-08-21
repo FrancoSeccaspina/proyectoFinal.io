@@ -1,3 +1,6 @@
+/* ------------------------------
+   Contenedor principal
+------------------------------ */
 .cuadro-container {
   display: flex;
   flex-direction: column;
@@ -13,23 +16,35 @@
   font-size: 1.4rem;
   margin: 0;
   color: #1f2937;
+  text-align: center;
 }
 
-.cuadro-filtros {
+/* ------------------------------
+   Contenedor de filtros
+------------------------------ */
+.filtros-container {
   display: flex;
-  flex-wrap: wrap;
-  gap: 1rem;
+  flex-direction: column;
+  gap: 0.5rem;
 }
 
-.cuadro-filtros label {
+.inputs-filtros {
+    display: flex;
+    gap: 1rem;
+    align-items: center;
+    flex-wrap: wrap;
+    justify-content: center;
+}
+
+.inputs-filtros label {
   display: flex;
   flex-direction: column;
   font-weight: 500;
-  color: #374151;
+  color: #ffffff;
 }
 
-.cuadro-filtros input,
-.cuadro-filtros select {
+.inputs-filtros input,
+.inputs-filtros select {
   margin-top: 4px;
   padding: 6px 10px;
   font-size: 1rem;
@@ -37,11 +52,42 @@
   border: 1px solid #d1d5db;
 }
 
+/* ------------------------------
+   Botón exportar
+------------------------------ */
+.exportar-btn-container {
+  text-align: left;
+  display: flex;
+  justify-content: flex-start;
+  margin-top: 0.5rem;
+}
+
+.exportar-btn {
+  background-color: #4CAF50;
+  color: #fff;
+  border: none;
+  padding: 0.5rem 1rem;
+  border-radius: 5px;
+  cursor: pointer;
+  font-size: 1rem;
+  transition: background-color 0.3s;
+}
+
+.exportar-btn:hover {
+  background-color: #45a049;
+}
+
+/* ------------------------------
+   Contenedor de gráfico
+------------------------------ */
 .grafico-wrapper {
   width: 100%;
   height: 300px;
 }
 
+/* ------------------------------
+   Tabla de datos
+------------------------------ */
 .tabla-wrapper {
   overflow-x: auto;
 }
@@ -65,6 +111,7 @@
   white-space: nowrap;
 }
 
+/* Totales al final de la tabla */
 .totales {
   display: flex;
   flex-direction: column;
@@ -73,8 +120,20 @@
   color: #111827;
 }
 
-@media (max-width: 425px) {
+/* ------------------------------
+   Titulos de sección
+------------------------------ */
+.titulos {
+  font-size: 0.9rem;
+  margin-top: 2rem;
+  color: #ffffff;
+  text-align: center;
+}
 
+/* ------------------------------
+   Responsive
+------------------------------ */
+@media (max-width: 425px) {
   .cuadro-titulo,
   .cuadro-subtitulo {
     font-size: 1.2rem;
@@ -86,36 +145,35 @@
 
   .tabla-datos {
     min-width: unset;
+    font-size: 0.85rem;
+  }
+
+  .inputs-filtros {
+    flex-direction: column;
+  }
+
+  .exportar-btn {
+    width: 100%;
   }
 }
 
 @media (min-width: 768px) {
-  .cuadro-container {
-    padding: 1rem;
-    box-sizing: border-box;
-  }
-
-  .tabla-wrapper {
-    width: 100%;
-    padding: 0;
-    margin: 0;
-    overflow-x: auto;
-  }
-
   .tabla-datos {
-    width: 100%;
-    border-collapse: collapse;
     background-color: #000;
     color: #fff;
     font-size: 0.9rem;
     table-layout: fixed;
     word-wrap: break-word;
+    text-align: center;
   }
 
   .tabla-datos th,
   .tabla-datos td {
     padding: 0.5rem;
-    text-align: center;
+  }
+
+  .grafico-wrapper {
+    height: 300px;
   }
 }
 
@@ -126,9 +184,5 @@
 
   .cuadro-filtros {
     flex-direction: column;
-  }
-
-  .tabla-datos {
-    font-size: 0.85rem;
   }
 }

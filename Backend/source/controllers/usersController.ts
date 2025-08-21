@@ -206,7 +206,6 @@ export class UsuarioController {
         imagen: usuario.imagen,
         aptoMedico: usuario.aptoMedico,
         fecha_fin_cuota: ultimaCuota?.fecha_fin?.toISOString().split("T")[0] || undefined,
-        estado_membresia: ultimaCuota?.estado_membresia
       });
 
       // Token JWT

@@ -1,4 +1,5 @@
 import React, { useState, useEffect } from 'react';
+import * as XLSX from 'xlsx';
 import '../css/CuadroIngresoCobro.css';
 import {
   AreaChart,
@@ -16,7 +17,6 @@ const CuadroIngresoCobro = () => {
   const [nuevoCobro, setNuevoCobro] = useState('');
   const [pendiente, setPendiente] = useState({ ingreso: null, cobro: null });
 
-  // Obtener datos de la API
   const showData = async () => {
     try {
       const response = await fetch("http://localhost:3032/api/gestionPagoProveedores", {
@@ -37,25 +37,20 @@ const CuadroIngresoCobro = () => {
     const valor = tipo === 'ingreso' ? nuevoIngreso : nuevoCobro;
     if (!valor) return;
 
-    const actualizado = {
-      ...pendiente,
-      [tipo]: parseFloat(valor)
-    };
-
+    const actualizado = { ...pendiente, [tipo]: parseFloat(valor) };
     setPendiente(actualizado);
+
     if (actualizado.ingreso !== null && actualizado.cobro !== null) {
       const sobrante = actualizado.ingreso - actualizado.cobro;
 
       const nuevoRegistro = {
         ingreso: actualizado.ingreso,
         egreso: actualizado.cobro,
-        sobrante: sobrante,
+        sobrante,
         fecha: new Date().toISOString()
       };
 
       enviarRegistro(nuevoRegistro);
-
-      // Limpiar estados
       setNuevoIngreso('');
       setNuevoCobro('');
       setPendiente({ ingreso: null, cobro: null });
@@ -65,29 +60,23 @@ const CuadroIngresoCobro = () => {
     if (tipo === 'cobro') setNuevoCobro('');
   };
 
-  // Enviar al backend
   const enviarRegistro = async (registro) => {
     try {
       await fetch("http://localhost:3032/api/gestionPagoProveedores", {
         method: 'POST',
         credentials: 'include',
-        headers: {
-          'Content-Type': 'application/json'
-        },
+        headers: { 'Content-Type': 'application/json' },
         body: JSON.stringify(registro)
       });
-
-      // Refrescar la tabla después del envío
       showData();
     } catch (error) {
       console.error('Error al agregar registro:', error);
     }
   };
 
-  // Totales
   const totalIngresado = resumen.reduce((acc, item) => acc + item.ingreso, 0);
   const totalEgresado = resumen.reduce((acc, item) => acc + item.egreso, 0);
-  const totalSobrante = resumen.reduce((acc, item) => acc + item.sobrante, 0); 
+  const totalSobrante = resumen.reduce((acc, item) => acc + item.sobrante, 0);
 
   const dataGrafico = [
     { nombre: 'Ingresado', monto: totalIngresado },
@@ -95,9 +84,36 @@ const CuadroIngresoCobro = () => {
     { nombre: 'Sobrante', monto: totalSobrante }
   ];
 
+  // Función para exportar a Excel con formato
+const exportarExcel = () => {
+  if (!resumen.length) return; // Evitar exportar si no hay datos
+
+  const datosExcel = resumen.map(item => ({
+    "Fecha": new Date(item.fecha).toLocaleDateString('es-AR'),
+    "Ingreso": item.ingreso.toFixed(2), 
+    "Egreso": item.egreso.toFixed(2),
+    "Sobrante": item.sobrante.toFixed(2)
+  }));
+
+  // Agregar fila de totales
+  datosExcel.push({
+    "Fecha": "Total",
+    "Ingreso": totalIngresado.toFixed(2),
+    "Egreso": totalEgresado.toFixed(2),
+    "Sobrante": totalSobrante.toFixed(2)
+  });
+
+  // Crear hoja y libro Excel
+  const hoja = XLSX.utils.json_to_sheet(datosExcel);
+  const libro = XLSX.utils.book_new();
+  XLSX.utils.book_append_sheet(libro, hoja, "Resumen Ingreso y Cobro");
+  XLSX.writeFile(libro, "IngresoEgreso_Provedores.xlsx");
+};
+
+
   return (
     <div className="cuadro-container">
-      <h2>Cuadro Ingreso y Egreso a Proveedores</h2>
+      <h2 className="cuadro-titulo">Cuadro Ingreso y Egreso a Proveedores</h2>
 
       <div className="formulario">
         <div className="campo">
@@ -123,6 +139,13 @@ const CuadroIngresoCobro = () => {
         </div>
       </div>
 
+      {/* Botón Exportar */}
+      <div className="exportar-btn-container">
+        <button className="exportar-btn" onClick={exportarExcel}>
+          Exportar a Excel
+        </button>
+      </div>
+
       <div className="grafico">
         <h4>Gráfico de Estado Financiero</h4>
         <ResponsiveContainer width="100%" height={300}>
@@ -137,13 +160,7 @@ const CuadroIngresoCobro = () => {
             <XAxis dataKey="nombre" />
             <YAxis allowDecimals={false} />
             <Tooltip />
-            <Area
-              type="monotone"
-              dataKey="monto"
-              stroke="#8884d8"
-              fillOpacity={1}
-              fill="url(#colorMonto)"
-            />
+            <Area type="monotone" dataKey="monto" stroke="#8884d8" fillOpacity={1} fill="url(#colorMonto)" />
           </AreaChart>
         </ResponsiveContainer>
       </div>
