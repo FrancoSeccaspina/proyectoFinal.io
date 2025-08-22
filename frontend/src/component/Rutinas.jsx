@@ -1,5 +1,4 @@
 import { useEffect, useState } from "react"; /*PASA A PRODUCTOS.JSX*/ 
-import { useLocation } from 'react-router-dom';
 import { Link } from "react-router-dom";
 import axios from 'axios';
 import '../css/header.css'
@@ -7,10 +6,8 @@ import '../css/header.css'
 function Ejercicios() {
   const [ejercicios, setEjercicios] = useState([]);
   const [categorias, setCategoria] = useState([]);
-  const location = useLocation();
-  const query = new URLSearchParams(location.search);
-  const categoriaDesdeURL = query.get("categoria") || "Todos";
-  const [categoriaSeleccionada, setCategoriaSeleccionada] = useState("Todos");
+  const [searchTerm, setSearchTerm] = useState("");
+
   const getCategorias = async ()=> {
   const response = await fetch("http://localhost:3032/api/categoriaGrupoMuscular");
   const data = await response.json();
@@ -23,10 +20,6 @@ function Ejercicios() {
     console.log('DATA RECIBIDA:', data);
     setEjercicios(data);
   }
-    // Sincronizar con la URL cuando cambia
-    useEffect(() => {
-      setCategoriaSeleccionada(categoriaDesdeURL);
-    }, [categoriaDesdeURL]);
 
   useEffect(() => {
     getEjercicios();
@@ -45,31 +38,38 @@ function Ejercicios() {
     }
   };
   
-  const ejerciciosFiltrados = categoriaSeleccionada === 'Todos'
-  ? ejercicios
-  : ejercicios.filter(ejercicios => ejercicios.grupo_muscular_id === parseInt(categoriaSeleccionada));
+  const categoriasMap = categorias.reduce((acc, c) => {
+    acc[String(c.id)] = c.nombre;
+    return acc;
+  }, {});
+
+  const normalizedSearch = searchTerm.trim().toLowerCase();
+  const ejerciciosFiltrados = ejercicios.filter(ejercicios => {
+    if (!normalizedSearch) return true;
+    const nombre = String(ejercicios.nombre || "").toLowerCase();
+    const categoriaNombre = String(categoriasMap[String(ejercicios.grupo_muscular_id)] || "").toLowerCase();
+    return nombre.includes(normalizedSearch) || categoriaNombre.includes(normalizedSearch);
+  });
 
 return (
 <div className="container-products">
   <section className="moverJuntos">
-    <h2 className='box-title'>Lista de Ejercicios:</h2>
+    <h2 className='box-title'>Catálogo de  Ejercicios:</h2>
+    <h3 className='box-title'>Ejercicios registrados: {ejerciciosFiltrados.length}</h3>
+
     <Link to={`/rutinaNueva`} className="btn btn-primary">
       Agregar Nuevo
     </Link>
   </section>
-    <h2 className='box-title'>Lista de Ejercicios: {ejerciciosFiltrados.length}</h2>
-
+ 
   <div className='category-filters'>
-  <label>Filtrar por categoría: </label><br/>
-          <select
-              value={categoriaSeleccionada}
-              onChange={(e) => setCategoriaSeleccionada(e.target.value)}
-          >
-              <option value="Todos">Todos</option>
-              {categorias.map(cat => (
-                  <option key={cat.grupo_muscular_id} value={cat.id}>{cat.nombre}</option>
-              ))}
-          </select>
+            <input
+                type="text"
+                placeholder="Buscar por nombre o categoría..."
+                value={searchTerm}
+                onChange={(e) => setSearchTerm(e.target.value)}
+                className="form-control mt-2 mb-3"
+              />
 
   </div>
       <table className='table table-dark table-striped'>

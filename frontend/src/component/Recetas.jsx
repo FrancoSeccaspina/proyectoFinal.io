@@ -1,5 +1,4 @@
 import { useEffect, useState } from "react"; /*PASA A PRODUCTOS.JSX*/ 
-import { useLocation } from 'react-router-dom';
 import { Link } from "react-router-dom";
 import axios from "axios";
 import '../css/header.css'
@@ -8,10 +7,8 @@ function Recetas() {
   console.log('Se está renderizando <Productos />');
   const [recetas, setRecetas] = useState([]);
   const [categoriasReceta, setCategoriaReceta] = useState([]);
-  const location = useLocation();
-  const query = new URLSearchParams(location.search);
-  const categoriaDesdeURL = query.get("categoria") || "Todos";
-  const [categoriaSeleccionada, setCategoriaSeleccionada] = useState("Todos");
+  const [searchTerm, setSearchTerm] = useState("");
+
   const getCategorias = async ()=> {
     const response = await fetch("http://localhost:3032/api/categoriaRecetas");
     const data = await response.json();
@@ -24,10 +21,6 @@ function Recetas() {
     console.log('DATA RECIBIDA:', data);
     setRecetas(data);
   }
-    // Sincronizar con la URL cuando cambia
-    useEffect(() => {
-      setCategoriaSeleccionada(categoriaDesdeURL);
-    }, [categoriaDesdeURL]);
 
   useEffect(() => {
     getRecetas();
@@ -46,30 +39,36 @@ function Recetas() {
     }
   };
 
-  const recetasFiltradas = categoriaSeleccionada === 'Todos'
-      ? recetas
-      : recetas.filter(recetas => recetas.categoriaId === parseInt(categoriaSeleccionada));
-    
+  const categoriasMap = categoriasReceta.reduce((acc, c) => {
+    acc[String(c.id)] = c.nombre;
+    return acc;
+  }, {});
+
+  const normalizedSearch = searchTerm.trim().toLowerCase();
+  const recetasFiltradas = recetas.filter(recetas => {
+    if (!normalizedSearch) return true;
+    const nombre = String(recetas.nombre || "").toLowerCase();
+    const categoriaNombre = String(categoriasMap[String(recetas.categoriaId)] || "").toLowerCase();
+    return nombre.includes(normalizedSearch) || categoriaNombre.includes(normalizedSearch);
+  });
       return (
         <div className="container-products">
         <section className="moverJuntos">
-          <h2 className='box-title'>Lista de Receta</h2>
+          <h2 className='box-title'>Catálogo de recetas</h2>
+          <h3 className='box-title'>Recetas registradas  : {recetasFiltradas.length}</h3>
+
           <Link to={`/recetaNueva`} class="btn btn-primary" >Agregar Nuevo</Link>
         </section>
-          <h3 className='box-title'>Lista de Recetas  : {recetasFiltradas.length}</h3>
-
+          
           
           <div className='category-filters'>
-          <label>Filtrar por categoría: </label><br/>
-                  <select
-                      value={categoriaSeleccionada}
-                      onChange={(e) => setCategoriaSeleccionada(e.target.value)}
-                  >
-                      <option value="Todos">Todos</option>
-                      {categoriasReceta.map(cat => (
-                          <option key={cat.id} value={cat.id}>{cat.nombre}</option>
-                      ))}
-                  </select>
+          <input
+            type="text"
+            placeholder="Buscar por nombre o categoría..."
+            value={searchTerm}
+            onChange={(e) => setSearchTerm(e.target.value)}
+            className="form-control mt-2 mb-3"
+          />
     
           </div>
     

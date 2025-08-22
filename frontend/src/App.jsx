@@ -10,6 +10,7 @@ import Reservas from './component/Reservas';
 import ReservaPorId from './component/ReservaPorId'
 import PrecioCuota from './component/PrecioCuota';
 import Empleados from './component/Empleados';
+import Actividad from './component/Actividad';
 import { BrowserRouter, Route, Routes } from 'react-router-dom';
 
 import EdicionReceta from './ABM/EdicionRece';
@@ -44,6 +45,7 @@ function App() {
           <Route path="/Reserva/:id" element={<ReservaPorId />} />
           <Route path="/PrecioCuota" element={<PrecioCuota />} />
           <Route path="/Empleados" element={<Empleados />} />
+          <Route path="/Actividad" element={<Actividad />} />
           
           {/* Ediciones */}
           <Route path="/productos/editar/:id" element={<EdicionProductos />} />

@@ -3,9 +3,9 @@
 -- https://www.phpmyadmin.net/
 --
 -- Servidor: 127.0.0.1
--- Tiempo de generación: 06-08-2025 a las 02:07:34
+-- Tiempo de generación: 13-08-2025 a las 07:39:13
 -- Versión del servidor: 10.4.32-MariaDB
--- Versión de PHP: 8.0.30
+-- Versión de PHP: 8.2.12
 
 SET SQL_MODE = "NO_AUTO_VALUE_ON_ZERO";
 START TRANSACTION;
@@ -41,9 +41,10 @@ CREATE TABLE `autenticacion` (
 INSERT INTO `autenticacion` (`id`, `email`, `contrasenia`, `id_usuario`) VALUES
 (1, 'admin@activafitness.com', '$2b$10$RCIHIHvb6asptQgSa.Yc.eTaj1N.VlCWFsNnsoPxuY.bELwO95QsG', 1),
 (19, 'francolector@gmail.com', '$2b$08$77S9p1bhG/zNyBc71teU6eFnTVRrk3ysEb6mj8eSqBDKDFV3qijca', 28),
-(20, 'lufrancolu@gmail.com', '$2b$08$59.4M2LJQWTz6lEzFq4jHezyLnHumzitUXhTGg5ei31A9qWVLgSv6', 29),
 (22, 'gustavo.jimenez.crespo@gmail.com', '$2b$08$o9POXNlcYJAiggiTSXAxjeKjRkrJE8UHuUXkF/z7ItG9TDmt1K6Uy', 31),
-(23, 'veronicagirardi9@gmail.com', '$2b$08$inW.F7IL2xIKnR2cqva4x.JxE1NMu15DH8vDw1BmagXnjWrJKAGUm', 32);
+(23, 'veronicagirardi9@gmail.com', '$2b$08$inW.F7IL2xIKnR2cqva4x.JxE1NMu15DH8vDw1BmagXnjWrJKAGUm', 32),
+(25, 'lucasfrancoaguirre@gmail.com', '$2b$08$MMhF2oNcqYjxH9a2p5Srh.OSMGcqe1E3HkuWIbpvG9LR46OBrapz6', 34),
+(26, 'lufrancolu@gmail.com', '$2b$08$Jj6GoqSYJ3X5WuosVr6fs.66wGvH4knFHux9QXIpi1.H12j8.CWeS', 35);
 
 -- --------------------------------------------------------
 
@@ -104,20 +105,26 @@ CREATE TABLE `cuota` (
   `sobrante` double NOT NULL,
   `id_usuario` int(11) NOT NULL,
   `fecha_fin` date DEFAULT NULL,
-  `estado_membresia` varchar(255) NOT NULL
+  `pagado` decimal(10,2) NOT NULL DEFAULT 0.00
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
 --
 -- Volcado de datos para la tabla `cuota`
 --
 
-INSERT INTO `cuota` (`id`, `fecha`, `descripcion`, `monto`, `estado`, `faltante`, `sobrante`, `id_usuario`, `fecha_fin`, `estado_membresia`) VALUES
-(12, '2025-06-19', 'wqeeqwe', 10000, 'PAGADA', 0, 4999, 28, NULL, ''),
-(13, '2025-06-19', 'QWEQWE', 10000, 'PAGADA', 0, 4999, 28, NULL, ''),
-(14, '2025-06-19', 'QWE', 10000, 'PAGADA', 0, 4000, 28, NULL, ''),
-(15, '2025-06-24', 'dasdas', 50000, 'PAGADA', 0, 19999, 29, NULL, ''),
-(16, '2025-06-25', 'qweqwe', 40000, 'PAGADA', 0, 160000, 29, NULL, ''),
-(17, '2025-06-24', '5k', 40000, 'PAGADA', 0, 5000, 29, '2025-07-23', 'ACTIVO');
+INSERT INTO `cuota` (`id`, `fecha`, `descripcion`, `monto`, `estado`, `faltante`, `sobrante`, `id_usuario`, `fecha_fin`, `pagado`) VALUES
+(12, '2025-06-19', 'wqeeqwe', 10000, 'PAGADA', 0, 4999, 28, NULL, 0.00),
+(13, '2025-06-19', 'QWEQWE', 10000, 'PAGADA', 0, 4999, 28, NULL, 0.00),
+(14, '2025-06-19', 'QWE', 10000, 'PAGADA', 0, 4000, 28, NULL, 0.00),
+(15, '2025-06-24', 'dasdas', 50000, 'PAGADA', 0, 19999, 29, NULL, 0.00),
+(16, '2025-06-25', 'qweqwe', 40000, 'PAGADA', 0, 160000, 29, NULL, 0.00),
+(17, '2025-06-24', '5k', 40000, 'PAGADA', 0, 5000, 29, '2025-07-23', 0.00),
+(18, '2025-07-10', '.', 40000, 'PAGADA', 0, 0, 28, NULL, 0.00),
+(19, '2025-08-08', 'faltan  5k\n', 40000, 'PENDIENTE', 5000, 0, 33, NULL, 0.00),
+(20, '2025-08-06', 'todo pagado', 40000, 'PAGADA', 0, 0, 33, '2025-09-05', 0.00),
+(21, '2025-08-13', 'll', 40000, 'PENDIENTE', 5000, 0, 28, NULL, 0.00),
+(22, '2025-08-13', 'lllll', 40000, 'ACTIVO', 0, 0, 28, NULL, 40000.00),
+(23, '2025-08-13', 'lñll', 40000, 'ACTIVO', 0, 0, 35, NULL, 40000.00);
 
 -- --------------------------------------------------------
 
@@ -154,14 +161,12 @@ INSERT INTO `detalle_reservas` (`id_detalle_reserva`, `id_producto`, `cantidad`,
 (40, 9, 1, 42, 45000),
 (41, 12, 1, 43, 20000),
 (42, 10, 1, 44, 35000),
-(43, 15, 1, 45, 1),
 (44, 12, 1, 46, 20000),
 (45, 12, 1, 47, 20000),
 (46, 12, 1, 48, 20000),
 (47, 11, 1, 49, 40000),
 (48, 10, 1, 50, 35000),
 (49, 12, 1, 51, 20000),
-(50, 15, 1, 52, 1),
 (51, 10, 1, 53, 35000),
 (52, 9, 1, 54, 45000),
 (53, 9, 1, 55, 45000),
@@ -175,7 +180,8 @@ INSERT INTO `detalle_reservas` (`id_detalle_reserva`, `id_producto`, `cantidad`,
 (61, 9, 1, 61, 45000),
 (62, 15, 1, 62, 1),
 (63, 9, 1, 63, 45000),
-(64, 10, 1, 63, 35000);
+(64, 10, 1, 63, 35000),
+(65, 9, 1, 64, 45000);
 
 -- --------------------------------------------------------
 
@@ -312,9 +318,7 @@ INSERT INTO `ejercicios` (`id`, `nombre`, `descripcion`, `grupo_muscular_id`, `v
 (126, 'Sentadillas Hack En Maquina', 'Ajusta la altura de las almohadillas para los hombros de la máquina de manera que se apoyen cómodamente en tus hombros. Coloca tus pies en la plataforma a una distancia similar al ancho de tus hombros, con los dedos ligeramente apuntando hacia afuera. Desbloquea la máquina y ponte de pie, apoyando tus hombros en las almohadillas y manteniendo la espalda recta contra el respaldo. Baja lentamente tu cuerpo flexionando las rodillas, manteniendo la espalda en contacto con el respaldo. Intenta llevar tus muslos al menos paralelos al suelo. El ángulo de la plataforma de la máquina enfatiza el trabajo en los cuádriceps. Empuja a través de tus talones para volver a la posición inicial, extendiendo completamente las rodillas, pero sin bloquearlas. Mantén el control del movimiento y la espalda apoyada en el respaldo.\r\nMúsculos trabajados: Cuádriceps. La posición en la máquina suele aislar más los cuádriceps. Glúteo mayor, isquiotibiales. El respaldo de la máquina proporciona estabilidad, por lo que el trabajo de los músculos del core es menor en comparación con las sentadillas libres.', 9, 'https://www.youtube.com/shorts/Hb6z8e6fWJA', 'Polea y Maquina', NULL),
 (127, 'Sillon Cuadriceps', 'Siéntate en la máquina y ajusta el respaldo para que tus rodillas estén alineadas con el eje de rotación de la máquina. Ajusta la almohadilla inferior de manera que quede justo por encima de tus tobillos. Asegura tus muslos debajo de la almohadilla superior (si la tiene) para evitar que se levanten durante el ejercicio. Tus rodillas deben estar flexionadas en un ángulo de aproximadamente 90 grados. Extiende tus piernas levantando la almohadilla inferior hasta que tus rodillas estén completamente extendidas (sin bloquearlas). Concéntrate en la contracción de los músculos de tus muslos. Baja la almohadilla lentamente y con control hasta la posición inicial, manteniendo la tensión en los músculos.\r\nMúsculos trabajados: Cuádriceps', 9, 'https://www.youtube.com/shorts/S50jrJDzO4M', 'Polea y Maquina', NULL),
 (128, 'Femoral Sentado En Maquina', 'Siéntate en la máquina y ajusta el respaldo de manera que tus rodillas estén alineadas con el eje de rotación de la máquina. Ajusta la almohadilla inferior de manera que quede justo por debajo de tus pantorrillas, cerca de tus tobillos.\r\nAsegura tus muslos contra la almohadilla superior (si la tiene). Tus piernas deben estar extendidas. Flexiona tus rodillas, llevando tus talones hacia tus glúteos. Mantén la parte superior de tu cuerpo quieta y concéntrate en la contracción de los músculos de la parte posterior de tus muslos. Regresa lentamente la almohadilla a la posición inicial, controlando el movimiento y resistiendo la tensión.\r\nMúsculos trabajados: Isquiotibiales', 9, 'https://www.youtube.com/shorts/oOE1vaDX71M', 'Polea y Maquina', NULL),
-(129, 'Sentadilla Smith En Maquina', 'Coloca la barra de la máquina Smith a una altura adecuada para que puedas colocarte debajo cómodamente. Carga el peso deseado en la barra. Colócate debajo de la barra, apoyándola en la parte superior de tus trapecios (parte superior de la espalda). Tus pies deben estar separados al ancho de los hombros o ligeramente más, colocados un poco hacia adelante con respecto a la barra (esto puede variar según la preferencia y la biomecánica individual). Desbloquea la barra girándola. Baja lentamente tu cuerpo flexionando las rodillas y las caderas, manteniendo la espalda recta y el pecho elevado. La barra se moverá en un plano vertical fijo. Intenta llevar tus muslos al menos paralelos al suelo. Empuja a través de tus talones para volver a la posición inicial, extendiendo completamente las rodillas y las caderas. Asegúrate de bloquear la barra al finalizar la serie.\r\nMúsculos trabajados: Cuádriceps y isquiotibiales.', 9, 'https://www.youtube.com/shorts/pyY96rjR-HI', 'Polea y Maquina', NULL),
-(136, 'pepe ruti', 'pepe rutipepe ruti', 9, 'pepe rutipepe rutipepe rutipepe ruti', 'Polea y Maquina', NULL),
-(137, 'lucas', 'lucas', 8, 'lucaslucas', 'lucaslucas', NULL);
+(129, 'Sentadilla Smith En Maquina', 'Coloca la barra de la máquina Smith a una altura adecuada para que puedas colocarte debajo cómodamente. Carga el peso deseado en la barra. Colócate debajo de la barra, apoyándola en la parte superior de tus trapecios (parte superior de la espalda). Tus pies deben estar separados al ancho de los hombros o ligeramente más, colocados un poco hacia adelante con respecto a la barra (esto puede variar según la preferencia y la biomecánica individual). Desbloquea la barra girándola. Baja lentamente tu cuerpo flexionando las rodillas y las caderas, manteniendo la espalda recta y el pecho elevado. La barra se moverá en un plano vertical fijo. Intenta llevar tus muslos al menos paralelos al suelo. Empuja a través de tus talones para volver a la posición inicial, extendiendo completamente las rodillas y las caderas. Asegúrate de bloquear la barra al finalizar la serie.\r\nMúsculos trabajados: Cuádriceps y isquiotibiales.', 9, 'https://www.youtube.com/shorts/pyY96rjR-HI', 'Polea y Maquina', NULL);
 
 -- --------------------------------------------------------
 
@@ -358,13 +362,7 @@ CREATE TABLE `gestion_pago_proveedores` (
 
 INSERT INTO `gestion_pago_proveedores` (`id`, `fecha`, `ingreso`, `egreso`, `sobrante`) VALUES
 (1, '2025-07-31', 4000, 3000, 1000),
-(2, '2025-08-01', 1, 2, 5),
-(3, '2025-08-01', 1, 2, 5),
-(4, '2025-08-01', 1, 2, -1),
-(5, '2025-08-01', 1000, 2, 998),
-(6, '2025-08-01', 20, 10, 10),
-(7, '2025-08-01', 3, 2, 1),
-(8, '2025-08-01', 6, 5, 1);
+(6, '2025-08-01', 20, 10, 10);
 
 -- --------------------------------------------------------
 
@@ -434,8 +432,6 @@ INSERT INTO `precio_cuota` (`id`, `precio`, `fecha`) VALUES
 (2, 15000, '2025-02-05'),
 (3, 50000, '2025-06-06'),
 (4, 60000, '2025-06-07'),
-(5, 45, '2025-06-06'),
-(6, 2, '2025-06-04'),
 (7, 10000, '2025-06-19'),
 (8, 50000, '2025-06-24'),
 (9, 40000, '2025-06-24');
@@ -461,7 +457,7 @@ CREATE TABLE `productos` (
 --
 
 INSERT INTO `productos` (`id`, `nombre`, `descripcion`, `precio`, `categoriaId`, `imagen`, `stock`) VALUES
-(8, 'Proteina whey', 'Post entrenamiento: Ideal para recuperación muscular. Consumir dentro de los 30-60 minutos después de entrenar.Desayuno o entre comidas: Si necesitás aumentar tu ingesta de proteínas diarias.Antes de dormir: En el caso de caseína (de absorción lenta), ayuda a evitar el catabolismo nocturno. Mezclar 1 scoop (medida del envase, aprox. 25-30g de proteína) en: 250-300 ml de agua, leche o bebida vegetal.Podés usar una licuadora o shaker. Si querés sumar calorías, podés agregar banana, avena, mantequi', 4, 2, 'proteinaTruemade.jpg', 0),
+(8, 'Proteina whey', 'Post entrenamiento: Ideal para recuperación muscular. Consumir dentro de los 30-60 minutos después de entrenar.Desayuno o entre comidas: Si necesitás aumentar tu ingesta de proteínas diarias.Antes de dormir: En el caso de caseína (de absorción lenta), ayuda a evitar el catabolismo nocturno. Mezclar 1 scoop (medida del envase, aprox. 25-30g de proteína) en: 250-300 ml de agua, leche o bebida vegetal.Podés usar una licuadora o shaker. Si querés sumar calorías, podés agregar banana, avena, mantequi', 4, 2, 'proteinaTruemade.jpg', 100),
 (9, 'Proteina Platinum Frutilla', 'Post entrenamiento: Ideal para recuperación muscular. Consumir dentro de los 30-60 minutos después de entrenar.Desayuno o entre comidas: Si necesitás aumentar tu ingesta de proteínas diarias.Antes de dormir: En el caso de caseína (de absorción lenta), ayuda a evitar el catabolismo nocturno. Mezclar 1 scoop (medida del envase, aprox. 25-30g de proteína) en: 250-300 ml de agua, leche o bebida vegetal.Podés usar una licuadora o shaker. Si querés sumar calorías, podés agregar banana, avena, mantequi', 45000, 2, 'Wheyproteina_Frutilla.jpg', 110),
 (10, 'Creatina ENA', '5 gramos por día, todos los días, a la misma hora (preferiblemente con una comida o postentreno).No hace falta cargar(es decir, tomar grandes dosis al principio). Pero si querés acelerar la saturación muscular, podés ver más abajo la fase de carga. Cuándo tomarla Postentreno (después de entrenar) es ideal, ya que el cuerpo absorbe mejor nutrientes después del ejercicio. También podés tomarla en cualquier momento del día si no entrenás.Con qué tomarla con agua, jugo o un batido postentreno. Si la', 35000, 1, 'creatinaEna.jpg', 95),
 (11, 'Poteina Bar Banana Split', 'Comerlas Post entrenamiento si no podés tomar batido. Colación entre comidas, especialmente si estás lejos de casa. Antes de entrenar, si no comiste nada.\r\nRecomendaciones:\r\nFijate en la cantidad de proteína por barra (ideal 15g o más). Revisá los ingredientes: algunas tienen mucho azúcar o grasa saturada.No las uses como reemplazo total de comidas, sino como complemento.', 40000, 3, 'EnaProteinBar_banansplit.jpg', 85),
@@ -487,8 +483,8 @@ CREATE TABLE `proveedores` (
 
 INSERT INTO `proveedores` (`id`, `nombre`, `apellido`, `celular`) VALUES
 (1, 'Franco', 'Buster', 1169385023),
-(2, 'Tomas', 'Elpeeme', 1109730681),
-(3, 'Lucas', 'keko', 1193868511);
+(2, 'Tomas', 'Lanza', 1109730681),
+(3, 'Lucas', 'Aguirre', 1193868511);
 
 -- --------------------------------------------------------
 
@@ -509,7 +505,7 @@ CREATE TABLE `recetas` (
 --
 
 INSERT INTO `recetas` (`id`, `nombre`, `descripcion`, `categoria_id`, `imagen`) VALUES
-(1, 'pepita la pistolera', 'Ingredientes:\r\n- 4 claras de huevo\r\n- 1 taza de espinacas frescas (puedes picarlas un poco)\r\n- 1/2 taza de champiñones frescos \r\n- 1 cucharada de aceite de oliva \r\nPreparación:\r\n- En una sartén antiadherente, calienta una cucharadita de aceite de oliva a fuego medio. Agrega el ajo y/o cebolla picada y saltea unos segundos.\r\n- Suma los champiñones laminados y cocina durante 2 a 3 minutos hasta que se ablanden y añadí la espinaca y cocina un minuto más, hasta que se reduzca su tamaño. Salpimenté a gusto.\r\n- En un bol, batí 4 claras de huevo con una pizca de sal y pimienta hasta que espumen un poco y en la misma sartén, vertí las claras batidas y luego coloca encima la mezcla de espinaca y champiñones.\r\n- Cocina a fuego bajo hasta que la tortilla cuaje completamente. Podes tapar la sartén para que se cocine más parejo.\r\n', 2, 'tortilla_papa_espinaca.jpg'),
+(1, 'Tortilla de papa vegana', 'Ingredientes:\r\n- 4 claras de huevo\r\n- 1 taza de espinacas frescas (puedes picarlas un poco)\r\n- 1/2 taza de champiñones frescos \r\n- 1 cucharada de aceite de oliva \r\nPreparación:\r\n- En una sartén antiadherente, calienta una cucharadita de aceite de oliva a fuego medio. Agrega el ajo y/o cebolla picada y saltea unos segundos.\r\n- Suma los champiñones laminados y cocina durante 2 a 3 minutos hasta que se ablanden y añadí la espinaca y cocina un minuto más, hasta que se reduzca su tamaño. Salpimenté a gusto.\r\n- En un bol, batí 4 claras de huevo con una pizca de sal y pimienta hasta que espumen un poco y en la misma sartén, vertí las claras batidas y luego coloca encima la mezcla de espinaca y champiñones.\r\n- Cocina a fuego bajo hasta que la tortilla cuaje completamente. Podes tapar la sartén para que se cocine más parejo.\r\n', 2, 'tortilla_papa_espinaca.jpg'),
 (2, 'Batido verde detox', 'Ingredientes:\n- 1 taza de espinaca fresca\n- 1/2 taza de pepino\n- 1 manzana verde \n- 1/2 cuchara limón \n- 1 taza de agua o agua de coco\nPreparación:\n- Lava bien todos los ingredientes. Pela el jengibre y corta el pepino y la manzana en trozos pequeños para facilitar el licuado.\n- Coloca en la licuadora las espinacas, pepino, manzana, jugo de limón, jengibre y el agua (o agua de coco). Si deseas una bebida más refrescante, añade hielo.\n- Mezcla todo a velocidad alta durante unos 30-60 segundos o hasta que la textura sea suave y homogénea.\n- Sirve inmediatamente para aprovechar todos los nutrientes. Puedes decorar con una rodaja de limón o unas hojas de menta si gustas. \n\n', 1, 'batido_verde.jpg'),
 (3, 'Batido proteína con avena y banana', 'Ingredientes:\r\n- 1 banana madura\r\n- 1/2 taza de avena\r\n- 1 scoop de proteína en polvo \r\n- 1 taza de leche\r\n- 1/2 cucharadita de canela(Opcional)\r\n- Cubos de hielo al gusto (opcional)\r\nPreparación:\r\n- Pela la banana y asegúrate de tener todos los ingredientes listos.\r\n- Si quieres una textura más suave, podes licuar primero la avena sola hasta que quede como un polvo fino.\r\n- Licuar por 30-60 segundos hasta que todo esté bien integrado y sin grumos.\r\n- Servir en un vaso grande y disfrutar al instante.', 1, 'batido_banana.jpg'),
 (4, 'Pollo a la plancha con quinoa y brócoli', 'Ingredientes:\r\n- 2 pechuga de pollo \r\n- 1 taza de quinoa \r\n- 1 taza de brócoli\r\n- 1 diente de ajo picado\r\n- 1 taza de quinoa\r\n- 1 cucharadita de aceite de oliva\r\nPreparación:\r\n- En un bowl, coloca las pechugas con el ajo picado, jugo de limón, sal, pimienta y especias(Aprox 20min).\r\n- Lava bien la quinoa bajo el chorro de agua; en una olla, coloca la quinoa con el doble de agua y una pizca de sal.\r\nLleva a hervor, luego bajá el fuego, tapa y cocina por 15-20 minutos, hasta que el agua se haya absorbido y deja reposar tapado 5 minutos y solta los granos con un tenedor.\r\n- Corta el brócoli en ramitos, herví en agua con sal por 5-7 minutos o hasta que esté tierno pero firme y escurrí, si queres, rocía con un poco de aceite de oliva o unas gotas de limón.\r\n- Calienta en una sartén o plancha con un chorrito de aceite de oliva y cocina las pechugas a fuego medio-alto por 4-5 minutos de cada lado o hasta que estén doradas y cocidas por dentro.\r\n \r\n', 1, 'pollo_brocoli.jpg'),
@@ -590,7 +586,7 @@ INSERT INTO `reservas` (`id_reserva`, `id_usuario`, `fecha`, `total`, `estado`, 
 (56, 31, '2025-07-29 21:29:51', 35000, 'expirado', '2025-07-29 21:59:51'),
 (57, 31, '2025-07-29 21:31:39', 35000, 'cancelado', '2025-07-29 22:01:39'),
 (58, 31, '2025-07-29 22:02:49', 20000, 'expirado', '2025-07-29 22:32:49'),
-(63, 1, '2025-08-05 21:53:52', 80000, 'expirado', '2025-08-05 22:23:52');
+(63, 1, '2025-08-05 21:53:52', 80000, 'cancelado', '2025-08-05 22:23:52');
 
 -- --------------------------------------------------------
 
@@ -654,11 +650,12 @@ CREATE TABLE `usuarios` (
 --
 
 INSERT INTO `usuarios` (`id`, `apellido`, `nombre`, `rol`, `imagen`, `id_membresia`, `fecha_nacimiento`, `celular`, `aptoMedico`, `dni`) VALUES
-(1, 'admin', 'admin', 'admin', 'perfil.jpg', 1, '2025-04-09', '1193868511', 'xd', 12345678),
-(28, 'Buster', 'Frank', 'jubilado', NULL, 1, '2001-05-03', '1165830511', 'asdasd', 44323448),
-(29, 'Aguirree', 'Lucass', 'socio', 'imagen_usuario_29.jpg', 1, '2001-05-04', '1165830512', 'aptomedico_usuario_29.pdf', 43245022),
-(31, 'Jimenez', 'Gustavo', 'cliente', 'perfil.jpg', 1, '2025-07-20', '1122222222', NULL, 39393939),
-(32, 'Girardi', 'Veronica', 'cliente', 'perfil.jpg', 1, '9999-09-09', '1122222222', NULL, 99999999);
+(1, 'admin', 'admin', 'admin', 'perfil.jpg', 1, '2025-04-09', '1193868511', '', 12345678),
+(28, 'Buster', 'Frank', 'jubilado', NULL, 1, '2001-05-03', '1165830511', 'aptoMedico_usuario_28.jpg', 44323448),
+(31, 'Jimenez', 'Gustavo', 'cliente', 'perfil.jpg', 1, '2025-07-20', '1122222222', 'aptoMedico_usuario_31.jpg', 39393939),
+(32, 'Girardi', 'Veronica', 'cliente', 'perfil.jpg', 1, '9999-09-09', '1122222222', 'aptoMedico_usuario_32.jpg', 99999999),
+(34, 'Melgem', 'Marina', 'socio', 'perfil.jpg', 1, '2001-05-04', '1138409088', 'aptoMedico_usuario_34.jpg', 43434340),
+(35, 'Aguirre', 'Lucas', 'cliente', 'perfil.jpg', 1, '2001-05-04', '1165830511', NULL, 43434334);
 
 --
 -- Índices para tablas volcadas
@@ -781,7 +778,7 @@ ALTER TABLE `usuarios`
 -- AUTO_INCREMENT de la tabla `autenticacion`
 --
 ALTER TABLE `autenticacion`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=24;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=27;
 
 --
 -- AUTO_INCREMENT de la tabla `categorias`
@@ -799,13 +796,13 @@ ALTER TABLE `categoria_recetas`
 -- AUTO_INCREMENT de la tabla `cuota`
 --
 ALTER TABLE `cuota`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=18;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=24;
 
 --
 -- AUTO_INCREMENT de la tabla `detalle_reservas`
 --
 ALTER TABLE `detalle_reservas`
-  MODIFY `id_detalle_reserva` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=65;
+  MODIFY `id_detalle_reserva` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=66;
 
 --
 -- AUTO_INCREMENT de la tabla `ejercicios`
@@ -865,7 +862,7 @@ ALTER TABLE `recetas`
 -- AUTO_INCREMENT de la tabla `reservas`
 --
 ALTER TABLE `reservas`
-  MODIFY `id_reserva` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=64;
+  MODIFY `id_reserva` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=65;
 
 --
 -- AUTO_INCREMENT de la tabla `transacciones`
@@ -877,7 +874,7 @@ ALTER TABLE `transacciones`
 -- AUTO_INCREMENT de la tabla `usuarios`
 --
 ALTER TABLE `usuarios`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=33;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=36;
 COMMIT;
 
 /*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;

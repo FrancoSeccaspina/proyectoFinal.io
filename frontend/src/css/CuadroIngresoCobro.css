@@ -103,6 +103,29 @@ td {
   border-top: 1px solid #444;
 }
 
+/* Botón exportar */
+.exportar-btn-container {
+  display: flex;
+  justify-content: flex-start;
+  margin-top: 1rem;
+}
+
+.exportar-btn {
+  background-color: #4CAF50;
+  color: #fff;
+  border: none;
+  padding: 0.5rem 1rem;
+  border-radius: 5px;
+  cursor: pointer;
+  font-size: 1rem;
+  transition: background-color 0.3s;
+}
+
+.exportar-btn:hover {
+  background-color: #45a049;
+}
+
+/* Responsivo */
 @media screen and (max-width: 320px) {
   h2 {
     font-size: 1.3rem;
@@ -127,7 +150,13 @@ td {
     display: block;
     overflow-x: auto;
   }
+
+  .exportar-btn {
+    width: 100%;
+    text-align: center;
+  }
 }
+
 @media screen and (min-width: 768px) {
   h2 {
     font-size: 1.6rem;
@@ -142,5 +171,12 @@ td {
     width: 100%;
     margin: 0;
     font-size: 0.9rem;
+  }
+}
+
+@media (max-width: 425px) {
+  .exportar-btn {
+    width: 100%;
+    text-align: center;
   }
 }

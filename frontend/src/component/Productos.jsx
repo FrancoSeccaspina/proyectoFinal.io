@@ -64,7 +64,8 @@ function Productos() {
   return (
     <div className="container-products">
       <section className="moverJuntos">
-        <h2 className='box-title'>Lista de Productos: {productosFiltrados.length}</h2>
+      <h2 className='box-title'>Catálogo de Productos</h2>
+        <h3 className='box-title'>Productos registrados: {productosFiltrados.length}</h3>
         <Link to="/productoNuevo" className="btn btn-primary">
           Agregar Nuevo
         </Link>

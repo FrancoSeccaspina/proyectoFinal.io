@@ -9,9 +9,9 @@ import {
   ResponsiveContainer,
   CartesianGrid,
 } from 'recharts';
-import { createChart } from 'lightweight-charts';
+import * as XLSX from 'xlsx';
 import '../css/cuadroCuotaAbonada.css';
-//const firstChart = createChart(document.getElementById('firstContainer'));
+
 const CuadroCuotaAbonada = () => {
   const [graficoData, setGraficoData] = useState([]);
   const [anio, setAnio] = useState('');
@@ -44,11 +44,37 @@ const CuadroCuotaAbonada = () => {
   const totalCuotas = graficoData.reduce((sum, item) => sum + item.cantidad, 0);
   const totalMonto = graficoData.reduce((sum, item) => sum + item.monto, 0);
 
+  const exportarExcel = () => {
+    // Crear datos para Excel
+    const datosExcel = graficoData.map(item => ({
+      "Mes/Año": item.mesAnio,
+      "Cantidad de cuotas abonadas": item.cantidad,
+      "Monto abonado": item.monto
+    }));
+
+    // Agregar fila de totales
+    datosExcel.push({
+      "Mes/Año": "TOTAL",
+      "Cantidad de cuotas abonadas": totalCuotas,
+      "Monto abonado": totalMonto
+    });
+
+    // Crear hoja de cálculo
+    const hoja = XLSX.utils.json_to_sheet(datosExcel);
+
+    // Crear libro y agregar la hoja
+    const libro = XLSX.utils.book_new();
+    XLSX.utils.book_append_sheet(libro, hoja, "Cuotas Abonadas");
+
+    // Exportar el archivo
+    XLSX.writeFile(libro, "Cuotas_Abonadas.xlsx");
+  };
+
   return (
     <div style={{ padding: '2rem' }}>
       <h2>Estadísticas de Cuotas Abonadas</h2>
-
-      <div style={{ marginBottom: '1rem' }}>
+      <div className="filtros-container">
+      <div style={{ marginBottom: '1rem' }} className='inputs-filtros'>
         <label style={{ marginRight: '1rem' }}>
           Año:
           <input
@@ -73,7 +99,12 @@ const CuadroCuotaAbonada = () => {
             ))}
           </select>
         </label>
-
+        </div>
+       <div className="exportar-btn-container">
+          <button className="exportar-btn" onClick={exportarExcel}>
+            Exportar a Excel
+          </button>
+        </div>
       </div>
 
       <div style={{ width: '100%', height: 300 }}>
@@ -94,33 +125,32 @@ const CuadroCuotaAbonada = () => {
           <tr>
             <th>Mes/Año</th>
             <th>Cantidad de cuotas abonadas</th>
+            <th>Monto abonado</th>
           </tr>
         </thead>
         <tbody>
           {graficoData.length === 0 ? (
             <tr>
-              <td colSpan="2">No hay datos para mostrar</td>
+              <td colSpan="3">No hay datos para mostrar</td>
             </tr>
           ) : (
             graficoData.map((item, index) => (
               <tr key={index}>
                 <td>{item.mesAnio}</td>
                 <td>{item.cantidad}</td>
+                <td>${item.monto.toLocaleString('es-AR', { minimumFractionDigits: 2 })}</td>
               </tr>
             ))
           )}
+          {graficoData.length > 0 && (
+            <tr>
+              <td><strong>Total</strong></td>
+              <td><strong>{totalCuotas}</strong></td>
+              <td><strong>${totalMonto.toLocaleString('es-AR', { minimumFractionDigits: 2 })}</strong></td>
+            </tr>
+          )}
         </tbody>
       </table>
-
-      <p className='titulos'>
-        <strong>Total abonadas:</strong> {totalCuotas}
-      </p>
-      <p className='titulos'>
-        <strong>Total montos abonados:</strong> ${totalMonto.toLocaleString('es-AR', { minimumFractionDigits: 2 })}
-      </p>
-      <section className='Proveedores'>
-
-      </section>
     </div>
   );
 };

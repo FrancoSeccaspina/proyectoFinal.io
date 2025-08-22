@@ -45,11 +45,6 @@
             </div>
 
             <div class="info-row">
-              <span class="label">Estado de la Membresía:</span>
-              <span class="value"><%= usuarioLogueado.estado_membresia %></span>
-            </div>
-
-            <div class="info-row">
               <% if (usuarioLogueado.fecha_fin_cuota) { %>
               <span class="label">Vigente hasta:</span>
               <span class="value"><%= usuarioLogueado.fecha_fin_cuota %></span>

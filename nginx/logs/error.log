@@ -88,3 +88,23 @@
 2025/08/06 00:59:15 [notice] 1#1: worker process 25 exited with code 0
 2025/08/06 00:59:15 [notice] 1#1: worker process 28 exited with code 0
 2025/08/06 00:59:15 [notice] 1#1: signal 29 (SIGIO) received
+2025/08/22 03:08:02 [emerg] 1#1: open() "/etc/letsencrypt/options-ssl-nginx.conf" failed (2: No such file or directory) in /etc/nginx/conf.d/base.conf:17
+2025/08/22 03:08:04 [emerg] 1#1: open() "/etc/letsencrypt/options-ssl-nginx.conf" failed (2: No such file or directory) in /etc/nginx/conf.d/base.conf:17
+2025/08/22 03:08:05 [emerg] 1#1: open() "/etc/letsencrypt/options-ssl-nginx.conf" failed (2: No such file or directory) in /etc/nginx/conf.d/base.conf:17
+2025/08/22 03:08:06 [emerg] 1#1: open() "/etc/letsencrypt/options-ssl-nginx.conf" failed (2: No such file or directory) in /etc/nginx/conf.d/base.conf:17
+2025/08/22 03:08:08 [emerg] 1#1: open() "/etc/letsencrypt/options-ssl-nginx.conf" failed (2: No such file or directory) in /etc/nginx/conf.d/base.conf:17
+2025/08/22 03:08:10 [emerg] 1#1: open() "/etc/letsencrypt/options-ssl-nginx.conf" failed (2: No such file or directory) in /etc/nginx/conf.d/base.conf:17
+2025/08/22 03:08:14 [emerg] 1#1: open() "/etc/letsencrypt/options-ssl-nginx.conf" failed (2: No such file or directory) in /etc/nginx/conf.d/base.conf:17
+2025/08/22 03:08:21 [emerg] 1#1: open() "/etc/letsencrypt/options-ssl-nginx.conf" failed (2: No such file or directory) in /etc/nginx/conf.d/base.conf:17
+2025/08/22 03:08:35 [emerg] 1#1: open() "/etc/letsencrypt/options-ssl-nginx.conf" failed (2: No such file or directory) in /etc/nginx/conf.d/base.conf:17
+2025/08/22 03:09:01 [emerg] 1#1: open() "/etc/letsencrypt/options-ssl-nginx.conf" failed (2: No such file or directory) in /etc/nginx/conf.d/base.conf:17
+2025/08/22 03:09:29 [emerg] 1#1: open() "/etc/letsencrypt/options-ssl-nginx.conf" failed (2: No such file or directory) in /etc/nginx/conf.d/base.conf:17
+2025/08/22 03:09:30 [emerg] 1#1: open() "/etc/letsencrypt/options-ssl-nginx.conf" failed (2: No such file or directory) in /etc/nginx/conf.d/base.conf:17
+2025/08/22 03:09:31 [emerg] 1#1: open() "/etc/letsencrypt/options-ssl-nginx.conf" failed (2: No such file or directory) in /etc/nginx/conf.d/base.conf:17
+2025/08/22 03:09:32 [emerg] 1#1: open() "/etc/letsencrypt/options-ssl-nginx.conf" failed (2: No such file or directory) in /etc/nginx/conf.d/base.conf:17
+2025/08/22 03:09:34 [emerg] 1#1: open() "/etc/letsencrypt/options-ssl-nginx.conf" failed (2: No such file or directory) in /etc/nginx/conf.d/base.conf:17
+2025/08/22 03:09:36 [emerg] 1#1: open() "/etc/letsencrypt/options-ssl-nginx.conf" failed (2: No such file or directory) in /etc/nginx/conf.d/base.conf:17
+2025/08/22 03:09:40 [emerg] 1#1: open() "/etc/letsencrypt/options-ssl-nginx.conf" failed (2: No such file or directory) in /etc/nginx/conf.d/base.conf:17
+2025/08/22 03:09:46 [emerg] 1#1: open() "/etc/letsencrypt/options-ssl-nginx.conf" failed (2: No such file or directory) in /etc/nginx/conf.d/base.conf:17
+2025/08/22 03:10:00 [emerg] 1#1: open() "/etc/letsencrypt/options-ssl-nginx.conf" failed (2: No such file or directory) in /etc/nginx/conf.d/base.conf:17
+2025/08/22 03:10:26 [emerg] 1#1: open() "/etc/letsencrypt/options-ssl-nginx.conf" failed (2: No such file or directory) in /etc/nginx/conf.d/base.conf:17

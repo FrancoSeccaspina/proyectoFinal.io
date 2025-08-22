@@ -23,38 +23,43 @@ function Reservas() {
       setLoading(false);
     }
   };
-  
+
   // Función de búsqueda
   const searcher = (e) => {
     setSearch(e.target.value);
   };
 
   const eliminarReserva = (id_reserva) => {
-    setReservas(prev => prev.filter(r => r.id_reserva !== id_reserva));
+    setReservas((prev) => prev.filter((r) => r.id_reserva !== id_reserva));
   };
 
   // Filtrado
   const resultado = !search
-  ? reservas
-  : reservas.filter((reserva) =>
-    reserva.estado.toLowerCase().includes(search.toLowerCase())    
-  );
+    ? reservas
+    : reservas.filter((reserva) =>
+        reserva.estado.toLowerCase().includes(search.toLowerCase())
+      );
 
+  // Exportación a Excel con todos los productos
   const exportarExcel = () => {
-    // Creamos una lista para almacenar filas
     const datosParaExportar = [];
+
     resultado.forEach((reserva) => {
-      const primerDetalle = Array.isArray(reserva.DetalleReservas) ? reserva.DetalleReservas[0] : null;
-  
-      datosParaExportar.push({
-        "ID Reserva": reserva.id_reserva,
-        "Fecha": new Date(reserva.fecha).toLocaleString(),  // fecha más legible
-        "Estado": reserva.estado,
-        "Total": reserva.total,
-        "Cliente": `${reserva.id_usuario || ''}`,
-        "Producto": primerDetalle?.Producto?.nombre || '',
-        "Cantidad": primerDetalle?.cantidad || '',
-      });
+      if (Array.isArray(reserva.DetalleReservas)) {
+        reserva.DetalleReservas.forEach((detalle, index) => {
+          datosParaExportar.push({
+            "ID Reserva": reserva.id_reserva,
+            "Fecha": new Date(reserva.fecha).toLocaleString(),
+            "Estado": reserva.estado,
+            "Cliente": `${reserva.Usuario?.nombre || ""} ${reserva.Usuario?.apellido || ""}`,
+            "Producto": detalle.Producto?.nombre || "",
+            "Cantidad": detalle.cantidad,
+            "Subtotal": detalle.subtotal,
+            "Total Reserva":
+              index === reserva.DetalleReservas.length - 1 ? reserva.total : "",
+          });
+        });
+      }
     });
 
     const wb = XLSX.utils.book_new();
@@ -69,7 +74,6 @@ function Reservas() {
 
   return (
     <div className="table-wrapper">
-
       <section className="moverJuntos">
         <h2 className="box-title">Lista de Reservas</h2>
       </section>
@@ -78,25 +82,27 @@ function Reservas() {
         value={search}
         onChange={searcher}
         type="text"
-        placeholder='Buscar por Estado'
-        className='form-control'
+        placeholder="Buscar por Estado"
+        className="form-control"
       />
 
       <button onClick={exportarExcel} className="btn-exportar">
         Exportar a Excel
       </button>
 
-      { loading ? ( <p>Cargando reservas...</p> ) : reservas.length > 0 ? (
-          resultado.map((reserva) => (
-            <ReservaCard 
-              key={reserva.id_reserva}
-              reserva={reserva}  
-              onDelete={eliminarReserva}
-              />
-            )
-          )
-        ) : ( <p>No hay reservas para mostrar.</p> )
-      }
+      {loading ? (
+        <p>Cargando reservas...</p>
+      ) : reservas.length > 0 ? (
+        resultado.map((reserva) => (
+          <ReservaCard
+            key={reserva.id_reserva}
+            reserva={reserva}
+            onDelete={eliminarReserva}
+          />
+        ))
+      ) : (
+        <p>No hay reservas para mostrar.</p>
+      )}
     </div>
   );
 }

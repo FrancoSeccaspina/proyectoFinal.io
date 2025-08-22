@@ -186,7 +186,11 @@ export class reservaApiController {
                         model: Reserva,
                         attributes: ['fecha'],
                         where: whereReserva
-                    }
+                    },
+                        {
+                        model: Producto,
+                        attributes: ['id', 'nombre']
+                        }
                 ],
                 order: [[Reserva, 'fecha', 'DESC']]
             });
