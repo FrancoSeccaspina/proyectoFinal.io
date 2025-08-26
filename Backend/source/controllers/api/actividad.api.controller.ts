@@ -1,5 +1,5 @@
 import { Request, Response } from 'express';
-import { Actividad } from '../../database/models/Actividad';
+import { Actividad } from '../../database/models/actividad';
 import { Op, fn, col, where } from 'sequelize';
 
 export class ActividadApiController {
