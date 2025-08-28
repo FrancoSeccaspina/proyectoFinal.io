@@ -5,7 +5,7 @@ import '../css/header.css'
 import '../css/productos.css'
 
 function Productos() {
-  console.log('Se está renderizando <Productos />');
+  console.log('Se está renderizando <Productos /> ');
   const [products, setProducts] = useState([]);
   const [categorias, setCategorias] = useState([]);
   const [searchTerm, setSearchTerm] = useState("");
@@ -14,7 +14,6 @@ function Productos() {
     try {
       const response = await fetch("http://localhost:3032/api/categoriaProductos");
       const data = await response.json();
-      console.log('DATA RECIBIDA (categorias):', data);
       setCategorias(data);
     } catch (err) {
       console.error('Error al traer categorías:', err);
@@ -23,6 +22,7 @@ function Productos() {
 
   const getProducts = async ()=> {
     try {
+      console.log('API URL:', apiUrl);
       const response = await fetch("http://localhost:3032/api/productos", { credentials: 'include' });
       const data = await response.json();
       console.log('DATA RECIBIDA (productos):', data);

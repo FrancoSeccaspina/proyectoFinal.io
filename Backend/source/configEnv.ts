@@ -11,6 +11,7 @@ export const DATABASE_PASSWORD_CONECT = process.env.DATABASE_PASSWORD_CONECT;
 export const DATABASE_HOST = process.env.DATABASE_HOST;
 export const TIEMPO_CONTROL_STOCK_MINUTOS = process.env.TIEMPO_CONTROL_STOCK_MINUTOS;
 export const JWT_SECRET = process.env.JWT_SECRET;
+export const BACKEND_APP_DOMAIN_HOST = process.env.BACKEND_APP_DOMAIN_HOST;
 
 export function validarVariablesDeEntorno() {
   const variablesRequeridas = [
@@ -20,6 +21,7 @@ export function validarVariablesDeEntorno() {
     'DATABASE_HOST',
     'TIEMPO_CONTROL_STOCK_MINUTOS',
     'JWT_SECRET',
+    'BACKEND_APP_DOMAIN_HOST'
   ];
 
   const variablesNoDefinidas = variablesRequeridas.filter(

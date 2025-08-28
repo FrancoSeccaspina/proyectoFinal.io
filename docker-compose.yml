@@ -27,6 +27,7 @@ services:
       DATABASE_PASSWORD_CONECT: ${DATABASE_PASSWORD}
       DATABASE_HOST: ${DATABASE_HOST}
       NODE_ENV : ${NODE_ENV}
+      BACKEND_APP_DOMAIN_HOST: ${DOMAIN_HOST}
     ports:
       - "3032:3032"
     depends_on:
@@ -65,6 +66,8 @@ services:
     build:
       context: ./flask
       dockerfile: Dockerfile
+    environment:
+      REACT_APP_DOMAIN_HOST: ${DOMAIN_HOST}
     ports:
       - "5000:5000"
     container_name: activa-flask
