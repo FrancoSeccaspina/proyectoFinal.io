@@ -22,7 +22,6 @@ function Productos() {
 
   const getProducts = async ()=> {
     try {
-      console.log('API URL:', apiUrl);
       const response = await fetch("http://localhost:3032/api/productos", { credentials: 'include' });
       const data = await response.json();
       console.log('DATA RECIBIDA (productos):', data);

@@ -45,6 +45,8 @@ import ActividadApiController from './routes/api/actividad.api.routes';
 import dotenv from 'dotenv';
 dotenv.config();
 
+import { REACT_APP_DOMAIN_HOST } from './configEnv';
+
 // cron
 import './cron-task/devolver-stock-reservas-vencidas'
 
@@ -53,9 +55,15 @@ validarVariablesDeEntorno();
 
 const app = express();
 
+// variables globales
+app.use((req, res, next) => {
+  res.locals.reactAppDomainHost = REACT_APP_DOMAIN_HOST;
+  next();
+});
+
 // Habilitar CORS
 app.use(cors({
-  origin: 'http://localhost:3000',
+  origin: `http://${REACT_APP_DOMAIN_HOST}`,
   credentials: true  
 }));
 

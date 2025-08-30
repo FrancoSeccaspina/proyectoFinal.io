@@ -8,7 +8,7 @@ import { firmarToken, obtenerPayload } from '../utils/generadorToken'
 import bcrypt from 'bcryptjs';
 import { Cuota } from "../database/models/cuota";
 import { transporter } from "../config/mailer";
-import { JWT_SECRET } from '../configEnv';
+import { REACT_APP_DOMAIN_HOST } from '../configEnv';
 
 const jwt = require('jsonwebtoken')
 
@@ -217,7 +217,7 @@ export class UsuarioController {
       });
 
       if (usuario.rol === Roles.ADMIN) {
-        return res.redirect("http://localhost:3000");
+        return res.redirect(`http://${REACT_APP_DOMAIN_HOST}`);
       }
 
       return res.redirect("/");

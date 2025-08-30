@@ -9,7 +9,7 @@ function RedireccionFlotante(){
                 <nav>
                     <ol class="texto_redireccion">
                         <li class="texto_redireccion-item">
-                            <a href="http://localhost:3032/" class="texto_redireccion-link">Cliente</a>
+                            <a href={`http://${process.env.REACT_APP_BACKEND_DOMAIN_HOST}`} class="texto_redireccion-link">Cliente</a>
                         </li>
 
                         <li class="texto_redireccion-separator">
@@ -20,7 +20,7 @@ function RedireccionFlotante(){
                         </li>
 
                         <li class="texto_redireccion-item">
-                            <a href="http://localhost:3000" class="texto_redireccion-link">Admin</a>
+                            <a href={`http://${process.env.REACT_APP_FRONTEND_DOMAIN_HOST}`} class="texto_redireccion-link">Admin</a>
                         </li>
                     </ol>
                 </nav>
