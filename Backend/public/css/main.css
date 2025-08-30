@@ -1,122 +1,160 @@
 @import url('header.css');
 @import url('footer.css');
 
-a {
-    text-decoration: none;
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
 }
+
+html {
+  scroll-behavior: smooth;
+  font-size: 16px;
+}
+
+body.body-style {
+  font-family: "Segoe UI", Roboto, Arial, sans-serif;
+  background-color: #fff;
+  color: #111;
+  line-height: 1.5;
+  overflow-x: hidden;
+}
+
+a {
+  text-decoration: none;
+  color: inherit;
+}
+
 li {
-    list-style-type: none;
+  list-style-type: none;
 }
 
 main {
-    padding: 1rem;
+  padding: 1rem;
 }
 
 .main-content {
-    background-color: transparent;
-    width: 100%;
-    margin: auto;
-    padding: 0px;
-    box-sizing: border-box;
+  width: 100%;
+  margin: auto;
+  padding: 0;
+  background-color: transparent;
 }
 
 .carousel-container {
-    max-height: 60vh;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    overflow: hidden;
-    background-color: transparent !important; /* <-- Asegura que no haya gris */
+  width: 100%;
+  max-width: 1440px;
+  margin: 0 auto;
+  overflow: hidden;
+  border-radius: 8px;
+  background-color: transparent !important;
+  box-shadow: 0 4px 12px rgba(0,0,0,0.25);
 }
+
 .carousel-inner {
-    background-color: transparent !important;
+  width: 100%;
+  background-color: transparent !important;
+}
+
+.carousel-item {
+  position: relative;
+  width: 100%;
+  height: 450px;
 }
 
 .carousel-img {
-    object-fit: contain;
-    height: 100%;
-    width: 100%;
-    height: auto;
-    display: block;
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  display: block;
+}
+
+.carousel-control-prev-icon,
+.carousel-control-next-icon {
+  filter: invert(100%);
+}
+
+.carousel-indicators button {
+  background-color: #fff !important;
 }
 
 .planes {
-    display: flex;
-    flex-wrap: wrap;
-    gap: 1rem;
-    margin-top: 2rem;
+  display: flex;
+  flex-wrap: wrap;
+  gap: 1rem;
+  margin-top: 2rem;
 }
 
 .planMensual, .planAnual {
-    flex: 1 1 300px;
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    justify-content: center;
+  flex: 1 1 300px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
 }
 
 .planMensual img, .planAnual img {
-    width: 100%;
-    max-width: 250px; /* Reducido a la mitad */
-    height: auto;
-    padding: 0.5rem;
-    object-fit: contain;
+  width: 100%;
+  max-width: 250px;
+  height: auto;
+  padding: 0.5rem;
+  object-fit: contain;
 }
 
 .planMensual a, .planAnual a {
-    text-decoration: none;
-    color: rgb(0, 0, 0);
-    text-align: center;
-    border: 1px solid #a1a1a1;
-    padding: 1rem;
-    font-weight: bold;
+  text-decoration: none;
+  color: #000;
+  text-align: center;
+  border: 1px solid #a1a1a1;
+  padding: 1rem;
+  font-weight: bold;
 }
 
 .planMensual a:hover, .planAnual a:hover {
-    color: rgb(104, 104, 104);
+  color: #555;
 }
 
 .gestion-boton {
-    text-align: center;
-    margin: 2rem 0;
+  text-align: center;
+  margin: 2rem 0;
 }
 
 .gestion-boton button {
-    padding: 0.8rem 1.5rem;
-    background-color: #444;
-    color: #fff;
-    border: none;
-    border-radius: 8px;
-    font-size: 1rem;
-    cursor: pointer;
+  padding: 0.8rem 1.5rem;
+  background-color: #111;
+  color: #fff;
+  border: none;
+  border-radius: 8px;
+  font-size: 1rem;
+  cursor: pointer;
+  transition: background 0.3s;
 }
 
 .gestion-boton button:hover {
-    background-color: #222;
+  background-color: #333;
 }
-    .visually-hidden {
-    position: absolute;
-    width: 1px;
-    height: 1px;
-    margin: -1px;
-    padding: 0;
-    overflow: hidden;
-    clip: rect(0, 0, 0, 0);
-    border: 0;
-    }
+
+.visually-hidden {
+  position: absolute;
+  width: 1px;
+  height: 1px;
+  margin: -1px;
+  padding: 0;
+  overflow: hidden;
+  clip: rect(0, 0, 0, 0);
+  border: 0;
+}
 
 .flotante {
-    display: flex;
-    position: fixed;
-    color: white;    
-    font-size: 14px;
-
-    bottom: 0px;
-    left: 0px;
-    right: 0px;
-    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
-    background-color: #2e2e2e;
-    justify-content: space-between;
+  display: flex;
+  position: fixed;
+  color: white;
+  font-size: 14px;
+  bottom: 0;
+  left: 0;
+  right: 0;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+  background-color: #2e2e2e;
+  justify-content: space-between;
 }
 
 .texto_redireccion {
@@ -124,18 +162,13 @@ main {
   align-items: center;
   gap: 4px;
   font-size: 14px;
-  color: var(--text-color);
-  list-style: none;
-  padding: 0;
+  color: #fff;
   padding-right: 2rem;
-  margin: 0;
 }
-
 
 .texto_redireccion-item {
   display: flex;
   align-items: center;
-
 }
 
 .texto_redireccion-link {
@@ -145,11 +178,9 @@ main {
   display: block;
 }
 
-
 .texto_redireccion-link:hover {
-  color: blue;
+  color: #ccc;
 }
-
 
 .texto_redireccion-separator {
   display: flex;
@@ -163,4 +194,86 @@ main {
 
 html[dir="rtl"] .texto_redireccion-icon {
   transform: rotate(180deg);
+}
+
+@media (max-width: 320px) {
+  .carousel-item {
+    height: 180px;
+  }
+  .carousel-img {
+    object-fit: contain;
+  }
+  .planMensual img, .planAnual img {
+    max-width: 150px;
+  }
+  .planMensual a, .planAnual a {
+    font-size: 0.8rem;
+    padding: 0.5rem;
+  }
+  footer {
+    font-size: 0.75rem;
+  }
+}
+
+
+@media (min-width: 321px) and (max-width: 425px) {
+  .carousel-item {
+    height: 220px;
+  }
+  .planMensual img, .planAnual img {
+    max-width: 180px;
+  }
+  .planMensual a, .planAnual a {
+    font-size: 0.9rem;
+  }
+}
+
+@media (min-width: 426px) and (max-width: 768px) {
+  .carousel-item {
+    height: 300px;
+  }
+  .carousel-img {
+    object-fit: cover;
+  }
+  .planMensual img, .planAnual img {
+    max-width: 200px;
+  }
+}
+
+@media (min-width: 769px) and (max-width: 1024px) {
+  .carousel-container {
+    max-width: 950px;
+    margin: 0 auto;
+  }
+  .carousel-item {
+    height: 360px;
+  }
+  .carousel-img {
+    object-fit: cover;
+    display: block;
+    margin: 0 auto;
+  }
+  .planMensual img, .planAnual img {
+    max-width: 220px;
+    margin: 0 auto;
+  }
+}
+
+@media (min-width: 1025px) and (max-width: 1440px) {
+  .carousel-container {
+    max-width: 1200px;
+    margin: 0 auto;
+  }
+  .carousel-item {
+    height: 420px;
+  }
+  .carousel-img {
+    object-fit: cover;
+    display: block;
+    margin: 0 auto;
+  }
+  .planMensual img, .planAnual img {
+    max-width: 250px;
+    margin: 0 auto;
+  }
 }

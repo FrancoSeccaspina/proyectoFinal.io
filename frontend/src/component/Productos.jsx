@@ -3,6 +3,8 @@ import { Link } from 'react-router-dom';
 import axios from "axios";
 import '../css/header.css'
 import '../css/productos.css'
+import { toast, ToastContainer } from "react-toastify";
+import "react-toastify/dist/ReactToastify.css";
 
 function Productos() {
   console.log('Se está renderizando <Productos /> ');
@@ -26,6 +28,15 @@ function Productos() {
       const data = await response.json();
       console.log('DATA RECIBIDA (productos):', data);
       setProducts(data);
+      // 🚨 Notificación de stock bajo
+      data.forEach(prod => {
+        if (prod.stock <= 5) {
+          toast.warning(`⚠️ El producto "${prod.nombre}" tiene stock bajo (${prod.stock})`);
+        }
+        if(prod.stock === 0) {
+          toast.error(`❌ El producto "${prod.nombre}" está agotado`);
+        }
+      });
     } catch (err) {
       console.error('Error al traer productos:', err);
     }
@@ -117,6 +128,7 @@ function Productos() {
           </tbody>
         </table>
       </ul>
+      <ToastContainer position="top-right" autoClose={4000} />
     </div>
   );
 }
