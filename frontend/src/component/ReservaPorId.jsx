@@ -22,7 +22,7 @@ function ReservaPorId() {
     const getReservaByID = async () => {
         try {
             const response = await axios.get(
-                `http://localhost:3032/api/reserva/${idReserva}/confirmar`,
+                `http://${process.env.REACT_APP_BACKEND_DOMAIN_HOST}/api/reserva/${idReserva}/confirmar`,
                 { withCredentials: true }
             );
             setReserva(response.data.reserva);

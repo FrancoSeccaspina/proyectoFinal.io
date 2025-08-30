@@ -14,7 +14,7 @@ const AltaPrecioCuota = () => {
       useEffect(() => {
         const fetchUltimoPrecio = async () => {
           try {
-            const res = await axios.get('http://localhost:3032/api/precioCuota/ultima',
+            const res = await axios.get(`http://${process.env.REACT_APP_BACKEND_DOMAIN_HOST}/api/precioCuota/ultima`,
               { withCredentials: true }
             );
             setUltimoPrecio(res.data.precio);
@@ -35,7 +35,7 @@ const AltaPrecioCuota = () => {
       const handleSubmit = async (e) => {
         e.preventDefault();
         try {
-            await axios.post('http://localhost:3032/api/precioCuota', cuota, {
+            await axios.post(`http://${process.env.REACT_APP_BACKEND_DOMAIN_HOST}/api/precioCuota`, cuota, {
               headers: {
                 'Content-Type': 'application/json'
               },

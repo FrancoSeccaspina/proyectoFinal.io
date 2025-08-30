@@ -18,7 +18,7 @@ const Actividad = () => {
   useEffect(() => {
     const fetchActividades = async () => {
       try {
-        const res = await axios.get("http://localhost:3032/api/actividad", {
+        const res = await axios.get(`http://${process.env.REACT_APP_BACKEND_DOMAIN_HOST}/api/actividad`, {
           withCredentials: true,
         });
 
@@ -58,7 +58,7 @@ const Actividad = () => {
 
     try {
       const res = await axios.post(
-        "http://localhost:3032/api/actividad",
+        `http://${process.env.REACT_APP_BACKEND_DOMAIN_HOST}/api/actividad`,
         nuevaActividad,
         { withCredentials: true }
       );
@@ -94,7 +94,7 @@ const Actividad = () => {
 
     try {
       await axios.put(
-        `http://localhost:3032/api/editarActividad/${eventoSeleccionado.id}`,
+        `http://${process.env.REACT_APP_BACKEND_DOMAIN_HOST}/api/editarActividad/${eventoSeleccionado.id}`,
         nuevaActividad,
         { withCredentials: true }
       );
@@ -135,7 +135,7 @@ const Actividad = () => {
 
     try {
       await axios.delete(
-        `http://localhost:3032/api/eliminarActividad/${eventoSeleccionado.id}`,
+        `http://${process.env.REACT_APP_BACKEND_DOMAIN_HOST}/api/eliminarActividad/${eventoSeleccionado.id}`,
         { withCredentials: true }
       );
 

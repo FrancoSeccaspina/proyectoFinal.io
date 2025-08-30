@@ -14,7 +14,9 @@ function Productos() {
 
   const getCategorias = async ()=> {
     try {
-      const response = await fetch("http://localhost:3032/api/categoriaProductos");
+      const url = `http://${process.env.REACT_APP_BACKEND_DOMAIN_HOST}/api/categoriaProductos`;
+      console.log('URL para categorías:', url);
+      const response = await fetch(`http://${process.env.REACT_APP_BACKEND_DOMAIN_HOST}/api/categoriaProductos`);
       const data = await response.json();
       setCategorias(data);
     } catch (err) {
@@ -24,7 +26,7 @@ function Productos() {
 
   const getProducts = async ()=> {
     try {
-      const response = await fetch("http://localhost:3032/api/productos", { credentials: 'include' });
+      const response = await fetch(`http://${process.env.REACT_APP_BACKEND_DOMAIN_HOST}/api/productos`, { credentials: 'include' });
       const data = await response.json();
       console.log('DATA RECIBIDA (productos):', data);
       setProducts(data);
@@ -50,7 +52,7 @@ function Productos() {
   const handleDelete = async (id) => {
     if (window.confirm("¿Estás seguro de que querés eliminar esta producto?")) {
       try {
-        await axios.delete(`http://localhost:3032/api/productos/${id}`, { withCredentials: true });
+        await axios.delete(`http://${process.env.REACT_APP_BACKEND_DOMAIN_HOST}/api/productos/${id}`, { withCredentials: true });
         setProducts(prevProductos => prevProductos.filter(r => r.id !== id));
       } catch (error) {
         console.error('Error al eliminar producto:', error);
@@ -109,7 +111,7 @@ function Productos() {
                 <td>{categoriasMap[String(prod.categoriaId)] || "Sin categoría"}</td>
                 <td>
                   <img
-                    src={`http://localhost:3032/images/${prod.imagen}`}
+                    src={`http://${process.env.REACT_APP_BACKEND_DOMAIN_HOST}/images/${prod.imagen}`}
                     alt={prod.nombre}
                     width='150'
                     className='game-image'

@@ -8,7 +8,7 @@ const BotonEliminarRutina = ({ id }) => {
   const handleDelete = async () => {
     if (window.confirm("¿Estás seguro de que querés eliminar esta rutina?")) {
       try {
-        await axios.delete(`http://localhost:3032/api/ejercicios/${id}`);
+        await axios.delete(`http://${process.env.REACT_APP_BACKEND_DOMAIN_HOST}/api/ejercicios/${id}`);
         alert("Rutina eliminada correctamente");
         navigate('/Rutinas');
       } catch (error) {

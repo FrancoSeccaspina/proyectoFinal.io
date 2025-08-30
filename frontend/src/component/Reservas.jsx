@@ -13,7 +13,7 @@ function Reservas() {
   const getReservas = async () => {
     try {
       const response = await axios.get(
-        "http://localhost:3032/api/reservas/mostrar",
+        `http://${process.env.REACT_APP_BACKEND_DOMAIN_HOST}/api/reservas/mostrar`,
         { withCredentials: true }
       );
       setReservas(response.data);

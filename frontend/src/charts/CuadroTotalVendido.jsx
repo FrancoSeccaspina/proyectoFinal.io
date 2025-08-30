@@ -23,7 +23,7 @@ const CuadroProductosIngresados = () => {
       if (anio !== '') params.anio = Number(anio);
       if (mes !== '') params.mes = Number(mes);
 
-      const res = await axios.get('http://localhost:3032/api/reservas/estadisticasPorProducto', {
+      const res = await axios.get(`http://${process.env.REACT_APP_BACKEND_DOMAIN_HOST}/api/reservas/estadisticasPorProducto`, {
         params,
         withCredentials: true
       });

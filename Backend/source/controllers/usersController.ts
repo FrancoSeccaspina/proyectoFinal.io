@@ -8,7 +8,7 @@ import { firmarToken, obtenerPayload } from '../utils/generadorToken'
 import bcrypt from 'bcryptjs';
 import { Cuota } from "../database/models/cuota";
 import { transporter } from "../config/mailer";
-import { REACT_APP_DOMAIN_HOST } from '../configEnv';
+import { REACT_APP_FRONTEND_DOMAIN_HOST, REACT_APP_BACKEND_DOMAIN_HOST } from '../configEnv';
 
 const jwt = require('jsonwebtoken')
 
@@ -217,7 +217,7 @@ export class UsuarioController {
       });
 
       if (usuario.rol === Roles.ADMIN) {
-        return res.redirect(`http://${REACT_APP_DOMAIN_HOST}`);
+        return res.redirect(`http://${REACT_APP_FRONTEND_DOMAIN_HOST}`);
       }
 
       return res.redirect("/");
@@ -382,7 +382,7 @@ export class UsuarioController {
       }, "5m")
 
       // Url que le va a llegar al usuario
-      const resetUrl = `http://localhost:3032/users/change-password/${token}`;
+      const resetUrl = `http://${REACT_APP_BACKEND_DOMAIN_HOST}/users/change-password/${token}`;
 
       const info = await transporter.sendMail({
         from: '"Olvide Mi Contraseña" <activafitness0@gmail.com>',

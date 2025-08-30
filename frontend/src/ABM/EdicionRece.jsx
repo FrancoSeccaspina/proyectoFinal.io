@@ -17,7 +17,7 @@ const EdicionReceta = () => {
   useEffect(() => {
     const fetchCategorias = async () => {
       try {
-        const response = await axios.get('http://localhost:3032/api/categoriaRecetas');
+        const response = await axios.get(`http://${process.env.REACT_APP_BACKEND_DOMAIN_HOST}/api/categoriaRecetas`);
         setCategorias(response.data);
       } catch (error) {
         console.error('Error al obtener categorías:', error);
@@ -27,7 +27,7 @@ const EdicionReceta = () => {
   }, []);
 
   useEffect(() => {
-    axios.get(`http://localhost:3032/api/recetas/${id}`)
+    axios.get(`http://${process.env.REACT_APP_BACKEND_DOMAIN_HOST}/api/recetas/${id}`)
       .then(res => setReceta(res.data))
       .catch(err => console.error('Error al cargar receta:', err));
   }, [id]);
@@ -59,7 +59,7 @@ const EdicionReceta = () => {
     }
 
     try {
-      await axios.put(`http://localhost:3032/api/recetaEditar/${id}`, formData, {
+      await axios.put(`http://${process.env.REACT_APP_BACKEND_DOMAIN_HOST}/api/recetaEditar/${id}`, formData, {
         headers: { 'Content-Type': 'multipart/form-data' },
         withCredentials: true
       });

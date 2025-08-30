@@ -1,6 +1,6 @@
 <%
     const telefono = `549${numeroContacto}`;
-    const link = `https://localhost:3032/Reserva/${reservaId}`;
+    const link = `https://${backAppDomainHost}/Reserva/${reservaId}`;
     const mensaje = `Hola, quiero concretar la reserva: ${link}`;
     const mensajeCodificado = encodeURIComponent(mensaje);
 

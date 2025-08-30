@@ -6,7 +6,7 @@ const Cuota = () => {
   const [cuotaPrecio, setCuota] = useState([]);
   const showData = async () => {
     try {
-      const response = await fetch("http://localhost:3032/api/precioCuota", { credentials: 'include' });
+      const response = await fetch(`http://${process.env.REACT_APP_BACKEND_DOMAIN_HOST}/api/precioCuota`, { credentials: 'include' });
       const data = await response.json();
       console.log('DATA RECIBIDA:', data);
       setCuota(data);
@@ -22,7 +22,7 @@ const Cuota = () => {
       useEffect(() => {
         const fetchUltimoPrecio = async () => {
           try {
-            const res = await axios.get('http://localhost:3032/api/precioCuota/ultima', 
+            const res = await axios.get(`http://${process.env.REACT_APP_BACKEND_DOMAIN_HOST}/api/precioCuota/ultima`, 
               { withCredentials: true }
             );
             setUltimoPrecio(res.data.precio);

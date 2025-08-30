@@ -6,7 +6,7 @@ const Empleados = () => {
     const [empleados, setEmpleados] = useState([])
     const [search, setSearch] = useState("")
     const showData = async ()=> {
-        const response = await fetch("http://localhost:3032/api/empleados");
+        const response = await fetch(`http://${process.env.REACT_APP_BACKEND_DOMAIN_HOST}/api/empleados`);
         const data = await response.json();
         setEmpleados(data);
 
@@ -33,7 +33,7 @@ const Empleados = () => {
       const handleDelete = async (id) => {
         if (window.confirm("¿Estás seguro de que querés eliminar este empleado?")) {
           try {
-            await axios.delete(`http://localhost:3032/api/empleados/${id}`);
+            await axios.delete(`http://${process.env.REACT_APP_BACKEND_DOMAIN_HOST}/api/empleados/${id}`);
             setEmpleados(prevEmpleados => prevEmpleados.filter(r => r.id !== id));
           } catch (error) {
             console.error('Error al eliminar empleado:', error);

@@ -14,7 +14,7 @@ const EdicionRutina = () => {
   });
 
   useEffect(() => {
-    axios.get(`http://localhost:3032/api/ejercicios/${id}`)
+    axios.get(`http://${process.env.REACT_APP_BACKEND_DOMAIN_HOST}/api/ejercicios/${id}`)
       .then(res => setRutina(res.data))
       .catch(err => console.error('Error al cargar rutina:', err));
   }, [id]);
@@ -44,7 +44,7 @@ const EdicionRutina = () => {
     formData.append('video', ejercicio.video);
     formData.append('titulo', ejercicio.titulo);
 
-    axios.put(`http://localhost:3032/api/ejercicioEditar/${id}`, formData, {
+    axios.put(`http://${process.env.REACT_APP_BACKEND_DOMAIN_HOST}/api/ejercicioEditar/${id}`, formData, {
         headers: {
           'Content-Type': 'multipart/form-data'
         },

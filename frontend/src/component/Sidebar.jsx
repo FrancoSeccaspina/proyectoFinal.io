@@ -43,7 +43,7 @@ function Sidebar() {
           <Link to="/Proveedores">Proveedores</Link>
           <Link to="/Reservas">Reservas</Link>
           <Link to="/Actividad">Actividad</Link>
-          <a href="http://localhost:3032/users/logout">Salir</a>
+          <a href={`http://${process.env.REACT_APP_BACKEND_DOMAIN_HOST}/users/logout`}>Salir</a>
         </nav>
       </div>
         <RedireccionFlotante/>

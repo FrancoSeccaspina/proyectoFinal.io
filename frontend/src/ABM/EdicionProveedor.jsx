@@ -12,7 +12,7 @@ const EdicionProveedor = () => {
   });
 
   useEffect(() => {
-    axios.get(`http://localhost:3032/api/proveedores/${id}`)
+    axios.get(`http://${process.env.REACT_APP_BACKEND_DOMAIN_HOST}/api/proveedores/${id}`)
       .then(res => setProveedor(res.data))
       .catch(err => console.error('Error al cargar proveedores:', err));
   }, [id]);
@@ -32,7 +32,7 @@ const EdicionProveedor = () => {
   };
   const handleSubmit = async (e) => {
     e.preventDefault();
-    axios.put(`http://localhost:3032/api/proveedorEditar/${id}`, proveedor,{
+    axios.put(`http://${process.env.REACT_APP_BACKEND_DOMAIN_HOST}/api/proveedorEditar/${id}`, proveedor,{
     withCredentials: true
       })
           .then(() => {

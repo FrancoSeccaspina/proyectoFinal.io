@@ -19,7 +19,7 @@ const EdicionCuota = () => {
 
   useEffect(() => {
     axios
-      .get(`http://localhost:3032/api/cuotas/${id}`, { withCredentials: true })
+      .get(`http://${process.env.REACT_APP_BACKEND_DOMAIN_HOST}/api/cuotas/${id}`, { withCredentials: true })
       .then((res) => setCuota(res.data))
       .catch((err) => console.error('Error al cargar cuotas:', err));
   }, [id]);
@@ -72,7 +72,7 @@ const EdicionCuota = () => {
     };
 
     axios
-      .put(`http://localhost:3032/api/editarCuota/${id}`, cuotaActualizada, {
+      .put(`http://${process.env.REACT_APP_BACKEND_DOMAIN_HOST}/api/editarCuota/${id}`, cuotaActualizada, {
         withCredentials: true,
       })
       .then(() => {
