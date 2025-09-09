@@ -1,6 +1,6 @@
 <%
     const telefono = `549${numeroContacto}`;
-    const link = `https://${backAppDomainHost}/Reserva/${reservaId}`;
+    const link = `https://${REACT_APP_BACKEND_DOMAIN_HOST}/Reserva/${reservaId}`;
     const mensaje = `Hola, quiero concretar la reserva: ${link}`;
     const mensajeCodificado = encodeURIComponent(mensaje);
 
