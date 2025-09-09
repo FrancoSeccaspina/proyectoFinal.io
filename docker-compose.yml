@@ -45,8 +45,8 @@ services:
   activa-flask:  
     restart: always
     build:
-      context: ./flask
-      dockerfile: Dockerfile
+      context: .
+      dockerfile: Dockerfile.flask
     ports:
       - "5000:5000"
     container_name: activa-flask
