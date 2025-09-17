@@ -21,7 +21,7 @@ const AltaCuota = () => {
   useEffect(() => {
     const fetchUltimoPrecio = async () => {
       try {
-        const res = await axios.get(`http://${process.env.REACT_APP_BACKEND_DOMAIN_HOST}/api/precioCuota/ultima`, {
+        const res = await axios.get(`${process.env.REACT_APP_BACKEND_DOMAIN_HOST}/api/precioCuota/ultima`, {
           withCredentials: true
         });
         setUltimoPrecio(res.data.precio);
@@ -71,7 +71,7 @@ const AltaCuota = () => {
     e.preventDefault();
 
     try {
-      await axios.post(`http://${process.env.REACT_APP_BACKEND_DOMAIN_HOST}/api/cuotas`, cuota, {withCredentials: true});
+      await axios.post(`${process.env.REACT_APP_BACKEND_DOMAIN_HOST}/api/cuotas`, cuota, {withCredentials: true});
       console.log("Cuota creada exitosamente");
       navigate('/Usuarios');
     } catch (error) {

@@ -19,7 +19,7 @@ const CuadroIngresoCobro = () => {
 
   const showData = async () => {
     try {
-      const response = await fetch(`http://${process.env.REACT_APP_BACKEND_DOMAIN_HOST}/api/gestionPagoProveedores`, {
+      const response = await fetch(`${process.env.REACT_APP_BACKEND_DOMAIN_HOST}/api/gestionPagoProveedores`, {
         credentials: 'include'
       });
       const data = await response.json();
@@ -62,7 +62,7 @@ const CuadroIngresoCobro = () => {
 
   const enviarRegistro = async (registro) => {
     try {
-      await fetch(`http://${process.env.REACT_APP_BACKEND_DOMAIN_HOST}/api/gestionPagoProveedores`, {
+      await fetch(`${process.env.REACT_APP_BACKEND_DOMAIN_HOST}/api/gestionPagoProveedores`, {
         method: 'POST',
         credentials: 'include',
         headers: { 'Content-Type': 'application/json' },

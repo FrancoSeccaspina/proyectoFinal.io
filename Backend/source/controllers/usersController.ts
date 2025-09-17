@@ -217,7 +217,7 @@ export class UsuarioController {
       });
 
       if (usuario.rol === Roles.ADMIN) {
-        return res.redirect(`http://${REACT_APP_FRONTEND_DOMAIN_HOST}`);
+        return res.redirect(`${REACT_APP_FRONTEND_DOMAIN_HOST}`);
       }
 
       return res.redirect("/");

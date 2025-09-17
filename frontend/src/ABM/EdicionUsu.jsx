@@ -18,7 +18,7 @@ const EdicionUsuario = () => {
   });
   // Cargar datos del usuario
   useEffect(() => {
-    axios.get(`http://${process.env.REACT_APP_BACKEND_DOMAIN_HOST}/api/usuarios/${id}`, { withCredentials: true })
+    axios.get(`${process.env.REACT_APP_BACKEND_DOMAIN_HOST}/api/usuarios/${id}`, { withCredentials: true })
     .then(res => setUsuario(res.data))
     .catch(err => console.error('Error al cargar Usuario:', err));
     }, [id]);
@@ -61,7 +61,7 @@ const EdicionUsuario = () => {
         formData.append('imagen', usuario.imagen);
       }
     
-      axios.put(`http://${process.env.REACT_APP_BACKEND_DOMAIN_HOST}/api/usuarioEditar/${id}`, formData, {
+      axios.put(`${process.env.REACT_APP_BACKEND_DOMAIN_HOST}/api/usuarioEditar/${id}`, formData, {
         headers: {
           'Content-Type': 'multipart/form-data'
         },

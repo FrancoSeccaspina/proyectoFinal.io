@@ -10,13 +10,13 @@ function Recetas() {
   const [searchTerm, setSearchTerm] = useState("");
 
   const getCategorias = async ()=> {
-    const response = await fetch(`http://${process.env.REACT_APP_BACKEND_DOMAIN_HOST}/api/categoriaRecetas`);
+    const response = await fetch(`${process.env.REACT_APP_BACKEND_DOMAIN_HOST}/api/categoriaRecetas`);
     const data = await response.json();
     console.log('DATA RECIBIDA:', data);
     setCategoriaReceta(data);
   }
   const getRecetas = async ()=> {
-    const response = await fetch(`http://${process.env.REACT_APP_BACKEND_DOMAIN_HOST}/api/recetas`);
+    const response = await fetch(`${process.env.REACT_APP_BACKEND_DOMAIN_HOST}/api/recetas`);
     const data = await response.json();
     console.log('DATA RECIBIDA:', data);
     setRecetas(data);
@@ -30,7 +30,7 @@ function Recetas() {
   const handleDelete = async (id) => {
     if (window.confirm("¿Estás seguro de que querés eliminar esta rutina?")) {
       try {
-        await axios.delete(`http://${process.env.REACT_APP_BACKEND_DOMAIN_HOST}/api/recetas/${id}`, { withCredentials: true });
+        await axios.delete(`${process.env.REACT_APP_BACKEND_DOMAIN_HOST}/api/recetas/${id}`, { withCredentials: true });
         setRecetas(prevRecetas => prevRecetas.filter(r => r.id !== id));
       } catch (error) {
         console.error('Error al eliminar recetas:', error);
@@ -86,7 +86,7 @@ function Recetas() {
                     {recetasFiltradas.map((recetas) => (
                   <tr key= {recetas.id}>
                       <td>{recetas.nombre}</td>
-                      <td><img src={`http://${process.env.REACT_APP_BACKEND_DOMAIN_HOST}/images/${recetas.imagen}`} alt="" width='150' className='game-image' /></td>
+                      <td><img src={`${process.env.REACT_APP_BACKEND_DOMAIN_HOST}/images/${recetas.imagen}`} alt="" width='150' className='game-image' /></td>
                       <td>
                       <div class="accordion bg-dark text-white" id="accordionExample">
                         <div class="accordion-item bg-dark text-white">

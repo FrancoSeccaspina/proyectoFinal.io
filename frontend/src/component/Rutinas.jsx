@@ -9,13 +9,13 @@ function Ejercicios() {
   const [searchTerm, setSearchTerm] = useState("");
 
   const getCategorias = async ()=> {
-  const response = await fetch(`http://${process.env.REACT_APP_BACKEND_DOMAIN_HOST}/api/categoriaGrupoMuscular`);
+  const response = await fetch(`${process.env.REACT_APP_BACKEND_DOMAIN_HOST}/api/categoriaGrupoMuscular`);
   const data = await response.json();
   console.log('DATA RECIBIDA:', data);
   setCategoria(data);
   }
   const getEjercicios = async ()=> {
-    const response = await fetch(`http://${process.env.REACT_APP_BACKEND_DOMAIN_HOST}/api/ejercicios`);
+    const response = await fetch(`${process.env.REACT_APP_BACKEND_DOMAIN_HOST}/api/ejercicios`);
     const data = await response.json();
     console.log('DATA RECIBIDA:', data);
     setEjercicios(data);
@@ -29,7 +29,7 @@ function Ejercicios() {
   const handleDelete = async (id) => {
     if (window.confirm("¿Estás seguro de que querés eliminar esta rutina?")) {
       try {
-        await axios.delete(`http://${process.env.REACT_APP_BACKEND_DOMAIN_HOST}/api/ejercicios/${id}`, { withCredentials: true });
+        await axios.delete(`${process.env.REACT_APP_BACKEND_DOMAIN_HOST}/api/ejercicios/${id}`, { withCredentials: true });
         setEjercicios(prevRutinas => prevRutinas.filter(r => r.id !== id));
       } catch (error) {
         console.error('Error al eliminar rutina:', error);

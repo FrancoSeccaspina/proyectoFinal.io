@@ -6,7 +6,7 @@ const Proveedores = () => {
     const [proveedores, setProvedores] = useState([])
     const [search, setSearch] = useState("")
     const showData = async ()=> {
-        const response = await fetch(`http://${process.env.REACT_APP_BACKEND_DOMAIN_HOST}/api/proveedores`);
+        const response = await fetch(`${process.env.REACT_APP_BACKEND_DOMAIN_HOST}/api/proveedores`);
         const data = await response.json();
         setProvedores(data);
 
@@ -33,7 +33,7 @@ const Proveedores = () => {
       const handleDelete = async (id) => {
         if (window.confirm("¿Estás seguro de que querés eliminar este proveedor?")) {
           try {
-            await axios.delete(`http://${process.env.REACT_APP_BACKEND_DOMAIN_HOST}/api/proveedores/${id}`, { withCredentials: true });
+            await axios.delete(`${process.env.REACT_APP_BACKEND_DOMAIN_HOST}/api/proveedores/${id}`, { withCredentials: true });
             setProvedores(prevProveedores => prevProveedores.filter(r => r.id !== id));
           } catch (error) {
             console.error('Error al eliminar proveedor:', error);

@@ -23,7 +23,7 @@ const CuadroCuotaAbonada = () => {
       if (anio) params.anio = anio;
       if (mes) params.mes = mes;
 
-      const res = await axios.get(`http://${process.env.REACT_APP_BACKEND_DOMAIN_HOST}/api/estadisticas`, { params });
+      const res = await axios.get(`${process.env.REACT_APP_BACKEND_DOMAIN_HOST}/api/estadisticas`, { params });
 
       const formateado = res.data.map(item => ({
         mesAnio: `${item.mes.toString().padStart(2, '0')}/${item.anio}`,
