@@ -17,7 +17,7 @@ const AltaReceta = () => {
   useEffect(() => {
     const fetchCategorias = async () => {
       try {
-        const response = await axios.get(`http://${process.env.REACT_APP_BACKEND_DOMAIN_HOST}/api/categoriaRecetas`);
+        const response = await axios.get(`${process.env.REACT_APP_BACKEND_DOMAIN_HOST}/api/categoriaRecetas`);
         setCategorias(response.data);
       } catch (error) {
         console.error('Error al obtener categorías:', error);
@@ -44,7 +44,7 @@ const AltaReceta = () => {
     formData.append('imagen', receta.imagen);
 
     try {
-      await axios.post(`http://${process.env.REACT_APP_BACKEND_DOMAIN_HOST}/api/recetas`, formData,{
+      await axios.post(`${process.env.REACT_APP_BACKEND_DOMAIN_HOST}/api/recetas`, formData,{
         headers: {
           'Content-Type': 'multipart/form-data'
         },
@@ -141,7 +141,7 @@ const AltaRece = () => {
     useEffect(() => {
         const fetchGrupos = async() => {
             try{
-                const response = await axios.get(`http://${process.env.REACT_APP_BACKEND_DOMAIN_HOST}/api/categoriaRecetas`);
+                const response = await axios.get(`${process.env.REACT_APP_BACKEND_DOMAIN_HOST}/api/categoriaRecetas`);
                 setCategoriaReceta(response.data);
             }catch(error){
                 console.log('Error al obtener categpria de productos:', error);
@@ -162,7 +162,7 @@ const AltaRece = () => {
         e.preventDefault();
 
         try{
-            await axios.post(`http://${process.env.REACT_APP_BACKEND_DOMAIN_HOST}/api/recetas`, {
+            await axios.post(`${process.env.REACT_APP_BACKEND_DOMAIN_HOST}/api/recetas`, {
                 nombre: recetas.nombre,
                 descripcion: recetas.descripcion,
                 categoriaId: recetas.categoriaId,

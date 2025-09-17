@@ -13,7 +13,7 @@ const EdicionEmpleado = () => {
   });
 
   useEffect(() => {
-    axios.get(`http://${process.env.REACT_APP_BACKEND_DOMAIN_HOST}/api/empleados/${id}`)
+    axios.get(`${process.env.REACT_APP_BACKEND_DOMAIN_HOST}/api/empleados/${id}`)
       .then(res => setEmpleado(res.data))
       .catch(err => console.error('Error al cargar empleados:', err));
   }, [id]);
@@ -33,7 +33,7 @@ const EdicionEmpleado = () => {
   };
   const handleSubmit = async (e) => {
     e.preventDefault();
-    axios.put(`http://${process.env.REACT_APP_BACKEND_DOMAIN_HOST}/api/empleadoEditar/${id}`, empleado)
+    axios.put(`${process.env.REACT_APP_BACKEND_DOMAIN_HOST}/api/empleadoEditar/${id}`, empleado)
           .then(() => {
             console.log("empleado actualizadp");
             navigate('/Empleados');

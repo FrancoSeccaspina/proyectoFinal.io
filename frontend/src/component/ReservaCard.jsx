@@ -41,7 +41,7 @@ function ReservaCard({ reserva, onDelete}) {
   const onclickConfirm = async () => {
     try {
       const response = await axios.put(
-        `http://${process.env.REACT_APP_BACKEND_DOMAIN_HOST}/api/reservas/confirmar/${reservaActual.id_reserva}`, {},
+        `${process.env.REACT_APP_BACKEND_DOMAIN_HOST}/api/reservas/confirmar/${reservaActual.id_reserva}`, {},
         {
           withCredentials: true
         });
@@ -55,7 +55,7 @@ function ReservaCard({ reserva, onDelete}) {
   const onclickCancel = async () => {
     try {
       const response = await axios.put(
-        `http://${process.env.REACT_APP_BACKEND_DOMAIN_HOST}/api/reservas/cancelar/${reservaActual.id_reserva}`, {},
+        `${process.env.REACT_APP_BACKEND_DOMAIN_HOST}/api/reservas/cancelar/${reservaActual.id_reserva}`, {},
         {
           withCredentials: true
         }
@@ -70,7 +70,7 @@ function ReservaCard({ reserva, onDelete}) {
   const handleDelete = async () => {
     try {
       const idAEliminar = reservaActual.id_reserva;
-      await axios.delete(`http://${process.env.REACT_APP_BACKEND_DOMAIN_HOST}/api/reservas/${idAEliminar}`, { withCredentials: true });
+      await axios.delete(`${process.env.REACT_APP_BACKEND_DOMAIN_HOST}/api/reservas/${idAEliminar}`, { withCredentials: true });
       onDelete?.(idAEliminar);
     } catch (error) {
       console.error('Error al eliminar reserva:', error);

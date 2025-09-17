@@ -10,7 +10,7 @@ const Usuarios = () => {
 
   const showData = async () => {
     try {
-      const { data } = await axios.get(`http://${process.env.REACT_APP_BACKEND_DOMAIN_HOST}/api/usuarios`);
+      const { data } = await axios.get(`${process.env.REACT_APP_BACKEND_DOMAIN_HOST}/api/usuarios`);
       console.log('DATA RECIBIDA:', data);
       setUsuarios(data);
     } catch (error) {
@@ -39,7 +39,7 @@ const Usuarios = () => {
     if (window.confirm('¿Estás seguro de que querés eliminar este usuario?')) {
       try {
         await axios.delete(
-          `http://${process.env.REACT_APP_BACKEND_DOMAIN_HOST}/api/usuarios/${id}`,
+          `${process.env.REACT_APP_BACKEND_DOMAIN_HOST}/api/usuarios/${id}`,
           { withCredentials: true }
         );
         setUsuarios((prev) => prev.filter((u) => u.id !== id));
@@ -58,7 +58,7 @@ const Usuarios = () => {
         <h3 className="box-title">Usuarios registrados: {resultado.length}</h3>
         
         <Link
-          to={`http://${process.env.REACT_APP_BACKEND_DOMAIN_HOST}/register`}
+          to={`${process.env.REACT_APP_BACKEND_DOMAIN_HOST}/register`}
           className="btn btn-primary"
         >
           Agregar Nuevo

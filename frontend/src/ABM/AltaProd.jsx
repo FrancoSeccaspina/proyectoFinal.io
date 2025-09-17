@@ -17,7 +17,7 @@ const AltaProd = () => {
   useEffect(() => {
     const fetchGrupos = async () => {
       try {
-        const response = await axios.get(`http://${process.env.REACT_APP_BACKEND_DOMAIN_HOST}/api/categoriaProductos`);
+        const response = await axios.get(`${process.env.REACT_APP_BACKEND_DOMAIN_HOST}/api/categoriaProductos`);
         setCategorias(response.data);
       } catch (error) {
         console.error('Error al obtener Categoria de Productos:', error);
@@ -46,7 +46,7 @@ const AltaProd = () => {
         formData.append('imagen', producto.imagen);
       
         try {
-          await axios.post(`http://${process.env.REACT_APP_BACKEND_DOMAIN_HOST}/api/productos`, formData, {
+          await axios.post(`${process.env.REACT_APP_BACKEND_DOMAIN_HOST}/api/productos`, formData, {
             headers: {
               'Content-Type': 'multipart/form-data'
             },

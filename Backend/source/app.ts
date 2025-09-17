@@ -64,7 +64,7 @@ app.use((req, res, next) => {
 
 // Habilitar CORS
 app.use(cors({
-  origin: `http://${REACT_APP_FRONTEND_DOMAIN_HOST}`,
+  origin: `${REACT_APP_FRONTEND_DOMAIN_HOST}`,
   credentials: true  
 }));
 

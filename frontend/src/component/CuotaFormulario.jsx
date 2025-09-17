@@ -20,8 +20,8 @@ const CuotaFormulario = () => {
     const fetchData = async () => {
       try {
         const [usuarioRes, cuotasRes] = await Promise.all([
-          axios.get(`http://${process.env.REACT_APP_BACKEND_DOMAIN_HOST}/api/usuarios/${id}`),
-          axios.get(`http://${process.env.REACT_APP_BACKEND_DOMAIN_HOST}/api/cuotasdelUsuario/${id}`)
+          axios.get(`${process.env.REACT_APP_BACKEND_DOMAIN_HOST}/api/usuarios/${id}`),
+          axios.get(`${process.env.REACT_APP_BACKEND_DOMAIN_HOST}/api/cuotasdelUsuario/${id}`)
         ]);
         setUsuario(usuarioRes.data);
 
@@ -43,7 +43,7 @@ const CuotaFormulario = () => {
         if (filtroMes) params.mes = filtroMes;
         if (id) params.id_usuario = id;
 
-        const res = await axios.get(`http://${process.env.REACT_APP_BACKEND_DOMAIN_HOST}/api/abonadas-por-mes`, { params });
+        const res = await axios.get(`${process.env.REACT_APP_BACKEND_DOMAIN_HOST}/api/abonadas-por-mes`, { params });
         const formateado = res.data.map(item => ({
           mesAnio: `${item.mes.toString().padStart(2, '0')}/${item.anio}`,
           cantidad: Number(item.cantidad)
@@ -59,7 +59,7 @@ const CuotaFormulario = () => {
   const handleDelete = async (idCuota) => {
     if (window.confirm("¿Estás seguro de que querés eliminar esta Cuota?")) {
       try {
-        await axios.delete(`http://${process.env.REACT_APP_BACKEND_DOMAIN_HOST}/api/cuotas/${idCuota}`, { withCredentials: true });
+        await axios.delete(`${process.env.REACT_APP_BACKEND_DOMAIN_HOST}/api/cuotas/${idCuota}`, { withCredentials: true });
         setCuotas(prevCuotas => prevCuotas.filter(c => c.id !== idCuota));
       } catch (error) {
         console.error('Error al eliminar cuota:', error);

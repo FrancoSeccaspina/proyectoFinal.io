@@ -24,7 +24,7 @@ const AltaEmpleado = () => {
   const handleSubmit = async (e) => {
     e.preventDefault();
     try {
-        await axios.post(`http://${process.env.REACT_APP_BACKEND_DOMAIN_HOST}/api/empleados`, empleado);
+        await axios.post(`${process.env.REACT_APP_BACKEND_DOMAIN_HOST}/api/empleados`, empleado);
         console.log("empleado creado exitosamente");
         navigate('/Empleados');
       } catch (error) {

@@ -15,7 +15,7 @@ const EdicionProductos = () => {
   });
   // Cargar datos del producto
   useEffect(() => {
-    axios.get(`http://${process.env.REACT_APP_BACKEND_DOMAIN_HOST}/api/productos/${id}`, { withCredentials: true })
+    axios.get(`${process.env.REACT_APP_BACKEND_DOMAIN_HOST}/api/productos/${id}`, { withCredentials: true })
       .then(res => setProducto(res.data))
       .catch(err => console.error('Error al cargar producto:', err));
   }, [id]);
@@ -52,7 +52,7 @@ const EdicionProductos = () => {
       formData.append('imagen', producto.imagen);
     }
 
-    axios.put(`http://${process.env.REACT_APP_BACKEND_DOMAIN_HOST}/api/productoEditar/${id}`, formData, {
+    axios.put(`${process.env.REACT_APP_BACKEND_DOMAIN_HOST}/api/productoEditar/${id}`, formData, {
       headers: {
         'Content-Type': 'multipart/form-data'
       },
@@ -80,7 +80,7 @@ const EdicionProductos = () => {
           <div>
             <label>Imagen actual</label>
             <img
-              src={`http://${process.env.REACT_APP_BACKEND_DOMAIN_HOST}/images/${producto.imagen}`}
+              src={`${process.env.REACT_APP_BACKEND_DOMAIN_HOST}/images/${producto.imagen}`}
               alt="Imagen actual"
               style={{ maxWidth: '200px', display: 'block', marginBottom: '10px' }}
             />
