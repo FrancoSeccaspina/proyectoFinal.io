@@ -1,0 +1,10 @@
+# ─────────────────────────────────────────────
+# Evitar conflictos de entorno y código runtime
+# ─────────────────────────────────────────────
+
+# Mantener siempre la versión local de los archivos .env
+Backend/.env merge=ours
+frontend/.env merge=ours
+
+# Mantener siempre la versión local de todo el directorio flask
+flask/** merge=ours
