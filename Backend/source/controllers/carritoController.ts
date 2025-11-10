@@ -34,9 +34,21 @@ class carritoController {
             const { id_producto, cantidad } = req.body;
             const producto = await Producto.findByPk(id_producto);
 
+            const cantidadNum = Number(cantidad);
+            if (isNaN(cantidadNum) || cantidadNum <= 0) {
+
+                return res.status(400).render("productDetail", {
+                    message: "La cantidad debe ser un número positivo mayor que cero.",
+                    producto: await Producto.findByPk(id_producto)
+                });
+            }
+ 
             if (!producto) {
                 throw new Error("Producto no encontrado");
             }
+            
+            console.log("cantidad a comprar", cantidad)
+            console.log("stock disponible", producto.stock)
 
             if (cantidad > producto.stock) {
                 return res.status(400).render("productDetail", {
