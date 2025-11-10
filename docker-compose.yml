@@ -21,26 +21,29 @@ services:
     container_name: activa-backend-container
     env_file: ./Backend/.env
     restart: always
+    environment:
+      REACT_APP_FRONTEND_DOMAIN_HOST: http://localhost:5000
+      REACT_APP_BACKEND_DOMAIN_HOST: http://localhost:3032
     ports:
       - "3032:3032"
     depends_on:
       - activa-db
 
-  activa-nginx:
-    build:
-      context: .
-      dockerfile: Dockerfile.nginx
-    container_name: activa-nginx-container
-    restart: always
-    ports:
-      # puerto http 
-      - "80:80"
-      # puerto https
-      - "443:443"
-    volumes:
-      - ./nginx/conf.d:/etc/nginx/conf.d
-      - ./nginx/cert:/etc/letsencrypt
-      - ./nginx/logs:/var/log/nginx
+  # activa-nginx:
+  #   build:
+  #     context: .
+  #     dockerfile: Dockerfile.nginx
+  #   container_name: activa-nginx-container
+  #   restart: always
+  #   ports:
+  #     # puerto http 
+  #     - "80:80"
+  #     # puerto https
+  #     - "443:443"
+  #   volumes:
+  #     - ./nginx/conf.d:/etc/nginx/conf.d
+  #     - ./nginx/cert:/etc/letsencrypt
+  #     - ./nginx/logs:/var/log/nginx
     
   activa-flask:  
     restart: always
@@ -50,6 +53,6 @@ services:
     ports:
       - "5000:5000"
     container_name: activa-flask
-      
+
 volumes:
   activa-db-data:
