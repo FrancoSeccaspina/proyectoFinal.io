@@ -1,0 +1,31 @@
+name: Prueba de Funcionamiento del Workflow
+
+on:
+  push:
+    branches: ["main"]
+  workflow_dispatch: 
+
+jobs:
+  verificacion:
+    runs-on: ubuntu-latest
+    
+    steps:
+      - name: 1. Checkout Código 
+        uses: actions/checkout@v4
+
+      - name: 2. Confirmar que el Workflow se Ejecuta Correctamente
+        run: |
+          echo "¡El workflow 'deploy.yml' ha comenzado a ejecutarse con éxito!"
+          echo "El código está en el directorio de trabajo: $(pwd)"
+          echo "Contenido del repositorio descargado:"
+          ls -la
+          
+      - name: 3. Simulación de Compilación
+        run: |
+          echo "Simulando la compilación..."
+          mkdir build/
+          echo "La página ha sido compilada con éxito." > build/index.html
+          ls -la build/
+          
+      - name: 4. Finalización de la Prueba 🏁
+        run: echo "Prueba de funcionamiento completada. Si ves este mensaje, la estructura de tu CI/CD está OK."
