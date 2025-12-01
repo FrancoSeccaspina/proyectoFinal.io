@@ -9,8 +9,7 @@ services:
       MYSQL_USER: ${DATABASE_USER}
       MYSQL_PASSWORD: ${DATABASE_PASSWORD}
     volumes:
-      - activa-db-data:/var/lib/mysql   
-      - ./gimnasio_activa.sql:/docker-entrypoint-initdb.d/gimnasio_activa.sql
+      - activa-db-data:/var/lib/mysql
     ports:
       - "3307:3306"
 
