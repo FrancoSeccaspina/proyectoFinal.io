@@ -1,4 +1,4 @@
-#!/bin/sh
+#!/bin/bash
 
 BACKUP_DIR="/var/lib/mysql/backups"
 BACKUP_FILE="$BACKUP_DIR/backup_$(date +%Y%m%d).sql"

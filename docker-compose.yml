@@ -10,6 +10,7 @@ services:
       MYSQL_PASSWORD: ${DATABASE_PASSWORD}
     volumes:
       - activa-db-data:/var/lib/mysql
+      - ./crear_backup_gimnasio_activa.sh:/usr/local/bin/backup.sh
     ports:
       - "3307:3306"
 
