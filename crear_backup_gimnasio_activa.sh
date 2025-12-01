@@ -11,7 +11,7 @@ MYSQL_PWD="$MYSQL_ROOT_PASSWORD" mysqldump -u root "$MYSQL_DATABASE" > "$BACKUP_
 
 # Verificar el código de salida ($?) para asegurar que mysqldump fue exitoso
 if [ $? -eq 0 ]; then
-    echo "Respaldo completado y guardado en: $BACKUP_FILE"
+    echo "$BACKUP_FILE"
 else
     echo "¡ERROR! Falló la ejecución de mysqldump." >&2
 fi
