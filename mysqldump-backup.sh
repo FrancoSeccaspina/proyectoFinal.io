@@ -4,9 +4,9 @@ BACKUP_DIR="/var/lib/mysql/backups"
 FILE_NAME="backup_$(date +%Y%m%d).sql"
 BACKUP_FILE="$BACKUP_DIR/$FILE_NAME"
 
-echo "Creando directorio de respaldo ($BACKUP_DIR) si no existe..."
+echo "Creando directorio de respaldo ($BACKUP_DIR) si no existe..." >&2
 mkdir -p "$BACKUP_DIR"
-echo "Iniciando mysqldump de la base de datos '$MYSQL_DATABASE'..."
+echo "Iniciando mysqldump de la base de datos '$MYSQL_DATABASE'..." >&2
 
 MYSQL_PWD="$MYSQL_ROOT_PASSWORD" mysqldump -u root "$MYSQL_DATABASE" > "$BACKUP_FILE"
 

@@ -1,7 +1,7 @@
 services:
   activa-db:
     image: mysql:8.0
-    container_name: activa-db-container
+    container_name: activa-db
     restart: always
     environment:
       MYSQL_ROOT_PASSWORD: ${MYSQL_ROOT_PASSWORD}
@@ -10,7 +10,7 @@ services:
       MYSQL_PASSWORD: ${DATABASE_PASSWORD}
     volumes:
       - activa-db-data:/var/lib/mysql
-      - ./crear_backup_gimnasio_activa.sh:/usr/local/bin/crear_backup_gimnasio_activa.sh
+      - ./mysqldump-backup.sh:/usr/local/bin/mysqldump-backup.sh
     ports:
       - "3307:3306"
 
@@ -18,7 +18,7 @@ services:
     build:
       context: .
       dockerfile: Dockerfile.backend
-    container_name: activa-backend-container
+    container_name: activa-backend
     env_file: ./Backend/.env
     restart: always
     ports:
@@ -30,7 +30,7 @@ services:
     build:
       context: .
       dockerfile: Dockerfile.nginx
-    container_name: activa-nginx-container
+    container_name: activa-nginx
     restart: always
     ports:
       # puerto http 

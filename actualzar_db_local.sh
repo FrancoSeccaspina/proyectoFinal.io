@@ -3,31 +3,33 @@
 # === CONFIG LOCAL ===
 SERVER="root@168.181.185.23"
 PORT="5538"
-REMOTE_BACKUP_DIR="/var/lib/mysql/backups"
+REMOTE_BACKUP_DIR="/proyectoFinal.io"
 
 LOCAL_CONTAINER="activa-db-container"
 LOCAL_DB_NAME="gimnasio_activa"
 
 
-# BACKUP_FILE=$(ssh -p $PORT $SERVER "docker exec activa-db-container bash /usr/local/bin/crear_backup_gimnasio_activa.sh")
-BACKUP_FILE="backup_20251201.sql"
+BACKUP_FILE=$(ssh -p 5538 root@168.181.185.23 "docker exec activa-db-container bash /usr/local/bin/generar-backup-gimnasio-activa.sh")
+REMOTE_PATH=/root/"$REMOTE_BACKUP_DIR/$BACKUP_FILE"
+LOCAL_PATH="./backups/$BACKUP_FILE"
 
-REMOTE_PATH="$REMOTE_BACKUP_DIR/$BACKUP_FILE"
-LOCAL_PATH="./$BACKUP_FILE"
 
-# === 2. Descargar el backup ===
+if [ -z "$BACKUP_FILE" ]; then
+    echo "ERROR: hubo un error al correr el crear_backup_gimnasio_activa.sh." >&2
+    exit 1
+fi
+
 echo "Descargando backup desde el servidor remoto..."
 scp -P $PORT "$SERVER:$REMOTE_PATH" "$LOCAL_PATH"
 
 if [ $? -ne 0 ]; then
-    echo "❌ Error descargando el backup."
+    echo "ERROR: descargando el archivo : scp -P $PORT $SERVER:$REMOTE_PATH $LOCAL_PATH"
     exit 1
 fi
-
 echo "Backup guardado localmente en: $LOCAL_PATH"
 
 # === 3. Restaurar en el contenedor LOCAL ===
-echo "Importando backup en el contenedor local..."
+# echo "Importando backup en el contenedor local..."
 
 # # Comprobamos que la variable de entorno exista
 # if [ -z "$MYSQL_ROOT_PASSWORD" ]; then
