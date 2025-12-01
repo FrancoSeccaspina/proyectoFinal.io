@@ -7,3 +7,6 @@ node_modules/
 
 # certificados de nginx
 nginx/cert/
+
+# logs
+nginx/logs/*.log
