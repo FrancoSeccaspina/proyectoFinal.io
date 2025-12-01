@@ -1,7 +1,7 @@
 #!/bin/bash
 
-echo "Ejecutando backup en el contenedor activa-db-container..."
-BACKUP_FILE=$(docker exec activa-db-container bash /usr/local/bin/mysqldump-backup.sh)
+echo "Ejecutando backup en el contenedor activa-db..."&2
+BACKUP_FILE=$(docker exec activa-db bash /usr/local/bin/mysqldump-backup.sh)
 
 if [ $? -ne 0 ]; then
     echo "ERROR: Falló la creación del backup en el contenedor" >&2
@@ -16,7 +16,7 @@ fi
 echo "Backup creado: $BACKUP_FILE" >&2
 echo "Copiando backup al host..." >&2
 
-docker cp activa-db-container:/var/lib/mysql/backups/"$BACKUP_FILE" ./backups/"$BACKUP_FILE"
+docker cp activa-db:/var/lib/mysql/backups/"$BACKUP_FILE" ./backups/"$BACKUP_FILE"
 
 if [ $? -eq 0 ]; then
     echo "$BACKUP_FILE"

@@ -3,15 +3,16 @@
 # === CONFIG LOCAL ===
 SERVER="root@168.181.185.23"
 PORT="5538"
-REMOTE_BACKUP_DIR="/proyectoFinal.io"
+REMOTE_BACKUP_DIR="/proyectoFinal"
 
-LOCAL_CONTAINER="activa-db-container"
+LOCAL_CONTAINER="activa-db"
 LOCAL_DB_NAME="gimnasio_activa"
 
 
-BACKUP_FILE=$(ssh -p 5538 root@168.181.185.23 "docker exec activa-db-container bash /usr/local/bin/generar-backup-gimnasio-activa.sh")
-REMOTE_PATH=/root/"$REMOTE_BACKUP_DIR/$BACKUP_FILE"
-LOCAL_PATH="./backups/$BACKUP_FILE"
+BACKUP_FILE=$(ssh -p 5538 root@168.181.185.23 "/root/proyectoFinal.io/generar-backup-gimnasio-activa.sh")
+
+LOCAL_PATH="backups/$BACKUP_FILE"
+REMOTE_PATH=/root/"$LOCAL_PATH"
 
 
 if [ -z "$BACKUP_FILE" ]; then
@@ -20,13 +21,14 @@ if [ -z "$BACKUP_FILE" ]; then
 fi
 
 echo "Descargando backup desde el servidor remoto..."
-scp -P $PORT "$SERVER:$REMOTE_PATH" "$LOCAL_PATH"
+scp -P $PORT "$SERVER:$REMOTE_PATH" ./"$BACKUP_FILE"
 
 if [ $? -ne 0 ]; then
-    echo "ERROR: descargando el archivo : scp -P $PORT $SERVER:$REMOTE_PATH $LOCAL_PATH"
+    echo "ERROR: descargando el archivo : scp -P $PORT $SERVER:$REMOTE_PATH ./"$BACKUP_FILE""
     exit 1
 fi
-echo "Backup guardado localmente en: $LOCAL_PATH"
+
+echo "Backup guardado: $BACKUP_FILE"
 
 # === 3. Restaurar en el contenedor LOCAL ===
 # echo "Importando backup en el contenedor local..."
