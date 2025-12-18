@@ -2,7 +2,7 @@ FROM python:3.13.3-alpine3.21
 
 WORKDIR /app
 
-COPY ./flask/app .
+COPY ./app .
 
 RUN pip install gunicorn
 RUN pip install flask

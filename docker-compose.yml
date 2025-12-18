@@ -16,8 +16,8 @@ services:
 
   activa-backend:
     build:
-      context: .
-      dockerfile: Dockerfile.backend
+      context: ./Backend
+      dockerfile: Dockerfile
     container_name: activa-backend
     env_file: ./Backend/.env
     restart: always
@@ -28,8 +28,8 @@ services:
 
   activa-nginx:
     build:
-      context: .
-      dockerfile: Dockerfile.nginx
+      context: ./nginx
+      dockerfile: Dockerfile
     container_name: activa-nginx
     restart: always
     ports:
@@ -45,8 +45,8 @@ services:
   activa-flask:  
     restart: always
     build:
-      context: .
-      dockerfile: Dockerfile.flask
+      context: ./flask
+      dockerfile: Dockerfile
     ports:
       - "5000:5000"
     container_name: activa-flask
