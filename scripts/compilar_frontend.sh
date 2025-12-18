@@ -1,6 +1,6 @@
 #!/bin/bash
 set -e
-
+cd ..
 FRONTEND_DIR="$(pwd)/frontend"
 FLASK_STATIC_DIR="$(pwd)/flask/app/static"
 BUILD_DIR="$FRONTEND_DIR/build"
