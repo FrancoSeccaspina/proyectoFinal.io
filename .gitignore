@@ -14,6 +14,9 @@ frontend/build/
 .env.*
 **/.env
 **/.env.*
+# Excepción: los .env.example son seguros para commitear
+!.env.example
+!**/.env.example
 
 # certificados de nginx
 nginx/cert/
