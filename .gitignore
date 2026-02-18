@@ -5,6 +5,16 @@ node_modules/
 # dist, compilacion de TypeScript
 /Backend/dist/
 
+# Build de React (generado por scripts/compilar_frontend.sh)
+flask/app/static/
+frontend/build/
+
+# Variables de entorno (contienen credenciales)
+.env
+.env.*
+**/.env
+**/.env.*
+
 # certificados de nginx
 nginx/cert/
 
