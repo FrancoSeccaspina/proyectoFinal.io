@@ -33,23 +33,14 @@ services:
     container_name: activa-nginx
     restart: always
     ports:
-      # puerto http
       - "80:80"
-      # puerto https
       - "443:443"
+    depends_on:
+      - activa-backend
     volumes:
+      - ./nginx/conf.d:/etc/nginx/conf.d
       - ./nginx/cert:/etc/letsencrypt
       - ./nginx/logs:/var/log/nginx
 
-  # activa-flask ya no es necesario: la SPA de React la sirve Nginx directamente
-  # activa-flask:
-  #   restart: always
-  #   build:
-  #     context: ./flask
-  #     dockerfile: Dockerfile
-  #   ports:
-  #     - "5000:5000"
-  #   container_name: activa-flask
-      
 volumes:
   activa-db-data:

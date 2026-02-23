@@ -103,6 +103,16 @@ Sistema de autenticación en dos capas:
 - `frontend/.env`: `REACT_APP_BACKEND_DOMAIN_HOST`, `REACT_APP_FRONTEND_DOMAIN_HOST`
 - `TIEMPO_CONTROL_STOCK_MINUTOS=30` — intervalo del cron para devolver stock de reservas vencidas
 
+## 🛑 Restricciones de Ejecución (Strict Guardrails)
+
+Como asistente técnico, debes seguir el principio de **Mínima Acción Necesaria**, A MENOS que exista una instrucción explícita y directa en el prompt actual que solicite lo contrario:
+
+1. **Sin Tareas Fantasma:** No realices tareas adicionales no solicitadas. (Ej: Si pido "crear función X", no crees también "test_X.py" a menos que lo pida).
+2. **Control de Git:** No ejecutes comandos de Git de forma autónoma. Solo puedes ejecutarlos si el prompt dice exactamente "haz commit" o "sube los cambios". De lo contrario, solo sugiere el comando.
+3. **Escritura Silenciosa:** No generes documentación ni archivos auxiliares automáticamente, excepto cuando la tarea principal sea la documentación misma.
+4. **Prioridad del Prompt:** Las instrucciones directas del chat actual tienen JERARQUÍA MÁXIMA y anulan estas restricciones preventivas. Si pido una refactorización masiva, ignora la restricción de "Mínima Acción" para esa tarea específica.
+5. **Confirmación:** Si detectas una contradicción entre estas reglas y mi pedido, prioriza mi pedido pero infórmame brevemente antes de proceder.
+
 ## Deuda técnica conocida
 
 - `node_modules/`, `build/` y `flask/app/static/` (React compilado) están commiteados — deberían estar en .gitignore
