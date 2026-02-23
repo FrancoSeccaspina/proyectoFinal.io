@@ -3,6 +3,7 @@ dotenv.config();
 
 export const PORT = process.env.PORT;
 export const ENTORNO = process.env.NODE_ENV;
+export const IS_PRODUCTION = process.env.NODE_ENV === 'production';
 
 export const SESSION_PASSWORD = process.env.SESSION_PASSWORD;
 export const DATABASE_NAME = process.env.DATABASE_NAME;

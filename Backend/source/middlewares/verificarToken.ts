@@ -1,5 +1,6 @@
 import { Request, Response, NextFunction } from 'express';
 import { obtenerPayload } from '../utils/generadorToken';
+import { IS_PRODUCTION } from '../configEnv';
 
 
 /**
@@ -22,7 +23,8 @@ export const verificarTokenPorRol = (rolesPermitidos: string[]) => {
       console.warn(`Acceso denegado: Token no proporcionado. Ruta: ${req.originalUrl}.`);
       res.clearCookie('token', {
           httpOnly: true,
-          sameSite: 'strict'
+          secure: IS_PRODUCTION,
+          sameSite: IS_PRODUCTION ? 'strict' : 'lax'
         });
       res.status(401).render("login", {
         mostrarModal: true,

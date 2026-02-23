@@ -8,7 +8,7 @@ import { firmarToken, obtenerPayload } from '../utils/generadorToken'
 import bcrypt from 'bcryptjs';
 import { Cuota } from "../database/models/cuota";
 import { transporter } from "../config/mailer";
-import { REACT_APP_FRONTEND_DOMAIN_HOST, REACT_APP_BACKEND_DOMAIN_HOST } from '../configEnv';
+import { REACT_APP_FRONTEND_DOMAIN_HOST, REACT_APP_BACKEND_DOMAIN_HOST, IS_PRODUCTION } from '../configEnv';
 
 const jwt = require('jsonwebtoken')
 
@@ -213,6 +213,8 @@ export class UsuarioController {
       const token = firmarToken({ id: usuario.id, nombre: usuario.nombre, rol: usuario.rol }, "1h");
       res.cookie('token', token, {
         httpOnly: true,
+        secure: IS_PRODUCTION,
+        sameSite: IS_PRODUCTION ? 'strict' : 'lax',
         maxAge: 1 * 60 * 60 * 1000 // 1 hora
       });
 

@@ -19,6 +19,8 @@ services:
       context: ./Backend
       dockerfile: Dockerfile
     container_name: activa-backend
+    environment:
+      NODE_ENV: production
     env_file: ./Backend/.env
     restart: always
     ports:

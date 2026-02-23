@@ -45,7 +45,7 @@ import ActividadApiController from './routes/api/actividad.api.routes';
 import dotenv from 'dotenv';
 dotenv.config();
 
-import { REACT_APP_BACKEND_DOMAIN_HOST, REACT_APP_FRONTEND_DOMAIN_HOST } from './configEnv';
+import { REACT_APP_BACKEND_DOMAIN_HOST, REACT_APP_FRONTEND_DOMAIN_HOST, IS_PRODUCTION } from './configEnv';
 
 // cron
 import './cron-task/devolver-stock-reservas-vencidas'
@@ -85,7 +85,7 @@ app.use(session({
     secret: SESSION_PASSWORD || '',
     resave: true,
     saveUninitialized: false,
-    cookie: { secure: false } // Cambiar a true en producción
+    cookie: { secure: IS_PRODUCTION }
 }));
 
 // Verifica si hay un usuario en la sesión
