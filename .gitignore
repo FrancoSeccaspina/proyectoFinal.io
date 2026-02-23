@@ -23,3 +23,6 @@ nginx/cert/
 
 # logs
 nginx/logs/*.log
+
+# Instrucciones locales de Claude Code (no compartir)
+CLAUDE.local.md
