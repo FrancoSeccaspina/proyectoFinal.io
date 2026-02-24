@@ -1,5 +1,129 @@
 # Plan de Modernizacion — Gimnasio Activa 2026
 
+# Resumen de Modernización: Ciclo de Vida y Despliegue 2026
+
+### 🎯 El Punto Principal del Cambio
+El objetivo central es la **Inmutabilidad y la Consistencia**. Aunque en el pasado se consideró la alternativa de usar un **"Doble Repositorio"** (uno para código y otro para compilados) para intentar organizar los despliegues, esa opción se descartó por ser ineficiente y propensa a errores de sincronización. En su lugar, adoptamos **Docker Registry**. Esto significa que el código se empaqueta en una "caja cerrada" (imagen) que no cambia: lo que se construye y prueba es exactamente lo que se despliega, eliminando para siempre el "en mi máquina funciona".
+
+---
+
+### 💻 ¿Cómo se trabajaría en Desarrollo?
+En el entorno local, el flujo será puramente código fuente. El desarrollador ya no tiene que preocuparse por ejecutar scripts manuales para mover carpetas `/dist` o `/build`. Al levantar el entorno con `docker compose`, el sistema se encarga de procesar los cambios. Trabajamos con la tranquilidad de que nuestro entorno local es un espejo idéntico al de producción (misma versión de Node, base de datos y Nginx), pero con herramientas de recarga rápida para programar con agilidad. Solo nos encargamos de escribir código y hacer `git push`.
+
+---
+
+### 🚀 ¿Cómo se trabajaría en Producción?
+El servidor de producción se vuelve un entorno optimizado y seguro. Ya no realiza tareas pesadas de compilación ni necesita tener herramientas de desarrollo instaladas. El flujo es automático:
+1. **GitHub Actions** detecta el nuevo código en la rama principal.
+2. Construye las imágenes ultra-ligeras y las guarda en un almacén seguro (Registry).
+3. El servidor recibe la instrucción, descarga la imagen lista para usar y reinicia los servicios en segundos. 
+Esto garantiza despliegues limpios, sin archivos residuales de versiones viejas y con una capacidad de respuesta inmediata ante cualquier falla.
+
+
+  Modo Desarrollo (local, sin Docker completo)                                             
+                                                                                           
+  Prerrequisito: Base de datos                                                             
+                                                                                           
+  Necesitás MySQL corriendo. La opción más simple es levantar solo ese servicio de Docker:
+
+  # Solo la DB en Docker
+  docker compose up activa-db -d
+
+  O tener MySQL 8.0 instalado localmente en el puerto 3307.
+
+  ---
+  Backend (Express + TypeScript)
+
+  cd Backend
+  cp .env.example .env       # Completar: DATABASE_PASSWORD_CONECT, SESSION_PASSWORD,
+  JWT_SECRET
+  npm install
+  npm run start:dev          # nodemon + ts-node, hot reload sobre source/
+
+  Variables clave para desarrollo en Backend/.env:
+  NODE_ENV=development
+  DATABASE_HOST=localhost      # (o activa-db si usás el contenedor de db)
+  REACT_APP_FRONTEND_DOMAIN_HOST=http://localhost:5000
+  REACT_APP_BACKEND_DOMAIN_HOST=http://localhost:3032
+
+  El backend escucha en localhost:3032. Con NODE_ENV=development, las cookies no son secure
+   ni httpOnly (ver configEnv.ts:6).
+
+  ---
+  Frontend (React SPA)
+
+  cd frontend
+  cp .env.example .env       # REACT_APP_BACKEND_DOMAIN_HOST=http://localhost:3032
+  npm install
+  npm start                  # CRA dev server con hot reload
+
+  CRA levanta en localhost:3000 por defecto. Si el backend tiene CORS configurado para
+  localhost:5000, hay un potencial conflicto — revisá que los puertos coincidan entre
+  frontend/.env y Backend/.env.
+
+  ---
+  Flujo en desarrollo
+
+  Browser → localhost:3032        (sitio público EJS)
+  Browser → localhost:3000        (SPA React, dev server)
+    └── fetch → localhost:3032/api/*  (API Express)
+
+  ---
+  Modo Producción (Docker Compose)
+
+  Todo el stack se construye y orquesta con Docker Compose. Un solo comando:
+
+  docker compose up -d
+
+  Lo que hace internamente:
+
+  Servicio: activa-db
+  Build: mysql:8.0
+  Resultado: MySQL en red interna, puerto 3307 expuesto al host
+  ────────────────────────────────────────
+  Servicio: activa-backend
+  Build: Backend/Dockerfile (multi-stage)
+  Resultado: Stage 1: compila TS → Stage 2: solo deps de producción, corre node
+    dist/source/app.js
+  ────────────────────────────────────────
+  Servicio: activa-nginx
+  Build: nginx/Dockerfile (multi-stage)
+  Resultado: Stage 1: compila React → Stage 2: Nginx sirve la SPA + proxy al backend
+
+  Diferencias clave respecto a desarrollo:
+
+  1. NODE_ENV=production — forzado en docker-compose.yml:29, activa cookies secure +
+  httpOnly
+  2. React compilado en imagen — el build de React se hace dentro del Dockerfile de Nginx;
+  no hay servidor CRA
+  3. Sin devDependencies — npm ci --omit=dev en el stage final del backend
+  4. SSL obligatorio — Nginx fuerza redirect 301 HTTP→HTTPS, requiere certificados en
+  nginx/cert/
+  5. Healthchecks encadenados — Nginx espera que backend esté healthy, backend espera que
+  la DB esté healthy
+
+  Flujo en producción
+
+  Internet:80  → Nginx (redirect 301 → HTTPS)
+  Internet:443
+    ├── activafitness.com.ar        → proxy → activa-backend:3032 (Express/EJS)
+    └── dashboard.activafitness.com.ar → archivos estáticos React en Nginx
+          └── /api/*                → proxy → activa-backend:3032
+
+  Variables a configurar antes del primer deploy:
+
+  cp Backend/.env.example Backend/.env
+  # Cambiar:
+  # DATABASE_HOST=activa-db   ← nombre del servicio Docker, no localhost
+  # REACT_APP_FRONTEND_DOMAIN_HOST=https://dashboard.activafitness.com.ar
+  # REACT_APP_BACKEND_DOMAIN_HOST=https://activafitness.com.ar
+  # NODE_ENV=development  ← docker-compose.yml lo sobreescribe a production
+
+  También necesitás un .env en la raíz del proyecto para las variables de activa-db:
+  cp .env.example .env   # MYSQL_ROOT_PASSWORD, DATABASE_NAME, DATABASE_USER,
+  DATABASE_PASSWORD
+
+
 ## Del "Doble Repo" a "Contenedores con CI/CD"
 
 **Fecha:** 2026-02-08
@@ -19,6 +143,8 @@
 | **Total** | | **18 tickets** | |
 
 ---
+
+
 
 ## FASE 1: Unificacion y Limpieza
 
