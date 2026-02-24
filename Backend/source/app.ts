@@ -134,6 +134,9 @@ app.use('/api',
 
 app.use('/uploads/aptoMedico', express.static(path.join(__dirname, '..', 'uploads', 'aptoMedico')));
 
+// Health check para Docker
+app.get('/api/health', (_req: express.Request, res: express.Response) => res.sendStatus(200));
+
 // verifica que las rutas no existan y redirige a la página de error 404
 app.use(rutaNoEncontrada);
 
