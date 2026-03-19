@@ -1,9 +1,9 @@
 # --- Stage 1: Compilar el frontend React ---
 FROM node:22-alpine AS frontend-build
 WORKDIR /app
-COPY frontend/package*.json ./
+COPY --from=frontend package*.json ./
 RUN npm ci
-COPY frontend/ ./
+COPY --from=frontend . ./
 RUN CI=false npm run build
 
 # --- Stage 2: Nginx con el build + Certbot ---
@@ -13,7 +13,7 @@ FROM nginx:1.21.6
 COPY --from=frontend-build /app/build /usr/share/nginx/html/dashboard
 
 # Copiar script de renovación de certificados
-COPY nginx/renew.sh /
+COPY renew.sh /
 RUN chmod +x /renew.sh
 
 # Instalar Certbot (mantener funcionalidad actual)
@@ -24,4 +24,4 @@ RUN /opt/certbot/bin/pip install certbot certbot-nginx
 RUN ln -s /opt/certbot/bin/certbot /usr/bin/certbot
 
 # Copiar configuración de Nginx
-COPY nginx/conf.d/base.conf /etc/nginx/conf.d/default.conf
+COPY conf.d/base.conf /etc/nginx/conf.d/default.conf

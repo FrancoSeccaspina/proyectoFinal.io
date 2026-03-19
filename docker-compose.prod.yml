@@ -1,3 +1,9 @@
+# docker-compose.prod.yml
+# Usado por el servidor de producción.
+# Las imágenes son descargadas desde GHCR (no se compila localmente).
+# Uso: docker compose -f docker-compose.prod.yml pull
+#      docker compose -f docker-compose.prod.yml up -d
+
 services:
   activa-db:
     image: mysql:8.0
@@ -15,15 +21,13 @@ services:
       - "3307:3306"
     healthcheck:
       test: ["CMD", "mysqladmin", "ping", "-h", "127.0.0.1", "--silent"]
-      interval: 10s
-      timeout: 5s
+      interval: 30s
+      timeout: 10s
       retries: 5
       start_period: 30s
 
   activa-backend:
-    build:
-      context: ./Backend
-      dockerfile: Dockerfile
+    image: ghcr.io/francoseccaspina/activa-backend:latest
     container_name: activa-backend
     environment:
       NODE_ENV: production
@@ -36,17 +40,13 @@ services:
         condition: service_healthy
     healthcheck:
       test: ["CMD", "wget", "-qO-", "http://localhost:3032/api/health"]
-      interval: 10s
-      timeout: 5s
+      interval: 30s
+      timeout: 10s
       retries: 5
       start_period: 15s
 
   activa-nginx:
-    build:
-      context: ./nginx
-      dockerfile: Dockerfile
-      additional_contexts:
-        frontend: ./frontend
+    image: ghcr.io/francoseccaspina/activa-nginx:latest
     container_name: activa-nginx
     restart: always
     ports:
@@ -61,8 +61,8 @@ services:
       - ./nginx/logs:/var/log/nginx
     healthcheck:
       test: ["CMD", "curl", "-f", "http://localhost/"]
-      interval: 15s
-      timeout: 5s
+      interval: 30s
+      timeout: 10s
       retries: 3
       start_period: 10s
 

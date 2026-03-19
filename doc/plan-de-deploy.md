@@ -610,27 +610,89 @@ server {
 **Esfuerzo:** Medio (1-2 hs)
 
 **Acciones:**
-1. Habilitar GitHub Packages en el repositorio (viene habilitado por defecto)
-2. Crear un Personal Access Token (PAT) con permisos `write:packages` y `read:packages`
-3. Agregar los siguientes secretos en el repo (Settings > Secrets and variables > Actions):
-   - `SERVER_HOST` — IP o dominio del servidor de produccion
-   - `SERVER_USER` — usuario SSH del servidor
-   - `SERVER_SSH_KEY` — clave privada SSH para conectarse
-   - `BACKEND_ENV` — contenido del archivo `Backend/.env` de produccion
-4. Probar login al registry:
-   ```bash
-   echo $PAT | docker login ghcr.io -u USERNAME --password-stdin
-   ```
+
+#### 1. Habilitar GitHub Packages
+Viene habilitado por defecto en el repositorio. No requiere acción.
+
+#### 2. Crear clave SSH dedicada para el deploy (NO usar clave personal)
+
+La clave SSH del deploy debe ser independiente de las claves personales de cada desarrollador. Así cualquier colaborador puede hacer push a `main` y el deploy se dispara automáticamente sin compartir claves personales.
+
+```bash
+# Generar un par de claves nuevo, solo para CI/CD:
+ssh-keygen -t ed25519 -C "github-actions-deploy" -f ~/.ssh/activa_deploy
+
+# Resultado:
+# ~/.ssh/activa_deploy      ← clave PRIVADA (va en GitHub Secrets)
+# ~/.ssh/activa_deploy.pub  ← clave PÚBLICA (va en el servidor)
+```
+
+Registrar la clave pública en el servidor de producción:
+```bash
+ssh-copy-id -i ~/.ssh/activa_deploy.pub -p TU_PUERTO_SSH root@TU_IP_SERVIDOR
+```
+
+Verificar que la conexión funciona:
+```bash
+ssh -i ~/.ssh/activa_deploy -p TU_PUERTO_SSH root@TU_IP_SERVIDOR
+```
+
+#### 3. Agregar los secretos en el repo (Settings > Secrets and variables > Actions)
+
+| Secreto | Valor | Cómo obtenerlo |
+|---------|-------|----------------|
+| `SERVER_HOST` | `203.0.113.10` | IP del servidor de producción |
+| `SERVER_USER` | `root` | Usuario Linux del servidor |
+| `SERVER_SSH_KEY` | contenido de `~/.ssh/activa_deploy` | `cat ~/.ssh/activa_deploy` — pegar todo incluyendo `BEGIN` y `END` |
+| `SERVER_SSH_PORT` | `5833` | Puerto SSH del servidor (puede no ser el 22 estándar) |
+| `BACKEND_ENV` | contenido de `Backend/.env` de producción | Copiar el `.env` real del servidor |
+
+> **Nota sobre SERVER_SSH_KEY:** pegar el contenido completo del archivo, incluyendo las líneas de cabecera:
+> ```
+> -----BEGIN OPENSSH PRIVATE KEY-----
+> b3BlbnNzaC1rZXkAAAAA...
+> -----END OPENSSH PRIVATE KEY-----
+> ```
+
+#### 4. Configurar el puerto SSH en el workflow (Ticket 4.3)
+
+El servidor usa el puerto 5833, no el 22 estándar. Esto se indica en el workflow, no en los secretos:
+
+```yaml
+- name: Deploy via SSH al servidor
+  uses: appleboy/ssh-action@v1
+  with:
+    host: ${{ secrets.SERVER_HOST }}
+    username: ${{ secrets.SERVER_USER }}
+    key: ${{ secrets.SERVER_SSH_KEY }}
+    port: ${{ secrets.SERVER_SSH_PORT }}   # <-- puerto no estándar
+    script: |
+      ...
+```
+
+#### 5. Probar login al registry desde local
+
+```bash
+# Login a GHCR con tu usuario de GitHub:
+echo $PAT | docker login ghcr.io -u TU_USUARIO_GITHUB --password-stdin
+
+# Build y push de prueba:
+docker build -t ghcr.io/TU_USUARIO/activa-backend:test ./Backend
+docker push ghcr.io/TU_USUARIO/activa-backend:test
+```
 
 **Criterio de aceptacion:**
+- [ ] Existe un par de claves `activa_deploy` / `activa_deploy.pub` dedicado al CI/CD
+- [ ] La clave pública está registrada en el servidor (`~/.ssh/authorized_keys` de root)
+- [ ] La conexión SSH desde local al servidor funciona usando la clave `activa_deploy`
+- [ ] Los 5 secretos están configurados en GitHub Actions
 - [ ] Se puede hacer `docker push ghcr.io/USUARIO/activa-backend:latest` desde local
-- [ ] Los secretos estan configurados en GitHub
 
 ---
 
 ### TICKET 4.2 — Crear docker-compose.prod.yml para el servidor
 
-**Estado:** Pendiente
+**Estado:** Completado
 **Esfuerzo:** Medio (1-2 hs)
 
 **Proposito:** El servidor de produccion usara un compose que descarga imagenes pre-construidas (no compila localmente).
