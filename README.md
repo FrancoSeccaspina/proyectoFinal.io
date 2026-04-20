@@ -188,6 +188,22 @@ feature/mi-cambio  →  (Pull Request)  →  main  →  deploy automático a pro
 
 Para forzar un deploy sin cambios de código: **GitHub → Actions → Build & Deploy → Run workflow**.
 
+### Deploy manual en el servidor
+
+Si el contenedor del backend sigue corriendo una imagen vieja después de un deploy automático (por ejemplo, el servidor no descargó la imagen nueva de GHCR), ejecutar esto directamente en el servidor:
+
+```bash
+cd /root/proyectoFinal.io
+git pull origin main
+docker compose -f docker-compose.prod.yml pull
+docker compose -f docker-compose.prod.yml up -d
+```
+
+**Por qué es necesario:**
+- `git pull` — actualiza el `docker-compose.prod.yml` y el `.env` en el servidor con los últimos cambios del repo
+- `docker compose pull` — descarga las imágenes más recientes desde GHCR (el registry de GitHub); sin este paso el contenedor sigue usando la imagen cacheada localmente aunque exista una versión nueva
+- `docker compose up -d` — reinicia los servicios con las imágenes y configuración actualizadas
+
 ---
 
 ## Scripts de utilidad
