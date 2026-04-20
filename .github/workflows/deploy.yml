@@ -46,6 +46,9 @@ jobs:
         with:
           context: .
           file: ./nginx/Dockerfile
+          build-args: |
+            REACT_APP_FRONTEND_DOMAIN_HOST=${{ secrets.REACT_APP_FRONTEND_DOMAIN_HOST }}
+            REACT_APP_BACKEND_DOMAIN_HOST=${{ secrets.REACT_APP_BACKEND_DOMAIN_HOST }}
           push: true
           tags: |
             ${{ env.NGINX_IMAGE }}:latest
@@ -63,7 +66,31 @@ jobs:
           username: ${{ secrets.SERVER_USER }}
           key: ${{ secrets.SERVER_SSH_KEY }}
           port: ${{ secrets.SERVER_SSH_PORT }}
+          envs: MYSQL_ROOT_PASSWORD,DATABASE_NAME,DB_USER,DATABASE_PASSWORD,SESSION_PASSWORD,JWT_SECRET,REACT_APP_FRONTEND_DOMAIN_HOST,REACT_APP_BACKEND_DOMAIN_HOST
           script: |
+            # Generar .env raíz (docker-compose.prod.yml)
+            cat > /root/proyectoFinal.io/.env << ENVEOF
+            MYSQL_ROOT_PASSWORD=${MYSQL_ROOT_PASSWORD}
+            DATABASE_NAME=${DATABASE_NAME}
+            DATABASE_USER=${DB_USER}
+            DATABASE_PASSWORD=${DATABASE_PASSWORD}
+            ENVEOF
+
+            # Generar Backend/.env
+            cat > /root/proyectoFinal.io/Backend/.env << ENVEOF
+            DATABASE_NAME=${DATABASE_NAME}
+            DATABASE_USER_CONECT=${DB_USER}
+            DATABASE_PASSWORD_CONECT=${DATABASE_PASSWORD}
+            DATABASE_HOST=activa-db
+            PORT=3032
+            SESSION_PASSWORD=${SESSION_PASSWORD}
+            JWT_SECRET=${JWT_SECRET}
+            TIEMPO_CONTROL_STOCK_MINUTOS=30
+            REACT_APP_FRONTEND_DOMAIN_HOST=${REACT_APP_FRONTEND_DOMAIN_HOST}
+            REACT_APP_BACKEND_DOMAIN_HOST=${REACT_APP_BACKEND_DOMAIN_HOST}
+            NODE_ENV=production
+            ENVEOF
+
             cd /root/proyectoFinal.io
             docker compose -f docker-compose.prod.yml pull
             docker compose -f docker-compose.prod.yml up -d
