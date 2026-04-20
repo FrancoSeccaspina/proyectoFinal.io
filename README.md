@@ -90,9 +90,8 @@ El valor de `DATABASE_HOST` en `.env` depende de cómo levantás el proyecto:
 
 | Modo | `DATABASE_HOST` |
 |---|---|
-| `npm run start:dev` (proceso local) | `localhost` |
-| `docker compose up` (Docker local) | `activa-db` |
-| Producción | `activa-db` |
+| Backend como proceso local (DB en Docker o local) | `localhost` |
+| Producción (backend y DB dentro del mismo docker network) | `activa-db` |
 
 **Opción A — Backend y frontend como procesos locales (recomendado):**
 
@@ -123,7 +122,7 @@ docker compose up
 docker compose down   # para detener
 ```
 
-En `.env` usar `DATABASE_HOST=activa-db`.
+En `Backend/.env` usar `DATABASE_HOST=activa-db` solo si el backend también corre dentro del docker network (producción). Para desarrollo local usar `localhost`.
 
 ### 6. Comandos útiles del backend
 
