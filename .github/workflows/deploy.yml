@@ -64,7 +64,7 @@ jobs:
         env:
           MYSQL_ROOT_PASSWORD: ${{ secrets.MYSQL_ROOT_PASSWORD }}
           DATABASE_NAME: ${{ secrets.DATABASE_NAME }}
-          DB_USER: ${{ secrets.DB_USER }}
+          DATABASE_USER: ${{ secrets.DATABASE_USER }}
           DATABASE_PASSWORD: ${{ secrets.DATABASE_PASSWORD }}
           SESSION_PASSWORD: ${{ secrets.SESSION_PASSWORD }}
           JWT_SECRET: ${{ secrets.JWT_SECRET }}
@@ -76,23 +76,16 @@ jobs:
           username: ${{ secrets.SERVER_USER }}
           key: ${{ secrets.SERVER_SSH_KEY }}
           port: ${{ secrets.SERVER_SSH_PORT }}
-          envs: MYSQL_ROOT_PASSWORD,DATABASE_NAME,DB_USER,DATABASE_PASSWORD,SESSION_PASSWORD,JWT_SECRET,REACT_APP_FRONTEND_DOMAIN_HOST,REACT_APP_BACKEND_DOMAIN_HOST,PAT_PRODUCCION
+          envs: MYSQL_ROOT_PASSWORD,DATABASE_NAME,DATABASE_USER,DATABASE_PASSWORD,SESSION_PASSWORD,JWT_SECRET,REACT_APP_FRONTEND_DOMAIN_HOST,REACT_APP_BACKEND_DOMAIN_HOST,PAT_PRODUCCION
           script: |
             echo "${PAT_PRODUCCION}" | docker login ghcr.io -u francoseccaspina --password-stdin
 
-            # Generar .env raíz (docker-compose.prod.yml)
+            # Generar .env único (usado por Docker Compose y el backend)
             cat > /root/proyectoFinal.io/.env << ENVEOF
             MYSQL_ROOT_PASSWORD=${MYSQL_ROOT_PASSWORD}
             DATABASE_NAME=${DATABASE_NAME}
-            DATABASE_USER=${DB_USER}
+            DATABASE_USER=${DATABASE_USER}
             DATABASE_PASSWORD=${DATABASE_PASSWORD}
-            ENVEOF
-
-            # Generar Backend/.env
-            cat > /root/proyectoFinal.io/Backend/.env << ENVEOF
-            DATABASE_NAME=${DATABASE_NAME}
-            DATABASE_USER_CONECT=${DB_USER}
-            DATABASE_PASSWORD_CONECT=${DATABASE_PASSWORD}
             DATABASE_HOST=activa-db
             PORT=3032
             SESSION_PASSWORD=${SESSION_PASSWORD}

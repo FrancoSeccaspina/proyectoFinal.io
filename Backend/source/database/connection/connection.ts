@@ -1,15 +1,15 @@
 import { Sequelize } from 'sequelize';
 import {
   DATABASE_NAME,
-  DATABASE_USER_CONECT,
+  DATABASE_USER,
   DATABASE_HOST,
-  DATABASE_PASSWORD_CONECT
+  DATABASE_PASSWORD
 } from '../../configEnv';
 
 const sequelize = new Sequelize(
   DATABASE_NAME || '',
-  DATABASE_USER_CONECT || '', 
-  DATABASE_PASSWORD_CONECT || '',
+  DATABASE_USER || '',
+  DATABASE_PASSWORD || '',
   {
     host: DATABASE_HOST || '',
     dialect: 'mysql',
