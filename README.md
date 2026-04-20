@@ -54,25 +54,6 @@ Todas las variables viven en un único archivo `.env` en la raíz del proyecto:
 cp .env.example .env
 ```
 
-#### `.env` — variables requeridas
-
-| Variable | Descripción | Valor en desarrollo |
-|---|---|---|
-| `MYSQL_ROOT_PASSWORD` | Contraseña root de MySQL | _(la del equipo)_ |
-| `DATABASE_NAME` | Nombre de la base de datos | `gimnasio_activa` |
-| `DATABASE_USER` | Usuario de MySQL | `root` |
-| `DATABASE_PASSWORD` | Contraseña de MySQL | _(la del equipo)_ |
-| `DATABASE_HOST` | Host de MySQL | `localhost` (dev local) o `activa-db` (Docker) |
-| `PORT` | Puerto del backend Express | `3032` |
-| `SESSION_PASSWORD` | Secreto para cifrar sesiones EJS | _(string largo aleatorio)_ |
-| `JWT_SECRET` | Secreto para firmar tokens JWT | _(string largo aleatorio)_ |
-| `REACT_APP_BACKEND_DOMAIN_HOST` | URL base del backend (CORS y frontend) | `http://localhost:3032` |
-| `REACT_APP_FRONTEND_DOMAIN_HOST` | URL base del frontend | `http://localhost:3000` |
-| `TIEMPO_CONTROL_STOCK_MINUTOS` | Intervalo del cron de devolución de stock | `30` |
-| `NODE_ENV` | Entorno de ejecución | `development` |
-| `BROWSER` | Evita que CRA abra el navegador automáticamente | `none` |
-
-El archivo `.env` **no está commiteado** (está en `.gitignore`).
 
 ### 4. Levantar la base de datos
 
@@ -80,15 +61,14 @@ El archivo `.env` **no está commiteado** (está en `.gitignore`).
 
 ```bash
 docker compose up activa-db
+
+docker exec -i activa-db mysql -uroot -proot gimnasio_activa < gimnasio_activa.sql     
+                                                                                           
+# Correlo desde el directorio donde está el archivo .sql.  
 ```
 
 MySQL queda disponible en `localhost:3307`. En `.env` usar `DATABASE_HOST=localhost`.
 
-Importar el esquema inicial:
-
-```bash
-mysql -u root -p -P 3307 gimnasio_activa < gimnasio_activa.sql
-```
 
 **Opción B — MySQL instalado localmente:**
 
