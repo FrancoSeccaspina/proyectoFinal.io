@@ -1,14 +1,3 @@
-/* Centrado de títulos */
-h2 {
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    padding: 1rem;
-    font-size: 20px;
-    margin: 0;
-    width: 100%;
-}
-
 .accordion-container {
     max-width: 800px;
     margin: 2rem auto;
@@ -16,95 +5,80 @@ h2 {
 }
 
 .accordion-card {
-    border: 1px solid white;
-    border-radius: 8px;
+    border: 1px solid #e8e3dc;
+    border-radius: 10px;
     margin-bottom: 10px;
     overflow: hidden;
-    background-color: transparent;
-    backdrop-filter: blur(2px);
-    transition: box-shadow 0.3s ease;
+    background-color: #fff;
+    transition: border-color 0.25s ease;
 }
 
 .accordion-card:hover {
-    box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+    border-color: rgba(239, 50, 55, 0.3);
 }
 
 .accordion-toggle {
-    background-color: rgba(255, 255, 255, 0.12);
-    color: white;
-    border: 1px solid white;
-    border-radius: 6px;
-    padding: 10px 16px;
+    background-color: #fff;
+    color: #1a1a1a;
+    border: none;
+    padding: 14px 18px;
     font-size: 0.9rem;
     text-transform: uppercase;
-    font-weight: 500;
+    font-weight: 600;
+    letter-spacing: 0.5px;
     width: 100%;
     text-align: left;
     cursor: pointer;
-    transition: background-color 0.3s ease;
+    transition: background-color 0.25s ease, color 0.25s ease;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
 }
 
 .accordion-toggle:hover {
-    background-color: rgba(255, 255, 255, 0.3);
+    background-color: #fdf5f5;
+    color: #ef3237;
+}
+
+.accordion-card.open .accordion-toggle {
+    color: #ef3237;
+    border-bottom: 1px solid #f0ece6;
 }
 
 .accordion-content {
     display: none;
-    padding: 15px;
-    background-color: transparent;
-    color: white !important;
-    font-weight: 500;
-    backdrop-filter: blur(2px);
+    padding: 16px 18px;
+    background-color: #fdf5f5;
     transition: max-height 0.3s ease-out;
-}
-
-.accordion-content p {
-    color: white !important;
-    font-weight: 500;
 }
 
 .accordion-card.open .accordion-content {
     display: block;
 }
 
+.accordion-content p,
+.mainRecetaDetail p {
+    color: #333;
+    font-weight: 400;
+    font-size: 0.95rem;
+    line-height: 1.7;
+    white-space: pre-line;
+    margin: 0;
+}
+
 .arrow {
     display: inline-block;
     margin-left: 10px;
     transition: transform 0.3s ease;
+    color: #ef3237;
 }
 
 .accordion-card.open .arrow {
     transform: rotate(180deg);
 }
 
-/* CAMBIO: Limitamos los estilos de <p> para no afectar el footer */
-.mainRecetaDetail p {
-    color: white;
-    font-weight: 500;
-    white-space: pre-line;
-    margin: 0;
-}
-
-@media screen and (min-width: 320px) {
-    h2 {
-        font-size: 12px;
-        width: 100%;
-    }
-
-    .mainRecetaDetail p {
-        font-size: 10px;
-    }
-}
-
-@media screen and (min-width: 768px) {
-    h2 {
-        font-size: 20px;
-        width: 100%;
-    }
-
-    .mainRecetaDetail p {
-        font-size: 15px;
-    }
+.mainRecetaDetail {
+    padding: 1.5rem;
 }
 
 .visually-hidden {
@@ -118,26 +92,9 @@ h2 {
     border: 0;
 }
 
-.mainLienzo {
-    margin-top: 1rem;
-    margin-bottom: 1rem;
-    padding: 1rem;
-    background-image: url('/images/Lienzo01vero.jpeg');
-    background-size: cover;
-    background-repeat: no-repeat;
-    background-position: center;
-    overflow: hidden;
-    box-shadow: 0px 4px 12px rgba(0, 0, 0, 0.12);
-}
-
-.mainRecetaDetail {
-    padding: 1rem;
-    background-image: url('/images/Lienzo01vero.jpeg');
-    background-size: 100% auto;
-    background-repeat: repeat-y;
-    background-position: center top;
-    background-attachment: fixed;
-    border-radius: 8px;
-    overflow: hidden;
-    box-shadow: 0px 4px 12px rgba(0, 0, 0, 0.12);
+@media screen and (min-width: 768px) {
+    .accordion-content p,
+    .mainRecetaDetail p {
+        font-size: 1rem;
+    }
 }

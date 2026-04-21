@@ -63,8 +63,16 @@
   margin-right: 0.5rem;
 }
 
+.nav-item a {
+  border-radius: 8px;
+  transition: color 0.25s ease, background 0.25s ease, transform 0.2s ease;
+}
+
 .nav-item a:hover {
-  text-decoration: underline;
+  color: #ef3237;
+  background: rgba(239, 50, 55, 0.10);
+  text-decoration: none;
+  transform: translateY(-1px);
 }
 /* Al hacer hover se despliega */
 .search-box:hover {
@@ -139,12 +147,16 @@
   flex-direction: column;
   align-items: center;
   color: #fff;
-  transition: color 0.2s;
   text-decoration: none;
+  border-radius: 10px;
+  padding: 0.4rem 0.6rem;
+  transition: color 0.25s ease, background 0.25s ease, transform 0.2s ease;
 }
 
 .item-nav:hover {
-  color: red;
+  color: #ef3237;
+  background: rgba(239, 50, 55, 0.12);
+  transform: translateY(-2px);
 }
 
 .icon-nav {

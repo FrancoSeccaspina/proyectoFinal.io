@@ -1,23 +1,352 @@
 <!DOCTYPE html>
-<html lang="es"> 
+<html lang="es">
 <head>
   <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.5/dist/js/bootstrap.bundle.min.js"></script>
   <%- include('./partials/head.ejs') %>
+
+  <style>
+    /* ── FONDO: crema suave ── */
+    body {
+      background-image: none !important;
+      background: linear-gradient(180deg, #faf8f5 0%, #f2ede6 100%) !important;
+      background-attachment: fixed !important;
+    }
+
+    /* ── MAIN CONTENT ── */
+    .main-content {
+      padding: 2rem 1.5rem 4rem;
+      max-width: 1400px;
+      margin: 0 auto;
+    }
+
+    /* ── CARRUSEL WRAPPER: centra y da respiro al carrusel ── */
+    .carousel-container {
+      max-width: 1300px;
+      margin: 0 auto 2.5rem;
+      border-radius: 10px;
+      overflow: hidden;
+      box-shadow: none;
+      border: 1px solid rgba(239, 50, 55, 0.12);
+    }
+
+    /* ── IMÁGENES ── */
+    .carousel-item {
+      height: 520px;
+      transition: transform 0.65s cubic-bezier(0.4, 0, 0.2, 1);
+    }
+
+    .carousel-img {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+      object-position: center;
+      display: block;
+    }
+
+    /* ── INDICADORES: pastillas — activo en rojo ── */
+    .carousel-indicators {
+      bottom: 16px;
+      gap: 6px;
+      margin: 0;
+      justify-content: center;
+    }
+
+    .carousel-indicators button {
+      width: 26px !important;
+      height: 4px !important;
+      border-radius: 2px !important;
+      background-color: rgba(255, 255, 255, 0.5) !important;
+      border-top: none !important;
+      border-bottom: none !important;
+      opacity: 1 !important;
+      transition: background-color 0.3s ease, width 0.3s ease !important;
+    }
+
+    .carousel-indicators button.active {
+      background-color: #ef3237 !important;
+      width: 42px !important;
+    }
+
+    /* ── CONTROLES: flechas limpias ── */
+    .carousel-control-prev,
+    .carousel-control-next {
+      width: 8%;
+      opacity: 0.7;
+      transition: opacity 0.2s;
+    }
+
+    .carousel-control-prev:hover,
+    .carousel-control-next:hover {
+      opacity: 1;
+    }
+
+    .carousel-control-prev-icon,
+    .carousel-control-next-icon {
+      filter: invert(100%);
+      width: 1.8rem;
+      height: 1.8rem;
+    }
+
+    /* ── RESPONSIVE ── */
+    @media (max-width: 320px) {
+      .carousel-item { height: 180px; }
+      .carousel-img  { object-fit: contain; }
+    }
+
+    @media (min-width: 321px) and (max-width: 425px) {
+      .carousel-item { height: 220px; }
+    }
+
+    @media (min-width: 426px) and (max-width: 768px) {
+      .carousel-item { height: 300px; }
+    }
+
+    @media (min-width: 769px) and (max-width: 1024px) {
+      .carousel-container { max-width: 900px; }
+      .carousel-item      { height: 380px; }
+    }
+
+    @media (min-width: 1025px) and (max-width: 1440px) {
+      .carousel-container { max-width: 1100px; }
+      .carousel-item      { height: 460px; }
+    }
+
+    @media (min-width: 1441px) {
+      .carousel-container { max-width: 1300px; }
+      .carousel-item      { height: 520px; }
+    }
+
+    /* ── HERO SECTION ── */
+    .hero-section {
+      text-align: center;
+      padding: 5rem 2rem 4.5rem;
+      background: linear-gradient(135deg, #1a1a1a 0%, #2e2e2e 60%, #3d1010 100%);
+      color: #fff;
+      margin: 0 auto 2.5rem;
+      border-radius: 14px;
+      max-width: 1300px;
+      position: relative;
+      overflow: hidden;
+    }
+
+    .hero-section::before {
+      content: '';
+      position: absolute;
+      top: -60px;
+      right: -60px;
+      width: 260px;
+      height: 260px;
+      background: radial-gradient(circle, rgba(239,50,55,0.25) 0%, transparent 70%);
+      pointer-events: none;
+    }
+
+    .hero-section::after {
+      content: '';
+      position: absolute;
+      bottom: -40px;
+      left: -40px;
+      width: 200px;
+      height: 200px;
+      background: radial-gradient(circle, rgba(239,50,55,0.15) 0%, transparent 70%);
+      pointer-events: none;
+    }
+
+    .hero-tagline {
+      font-size: 0.8rem;
+      letter-spacing: 4px;
+      text-transform: uppercase;
+      color: #ef3237;
+      font-weight: 600;
+      margin-bottom: 1.4rem;
+    }
+
+    .hero-title {
+      font-size: clamp(2rem, 5vw, 3.5rem);
+      font-weight: 800;
+      line-height: 1.2;
+      margin-bottom: 1.5rem;
+      letter-spacing: -0.5px;
+    }
+
+    .hero-title span {
+      color: #ef3237;
+    }
+
+    .hero-subtitle {
+      font-size: clamp(1rem, 2vw, 1.15rem);
+      color: rgba(255,255,255,0.65);
+      max-width: 520px;
+      margin: 0 auto 2.8rem;
+      line-height: 1.75;
+    }
+
+    .hero-ctas {
+      display: flex;
+      gap: 1rem;
+      justify-content: center;
+      flex-wrap: wrap;
+    }
+
+    .btn-hero-primary {
+      background: #ef3237;
+      color: #fff;
+      padding: 0.85rem 2rem;
+      border-radius: 50px;
+      font-weight: 700;
+      font-size: 0.95rem;
+      text-decoration: none;
+      letter-spacing: 0.5px;
+      transition: background 0.25s ease, transform 0.2s ease;
+    }
+
+    .btn-hero-primary:hover {
+      background: #c8292d;
+      transform: translateY(-2px);
+      color: #fff;
+    }
+
+    .btn-hero-secondary {
+      background: transparent;
+      color: #fff;
+      padding: 0.85rem 2rem;
+      border-radius: 50px;
+      font-weight: 600;
+      font-size: 0.95rem;
+      text-decoration: none;
+      border: 2px solid rgba(255,255,255,0.4);
+      transition: border-color 0.25s ease, background 0.25s ease, transform 0.2s ease;
+    }
+
+    .btn-hero-secondary:hover {
+      border-color: #ef3237;
+      background: rgba(239, 50, 55, 0.1);
+      transform: translateY(-2px);
+      color: #fff;
+    }
+
+    /* ── FEATURES ── */
+    .features-section {
+      max-width: 1300px;
+      margin: 0 auto;
+      padding: 0 1rem;
+    }
+
+    .features-title {
+      text-align: center;
+      font-size: clamp(1.4rem, 3vw, 2rem);
+      font-weight: 800;
+      color: #1a1a1a;
+      margin-bottom: 0.75rem;
+      line-height: 1.2;
+    }
+
+    .features-title span {
+      color: #ef3237;
+    }
+
+    .features-subtitle {
+      text-align: center;
+      color: #777;
+      font-size: 1rem;
+      margin-bottom: 2.5rem;
+      line-height: 1.6;
+    }
+
+    .features-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(240px, 1fr));
+      gap: 1.5rem;
+    }
+
+    .feature-card {
+      background: #fff;
+      border-radius: 16px;
+      padding: 2rem 1.5rem;
+      text-align: center;
+      border: 1px solid #f0ece6;
+      transition: transform 0.25s ease;
+      text-decoration: none;
+      color: inherit;
+      display: block;
+    }
+
+    .feature-card:hover {
+      transform: translateY(-6px);
+      border-color: rgba(239, 50, 55, 0.2);
+      color: inherit;
+    }
+
+    .feature-icon {
+      width: 60px;
+      height: 60px;
+      background: linear-gradient(135deg, #ef3237, #c8292d);
+      border-radius: 16px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      margin: 0 auto 1.2rem;
+      font-size: 1.6rem;
+      color: #fff;
+    }
+
+    .feature-card h3 {
+      font-size: 1.05rem;
+      font-weight: 700;
+      color: #1a1a1a;
+      margin-bottom: 0.65rem;
+      line-height: 1.3;
+    }
+
+    .feature-card p {
+      font-size: 0.9rem;
+      color: #666;
+      line-height: 1.7;
+    }
+
+    .feature-arrow {
+      display: inline-block;
+      margin-top: 1.2rem;
+      font-size: 0.85rem;
+      font-weight: 600;
+      color: #ef3237;
+      letter-spacing: 0.5px;
+    }
+
+  </style>
 </head>
 <body class="body-style">
   <%- include('./partials/header.ejs') %>
 
   <main class="main-content" aria-label="Inicio">
+    <!-- HERO SECTION -->
+    <section class="hero-section">
+      <p class="hero-tagline">Tu mejor versión empieza aquí</p>
+      <h1 class="hero-title">Entrena fuerte.<br><span>Vive mejor.</span></h1>
+      <p class="hero-subtitle">Rutinas personalizadas, nutrición y una tienda completa para llevar tu entrenamiento al siguiente nivel.</p>
+      <div class="hero-ctas">
+        <a href="/rutinas" class="btn-hero-primary">Explorar rutinas</a>
+        <% if (!usuarioLogueado) { %>
+          <a href="/register" class="btn-hero-secondary">Crear cuenta gratis</a>
+        <% } else { %>
+          <a href="/productos" class="btn-hero-secondary">Ver tienda</a>
+        <% } %>
+      </div>
+    </section>
+    <h2 class="features-title">Todo lo que <span>necesitás</span></h2>
+    <p class="features-subtitle">Una plataforma completa para tu bienestar físico</p>
+     
+
+    <!-- CARRUSEL -->
     <div class="carousel-container" role="region" aria-label="Galería de imágenes destacadas">
       <div id="carouselExampleIndicators" class="carousel slide" data-bs-ride="carousel">
-        
+
         <div class="carousel-indicators">
           <% for(let i = 0; i < 8; i++) { %>
-            <button 
-              type="button" 
-              data-bs-target="#carouselExampleIndicators" 
-              data-bs-slide-to="<%= i %>" 
-              class="<%= i === 0 ? 'active' : '' %>" 
+            <button
+              type="button"
+              data-bs-target="#carouselExampleIndicators"
+              data-bs-slide-to="<%= i %>"
+              class="<%= i === 0 ? 'active' : '' %>"
               aria-label="Diapositiva <%= i + 1 %>"
               aria-current="<%= i === 0 ? 'true' : 'false' %>">
             </button>
@@ -27,10 +356,10 @@
         <div class="carousel-inner">
           <% for(let i = 1; i <= 8; i++) { %>
             <div class="carousel-item <%= i === 1 ? 'active' : '' %>">
-              <img 
-              src="/images/carrouselve<%= i %>_suave.png" 
-              class="carousel-img" 
-              alt="Imagen ilustrativa número <%= i %> del gimnasio ActivaFitness">
+              <img
+                src="/images/carrouselve<%= i %>_suave.png"
+                class="carousel-img"
+                alt="Imagen ilustrativa número <%= i %> del gimnasio ActivaFitness">
             </div>
           <% } %>
         </div>
@@ -47,8 +376,49 @@
 
       </div>
     </div>
+
+    <!-- FEATURES SECTION -->
+    <section class="features-section">
+       <div class="features-grid">
+        <a href="/rutinas" class="feature-card">
+          <div class="feature-icon">
+            <i class="fa-solid fa-dumbbell"></i>
+          </div>
+          <h3>Rutinas de Ejercicio</h3>
+          <p>Programas diseñados para todos los niveles. Desde principiante hasta avanzado.</p>
+          <span class="feature-arrow">Ver rutinas →</span>
+        </a>
+        <a href="/recetas" class="feature-card">
+          <div class="feature-icon">
+            <i class="fa-solid fa-utensils"></i>
+          </div>
+          <h3>Plan Alimenticio</h3>
+          <p>Recetas saludables y planes de nutrición para complementar tu entrenamiento.</p>
+          <span class="feature-arrow">Ver recetas →</span>
+        </a>
+        <a href="/productos" class="feature-card">
+          <div class="feature-icon">
+            <i class="fa-solid fa-store"></i>
+          </div>
+          <h3>Tienda Deportiva</h3>
+          <p>Suplementos, ropa y equipamiento de las mejores marcas a tu alcance.</p>
+          <span class="feature-arrow">Ver productos →</span>
+        </a>
+        <% if (usuarioLogueado) { %>
+        <a href="/reserva/mostrar/reservas" class="feature-card">
+          <div class="feature-icon">
+            <i class="fa-solid fa-calendar-check"></i>
+          </div>
+          <h3>Mis Reservas</h3>
+          <p>Gestioná tus clases y turnos de entrenamiento de forma sencilla.</p>
+          <span class="feature-arrow">Ver reservas →</span>
+        </a>
+        <% } %>
+      </div>
+    </section>
+
   </main>
- 
+
   <%- include('./partials/footer.ejs') %>
   <script src="./js/hamburguer.js"></script>
   <script src="./js/soundtrack.js"></script>

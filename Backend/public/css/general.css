@@ -7,6 +7,7 @@ html, body {
   display: flex;
   flex-direction: column;
   min-height: 100vh;
+  gap: 2rem;
 }
 
 main {
@@ -19,12 +20,9 @@ REUTILIZABLES: Fondo tipo lienzo
 .mainLienzo ya no se usa, se elimina al finalizar limpieza de vistas
 ------------------------------------------ */
 .mainLienzo {
-  background: url('/images/Lienzo01vero.jpeg') center top repeat-y;
-  background-size: 100% auto;
-  background-attachment: fixed;
-  padding: 1rem;
+  background: transparent;
+  padding: 1.5rem;
   overflow: hidden;
-  box-shadow: 0px 4px 12px rgba(0, 0, 0, 0.12);
 }
 
 /* -----------------------------------------
@@ -39,9 +37,9 @@ REUTILIZABLES: Fondo tipo lienzo
 .titulo h3 {
   padding-top: 0.5rem;
   font-size: 22px;
-  color: white;
+  color: #1a1a1a;
   text-align: center;
-  border-bottom: 1px solid white;
+  border-bottom: 2px solid #ef3237;
   padding-bottom: 0.5rem;
   width: 90%;
   margin: 0 auto 1rem auto;
@@ -49,7 +47,7 @@ REUTILIZABLES: Fondo tipo lienzo
 
 .titulo p {
   font-size: 16px;
-  color: white;
+  color: #555;
   text-align: center;
   margin-bottom: 0.5rem;
 }
@@ -69,40 +67,42 @@ REUTILIZABLES: Fondo tipo lienzo
    REUTILIZABLES: Botón primario
 ------------------------------------------ */
 .btn-primary {
-    background-color: rgba(255, 255, 255, 0.1);
+    background-color: #ef3237;
     color: white;
-    border: 1px solid white;
+    border: none;
     border-radius: 6px;
     padding: 10px 16px;
     font-size: 0.9rem;
     text-transform: uppercase;
-    font-weight: 500;
+    font-weight: 600;
     cursor: pointer;
-    transition: background-color 0.3s ease;
+    transition: background-color 0.3s ease, transform 0.2s ease;
     text-align: center;
     text-decoration: none;
 }
 
 .btn-primary:hover {
-    background-color: rgba(255, 255, 255, 0.3);
+    background-color: #c8292d;
+    transform: translateY(-1px);
+    color: white;
 }
 
 /* -----------------------------------------
    REUTILIZABLES: Botón de consulta
 ------------------------------------------ */
 .consultar a {
-    background-color: rgba(255, 255, 255, 0.12);
-    color: white;
-    border: 1px solid white;
+    background-color: transparent;
+    color: #ef3237;
+    border: 2px solid #ef3237;
     border-radius: 6px;
     padding: 10px 16px;
     font-size: 0.9rem;
     text-transform: uppercase;
-    font-weight: 500;
+    font-weight: 600;
     text-decoration: none;
     display: inline-block;
     margin-top: 1rem;
-    transition: background-color 0.3s ease;
+    transition: background-color 0.3s ease, color 0.3s ease;
 }
 .consultar {
     display: flex;
@@ -111,19 +111,39 @@ REUTILIZABLES: Fondo tipo lienzo
     margin-bottom: 2rem;
 }
 .consultar a:hover {
-    background-color: rgba(255, 255, 255, 0.3);
+    background-color: #ef3237;
+    color: white;
 }
 .mainLienzo-register {
-    margin-top: 1rem;
-    margin-bottom: 1rem;
-    padding: 1rem;
-    background-image: url('/images/Lienzo01vero.jpeg');
-    background-size: contain;
-    background-repeat: repeat-y; /* clave: repite verticalmente */
-    background-position: center top;
-    background-attachment: fixed;
-    overflow-y: auto;
-    box-shadow: 0px 4px 12px rgba(0, 0, 0, 0.12);
+    padding: 3rem 1rem;
+    background: linear-gradient(135deg, #1a1a1a 0%, #2e2e2e 60%, #3d1010 100%);
+    position: relative;
+    overflow: hidden;
+    border-radius: 14px;
+    max-width: 1300px;
+    margin: 1rem auto 2rem;
+}
+
+.mainLienzo-register::before {
+    content: '';
+    position: absolute;
+    top: -60px;
+    right: -60px;
+    width: 260px;
+    height: 260px;
+    background: radial-gradient(circle, rgba(239,50,55,0.25) 0%, transparent 70%);
+    pointer-events: none;
+}
+
+.mainLienzo-register::after {
+    content: '';
+    position: absolute;
+    bottom: -40px;
+    left: -40px;
+    width: 200px;
+    height: 200px;
+    background: radial-gradient(circle, rgba(239,50,55,0.15) 0%, transparent 70%);
+    pointer-events: none;
 }
 .button-access {
     background-color: #dc2626 !important; /* rojo fuerte */
@@ -180,10 +200,7 @@ REUTILIZABLES: Fondo tipo lienzo
 }
 
 body {
-  background-image: url('/images/Lienzo01vero.jpeg');
-  background-repeat: repeat-y;
-  background-size: 100% auto;
-  background-position: center top;
+  background: linear-gradient(180deg, #faf8f5 0%, #f2ede6 100%);
   background-attachment: fixed;
   margin: 0;
   padding: 0;

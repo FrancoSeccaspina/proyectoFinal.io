@@ -4,8 +4,8 @@ body {
 
 #h2-register {
     text-align: center;
-    margin: 0 auto 1rem auto;
-    border-bottom: 1px solid white;
+    margin: 0 auto 1.5rem auto;
+    border-bottom: 2px solid #ef3237;
     padding-bottom: 0.5rem;
     width: 90%;
     font-size: 22px;

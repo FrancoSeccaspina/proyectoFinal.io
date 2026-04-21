@@ -2,7 +2,7 @@ body {
   margin: 0;
   padding: 0;
   background-color: transparent;
-  color: white;
+  color: #1a1a1a;
 }
 .container-allMain {
   width: 100%;
@@ -24,20 +24,28 @@ body {
   width: 100%;
   max-width: 12rem;
   padding: 0.4rem;
-  border: 1px solid white;
-  background-color: rgba(255, 255, 255, 0.12);
-  backdrop-filter: blur(3px);
+  border: 1px solid #f0ece6;
+  background-color: #fff;
   display: flex;
   flex-direction: column;
   align-items: center;
   text-align: center;
-  border-radius: 10px;
+  border-radius: 12px;
+  box-shadow: 0 2px 12px rgba(0, 0, 0, 0.07);
+  transition: transform 0.25s ease, box-shadow 0.25s ease;
+}
+
+.card:hover {
+  transform: translateY(-4px);
+  box-shadow: 0 8px 24px rgba(239, 50, 55, 0.12);
+  border-color: rgba(239, 50, 55, 0.2);
 }
 
 .card-title {
   font-size: 13px;
   margin-bottom: 0.4rem;
-  color: white;
+  color: #1a1a1a;
+  font-weight: 600;
 }
 
 .card-body {
@@ -63,10 +71,15 @@ body {
 }
 
 .tipo-envio,
-.tipo-entrega,
-.precio-ahora {
-  color: white;
+.tipo-entrega {
+  color: #555;
   font-size: 13px;
+}
+
+.precio-ahora {
+  color: #1a1a1a;
+  font-size: 15px;
+  font-weight: 700;
 }
 
 /* Responsive */
