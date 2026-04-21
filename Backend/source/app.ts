@@ -80,12 +80,20 @@ app.set('view engine', 'ejs');
 app.use(express.urlencoded({ extended: true }));
 app.use(express.json());
 
+// Necesario para que express-session envíe la cookie con secure:true detrás de Nginx
+app.set('trust proxy', 1);
+
 // Sessions
 app.use(session({
     secret: SESSION_PASSWORD || '',
     resave: true,
     saveUninitialized: false,
-    cookie: { secure: IS_PRODUCTION }
+    cookie: {
+        secure: IS_PRODUCTION,
+        httpOnly: true,
+        sameSite: IS_PRODUCTION ? 'lax' : false,
+        maxAge: 1000 * 60 * 60 * 24  // 24 horas
+    }
 }));
 
 // Verifica si hay un usuario en la sesión
