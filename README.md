@@ -48,12 +48,7 @@ cd frontend && npm install && cd ..
 
 ### 3. Configurar variables de entorno
 
-Todas las variables viven en un único archivo `.env` en la raíz del proyecto:
-
-```bash
-cp .env.example .env
-```
-
+- Definir .env en Backend, frontend y en el directorio raiz
 
 ### 4. Levantar la base de datos
 
@@ -142,13 +137,6 @@ npm test            # Jest + React Testing Library
 npm run build       # build de producción
 ```
 
-### 8. Credenciales de prueba
-
-| Campo | Valor |
-|---|---|
-| Email | `admin@activafitness.com` |
-| Password | `admin123` |
-
 > Solo válidas en entornos de desarrollo con los datos de `gimnasio_activa.sql` cargados.
 
 ---
@@ -159,7 +147,7 @@ npm run build       # build de producción
 feature/mi-cambio  →  (Pull Request)  →  main  →  deploy automático a producción
 ```
 
-1. Crear una rama desde `main` con nombre descriptivo: `feature/`, `fix/`, `chore/`
+1. Crear una rama desde `main` con nombre descriptivo
 2. Hacer los cambios y abrir un Pull Request hacia `main`
 3. Una vez mergeado a `main`, **GitHub Actions despliega automáticamente**:
    - Compila y sube las imágenes Docker a GHCR (backend + nginx con frontend incluido)
@@ -184,12 +172,3 @@ docker compose -f docker-compose.prod.yml up -d
 - `docker compose up -d` — reinicia los servicios con las imágenes y configuración actualizadas
 
 ---
-
-## Scripts de utilidad
-
-| Script | Descripción |
-|---|---|
-| `scripts/actualizar_db_local.sh` | Sincroniza la base de datos local desde producción |
-| `scripts/generar-backup-gimnasio-activa.sh` | Genera un dump de la base de datos |
-| `mysqldump-backup.sh` | Script de backup usado por el contenedor de DB |
-| `scripts/compilar_frontend.DEPRECATED.sh` | Deprecado — reemplazado por el build multi-stage de Docker |

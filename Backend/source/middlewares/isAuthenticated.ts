@@ -29,7 +29,6 @@ function isAuthenticated(req: Request, res: Response, next: NextFunction): void 
 
 function setUsuarioLogueado(req: Request, res: Response, next: NextFunction): void {
   res.locals.usuarioLogueado = req.session.usuarioLogueado || null;
-  console.log('Usuario logueado:', res.locals.usuarioLogueado);
   next();
 }
 

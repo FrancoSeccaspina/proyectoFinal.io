@@ -102,14 +102,11 @@ declare module "express-session" {
 
 export const SessionService = {
   obtenerCarrito(req: Request) {
-    if (!req.session.carrito) {
-      req.session.carrito = [];
-    }
-    return req.session.carrito;
+    return req.session.carrito ?? [];
   },
 
   agregarProductoAlCarrito(req: Request, id_producto: number, cantidad: number) {
-    const carrito = this.obtenerCarrito(req);
+    const carrito = [...this.obtenerCarrito(req)];
     const productoExistente = carrito.find(producto => producto.id_producto === id_producto);
 
     if (productoExistente) {

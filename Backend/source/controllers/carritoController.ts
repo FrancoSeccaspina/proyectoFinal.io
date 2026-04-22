@@ -50,16 +50,18 @@ class carritoController {
             console.log("cantidad a comprar", cantidad)
             console.log("stock disponible", producto.stock)
 
-            if (cantidad > producto.stock) {
+            if (cantidadNum > producto.stock) {
                 return res.status(400).render("productDetail", {
-                    // TODO : agregar etiqueta message en las vistas
                     message: "La cantidad solicitada supera el stock disponible",
                     producto: producto
                 });
             }
 
-            SessionService.agregarProductoAlCarrito(req, id_producto, cantidad);
-            res.render('productDetail', { message: "Producto agregado al carrito", producto: producto });
+            SessionService.agregarProductoAlCarrito(req, id_producto, cantidadNum);
+            req.session.save((err) => {
+                if (err) console.error("Error al guardar sesión:", err);
+                res.render('productDetail', { message: "Producto agregado al carrito", producto: producto });
+            });
 
         } catch (error) {
             console.error("Error al ver producto:", (error as Error).message);
