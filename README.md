@@ -155,6 +155,27 @@ feature/mi-cambio  →  (Pull Request)  →  main  →  deploy automático a pro
 
 Para forzar un deploy sin cambios de código: **GitHub → Actions → Build & Deploy → Run workflow**.
 
+### Deploy
+
+El workflow de GitHub Actions puede terminar en verde y aun así los contenedores no estar corriendo. Esto ocurre cuando el paso SSH completó sin error pero los servicios fallaron al iniciarse después (timeout de healthcheck, crash del contenedor, error al leer el `.env`, etc.).
+
+**Cómo detectarlo:** entrás al servidor y los contenedores no están corriendo o están en estado `Restarting`.
+
+```bash
+docker ps -a
+```
+
+# Ver por qué falló
+docker compose -f docker-compose.prod.yml logs --tail=50
+
+# Volver a levantar sin re-descargar imágenes (si el pull ya se hizo)
+docker compose -f docker-compose.prod.yml up -d
+
+# O desde cero: descargar imágenes y levantar
+docker compose -f docker-compose.prod.yml pull
+docker compose -f docker-compose.prod.yml up -d
+```
+
 ### Deploy manual en el servidor
 
 Si el contenedor del backend sigue corriendo una imagen vieja después de un deploy automático (por ejemplo, el servidor no descargó la imagen nueva de GHCR), ejecutar esto directamente en el servidor:
@@ -165,10 +186,3 @@ git pull origin main
 docker compose -f docker-compose.prod.yml pull
 docker compose -f docker-compose.prod.yml up -d
 ```
-
-**Por qué es necesario:**
-- `git pull` — actualiza el `docker-compose.prod.yml` y el `.env` en el servidor con los últimos cambios del repo
-- `docker compose pull` — descarga las imágenes más recientes desde GHCR (el registry de GitHub); sin este paso el contenedor sigue usando la imagen cacheada localmente aunque exista una versión nueva
-- `docker compose up -d` — reinicia los servicios con las imágenes y configuración actualizadas
-
----
