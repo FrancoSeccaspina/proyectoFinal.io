@@ -1,13 +1,13 @@
 /* header.css */
 
 #header-container {
-  background-color: #2e2e2e;
+  background-color: #f1343a;
   display: flex;
   flex-direction: column;
   padding: 1rem;
   width: 100%;
   position: sticky;    
-  top: 0;   
+  top: 0;
 }
 
 #top-bar {
