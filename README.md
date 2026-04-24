@@ -143,12 +143,14 @@ npm run build       # build de producción
 
 ## Flujo de trabajo con Git y deploy
 
+> Para una explicación detallada del flujo completo de CI/CD, variables de entorno y resolución de problemas comunes ver [`doc/flujo-de-trabajo-deploy-github-action.md`](doc/flujo-de-trabajo-deploy-github-action.md).
+
 ```
-feature/mi-cambio  →  (Pull Request)  →  main  →  deploy automático a producción
+feature/mi-cambio  →  (Pull Request o merge directo)  →  main  →  deploy automático a producción
 ```
 
 1. Crear una rama desde `main` con nombre descriptivo
-2. Hacer los cambios y abrir un Pull Request hacia `main`
+2. Hacer los cambios y abrir un Pull Request hacia `main` — o mergear directamente a `main` para aplicar los cambios a producción de forma inmediata
 3. Una vez mergeado a `main`, **GitHub Actions despliega automáticamente**:
    - Compila y sube las imágenes Docker a GHCR (backend + nginx con frontend incluido)
    - Se conecta al servidor por SSH y ejecuta `docker compose pull && up -d`
