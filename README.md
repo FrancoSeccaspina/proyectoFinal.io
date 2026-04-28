@@ -48,7 +48,17 @@ cd frontend && npm install && cd ..
 
 ### 3. Configurar variables de entorno
 
-- Definir .env en Backend, frontend y en el directorio raiz
+Los valores de las variables de entorno (secrets) están en el siguiente archivo de Drive compartido del equipo:
+
+**[Variables de entorno — Google Drive](https://drive.google.com/drive/u/0/folders/1p05LDm85nADgg41L0SL6mpleKfAAs1qI)**
+
+Copiar los valores correspondientes en cada archivo:
+
+| Archivo | Descripción |
+|---------|-------------|
+| `.env` | Variables para Docker Compose (MySQL) |
+| `Backend/.env` | Variables del servidor Express (DB, JWT, sesión, URLs) |
+| `frontend/.env` | Variables del frontend React (URLs de backend y frontend) |
 
 ### 4. Levantar la base de datos
 

@@ -42,7 +42,7 @@ echo "${PAT_PRODUCCION}" | docker login ghcr.io -u francoseccaspina --password-s
 
 Usa el Personal Access Token de Franco para que el servidor pueda bajar imágenes privadas de GHCR.
 
-### Paso 2 — Generar el archivo `.env`
+### Paso 2 vallores secretos en github
 
 ```bash
 cat > /root/proyectoFinal.io/.env << ENVEOF
@@ -66,7 +66,7 @@ Los valores vienen de los **GitHub Secrets** configurados en el repositorio. Est
 ### Paso 3 — Actualizar el repo en el servidor
 
 ```bash
-git pull origin deploy-test
+git pull origin <brach>
 ```
 
 Actualiza los archivos de configuración: `docker-compose.prod.yml`, configuración de nginx, scripts de backup, etc.
@@ -135,7 +135,7 @@ git push origin <branch>
 
 ### Opciones para aplicar cambios a producción
 
-**Opción A — Pull Request (recomendado para cambios revisados):**
+**Opció n A — Pull Request (recomendado para cambios revisados):**
 ```bash
 git push origin feature/mi-cambio
 # Abrir PR en GitHub → mergear a main → deploy automático
