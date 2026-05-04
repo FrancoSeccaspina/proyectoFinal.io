@@ -33,10 +33,10 @@ const EdicionEmpleado = () => {
   };
   const handleSubmit = async (e) => {
     e.preventDefault();
-    axios.put(`${process.env.REACT_APP_BACKEND_DOMAIN_HOST}/api/empleadoEditar/${id}`, empleado)
+    axios.put(`${process.env.REACT_APP_BACKEND_DOMAIN_HOST}/api/empleados/${id}`, empleado)
           .then(() => {
             console.log("empleado actualizadp");
-            navigate('/Empleados');
+            navigate('/empleados');
           })
           .catch(err => console.error('Error al editar:', err));
       };
@@ -79,7 +79,7 @@ const EdicionEmpleado = () => {
             />
             <div className="acomodar">
               <button type="submit" className='boton'>Guardar Cambios</button>
-              <button className='atras'><a href="/Proveedores">Volver</a></button>
+              <button className='atras'><a href="/empleados">Volver</a></button>
             </div>
           </form>
         </div>

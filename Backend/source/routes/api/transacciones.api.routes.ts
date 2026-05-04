@@ -3,6 +3,6 @@ import transaccionApiController from '../../controllers/api/transaccion.api.Cont
 
 const route = Router();
 
-route.get('/transacciones/mostrar', (res: Response) => { transaccionApiController.listaTransacciones(res) });
+route.get('/transacciones', (res: Response) => { transaccionApiController.listaTransacciones(res) });
 
 export default route;

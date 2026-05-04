@@ -32,12 +32,12 @@ const EdicionProveedor = () => {
   };
   const handleSubmit = async (e) => {
     e.preventDefault();
-    axios.put(`${process.env.REACT_APP_BACKEND_DOMAIN_HOST}/api/proveedorEditar/${id}`, proveedor,{
+    axios.put(`${process.env.REACT_APP_BACKEND_DOMAIN_HOST}/api/proveedores/${id}`, proveedor,{
     withCredentials: true
       })
           .then(() => {
             console.log("proveedor actualizadp");
-            navigate('/Proveedores');
+            navigate('/proveedores');
           })
           .catch(err => console.error('Error al editar:', err));
       };
@@ -72,7 +72,7 @@ const EdicionProveedor = () => {
             />
             <div className="acomodar">
               <button type="submit" className='boton'>Guardar Cambios</button>
-              <button className='atras'><a href="/Proveedores">Volver</a></button>
+              <button className='atras'><a href="/proveedores">Volver</a></button>
             </div>
           </form>
         </div>

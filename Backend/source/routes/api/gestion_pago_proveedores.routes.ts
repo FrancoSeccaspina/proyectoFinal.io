@@ -5,6 +5,6 @@ import { Router } from "express";
 
 const route = Router();
 
-route.get('/gestionPagoProveedores', verificarTokenPorRol([Roles.ADMIN]), gestionPagoProveedoresApiController.listaGestionPagoProveedores.bind(gestionPagoProveedoresApiController));
-route.post('/gestionPagoProveedores', verificarTokenPorRol([Roles.ADMIN]), gestionPagoProveedoresApiController.crearGestionPagoProveedor.bind(gestionPagoProveedoresApiController));
+route.get('/pagos-proveedores', verificarTokenPorRol([Roles.ADMIN]), gestionPagoProveedoresApiController.listaGestionPagoProveedores.bind(gestionPagoProveedoresApiController));
+route.post('/pagos-proveedores', verificarTokenPorRol([Roles.ADMIN]), gestionPagoProveedoresApiController.crearGestionPagoProveedor.bind(gestionPagoProveedoresApiController));
 export default route;

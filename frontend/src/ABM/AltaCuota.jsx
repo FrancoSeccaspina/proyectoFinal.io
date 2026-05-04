@@ -21,7 +21,7 @@ const AltaCuota = () => {
   useEffect(() => {
     const fetchUltimoPrecio = async () => {
       try {
-        const res = await axios.get(`${process.env.REACT_APP_BACKEND_DOMAIN_HOST}/api/precioCuota/ultima`, {
+        const res = await axios.get(`${process.env.REACT_APP_BACKEND_DOMAIN_HOST}/api/precios-cuota/ultima`, {
           withCredentials: true
         });
         setUltimoPrecio(res.data.precio);
@@ -73,7 +73,7 @@ const AltaCuota = () => {
     try {
       await axios.post(`${process.env.REACT_APP_BACKEND_DOMAIN_HOST}/api/cuotas`, cuota, {withCredentials: true});
       console.log("Cuota creada exitosamente");
-      navigate('/Usuarios');
+      navigate('/usuarios');
     } catch (error) {
       console.error('Error al crear cuota:', error);
       alert(`Error: ${error.response?.data?.message || error.message}`);
@@ -146,7 +146,7 @@ const AltaCuota = () => {
 
         <div className="acomodar">
           <button type="submit" className="boton">Crear Cuota</button>
-          <button type="button" className="atras" onClick={() => navigate('/Usuarios')}>Volver</button>
+          <button type="button" className="atras" onClick={() => navigate('/usuarios')}>Volver</button>
         </div>
       </form>
     </div>

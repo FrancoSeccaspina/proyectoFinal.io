@@ -10,7 +10,7 @@ function Recetas() {
   const [searchTerm, setSearchTerm] = useState("");
 
   const getCategorias = async ()=> {
-    const response = await fetch(`${process.env.REACT_APP_BACKEND_DOMAIN_HOST}/api/categoriaRecetas`);
+    const response = await fetch(`${process.env.REACT_APP_BACKEND_DOMAIN_HOST}/api/categorias-recetas`);
     const data = await response.json();
     console.log('DATA RECIBIDA:', data);
     setCategoriaReceta(data);
@@ -57,7 +57,7 @@ function Recetas() {
           <h2 className='box-title'>Catálogo de recetas</h2>
           <h3 className='box-title'>Recetas registradas  : {recetasFiltradas.length}</h3>
 
-          <Link to={`/recetaNueva`} class="btn btn-primary" >Agregar Nuevo</Link>
+          <Link to={`/recetas/nueva`} class="btn btn-primary" >Agregar Nuevo</Link>
         </section>
           
           

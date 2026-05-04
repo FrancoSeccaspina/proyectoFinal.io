@@ -10,7 +10,7 @@ const BotonEliminarRutina = ({ id }) => {
       try {
         await axios.delete(`${process.env.REACT_APP_BACKEND_DOMAIN_HOST}/api/ejercicios/${id}`);
         alert("Rutina eliminada correctamente");
-        navigate('/Rutinas');
+        navigate('/rutinas');
       } catch (error) {
         console.error('Error al eliminar rutina:', error);
         alert(`Error: ${error.response?.data?.message || error.message}`);

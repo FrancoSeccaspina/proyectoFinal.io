@@ -6,11 +6,11 @@ import { Roles } from '../../constants/roles';
 const route = Router();
 
 // routes/reservaApiRoutes.ts
-route.get('/reservas/estadisticasPorProducto', verificarTokenPorRol([Roles.ADMIN]), reservaApiController.estadisticasPorProducto);
-route.get("/reservas/mostrar", verificarTokenPorRol([Roles.ADMIN]), (req: Request, res: Response) => {reservaApiController.listaReservas(req, res)})
-route.put("/reservas/confirmar/:id", verificarTokenPorRol([Roles.ADMIN]), (req: Request, res: Response) => { reservaApiController.confirmarReserva(req, res) });
-route.put("/reservas/cancelar/:id", verificarTokenPorRol([Roles.ADMIN]), (req: Request, res: Response) => { reservaApiController.cancelarReserva(req, res) });
+route.get('/reservas/estadisticas', verificarTokenPorRol([Roles.ADMIN]), reservaApiController.estadisticasPorProducto);
+route.get("/reservas", verificarTokenPorRol([Roles.ADMIN]), (req: Request, res: Response) => {reservaApiController.listaReservas(req, res)})
+route.patch("/reservas/:id/confirmar", verificarTokenPorRol([Roles.ADMIN]), (req: Request, res: Response) => { reservaApiController.confirmarReserva(req, res) });
+route.patch("/reservas/:id/cancelar", verificarTokenPorRol([Roles.ADMIN]), (req: Request, res: Response) => { reservaApiController.cancelarReserva(req, res) });
 route.delete('/reservas/:id_reserva', verificarTokenPorRol([Roles.ADMIN, Roles.CLIENTE]), (res, req) => { reservaApiController.delete(res, req) })
-route.get("/reserva/:id/confirmar", (req: Request, res: Response) => {reservaApiController.reservaPorId(req, res)});
+route.get("/reservas/:id", (req: Request, res: Response) => {reservaApiController.reservaPorId(req, res)});
 
 export default route;

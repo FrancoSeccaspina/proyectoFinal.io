@@ -28,7 +28,7 @@ route.get('/productos/:id', (req, res) => { productoAPIController.buscarProducto
 //ruta para crear un producto
 route.post('/productos', verificarTokenPorRol([Roles.ADMIN]), upload.single('imagen'), (req, res) => { productoAPIController.crearProducto(req, res) });
 // Ruta para editar producto con imagen
-route.put('/productoEditar/:id', verificarTokenPorRol([Roles.ADMIN]), upload.single('imagen'), (req, res) => {productoAPIController.editarProducto(req, res);});
+route.put('/productos/:id', verificarTokenPorRol([Roles.ADMIN]), upload.single('imagen'), (req, res) => {productoAPIController.editarProducto(req, res);});
 route.delete('/productos/:id', verificarTokenPorRol([Roles.ADMIN]), (res, req) => { productoAPIController.delete(res, req) })
 
 export default route;

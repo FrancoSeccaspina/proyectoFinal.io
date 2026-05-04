@@ -46,7 +46,7 @@ const Empleados = () => {
     
     <div className='mover_abajo'>
       <h2>Lista de Empleados</h2>
-        <Link to={`/empleadoNuevo`} class="btn btn-primary" >Agregar Nuevo</Link>
+        <Link to={`/empleados/nuevo`} class="btn btn-primary" >Agregar Nuevo</Link>
         <input value={search} onChange={searcher} type="text" placeholder='Buscar por Nombre' className='form-control'/>
         <table className='table table-dark table-striped'>
                 <thead>

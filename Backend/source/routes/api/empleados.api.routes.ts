@@ -9,7 +9,7 @@ route.get('/empleados/:id', (req, res) => {
 });
 route.post('/empleados', (req, res) => { empleadoAPIController.crearEmpleado(req, res) });
 route.delete('/empleados/:id' , (res, req) => {empleadoAPIController.delete(res, req) })
-route.put('/empleadoEditar/:id', (req, res) => {
+route.put('/empleados/:id', (req, res) => {
     empleadoAPIController.editarEmpleado(req, res);
 });
 export default route;

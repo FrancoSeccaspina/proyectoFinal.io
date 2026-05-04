@@ -46,7 +46,7 @@ const Proveedores = () => {
     
     <div className='moverJuntos'>
       <h2>Lista de Proveedores</h2>
-        <Link to={`/proveedorNuevo`} class="btn btn-primary" >Agregar Nuevo</Link>
+        <Link to={`/proveedores/nuevo`} class="btn btn-primary" >Agregar Nuevo</Link>
         <input value={search} onChange={searcher} type="text" placeholder='Buscar' className='form-control'/>
         <table className='table table-dark table-striped'>
                 <thead>
@@ -64,7 +64,7 @@ const Proveedores = () => {
                             <td>{proveedores.apellido}</td>
                             <td>{proveedores.celular}</td>
                             <td>
-                                <Link to={`/provedores/editar/${proveedores.id}`} className="btn btn-success">Editar</Link>
+                                <Link to={`/proveedores/editar/${proveedores.id}`} className="btn btn-success">Editar</Link>
                                 <button class="btn btn-danger" onClick={() => handleDelete(proveedores.id)}>Eliminar</button>
                                 
                             </td>

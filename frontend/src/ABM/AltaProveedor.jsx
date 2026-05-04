@@ -27,7 +27,7 @@ const AltaProveedor = () => {
     withCredentials: true
     });
         console.log("Proveedor creado exitosamente");
-        navigate('/Proveedores');
+        navigate('/proveedores');
       } catch (error) {
         console.error('Error al crear proveedor:', error);
         alert(`Error: ${error.response?.data?.message || error.message}`);
@@ -62,7 +62,7 @@ const AltaProveedor = () => {
         />
           <div className="acomodar">
           <button type="submit" className="boton">Crear Proveedor</button>
-          <button type="button" className="atras" onClick={() => navigate('/Proveedores')}>Volver</button>
+          <button type="button" className="atras" onClick={() => navigate('/proveedores')}>Volver</button>
         </div>
       </form>
     </div>

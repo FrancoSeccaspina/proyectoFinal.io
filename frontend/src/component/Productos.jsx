@@ -14,9 +14,9 @@ function Productos() {
 
   const getCategorias = async ()=> {
     try {
-      const url = `${process.env.REACT_APP_BACKEND_DOMAIN_HOST}/api/categoriaProductos`;
+      const url = `${process.env.REACT_APP_BACKEND_DOMAIN_HOST}/api/categorias-productos`;
       console.log('URL para categorías:', url);
-      const response = await fetch(`${process.env.REACT_APP_BACKEND_DOMAIN_HOST}/api/categoriaProductos`);
+      const response = await fetch(`${process.env.REACT_APP_BACKEND_DOMAIN_HOST}/api/categorias-productos`);
       const data = await response.json();
       setCategorias(data);
     } catch (err) {
@@ -78,7 +78,7 @@ function Productos() {
       <section className="moverJuntos">
       <h2 className='box-title'>Catálogo de Productos</h2>
         <h3 className='box-title'>Productos registrados: {productosFiltrados.length}</h3>
-        <Link to="/productoNuevo" className="btn btn-primary">
+        <Link to="/productos/nuevo" className="btn btn-primary">
           Agregar Nuevo
         </Link>
       </section>

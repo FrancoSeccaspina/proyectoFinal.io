@@ -2,6 +2,6 @@ import categoriesRecetaAPIController from '../../controllers/api/categoriaReceta
 import { Router } from 'express';
 const route = Router();
 
-route.get('/categoriaRecetas', categoriesRecetaAPIController.listaRecetaPorCategoria.bind(categoriesRecetaAPIController));
+route.get('/categorias-recetas', categoriesRecetaAPIController.listaRecetaPorCategoria.bind(categoriesRecetaAPIController));
 
 export default route;

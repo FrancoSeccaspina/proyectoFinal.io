@@ -14,7 +14,7 @@ const AltaPrecioCuota = () => {
       useEffect(() => {
         const fetchUltimoPrecio = async () => {
           try {
-            const res = await axios.get(`${process.env.REACT_APP_BACKEND_DOMAIN_HOST}/api/precioCuota/ultima`,
+            const res = await axios.get(`${process.env.REACT_APP_BACKEND_DOMAIN_HOST}/api/precios-cuota/ultima`,
               { withCredentials: true }
             );
             setUltimoPrecio(res.data.precio);
@@ -35,13 +35,13 @@ const AltaPrecioCuota = () => {
       const handleSubmit = async (e) => {
         e.preventDefault();
         try {
-            await axios.post(`${process.env.REACT_APP_BACKEND_DOMAIN_HOST}/api/precioCuota`, cuota, {
+            await axios.post(`${process.env.REACT_APP_BACKEND_DOMAIN_HOST}/api/precios-cuota`, cuota, {
               headers: {
                 'Content-Type': 'application/json'
               },
               withCredentials: true
             });
-            navigate('/PrecioCuota');
+            navigate('/precios-cuota');
           } catch (error) {
             console.error('Error al crear producto:', error);
           }
@@ -69,7 +69,7 @@ const AltaPrecioCuota = () => {
                     />
                     <div className="acomodar">
                     <button type="submit" className="boton">Actualizar</button>
-                    <button type="button" className="atras" onClick={() => navigate('/PrecioCuota')}>Volver</button>
+                    <button type="button" className="atras" onClick={() => navigate('/precios-cuota')}>Volver</button>
                     </div>
             </form>
             </div>

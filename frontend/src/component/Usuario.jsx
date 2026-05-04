@@ -58,7 +58,7 @@ const Usuarios = () => {
         <h3 className="box-title">Usuarios registrados: {resultado.length}</h3>
         
         <Link
-          to={`${process.env.REACT_APP_BACKEND_DOMAIN_HOST}/register`}
+          to={`${process.env.REACT_APP_BACKEND_DOMAIN_HOST}/registrar`}
           className="btn btn-primary"
         >
           Agregar Nuevo
@@ -105,10 +105,10 @@ const Usuarios = () => {
                   >
                     Eliminar
                   </button>{' '}
-                  <Link to={`/cuota/${usuario.id}`} className="btn btn-primary btn-sm">
+                  <Link to={`/cuotas/${usuario.id}`} className="btn btn-primary btn-sm">
                     Historial Cuota
                   </Link>{' '}
-                  <Link to={`/cuotaNueva/${usuario.id}`} className="btn btn-warning btn-sm">
+                  <Link to={`/cuotas/nueva/${usuario.id}`} className="btn btn-warning btn-sm">
                     Agregar Cuota
                   </Link>
                 </div>

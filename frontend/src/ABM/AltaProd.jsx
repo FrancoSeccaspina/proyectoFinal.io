@@ -17,7 +17,7 @@ const AltaProd = () => {
   useEffect(() => {
     const fetchGrupos = async () => {
       try {
-        const response = await axios.get(`${process.env.REACT_APP_BACKEND_DOMAIN_HOST}/api/categoriaProductos`);
+        const response = await axios.get(`${process.env.REACT_APP_BACKEND_DOMAIN_HOST}/api/categorias-productos`);
         setCategorias(response.data);
       } catch (error) {
         console.error('Error al obtener Categoria de Productos:', error);
@@ -52,7 +52,7 @@ const AltaProd = () => {
             },
             withCredentials: true
           });
-          navigate('/Productos');
+          navigate('/productos');
         } catch (error) {
           console.error('Error al crear producto:', error);
         }

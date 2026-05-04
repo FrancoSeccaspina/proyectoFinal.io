@@ -21,7 +21,7 @@ const CuotaFormulario = () => {
       try {
         const [usuarioRes, cuotasRes] = await Promise.all([
           axios.get(`${process.env.REACT_APP_BACKEND_DOMAIN_HOST}/api/usuarios/${id}`),
-          axios.get(`${process.env.REACT_APP_BACKEND_DOMAIN_HOST}/api/cuotasdelUsuario/${id}`)
+          axios.get(`${process.env.REACT_APP_BACKEND_DOMAIN_HOST}/api/usuarios/${id}/cuotas`)
         ]);
         setUsuario(usuarioRes.data);
 
@@ -98,7 +98,7 @@ const CuotaFormulario = () => {
               <td>${cuota.faltante}</td>
               <td>${cuota.sobrante}</td>
               <td>
-                <Link to={`/cuota/editar/${cuota.id}`} className="btn btn-success">Editar</Link>
+                <Link to={`/cuotas/editar/${cuota.id}`} className="btn btn-success">Editar</Link>
                 <button className="btn btn-danger" onClick={() => handleDelete(cuota.id)}>Eliminar</button>
               </td>
             </tr>

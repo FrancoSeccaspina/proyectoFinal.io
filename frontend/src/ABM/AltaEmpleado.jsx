@@ -26,7 +26,7 @@ const AltaEmpleado = () => {
     try {
         await axios.post(`${process.env.REACT_APP_BACKEND_DOMAIN_HOST}/api/empleados`, empleado);
         console.log("empleado creado exitosamente");
-        navigate('/Empleados');
+        navigate('/empleados');
       } catch (error) {
         console.error('Error al crear empleado:', error);
         alert(`Error: ${error.response?.data?.message || error.message}`);
@@ -68,7 +68,7 @@ const AltaEmpleado = () => {
         />
           <div className="acomodar">
           <button type="submit" className="boton">Crear Empleado</button>
-          <button type="button" className="atras" onClick={() => navigate('/Empleados')}>Volver</button>
+          <button type="button" className="atras" onClick={() => navigate('/empleados')}>Volver</button>
         </div>
       </form>
     </div>

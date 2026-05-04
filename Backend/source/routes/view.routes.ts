@@ -17,22 +17,22 @@ route.get("/recetas", function (req, res) {
     res.render("recetas");
 });
 
-route.get("/listaProductos", function (req, res) {
+route.get("/lista-productos", function (req, res) {
     res.render("listaProductos");
 });
 
-route.get("/productDetail", function (req, res) {
+route.get("/detalle-producto", function (req, res) {
     res.render('productDetail');
 });
-route.get("/login", function (req, res) {
-    res.status(200).render("login", {    
-      mostrarModal:false, 
-      modalTitle:"", 
+route.get("/iniciar-sesion", function (req, res) {
+    res.status(200).render("login", {
+      mostrarModal:false,
+      modalTitle:"",
       modalMessage:""
     });
 });
 
-route.get("/register", function (req, res) {
+route.get("/registrar", function (req, res) {
     res.render("register");
 });
 
@@ -40,7 +40,7 @@ route.get("/carrito", function (req, res) {
     res.render("carrito");
 });
 
-route.get("/mPago", function (req, res) {
+route.get("/metodo-pago", function (req, res) {
     res.render("mPago");
 });
 
@@ -52,7 +52,7 @@ route.get('/perfil/editar', verificarTokenPorRol([Roles.CLIENTE]), middleware.se
     res.render('perfilEditar'); // los datos están en res.locals.usuarioLogueado
 });
 
-route.get("/finalizarCompra", function (req, res) {
+route.get("/finalizar-compra", function (req, res) {
     res.render("finalizarCompra");
 });
 

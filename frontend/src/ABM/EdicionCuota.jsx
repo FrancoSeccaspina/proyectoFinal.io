@@ -72,12 +72,12 @@ const EdicionCuota = () => {
     };
 
     axios
-      .put(`${process.env.REACT_APP_BACKEND_DOMAIN_HOST}/api/editarCuota/${id}`, cuotaActualizada, {
+      .put(`${process.env.REACT_APP_BACKEND_DOMAIN_HOST}/api/cuotas/${id}`, cuotaActualizada, {
         withCredentials: true,
       })
       .then(() => {
         console.log('Cuota actualizada');
-        navigate('/Usuarios');
+        navigate('/usuarios');
       })
       .catch((err) => console.error('Error al editar:', err));
   };
@@ -152,7 +152,7 @@ const EdicionCuota = () => {
         <div className="acomodar">
           <button type="submit" className='boton'>Guardar Cambios</button>
           <button type="button" className='atras'>
-            <a href="/Usuarios">Volver</a>
+            <a href="/usuarios">Volver</a>
           </button>
         </div>
       </form>

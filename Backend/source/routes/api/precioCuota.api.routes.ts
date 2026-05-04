@@ -4,13 +4,8 @@ import { Roles } from "../../constants/roles";
 import { Router } from "express";
 
 const route = Router();
-/* Revisar 
-route.get('/precioCuota', verificarTokenPorRol([Roles.ADMIN]), precioCuotaApiController.listaPrecioCuota.bind(precioCuotaApiController));
-route.post('/precioCuota', verificarTokenPorRol([Roles.ADMIN]), precioCuotaApiController.crearPrecioCuota.bind(precioCuotaApiController));
-route.get('/precioCuota/ultima', verificarTokenPorRol([Roles.ADMIN]), precioCuotaApiController.ultimaPrecioCuota.bind(precioCuotaApiController));
-*/
-route.get('/precioCuota', verificarTokenPorRol([Roles.ADMIN]), precioCuotaApiController.listaPrecioCuota.bind(precioCuotaApiController));
-route.post('/precioCuota', verificarTokenPorRol([Roles.ADMIN]), precioCuotaApiController.crearPrecioCuota.bind(precioCuotaApiController));
-route.get('/precioCuota/ultima', verificarTokenPorRol([Roles.ADMIN]), precioCuotaApiController.ultimaPrecioCuota.bind(precioCuotaApiController));
+route.get('/precios-cuota', verificarTokenPorRol([Roles.ADMIN]), precioCuotaApiController.listaPrecioCuota.bind(precioCuotaApiController));
+route.post('/precios-cuota', verificarTokenPorRol([Roles.ADMIN]), precioCuotaApiController.crearPrecioCuota.bind(precioCuotaApiController));
+route.get('/precios-cuota/ultima', verificarTokenPorRol([Roles.ADMIN]), precioCuotaApiController.ultimaPrecioCuota.bind(precioCuotaApiController));
 
 export default route;

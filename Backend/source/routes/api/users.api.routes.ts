@@ -25,9 +25,8 @@ const route = Router();
 route.get('/usuarios', usuariosAPIController.listaUsuarios.bind(usuariosAPIController));
 route.get('/usuarios/:id', (req, res) => {usuariosAPIController.buscarUsuarioPorId(req, res)});
 
-// Ruta para editar producto con imagen
-route.put('/usuarioEditar/:id',
-  verificarTokenPorRol([Roles.ADMIN]), 
+route.put('/usuarios/:id',
+  verificarTokenPorRol([Roles.ADMIN]),
   upload.fields([
   { name: 'imagen', maxCount: 1 },
   { name: 'aptoMedico', maxCount: 1 }
@@ -36,6 +35,6 @@ route.put('/usuarioEditar/:id',
 });
 
 route.delete('/usuarios/:id', verificarTokenPorRol([Roles.ADMIN]), (res, req) => { usuariosAPIController.delete(res, req) })
-route.post('/usuariosChangePassword', verificarTokenPorRol([Roles.ADMIN]), (req, res) => { usuariosAPIController.changePassword(req, res) });
+route.post('/usuarios/cambiar-contrasena', verificarTokenPorRol([Roles.ADMIN]), (req, res) => { usuariosAPIController.changePassword(req, res) });
 
 export default route;

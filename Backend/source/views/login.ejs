@@ -23,7 +23,7 @@
 
       <div class="form-container">
         <div id="left-login" aria-labelledby="login-heading">
-          <form action="/users/login" method="POST" aria-label="Formulario de inicio de sesión">
+          <form action="/usuarios/iniciar-sesion" method="POST" aria-label="Formulario de inicio de sesión">
             <label for="email-input">Correo electrónico</label>
             <input class="inputs-login" type="email" name="email" id="email-input" placeholder="ejemplo@correo.com"
               value="<%= typeof oldData !== 'undefined' && oldData.email ? oldData.email : '' %>"
@@ -61,7 +61,7 @@
         </div>
 
         <div id="registrate" role="region" aria-label="Opciones de registro">
-          <a href="/register">
+          <a href="/registrar">
             <i class="fa-regular fa-circle-user" aria-hidden="true"></i>
             Regístrate
           </a>
@@ -81,7 +81,7 @@
   <%- include('./partials/modalOlvidaste.ejs', {
     modalTitle: '¿Olvidaste tu contraseña?',
     modalMessage: 'Ingresá tu correo electrónico y te enviaremos un enlace para restablecerla.',
-    modalAction: '/users/update-password'
+    modalAction: '/usuarios/actualizar-contrasena'
   }) %>
 
   <%- include('./partials/modalConfirmacion.ejs', {

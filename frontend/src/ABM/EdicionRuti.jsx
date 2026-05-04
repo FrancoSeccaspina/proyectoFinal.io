@@ -44,13 +44,13 @@ const EdicionRutina = () => {
     formData.append('video', ejercicio.video);
     formData.append('titulo', ejercicio.titulo);
 
-    axios.put(`${process.env.REACT_APP_BACKEND_DOMAIN_HOST}/api/ejercicioEditar/${id}`, formData, {
+    axios.put(`${process.env.REACT_APP_BACKEND_DOMAIN_HOST}/api/ejercicios/${id}`, formData, {
         headers: {
           'Content-Type': 'multipart/form-data'
         },
         withCredentials: true
       })
-        .then(() => navigate('/Rutinas'))
+        .then(() => navigate('/rutinas'))
         .catch(err => console.error('Error al editar:', err));
     };
 

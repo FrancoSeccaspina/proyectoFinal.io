@@ -36,37 +36,37 @@ function App() {
         <Sidebar />
         <Routes>
           <Route path="/" element={<Home/>} />
-          <Route path="/Productos" element={<Productos />} />
-          <Route path="/Usuarios" element={<Usuario />} />
-          <Route path="/Rutinas" element={<Rutinas />} />
-          <Route path="/Recetas" element={<Recetas />} />
-          <Route path="/Proveedores" element={<Proveedores />} />
-          <Route path="/Reservas" element={<Reservas />} />
-          <Route path="/Reserva/:id" element={<ReservaPorId />} />
-          <Route path="/PrecioCuota" element={<PrecioCuota />} />
-          <Route path="/Empleados" element={<Empleados />} />
-          <Route path="/Actividad" element={<Actividad />} />
-          
+          <Route path="/productos" element={<Productos />} />
+          <Route path="/usuarios" element={<Usuario />} />
+          <Route path="/rutinas" element={<Rutinas />} />
+          <Route path="/recetas" element={<Recetas />} />
+          <Route path="/proveedores" element={<Proveedores />} />
+          <Route path="/reservas" element={<Reservas />} />
+          <Route path="/reservas/:id" element={<ReservaPorId />} />
+          <Route path="/precios-cuota" element={<PrecioCuota />} />
+          <Route path="/empleados" element={<Empleados />} />
+          <Route path="/actividades" element={<Actividad />} />
+
           {/* Ediciones */}
           <Route path="/productos/editar/:id" element={<EdicionProductos />} />
           <Route path="/recetas/editar/:id" element={<EdicionReceta />} />
           <Route path="/rutinas/editar/:id" element={<EdicionRutina />} />
           <Route path="/usuarios/editar/:id" element={<EdicionUsuario />} />
-          <Route path="/cuota/editar/:id" element={<EdicionCuota />} />
-          <Route path="/provedores/editar/:id" element={<EdicionProveedor />} />
+          <Route path="/cuotas/editar/:id" element={<EdicionCuota />} />
+          <Route path="/proveedores/editar/:id" element={<EdicionProveedor />} />
           <Route path="/empleados/editar/:id" element={<EdicionEmpleado />} />
 
           {/* Altas */}
-          <Route path="/productoNuevo" element={<AltaProd />} />
-          <Route path="/rutinaNueva" element={<AltaRuti />} />
-          <Route path="/recetaNueva" element={<AltaRece />} />
-          <Route path="/cuotaNueva/:idUsuario" element={<AltaCuota />} />
-          <Route path="/proveedorNuevo" element={<AltaProveedor />} />
-          <Route path="/empleadoNuevo" element={<AltaEmpleado />} />
-          <Route path="/nuevoPrecioCuota" element={<AltaPrecioCuota />} />
+          <Route path="/productos/nuevo" element={<AltaProd />} />
+          <Route path="/rutinas/nueva" element={<AltaRuti />} />
+          <Route path="/recetas/nueva" element={<AltaRece />} />
+          <Route path="/cuotas/nueva/:idUsuario" element={<AltaCuota />} />
+          <Route path="/proveedores/nuevo" element={<AltaProveedor />} />
+          <Route path="/empleados/nuevo" element={<AltaEmpleado />} />
+          <Route path="/precios-cuota/nuevo" element={<AltaPrecioCuota />} />
 
           {/* Otros */}
-          <Route path="/cuota/:id" element={<CuotaFormulario />} />
+          <Route path="/cuotas/:id" element={<CuotaFormulario />} />
         </Routes>
       </BrowserRouter>
     </div>

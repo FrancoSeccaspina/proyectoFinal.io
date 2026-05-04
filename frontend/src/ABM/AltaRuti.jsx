@@ -19,7 +19,7 @@ const AltaRuti = () => {
   useEffect(() => {
     const fetchGrupos = async () => {
       try {
-        const response = await axios.get(`${process.env.REACT_APP_BACKEND_DOMAIN_HOST}/api/categoriaGrupoMuscular`);
+        const response = await axios.get(`${process.env.REACT_APP_BACKEND_DOMAIN_HOST}/api/categorias-grupos-musculares`);
         setGruposMusculares(response.data);
       } catch (error) {
         console.error('Error al obtener grupos musculares:', error);
@@ -52,7 +52,7 @@ const AltaRuti = () => {
       }
     );
 
-      navigate('/Rutinas');
+      navigate('/rutinas');
     } catch (error) {
       console.error('Error al crear rutina:', error);
       alert(`Error del servidor: ${error.response?.data?.message || error.message}`);

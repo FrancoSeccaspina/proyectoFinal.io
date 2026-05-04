@@ -35,7 +35,7 @@
 
       <!-- Registro -->
       <% if (!usuarioLogueado) { %>
-        <a class="item-nav" href="/register" title="Registrar usuario" aria-label="Registrar nuevo usuario">
+        <a class="item-nav" href="/registrar" title="Registrar usuario" aria-label="Registrar nuevo usuario">
           <div class="icon-nav">
             <svg viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg" aria-hidden="true" focusable="false">
               <path fill-rule="evenodd" clip-rule="evenodd"
@@ -50,7 +50,7 @@
         </a>
 
         <!-- Login -->
-        <a class="item-nav" href="/login" title="Iniciar Sesión" aria-label="Iniciar sesión en tu cuenta">
+        <a class="item-nav" href="/iniciar-sesion" title="Iniciar Sesión" aria-label="Iniciar sesión en tu cuenta">
           <div class="icon-nav">
             <svg viewBox="0 0 24 24" fill="currentColor" xmlns="http://www.w3.org/2000/svg" aria-hidden="true" focusable="false">
               <path fill="currentColor" d="M4 21c0-3.866 4.03-7 8-7s8 3.134 8 7v1H4v-1z" />
@@ -77,7 +77,7 @@
 
       <!-- Logout -->
       <% if (usuarioLogueado) { %>
-        <a class="item-nav" href="/users/logout" title="Cerrar Sesión" aria-label="Cerrar sesión de usuario">
+        <a class="item-nav" href="/usuarios/cerrar-sesion" title="Cerrar Sesión" aria-label="Cerrar sesión de usuario">
           <div class="icon-nav">
             <svg viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg" aria-hidden="true" focusable="false">
               <path d="M10 12H20M20 12L17 9M20 12L17 15" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" />

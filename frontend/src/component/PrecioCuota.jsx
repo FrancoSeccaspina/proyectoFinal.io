@@ -6,7 +6,7 @@ const Cuota = () => {
   const [cuotaPrecio, setCuota] = useState([]);
   const showData = async () => {
     try {
-      const response = await fetch(`${process.env.REACT_APP_BACKEND_DOMAIN_HOST}/api/precioCuota`, { credentials: 'include' });
+      const response = await fetch(`${process.env.REACT_APP_BACKEND_DOMAIN_HOST}/api/precios-cuota`, { credentials: 'include' });
       const data = await response.json();
       console.log('DATA RECIBIDA:', data);
       setCuota(data);
@@ -22,7 +22,7 @@ const Cuota = () => {
       useEffect(() => {
         const fetchUltimoPrecio = async () => {
           try {
-            const res = await axios.get(`${process.env.REACT_APP_BACKEND_DOMAIN_HOST}/api/precioCuota/ultima`, 
+            const res = await axios.get(`${process.env.REACT_APP_BACKEND_DOMAIN_HOST}/api/precios-cuota/ultima`, 
               { withCredentials: true }
             );
             setUltimoPrecio(res.data.precio);
@@ -36,7 +36,7 @@ const Cuota = () => {
   return (
     <div style={{ padding: '1rem' }}>
       <h3>Precio Cuota Actual: {ultimoPrecio !== null ? `$${ultimoPrecio}` : 'Cargando...'}</h3>
-      <Link to={`/nuevoPrecioCuota`} className="btn btn-primary">
+      <Link to={`/precios-cuota/nuevo`} className="btn btn-primary">
           Actualizar Precio
         </Link>   
       <table border="1" cellPadding="6" style={{ width: '100%', textAlign: 'center' }}>

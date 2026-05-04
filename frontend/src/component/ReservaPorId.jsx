@@ -16,13 +16,13 @@ function ReservaPorId() {
 
     const eliminarReserva = () => {
         alert("Se elimino la reserva con exito!")     
-        navigate("/Reservas");
+        navigate("/reservas");
     };
 
     const getReservaByID = async () => {
         try {
             const response = await axios.get(
-                `${process.env.REACT_APP_BACKEND_DOMAIN_HOST}/api/reserva/${idReserva}/confirmar`,
+                `${process.env.REACT_APP_BACKEND_DOMAIN_HOST}/api/reservas/${idReserva}`,
                 { withCredentials: true }
             );
             setReserva(response.data.reserva);

@@ -40,8 +40,8 @@ function ReservaCard({ reserva, onDelete}) {
 
   const onclickConfirm = async () => {
     try {
-      const response = await axios.put(
-        `${process.env.REACT_APP_BACKEND_DOMAIN_HOST}/api/reservas/confirmar/${reservaActual.id_reserva}`, {},
+      const response = await axios.patch(
+        `${process.env.REACT_APP_BACKEND_DOMAIN_HOST}/api/reservas/${reservaActual.id_reserva}/confirmar`, {},
         {
           withCredentials: true
         });
@@ -54,8 +54,8 @@ function ReservaCard({ reserva, onDelete}) {
 
   const onclickCancel = async () => {
     try {
-      const response = await axios.put(
-        `${process.env.REACT_APP_BACKEND_DOMAIN_HOST}/api/reservas/cancelar/${reservaActual.id_reserva}`, {},
+      const response = await axios.patch(
+        `${process.env.REACT_APP_BACKEND_DOMAIN_HOST}/api/reservas/${reservaActual.id_reserva}/cancelar`, {},
         {
           withCredentials: true
         }

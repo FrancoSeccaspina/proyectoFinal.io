@@ -61,13 +61,13 @@ const EdicionUsuario = () => {
         formData.append('imagen', usuario.imagen);
       }
     
-      axios.put(`${process.env.REACT_APP_BACKEND_DOMAIN_HOST}/api/usuarioEditar/${id}`, formData, {
+      axios.put(`${process.env.REACT_APP_BACKEND_DOMAIN_HOST}/api/usuarios/${id}`, formData, {
         headers: {
           'Content-Type': 'multipart/form-data'
         },
         withCredentials: true 
       })
-        .then(() => navigate('/Usuarios'))
+        .then(() => navigate('/usuarios'))
         .catch(err => console.error('Error al editar:', err));
     };
     

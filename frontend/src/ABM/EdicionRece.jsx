@@ -17,7 +17,7 @@ const EdicionReceta = () => {
   useEffect(() => {
     const fetchCategorias = async () => {
       try {
-        const response = await axios.get(`${process.env.REACT_APP_BACKEND_DOMAIN_HOST}/api/categoriaRecetas`);
+        const response = await axios.get(`${process.env.REACT_APP_BACKEND_DOMAIN_HOST}/api/categorias-recetas`);
         setCategorias(response.data);
       } catch (error) {
         console.error('Error al obtener categorías:', error);
@@ -59,7 +59,7 @@ const EdicionReceta = () => {
     }
 
     try {
-      await axios.put(`${process.env.REACT_APP_BACKEND_DOMAIN_HOST}/api/recetaEditar/${id}`, formData, {
+      await axios.put(`${process.env.REACT_APP_BACKEND_DOMAIN_HOST}/api/recetas/${id}`, formData, {
         headers: { 'Content-Type': 'multipart/form-data' },
         withCredentials: true
       });

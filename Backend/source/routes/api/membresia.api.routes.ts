@@ -3,7 +3,7 @@ import  membresiaApiController from '../../controllers/api/membresia.api.Control
 
 const route = Router();
 
-route.get("/membresias/mostrar", (req: Request, res: Response) => {
+route.get("/membresias", (req: Request, res: Response) => {
     membresiaApiController.listaMembresias(req, res)
 })
 

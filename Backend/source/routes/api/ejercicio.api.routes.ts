@@ -26,6 +26,6 @@ route.get('/ejercicios/:id', (req, res) => { ejerciciosApiController.buscarEjerc
 route.post('/ejercicios', verificarTokenPorRol([Roles.ADMIN]), (res, req) => { ejerciciosApiController.crearEjercicio(res, req) })
 route.delete('/ejercicios/:id', verificarTokenPorRol([Roles.ADMIN]), (res, req) => { ejerciciosApiController.delete(res, req) })
 // Ruta para editar producto con imagen
-route.put('/ejercicioEditar/:id', verificarTokenPorRol([Roles.ADMIN]), upload.single('imagen'), (req, res) => { ejerciciosApiController.editarEjercicio(req, res); });
+route.put('/ejercicios/:id', verificarTokenPorRol([Roles.ADMIN]), upload.single('imagen'), (req, res) => { ejerciciosApiController.editarEjercicio(req, res); });
 
 export default route;

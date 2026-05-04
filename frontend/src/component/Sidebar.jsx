@@ -34,16 +34,16 @@ function Sidebar() {
 
         <nav id='menu' className='header-a'>
           <Link to="/">Home</Link>
-          <Link to="/Usuarios">Usuarios</Link>
-          <Link to="/Empleados">Empleados</Link>
-          <Link to="/PrecioCuota">Precio Cuota</Link>
-          <Link to="/Productos">Productos</Link>
-          <Link to="/Recetas">Recetas</Link>
-          <Link to="/Rutinas">Rutinas</Link>
-          <Link to="/Proveedores">Proveedores</Link>
-          <Link to="/Reservas">Reservas</Link>
-          <Link to="/Actividad">Actividad</Link>
-          <a href={`${process.env.REACT_APP_BACKEND_DOMAIN_HOST}/users/logout`}>Salir</a>
+          <Link to="/usuarios">Usuarios</Link>
+          <Link to="/empleados">Empleados</Link>
+          <Link to="/precios-cuota">Precio Cuota</Link>
+          <Link to="/productos">Productos</Link>
+          <Link to="/recetas">Recetas</Link>
+          <Link to="/rutinas">Rutinas</Link>
+          <Link to="/proveedores">Proveedores</Link>
+          <Link to="/reservas">Reservas</Link>
+          <Link to="/actividades">Actividad</Link>
+          <a href={`${process.env.REACT_APP_BACKEND_DOMAIN_HOST}/usuarios/cerrar-sesion`}>Salir</a>
         </nav>
       </div>
         <RedireccionFlotante/>

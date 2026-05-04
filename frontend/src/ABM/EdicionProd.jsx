@@ -52,7 +52,7 @@ const EdicionProductos = () => {
       formData.append('imagen', producto.imagen);
     }
 
-    axios.put(`${process.env.REACT_APP_BACKEND_DOMAIN_HOST}/api/productoEditar/${id}`, formData, {
+    axios.put(`${process.env.REACT_APP_BACKEND_DOMAIN_HOST}/api/productos/${id}`, formData, {
       headers: {
         'Content-Type': 'multipart/form-data'
       },

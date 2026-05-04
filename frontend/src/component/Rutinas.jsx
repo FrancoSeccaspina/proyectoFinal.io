@@ -9,7 +9,7 @@ function Ejercicios() {
   const [searchTerm, setSearchTerm] = useState("");
 
   const getCategorias = async ()=> {
-  const response = await fetch(`${process.env.REACT_APP_BACKEND_DOMAIN_HOST}/api/categoriaGrupoMuscular`);
+  const response = await fetch(`${process.env.REACT_APP_BACKEND_DOMAIN_HOST}/api/categorias-grupos-musculares`);
   const data = await response.json();
   console.log('DATA RECIBIDA:', data);
   setCategoria(data);
@@ -57,7 +57,7 @@ return (
     <h2 className='box-title'>Catálogo de  Ejercicios:</h2>
     <h3 className='box-title'>Ejercicios registrados: {ejerciciosFiltrados.length}</h3>
 
-    <Link to={`/rutinaNueva`} className="btn btn-primary">
+    <Link to={`/rutinas/nueva`} className="btn btn-primary">
       Agregar Nuevo
     </Link>
   </section>

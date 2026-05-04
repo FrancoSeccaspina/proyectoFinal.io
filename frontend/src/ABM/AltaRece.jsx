@@ -17,7 +17,7 @@ const AltaReceta = () => {
   useEffect(() => {
     const fetchCategorias = async () => {
       try {
-        const response = await axios.get(`${process.env.REACT_APP_BACKEND_DOMAIN_HOST}/api/categoriaRecetas`);
+        const response = await axios.get(`${process.env.REACT_APP_BACKEND_DOMAIN_HOST}/api/categorias-recetas`);
         setCategorias(response.data);
       } catch (error) {
         console.error('Error al obtener categorías:', error);
@@ -50,7 +50,7 @@ const AltaReceta = () => {
         },
         withCredentials: true
       });
-      navigate('/Recetas');
+      navigate('/recetas');
     } catch (error) {
       console.error('Error al crear receta:', error);
       alert(`Error del servidor: ${error.response?.data?.message || error.message}`);
@@ -136,12 +136,12 @@ const AltaRece = () => {
         imagen:'',
     });
     
-    const [categoriaRecetas, setCategoriaReceta] = useState([]);
+    const [categorias-recetas, setCategoriaReceta] = useState([]);
 
     useEffect(() => {
         const fetchGrupos = async() => {
             try{
-                const response = await axios.get(`${process.env.REACT_APP_BACKEND_DOMAIN_HOST}/api/categoriaRecetas`);
+                const response = await axios.get(`${process.env.REACT_APP_BACKEND_DOMAIN_HOST}/api/categorias-recetas`);
                 setCategoriaReceta(response.data);
             }catch(error){
                 console.log('Error al obtener categpria de productos:', error);
@@ -168,7 +168,7 @@ const AltaRece = () => {
                 categoriaId: recetas.categoriaId,
                 imagen: recetas.imagen,
             });
-            navigate('/Recetas');
+            navigate('/recetas');
         }catch(error){
             console.error('Error al crear una receta:', error);
             alert(` Error del servidor: ${ error.response?.data?.message || error.message}`);
@@ -188,7 +188,7 @@ const AltaRece = () => {
                 <label htmlFor="categorua_muscular_id">CategoriaId</label>
                 <select id="categoriaId" name="categoriaId" value={recetas.categoriaId} onChange={handleChange} required>
                     <option value="">Seleccionar Categoria</option>
-                    {categoriaRecetas.map(grupo => (
+                    {categorias-recetas.map(grupo => (
                         <option key={grupo.id} value={grupo.id}>{grupo.nombre}</option>
                     ))}
                 </select>
